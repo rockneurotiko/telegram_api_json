@@ -48,7 +48,7 @@ In the following sections you will find references to `Param`, this is an object
 
 - name: String - Name of the parameter
 - description: String - Description of the parameter
-- type: T - Type of the parameter, this can be any type that we've already covered or other models
+- type: T - [Type](#types) of the parameter, this can be any type that we've already covered or other models
 - optional: Boolean - If set to true, this parameter is optional
 
 Example of parameter, this is a parameters called `text` which is mandatory and the type is a string:
@@ -69,7 +69,7 @@ Example of parameter, this is a parameters called `text` which is mandatory and 
 Every model item have two root fields:
 
 - name: String - This is the name of the model, for example `Update` or `User`
-- params: [Param] - The parameters of the model
+- params: [Param] - The [parameters](#param) of the model
 
 Example of a model:
 
@@ -129,8 +129,8 @@ This are the fields of the method object:
 
 - name: String - Name of the method, you should use it in the path when doing the request.
 - type: String - Can be `get` or `post`, this are the verb recommended to do the request, even though, you can implement it as you want.
-- return: T - Type returned, check the type section
-- params: [Param] - Params of the method
+- return: T - [Type](#types) returned
+- params: [Param] - The [parameters](#param) of the method
 
 Example of a method:
 
