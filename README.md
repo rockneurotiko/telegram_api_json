@@ -8,10 +8,10 @@ Also this helps the developers to update their libraries to the last updates eas
 
 In this repository you can find two JSON files exported:
 
-- Minimum JSON: [https://github.com/rockneurotiko/telegram_api_json/blob/master/exports/tg_api.json](https://github.com/rockneurotiko/telegram_api_json/blob/master/exports/tg_api.json)
+- Minimum JSON: [https://raw.githubusercontent.com/rockneurotiko/telegram_api_json/master/exports/tg_api.json](https://raw.githubusercontent.com/rockneurotiko/telegram_api_json/master/exports/tg_api.json)
   This json is the least bytes possible, perfect to be consumed by the libraries.
 
-  - Pretty JSON: [https://github.com/rockneurotiko/telegram_api_json/blob/master/exports/tg_api_pretty.json](https://github.com/rockneurotiko/telegram_api_json/blob/master/exports/tg_api_pretty.json)
+- Pretty JSON: [https://raw.githubusercontent.com/rockneurotiko/telegram_api_json/master/exports/tg_api_pretty.json](https://raw.githubusercontent.com/rockneurotiko/telegram_api_json/master/exports/tg_api_pretty.json)
   This json is the same as the minimum json, but prettify, so a human can read it better :smile:
 
 
