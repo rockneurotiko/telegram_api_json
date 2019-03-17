@@ -284,7 +284,7 @@
           ],
           "optional": true,
           "name": "invite_link",
-          "description": "Optional. Chat invite link, for supergroups and channel chats. Returned only in getChat."
+          "description": "Optional. Chat invite link, for supergroups and channel chats. Each administrator in a chat generates their own invite links, so the bot must first generate the link using exportChatInviteLink. Returned only in getChat."
         },
         {
           "type": [
@@ -536,7 +536,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption for the audio, document, photo, video or voice, 0-200 characters"
+          "description": "Optional. Caption for the animation, audio, document, photo, video or voice, 0-1024 characters"
         },
         {
           "type": [
@@ -1728,7 +1728,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the photo to be sent, 0-200 characters"
+          "description": "Optional. Caption of the photo to be sent, 0-1024 characters"
         },
         {
           "type": [
@@ -1765,7 +1765,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the photo to be sent, 0-200 characters"
+          "description": "Optional. Caption of the photo to be sent, 0-1024 characters"
         },
         {
           "type": [
@@ -1803,7 +1803,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Optional. Thumbnail of the file sent. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -1811,7 +1811,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the video to be sent, 0-200 characters"
+          "description": "Optional. Caption of the video to be sent, 0-1024 characters"
         },
         {
           "type": [
@@ -1881,7 +1881,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Optional. Thumbnail of the file sent. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -1889,7 +1889,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the animation to be sent, 0-200 characters"
+          "description": "Optional. Caption of the animation to be sent, 0-1024 characters"
         },
         {
           "type": [
@@ -1951,7 +1951,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Optional. Thumbnail of the file sent. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -1959,7 +1959,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the audio to be sent, 0-200 characters"
+          "description": "Optional. Caption of the audio to be sent, 0-1024 characters"
         },
         {
           "type": [
@@ -2021,7 +2021,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Optional. Thumbnail of the file sent. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -2029,7 +2029,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the document to be sent, 0-200 characters"
+          "description": "Optional. Caption of the document to be sent, 0-1024 characters"
         },
         {
           "type": [
@@ -2465,7 +2465,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the photo to be sent, 0-200 characters"
+          "description": "Optional. Caption of the photo to be sent, 0-1024 characters"
         },
         {
           "type": [
@@ -2566,7 +2566,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the GIF file to be sent, 0-200 characters"
+          "description": "Optional. Caption of the GIF file to be sent, 0-1024 characters"
         },
         {
           "type": [
@@ -2667,7 +2667,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the MPEG-4 file to be sent, 0-200 characters"
+          "description": "Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters"
         },
         {
           "type": [
@@ -2752,7 +2752,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the video to be sent, 0-200 characters"
+          "description": "Optional. Caption of the video to be sent, 0-1024 characters"
         },
         {
           "type": [
@@ -2853,7 +2853,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption, 0-200 characters"
+          "description": "Optional. Caption, 0-1024 characters"
         },
         {
           "type": [
@@ -2938,7 +2938,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption, 0-200 characters"
+          "description": "Optional. Caption, 0-1024 characters"
         },
         {
           "type": [
@@ -3007,7 +3007,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the document to be sent, 0-200 characters"
+          "description": "Optional. Caption of the document to be sent, 0-1024 characters"
         },
         {
           "type": [
@@ -3464,7 +3464,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the photo to be sent, 0-200 characters"
+          "description": "Optional. Caption of the photo to be sent, 0-1024 characters"
         },
         {
           "type": [
@@ -3533,7 +3533,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the GIF file to be sent, 0-200 characters"
+          "description": "Optional. Caption of the GIF file to be sent, 0-1024 characters"
         },
         {
           "type": [
@@ -3602,7 +3602,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the MPEG-4 file to be sent, 0-200 characters"
+          "description": "Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters"
         },
         {
           "type": [
@@ -3724,7 +3724,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the document to be sent, 0-200 characters"
+          "description": "Optional. Caption of the document to be sent, 0-1024 characters"
         },
         {
           "type": [
@@ -3801,7 +3801,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the video to be sent, 0-200 characters"
+          "description": "Optional. Caption of the video to be sent, 0-1024 characters"
         },
         {
           "type": [
@@ -3870,7 +3870,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption, 0-200 characters"
+          "description": "Optional. Caption, 0-1024 characters"
         },
         {
           "type": [
@@ -3931,7 +3931,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption, 0-200 characters"
+          "description": "Optional. Caption, 0-1024 characters"
         },
         {
           "type": [
@@ -5448,7 +5448,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Photo caption (may also be used when resending photos by file_id), 0-200 characters"
+          "description": "Photo caption (may also be used when resending photos by file_id), 0-1024 characters"
         },
         {
           "type": [
@@ -5518,7 +5518,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Audio caption, 0-200 characters"
+          "description": "Audio caption, 0-1024 characters"
         },
         {
           "type": [
@@ -5559,7 +5559,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Thumbnail of the file sent. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -5622,7 +5622,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Thumbnail of the file sent. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -5630,7 +5630,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Document caption (may also be used when resending documents by file_id), 0-200 characters"
+          "description": "Document caption (may also be used when resending documents by file_id), 0-1024 characters"
         },
         {
           "type": [
@@ -5725,7 +5725,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Thumbnail of the file sent. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -5733,7 +5733,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Video caption (may also be used when resending videos by file_id), 0-200 characters"
+          "description": "Video caption (may also be used when resending videos by file_id), 0-1024 characters"
         },
         {
           "type": [
@@ -5836,7 +5836,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Thumbnail of the file sent. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -5844,7 +5844,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Animation caption (may also be used when resending animation by file_id), 0-200 characters"
+          "description": "Animation caption (may also be used when resending animation by file_id), 0-1024 characters"
         },
         {
           "type": [
@@ -5914,7 +5914,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Voice message caption, 0-200 characters"
+          "description": "Voice message caption, 0-1024 characters"
         },
         {
           "type": [
@@ -6009,7 +6009,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Thumbnail of the file sent. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
