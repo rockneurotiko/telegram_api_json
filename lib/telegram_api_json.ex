@@ -23,7 +23,7 @@ defmodule TelegramApiJson do
 
   @skip []
   @generic_types ["InlineQueryResult", "InputMessageContent", "PassportElementError"]
-  @zero_parameters ["getMe", "deleteWebhook", "getWebhookInfo"]
+  @zero_parameters ["getMe", "deleteWebhook", "getWebhookInfo", "getMyCommands"]
 
   def scrape() do
     tree() |> analyze_html(%__MODULE__{})
@@ -200,6 +200,9 @@ defmodule TelegramApiJson do
 
       String.contains?(type, "returns an Array of ChatMember") ->
         ["array", ["ChatMember"]]
+
+      String.contains?(type, "Returns Array of BotCommand") ->
+        ["array", ["BotCommand"]]
 
       Enum.any?(ts, &String.contains?(type, &1)) ->
         t = Enum.find(ts, &String.contains?(type, &1))

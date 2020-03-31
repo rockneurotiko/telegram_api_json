@@ -81,6 +81,22 @@
           "optional": true,
           "name": "pre_checkout_query",
           "description": "Optional. New incoming pre-checkout query. Contains full information about checkout"
+        },
+        {
+          "type": [
+            "Poll"
+          ],
+          "optional": true,
+          "name": "poll",
+          "description": "Optional. New poll state. Bots receive only updates about stopped polls and polls, which are sent by the bot"
+        },
+        {
+          "type": [
+            "PollAnswer"
+          ],
+          "optional": true,
+          "name": "poll_answer",
+          "description": "Optional. A user changed their answer in a non-anonymous poll. Bots receive new votes only in polls that were sent by the bot itself."
         }
       ],
       "name": "Update"
@@ -200,6 +216,30 @@
           "optional": true,
           "name": "language_code",
           "description": "Optional. IETF language tag of the user's language"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_join_groups",
+          "description": "Optional. True, if the bot can be invited to groups. Returned only in getMe."
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_read_all_group_messages",
+          "description": "Optional. True, if privacy mode is disabled for the bot. Returned only in getMe."
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "supports_inline_queries",
+          "description": "Optional. True, if the bot supports inline queries. Returned only in getMe."
         }
       ],
       "name": "User"
@@ -256,14 +296,6 @@
         },
         {
           "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "all_members_are_administrators",
-          "description": "Optional. True if a group has ‘All Members Are Admins’ enabled."
-        },
-        {
-          "type": [
             "ChatPhoto"
           ],
           "optional": true,
@@ -276,7 +308,7 @@
           ],
           "optional": true,
           "name": "description",
-          "description": "Optional. Description, for supergroups and channel chats. Returned only in getChat."
+          "description": "Optional. Description, for groups, supergroups and channel chats. Returned only in getChat."
         },
         {
           "type": [
@@ -284,7 +316,7 @@
           ],
           "optional": true,
           "name": "invite_link",
-          "description": "Optional. Chat invite link, for supergroups and channel chats. Each administrator in a chat generates their own invite links, so the bot must first generate the link using exportChatInviteLink. Returned only in getChat."
+          "description": "Optional. Chat invite link, for groups, supergroups and channel chats. Each administrator in a chat generates their own invite links, so the bot must first generate the link using exportChatInviteLink. Returned only in getChat."
         },
         {
           "type": [
@@ -292,7 +324,23 @@
           ],
           "optional": true,
           "name": "pinned_message",
-          "description": "Optional. Pinned message, for supergroups and channel chats. Returned only in getChat."
+          "description": "Optional. Pinned message, for groups, supergroups and channels. Returned only in getChat."
+        },
+        {
+          "type": [
+            "ChatPermissions"
+          ],
+          "optional": true,
+          "name": "permissions",
+          "description": "Optional. Default chat member permissions, for groups and supergroups. Returned only in getChat."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "slow_mode_delay",
+          "description": "Optional. For supergroups, the minimum allowed delay between consecutive messages sent by each unpriviledged user. Returned only in getChat."
         },
         {
           "type": [
@@ -381,6 +429,14 @@
         },
         {
           "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "forward_sender_name",
+          "description": "Optional. Sender's name for messages forwarded from users who disallow adding a link to their account in forwarded messages"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": true,
@@ -425,7 +481,7 @@
           ],
           "optional": true,
           "name": "text",
-          "description": "Optional. For text messages, the actual UTF-8 text of the message, 0-4096 characters."
+          "description": "Optional. For text messages, the actual UTF-8 text of the message, 0-4096 characters"
         },
         {
           "type": [
@@ -564,6 +620,22 @@
         },
         {
           "type": [
+            "Poll"
+          ],
+          "optional": true,
+          "name": "poll",
+          "description": "Optional. Message is a native poll, information about the poll"
+        },
+        {
+          "type": [
+            "Dice"
+          ],
+          "optional": true,
+          "name": "dice",
+          "description": "Optional. Message is a dice with random value from 1 to 6"
+        },
+        {
+          "type": [
             [
               "array",
               [
@@ -691,6 +763,14 @@
           "optional": true,
           "name": "passport_data",
           "description": "Optional. Telegram Passport data"
+        },
+        {
+          "type": [
+            "InlineKeyboardMarkup"
+          ],
+          "optional": true,
+          "name": "reply_markup",
+          "description": "Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons."
         }
       ],
       "name": "Message"
@@ -703,7 +783,7 @@
           ],
           "optional": false,
           "name": "type",
-          "description": "Type of the entity. Can be mention (@username), hashtag, cashtag, bot_command, url, email, phone_number, bold (bold text), italic (italic text), code (monowidth string), pre (monowidth block), text_link (for clickable text URLs), text_mention (for users without usernames)"
+          "description": "Type of the entity. Can be “mention” (@username), “hashtag” (#hashtag), “cashtag” ($USD), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames)"
         },
         {
           "type": [
@@ -736,6 +816,14 @@
           "optional": true,
           "name": "user",
           "description": "Optional. For “text_mention” only, the mentioned user"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "language",
+          "description": "Optional. For “pre” only, the programming language of the entity text"
         }
       ],
       "name": "MessageEntity"
@@ -748,7 +836,15 @@
           ],
           "optional": false,
           "name": "file_id",
-          "description": "Unique identifier for this file"
+          "description": "Identifier for this file, which can be used to download or reuse the file"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "file_unique_id",
+          "description": "Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
         },
         {
           "type": [
@@ -785,7 +881,15 @@
           ],
           "optional": false,
           "name": "file_id",
-          "description": "Unique identifier for this file"
+          "description": "Identifier for this file, which can be used to download or reuse the file"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "file_unique_id",
+          "description": "Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
         },
         {
           "type": [
@@ -846,7 +950,15 @@
           ],
           "optional": false,
           "name": "file_id",
-          "description": "Unique file identifier"
+          "description": "Identifier for this file, which can be used to download or reuse the file"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "file_unique_id",
+          "description": "Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
         },
         {
           "type": [
@@ -891,7 +1003,15 @@
           ],
           "optional": false,
           "name": "file_id",
-          "description": "Unique identifier for this file"
+          "description": "Identifier for this file, which can be used to download or reuse the file"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "file_unique_id",
+          "description": "Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
         },
         {
           "type": [
@@ -952,7 +1072,15 @@
           ],
           "optional": false,
           "name": "file_id",
-          "description": "Unique file identifier"
+          "description": "Identifier for this file, which can be used to download or reuse the file"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "file_unique_id",
+          "description": "Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
         },
         {
           "type": [
@@ -1021,7 +1149,15 @@
           ],
           "optional": false,
           "name": "file_id",
-          "description": "Unique identifier for this file"
+          "description": "Identifier for this file, which can be used to download or reuse the file"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "file_unique_id",
+          "description": "Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
         },
         {
           "type": [
@@ -1058,7 +1194,15 @@
           ],
           "optional": false,
           "name": "file_id",
-          "description": "Unique identifier for this file"
+          "description": "Identifier for this file, which can be used to download or reuse the file"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "file_unique_id",
+          "description": "Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
         },
         {
           "type": [
@@ -1210,6 +1354,156 @@
       "params": [
         {
           "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "text",
+          "description": "Option text, 1-100 characters"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "voter_count",
+          "description": "Number of users that voted for this option"
+        }
+      ],
+      "name": "PollOption"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "poll_id",
+          "description": "Unique poll identifier"
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": false,
+          "name": "user",
+          "description": "The user, who changed the answer to the poll"
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "int"
+              ]
+            ]
+          ],
+          "optional": false,
+          "name": "option_ids",
+          "description": "0-based identifiers of answer options, chosen by the user. May be empty if the user retracted their vote."
+        }
+      ],
+      "name": "PollAnswer"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "id",
+          "description": "Unique poll identifier"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "question",
+          "description": "Poll question, 1-255 characters"
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "PollOption"
+              ]
+            ]
+          ],
+          "optional": false,
+          "name": "options",
+          "description": "List of poll options"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "total_voter_count",
+          "description": "Total number of users that voted in the poll"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "is_closed",
+          "description": "True, if the poll is closed"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "is_anonymous",
+          "description": "True, if the poll is anonymous"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Poll type, currently can be “regular” or “quiz”"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "allows_multiple_answers",
+          "description": "True, if the poll allows multiple answers"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "correct_option_id",
+          "description": "Optional. 0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are closed, or was sent (not forwarded) by the bot or to the private chat with the bot."
+        }
+      ],
+      "name": "Poll"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "value",
+          "description": "Value of the dice, 1-6"
+        }
+      ],
+      "name": "Dice"
+    },
+    {
+      "params": [
+        {
+          "type": [
             "int"
           ],
           "optional": false,
@@ -1245,7 +1539,15 @@
           ],
           "optional": false,
           "name": "file_id",
-          "description": "Unique identifier for this file"
+          "description": "Identifier for this file, which can be used to download or reuse the file"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "file_unique_id",
+          "description": "Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
         },
         {
           "type": [
@@ -1338,9 +1640,30 @@
           "optional": false,
           "name": "request_location",
           "description": "Optional. If True, the user's current location will be sent when the button is pressed. Available in private chats only"
+        },
+        {
+          "type": [
+            "KeyboardButtonPollType"
+          ],
+          "optional": true,
+          "name": "request_poll",
+          "description": "Optional. If specified, the user will be asked to create a poll and send it to the bot when the button is pressed. Available in private chats only"
         }
       ],
       "name": "KeyboardButton"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Optional. If quiz is passed, the user will be allowed to create only polls in the quiz mode. If regular is passed, only regular polls will be allowed. Otherwise, the user will be allowed to create a poll of any type."
+        }
+      ],
+      "name": "KeyboardButtonPollType"
     },
     {
       "params": [
@@ -1406,6 +1729,14 @@
         },
         {
           "type": [
+            "LoginUrl"
+          ],
+          "optional": true,
+          "name": "login_url",
+          "description": "Optional. An HTTP URL used to automatically authorize the user. Can be used as a replacement for the Telegram Login Widget."
+        },
+        {
+          "type": [
             "str"
           ],
           "optional": true,
@@ -1446,6 +1777,43 @@
         }
       ],
       "name": "InlineKeyboardButton"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "url",
+          "description": "An HTTP URL to be opened with user authorization data added to the query string when the button is pressed. If the user refuses to provide authorization data, the original URL without information about the user will be opened. The data added is the same as described in Receiving authorization data.\n\nNOTE: You must always check the hash of the received data to verify the authentication and the integrity of the data as described in Checking authorization."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "forward_text",
+          "description": "Optional. New text of the button in forwarded messages."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "bot_username",
+          "description": "Optional. Username of a bot, which will be used for user authorization. See Setting up a bot for more details. If not specified, the current bot's username will be assumed. The url's domain must be the same as the domain linked with the bot. See Linking your domain to the bot for more details."
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "request_write_access",
+          "description": "Optional. Pass True to request the permission for your bot to send messages to the user."
+        }
+      ],
+      "name": "LoginUrl"
     },
     {
       "params": [
@@ -1537,7 +1905,15 @@
           ],
           "optional": false,
           "name": "small_file_id",
-          "description": "Unique file identifier of small (160x160) chat photo. This file_id can be used only for photo download."
+          "description": "File identifier of small (160x160) chat photo. This file_id can be used only for photo download and only for as long as the photo is not changed."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "small_file_unique_id",
+          "description": "Unique file identifier of small (160x160) chat photo, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
         },
         {
           "type": [
@@ -1545,7 +1921,15 @@
           ],
           "optional": false,
           "name": "big_file_id",
-          "description": "Unique file identifier of big (640x640) chat photo. This file_id can be used only for photo download."
+          "description": "File identifier of big (640x640) chat photo. This file_id can be used only for photo download and only for as long as the photo is not changed."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "big_file_unique_id",
+          "description": "Unique file identifier of big (640x640) chat photo, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
         }
       ],
       "name": "ChatPhoto"
@@ -1570,11 +1954,19 @@
         },
         {
           "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "custom_title",
+          "description": "Optional. Owner and administrators only. Custom title for this user"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": true,
           "name": "until_date",
-          "description": "Optional. Restricted and kicked only. Date when restrictions will be lifted for this user, unix time"
+          "description": "Optional. Restricted and kicked only. Date when restrictions will be lifted for this user; unix time"
         },
         {
           "type": [
@@ -1589,16 +1981,8 @@
             "bool"
           ],
           "optional": true,
-          "name": "can_change_info",
-          "description": "Optional. Administrators only. True, if the administrator can change the chat title, photo and other settings"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
           "name": "can_post_messages",
-          "description": "Optional. Administrators only. True, if the administrator can post in the channel, channels only"
+          "description": "Optional. Administrators only. True, if the administrator can post in the channel; channels only"
         },
         {
           "type": [
@@ -1606,7 +1990,7 @@
           ],
           "optional": true,
           "name": "can_edit_messages",
-          "description": "Optional. Administrators only. True, if the administrator can edit messages of other users and can pin messages, channels only"
+          "description": "Optional. Administrators only. True, if the administrator can edit messages of other users and can pin messages; channels only"
         },
         {
           "type": [
@@ -1621,24 +2005,8 @@
             "bool"
           ],
           "optional": true,
-          "name": "can_invite_users",
-          "description": "Optional. Administrators only. True, if the administrator can invite new users to the chat"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
           "name": "can_restrict_members",
           "description": "Optional. Administrators only. True, if the administrator can restrict, ban or unban chat members"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "can_pin_messages",
-          "description": "Optional. Administrators only. True, if the administrator can pin messages, supergroups only"
         },
         {
           "type": [
@@ -1653,8 +2021,40 @@
             "bool"
           ],
           "optional": true,
+          "name": "can_change_info",
+          "description": "Optional. Administrators and restricted only. True, if the user is allowed to change the chat title, photo and other settings"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_invite_users",
+          "description": "Optional. Administrators and restricted only. True, if the user is allowed to invite new users to the chat"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_pin_messages",
+          "description": "Optional. Administrators and restricted only. True, if the user is allowed to pin messages; groups and supergroups only"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "is_member",
+          "description": "Optional. Restricted only. True, if the user is a member of the chat at the moment of the request"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
           "name": "can_send_messages",
-          "description": "Optional. Restricted only. True, if the user can send text messages, contacts, locations and venues"
+          "description": "Optional. Restricted only. True, if the user is allowed to send text messages, contacts, locations and venues"
         },
         {
           "type": [
@@ -1662,7 +2062,15 @@
           ],
           "optional": true,
           "name": "can_send_media_messages",
-          "description": "Optional. Restricted only. True, if the user can send audios, documents, photos, videos, video notes and voice notes, implies can_send_messages"
+          "description": "Optional. Restricted only. True, if the user is allowed to send audios, documents, photos, videos, video notes and voice notes"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_send_polls",
+          "description": "Optional. Restricted only. True, if the user is allowed to send polls"
         },
         {
           "type": [
@@ -1670,7 +2078,7 @@
           ],
           "optional": true,
           "name": "can_send_other_messages",
-          "description": "Optional. Restricted only. True, if the user can send animations, games, stickers and use inline bots, implies can_send_media_messages"
+          "description": "Optional. Restricted only. True, if the user is allowed to send animations, games, stickers and use inline bots"
         },
         {
           "type": [
@@ -1678,10 +2086,100 @@
           ],
           "optional": true,
           "name": "can_add_web_page_previews",
-          "description": "Optional. Restricted only. True, if user may add web page previews to his messages, implies can_send_media_messages"
+          "description": "Optional. Restricted only. True, if the user is allowed to add web page previews to their messages"
         }
       ],
       "name": "ChatMember"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_send_messages",
+          "description": "Optional. True, if the user is allowed to send text messages, contacts, locations and venues"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_send_media_messages",
+          "description": "Optional. True, if the user is allowed to send audios, documents, photos, videos, video notes and voice notes, implies can_send_messages"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_send_polls",
+          "description": "Optional. True, if the user is allowed to send polls, implies can_send_messages"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_send_other_messages",
+          "description": "Optional. True, if the user is allowed to send animations, games, stickers and use inline bots, implies can_send_media_messages"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_add_web_page_previews",
+          "description": "Optional. True, if the user is allowed to add web page previews to their messages, implies can_send_media_messages"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_change_info",
+          "description": "Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_invite_users",
+          "description": "Optional. True, if the user is allowed to invite new users to the chat"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_pin_messages",
+          "description": "Optional. True, if the user is allowed to pin messages. Ignored in public supergroups"
+        }
+      ],
+      "name": "ChatPermissions"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "command",
+          "description": "Text of the command, 1-32 characters. Can contain only lowercase English letters, digits and underscores."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "description",
+          "description": "Description of the command, 3-256 characters."
+        }
+      ],
+      "name": "BotCommand"
     },
     {
       "params": [
@@ -1728,7 +2226,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the photo to be sent, 0-1024 characters"
+          "description": "Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -1765,7 +2263,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the photo to be sent, 0-1024 characters"
+          "description": "Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -1803,7 +2301,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -1811,7 +2309,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the video to be sent, 0-1024 characters"
+          "description": "Optional. Caption of the video to be sent, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -1881,7 +2379,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -1889,7 +2387,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the animation to be sent, 0-1024 characters"
+          "description": "Optional. Caption of the animation to be sent, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -1951,7 +2449,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -1959,7 +2457,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the audio to be sent, 0-1024 characters"
+          "description": "Optional. Caption of the audio to be sent, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -2021,7 +2519,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -2029,7 +2527,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the document to be sent, 0-1024 characters"
+          "description": "Optional. Caption of the document to be sent, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -2059,7 +2557,7 @@
           ],
           "optional": false,
           "name": "text",
-          "description": "Text of the message to be sent"
+          "description": "Text of the message to be sent, 1-4096 characters after entities parsing"
         },
         {
           "type": [
@@ -2115,7 +2613,15 @@
           ],
           "optional": false,
           "name": "file_id",
-          "description": "Unique identifier for this file"
+          "description": "Identifier for this file, which can be used to download or reuse the file"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "file_unique_id",
+          "description": "Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
         },
         {
           "type": [
@@ -2135,11 +2641,19 @@
         },
         {
           "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "is_animated",
+          "description": "True, if the sticker is animated"
+        },
+        {
+          "type": [
             "PhotoSize"
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Optional. Sticker thumbnail in the .webp or .jpg format"
+          "description": "Optional. Sticker thumbnail in the .WEBP or .JPG format"
         },
         {
           "type": [
@@ -2199,6 +2713,14 @@
             "bool"
           ],
           "optional": false,
+          "name": "is_animated",
+          "description": "True, if the sticker set contains animated stickers"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
           "name": "contains_masks",
           "description": "True, if the sticker set contains masks"
         },
@@ -2214,6 +2736,14 @@
           "optional": false,
           "name": "stickers",
           "description": "List of all set stickers"
+        },
+        {
+          "type": [
+            "PhotoSize"
+          ],
+          "optional": true,
+          "name": "thumb",
+          "description": "Optional. Sticker set thumbnail in the .WEBP or .TGS format"
         }
       ],
       "name": "StickerSet"
@@ -2287,7 +2817,7 @@
           ],
           "optional": false,
           "name": "query",
-          "description": "Text of the query (up to 512 characters)"
+          "description": "Text of the query (up to 256 characters)"
         },
         {
           "type": [
@@ -2465,7 +2995,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the photo to be sent, 0-1024 characters"
+          "description": "Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -2566,7 +3096,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the GIF file to be sent, 0-1024 characters"
+          "description": "Optional. Caption of the GIF file to be sent, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -2667,7 +3197,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters"
+          "description": "Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -2752,7 +3282,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the video to be sent, 0-1024 characters"
+          "description": "Optional. Caption of the video to be sent, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -2853,7 +3383,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption, 0-1024 characters"
+          "description": "Optional. Caption, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -2938,7 +3468,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption, 0-1024 characters"
+          "description": "Optional. Caption, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -3007,7 +3537,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the document to be sent, 0-1024 characters"
+          "description": "Optional. Caption of the document to be sent, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -3464,7 +3994,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the photo to be sent, 0-1024 characters"
+          "description": "Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -3533,7 +4063,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the GIF file to be sent, 0-1024 characters"
+          "description": "Optional. Caption of the GIF file to be sent, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -3602,7 +4132,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters"
+          "description": "Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -3724,7 +4254,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the document to be sent, 0-1024 characters"
+          "description": "Optional. Caption of the document to be sent, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -3801,7 +4331,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption of the video to be sent, 0-1024 characters"
+          "description": "Optional. Caption of the video to be sent, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -3870,7 +4400,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption, 0-1024 characters"
+          "description": "Optional. Caption, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -3931,7 +4461,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Optional. Caption, 0-1024 characters"
+          "description": "Optional. Caption, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -4536,7 +5066,15 @@
           ],
           "optional": false,
           "name": "file_id",
-          "description": "Unique identifier for this file"
+          "description": "Identifier for this file, which can be used to download or reuse the file"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "file_unique_id",
+          "description": "Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
         },
         {
           "type": [
@@ -5231,7 +5769,7 @@
           ],
           "optional": true,
           "name": "allowed_updates",
-          "description": "List the types of updates you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all updates regardless of type (default). If not specified, the previous setting will be used.\n\nPlease note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time."
+          "description": "A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all updates regardless of type (default). If not specified, the previous setting will be used.\n\nPlease note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time."
         }
       ],
       "name": "getUpdates"
@@ -5277,7 +5815,7 @@
           ],
           "optional": true,
           "name": "allowed_updates",
-          "description": "List the types of updates you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all updates regardless of type (default). If not specified, the previous setting will be used.\n\nPlease note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time."
+          "description": "A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all updates regardless of type (default). If not specified, the previous setting will be used.\n\nPlease note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time."
         }
       ],
       "name": "setWebhook"
@@ -5327,7 +5865,7 @@
           ],
           "optional": false,
           "name": "text",
-          "description": "Text of the message to be sent"
+          "description": "Text of the message to be sent, 1-4096 characters after entities parsing"
         },
         {
           "type": [
@@ -5448,7 +5986,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Photo caption (may also be used when resending photos by file_id), 0-1024 characters"
+          "description": "Photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -5518,7 +6056,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Audio caption, 0-1024 characters"
+          "description": "Audio caption, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -5559,7 +6097,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -5622,7 +6160,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -5630,7 +6168,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Document caption (may also be used when resending documents by file_id), 0-1024 characters"
+          "description": "Document caption (may also be used when resending documents by file_id), 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -5725,7 +6263,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -5733,7 +6271,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Video caption (may also be used when resending videos by file_id), 0-1024 characters"
+          "description": "Video caption (may also be used when resending videos by file_id), 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -5836,7 +6374,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -5844,7 +6382,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Animation caption (may also be used when resending animation by file_id), 0-1024 characters"
+          "description": "Animation caption (may also be used when resending animation by file_id), 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -5914,7 +6452,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "Voice message caption, 0-1024 characters"
+          "description": "Voice message caption, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -6009,7 +6547,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 90. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -6182,7 +6720,7 @@
           ],
           "optional": true,
           "name": "message_id",
-          "description": "Required if inline_message_id is not specified. Identifier of the sent message"
+          "description": "Required if inline_message_id is not specified. Identifier of the message to edit"
         },
         {
           "type": [
@@ -6240,7 +6778,7 @@
           ],
           "optional": true,
           "name": "message_id",
-          "description": "Required if inline_message_id is not specified. Identifier of the sent message"
+          "description": "Required if inline_message_id is not specified. Identifier of the message with live location to stop"
         },
         {
           "type": [
@@ -6434,6 +6972,157 @@
     {
       "type": "post",
       "return": [
+        "Message"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "question",
+          "description": "Poll question, 1-255 characters"
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "str"
+              ]
+            ]
+          ],
+          "optional": false,
+          "name": "options",
+          "description": "A JSON-serialized list of answer options, 2-10 strings 1-100 characters each"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "is_anonymous",
+          "description": "True, if the poll needs to be anonymous, defaults to True"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "type",
+          "description": "Poll type, “quiz” or “regular”, defaults to “regular”"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allows_multiple_answers",
+          "description": "True, if the poll allows multiple answers, ignored for polls in quiz mode, defaults to False"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "correct_option_id",
+          "description": "0-based identifier of the correct answer option, required for polls in quiz mode"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "is_closed",
+          "description": "Pass True, if the poll needs to be immediately closed. This can be useful for poll preview."
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "disable_notification",
+          "description": "Sends the message silently. Users will receive a notification with no sound."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "reply_to_message_id",
+          "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "InlineKeyboardMarkup",
+            "ReplyKeyboardMarkup",
+            "ReplyKeyboardRemove",
+            "ForceReply"
+          ],
+          "optional": true,
+          "name": "reply_markup",
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
+        }
+      ],
+      "name": "sendPoll"
+    },
+    {
+      "type": "post",
+      "return": [
+        "Message"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "disable_notification",
+          "description": "Sends the message silently. Users will receive a notification with no sound."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "reply_to_message_id",
+          "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "InlineKeyboardMarkup",
+            "ReplyKeyboardMarkup",
+            "ReplyKeyboardRemove",
+            "ForceReply"
+          ],
+          "optional": true,
+          "name": "reply_markup",
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
+        }
+      ],
+      "name": "sendDice"
+    },
+    {
+      "type": "post",
+      "return": [
         "True"
       ],
       "params": [
@@ -6592,43 +7281,19 @@
         },
         {
           "type": [
+            "ChatPermissions"
+          ],
+          "optional": false,
+          "name": "permissions",
+          "description": "New user permissions"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": true,
           "name": "until_date",
           "description": "Date when restrictions will be lifted for the user, unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "can_send_messages",
-          "description": "Pass True, if the user can send text messages, contacts, locations and venues"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "can_send_media_messages",
-          "description": "Pass True, if the user can send audios, documents, photos, videos, video notes and voice notes, implies can_send_messages"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "can_send_other_messages",
-          "description": "Pass True, if the user can send animations, games, stickers and use inline bots, implies can_send_media_messages"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "can_add_web_page_previews",
-          "description": "Pass True, if the user may add web page previews to their messages, implies can_send_media_messages"
         }
       ],
       "name": "restrictChatMember"
@@ -6722,6 +7387,66 @@
         }
       ],
       "name": "promoteChatMember"
+    },
+    {
+      "type": "post",
+      "return": [
+        "True"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "user_id",
+          "description": "Unique identifier of the target user"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "custom_title",
+          "description": "New custom title for the administrator; 0-16 characters, emoji are not allowed"
+        }
+      ],
+      "name": "setChatAdministratorCustomTitle"
+    },
+    {
+      "type": "post",
+      "return": [
+        "True"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
+        },
+        {
+          "type": [
+            "ChatPermissions"
+          ],
+          "optional": false,
+          "name": "permissions",
+          "description": "New default chat permissions"
+        }
+      ],
+      "name": "setChatPermissions"
     },
     {
       "type": "post",
@@ -7086,6 +7811,39 @@
     {
       "type": "post",
       "return": [
+        "True"
+      ],
+      "params": [
+        {
+          "type": [
+            [
+              "array",
+              [
+                "BotCommand"
+              ]
+            ]
+          ],
+          "optional": false,
+          "name": "commands",
+          "description": "A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be specified."
+        }
+      ],
+      "name": "setMyCommands"
+    },
+    {
+      "type": "get",
+      "return": [
+        "array",
+        [
+          "BotCommand"
+        ]
+      ],
+      "params": [],
+      "name": "getMyCommands"
+    },
+    {
+      "type": "post",
+      "return": [
         "Message"
       ],
       "params": [
@@ -7104,7 +7862,7 @@
           ],
           "optional": true,
           "name": "message_id",
-          "description": "Required if inline_message_id is not specified. Identifier of the sent message"
+          "description": "Required if inline_message_id is not specified. Identifier of the message to edit"
         },
         {
           "type": [
@@ -7120,7 +7878,7 @@
           ],
           "optional": false,
           "name": "text",
-          "description": "New text of the message"
+          "description": "New text of the message, 1-4096 characters after entities parsing"
         },
         {
           "type": [
@@ -7170,7 +7928,7 @@
           ],
           "optional": true,
           "name": "message_id",
-          "description": "Required if inline_message_id is not specified. Identifier of the sent message"
+          "description": "Required if inline_message_id is not specified. Identifier of the message to edit"
         },
         {
           "type": [
@@ -7186,7 +7944,7 @@
           ],
           "optional": true,
           "name": "caption",
-          "description": "New caption of the message"
+          "description": "New caption of the message, 0-1024 characters after entities parsing"
         },
         {
           "type": [
@@ -7228,7 +7986,7 @@
           ],
           "optional": true,
           "name": "message_id",
-          "description": "Required if inline_message_id is not specified. Identifier of the sent message"
+          "description": "Required if inline_message_id is not specified. Identifier of the message to edit"
         },
         {
           "type": [
@@ -7278,7 +8036,7 @@
           ],
           "optional": true,
           "name": "message_id",
-          "description": "Required if inline_message_id is not specified. Identifier of the sent message"
+          "description": "Required if inline_message_id is not specified. Identifier of the message to edit"
         },
         {
           "type": [
@@ -7298,6 +8056,40 @@
         }
       ],
       "name": "editMessageReplyMarkup"
+    },
+    {
+      "type": "post",
+      "return": [
+        "results"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "message_id",
+          "description": "Identifier of the original message with the poll"
+        },
+        {
+          "type": [
+            "InlineKeyboardMarkup"
+          ],
+          "optional": true,
+          "name": "reply_markup",
+          "description": "A JSON-serialized object for a new message inline keyboard."
+        }
+      ],
+      "name": "stopPoll"
     },
     {
       "type": "post",
@@ -7347,7 +8139,7 @@
           ],
           "optional": false,
           "name": "sticker",
-          "description": "Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .webp file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files »"
+          "description": "Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files »"
         },
         {
           "type": [
@@ -7456,9 +8248,17 @@
             "file",
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "png_sticker",
-          "description": "Png image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files »"
+          "description": "PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files »"
+        },
+        {
+          "type": [
+            "file"
+          ],
+          "optional": true,
+          "name": "tgs_sticker",
+          "description": "TGS animation with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/animated_stickers#technical-requirements for technical requirements"
         },
         {
           "type": [
@@ -7516,7 +8316,15 @@
           ],
           "optional": false,
           "name": "png_sticker",
-          "description": "Png image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files »"
+          "description": "PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files »"
+        },
+        {
+          "type": [
+            "file"
+          ],
+          "optional": true,
+          "name": "tgs_sticker",
+          "description": "TGS animation with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/animated_stickers#technical-requirements for technical requirements"
         },
         {
           "type": [
@@ -7578,6 +8386,40 @@
         }
       ],
       "name": "deleteStickerFromSet"
+    },
+    {
+      "type": "post",
+      "return": [
+        "True"
+      ],
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "name",
+          "description": "Sticker set name"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "user_id",
+          "description": "User identifier of the sticker set owner"
+        },
+        {
+          "type": [
+            "file",
+            "str"
+          ],
+          "optional": true,
+          "name": "thumb",
+          "description": "A PNG image with the thumbnail, must be up to 128 kilobytes in size and have width and height exactly 100px, or a TGS animation with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/animated_stickers#technical-requirements for animated sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files ». Animated sticker set thumbnail can't be uploaded via HTTP URL."
+        }
+      ],
+      "name": "setStickerSetThumb"
     },
     {
       "type": "post",
@@ -7722,7 +8564,7 @@
           ],
           "optional": false,
           "name": "prices",
-          "description": "Price breakdown, a list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)"
+          "description": "Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)"
         },
         {
           "type": [
