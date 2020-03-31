@@ -8850,7 +8850,7 @@
     {
       "type": "post",
       "return": [
-        "Message,"
+        "Message"
       ],
       "params": [
         {

@@ -207,7 +207,7 @@ defmodule TelegramApiJson do
       Enum.any?(ts, &String.contains?(type, &1)) ->
         t = Enum.find(ts, &String.contains?(type, &1))
 
-        [String.split(type, t) |> Enum.at(1) |> String.split() |> Enum.at(0)]
+        [String.split(type, t) |> Enum.at(1) |> String.split() |> Enum.at(0) |> String.trim(",")]
 
       true ->
         ["any"]
