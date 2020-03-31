@@ -180,12 +180,12 @@ defmodule TelegramApiJson do
       "Returns a ",
       "returns a ",
       "Returns ",
-      "returns ",
-      "the stopped "
+      "returns "
     ]
 
     prev_ts = [
       " object is returned",
+      " with the final results is returned",
       " is returned"
     ]
 

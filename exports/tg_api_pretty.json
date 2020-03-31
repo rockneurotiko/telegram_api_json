@@ -8060,7 +8060,7 @@
     {
       "type": "post",
       "return": [
-        "results"
+        "Poll"
       ],
       "params": [
         {
