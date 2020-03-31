@@ -5777,7 +5777,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -5823,7 +5823,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [],
       "name": "deleteWebhook"
@@ -7123,7 +7123,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -7182,7 +7182,7 @@
     {
       "type": "get",
       "return": [
-        "file"
+        "File"
       ],
       "params": [
         {
@@ -7199,7 +7199,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -7233,7 +7233,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -7259,7 +7259,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -7301,7 +7301,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -7391,7 +7391,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -7425,7 +7425,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -7451,7 +7451,7 @@
     {
       "type": "post",
       "return": [
-        "String"
+        "str"
       ],
       "params": [
         {
@@ -7469,7 +7469,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -7495,7 +7495,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -7513,7 +7513,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -7539,7 +7539,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -7565,7 +7565,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -7599,7 +7599,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -7617,7 +7617,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -7674,7 +7674,7 @@
     {
       "type": "get",
       "return": [
-        "Int"
+        "int"
       ],
       "params": [
         {
@@ -7718,7 +7718,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -7744,7 +7744,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -7811,7 +7811,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -8094,7 +8094,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -8216,7 +8216,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -8290,7 +8290,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -8348,7 +8348,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -8373,7 +8373,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -8390,7 +8390,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -8771,7 +8771,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {

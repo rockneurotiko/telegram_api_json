@@ -97,7 +97,7 @@ defmodule TelegramApiJson do
 
   defp extract_method(name, tree) do
     type = if String.starts_with?(name, "get"), do: "get", else: "post"
-    returned = tree |> find_next("p") |> Floki.text() |> extract_return_type() |> good_type()
+    returned = tree |> find_next("p") |> Floki.text() |> extract_return_type()
 
     params =
       case name in @zero_parameters do
@@ -190,7 +190,7 @@ defmodule TelegramApiJson do
         ["array", ["Message"]]
 
       String.contains?(type, "File object is returned") ->
-        ["file"]
+        ["File"]
 
       String.contains?(type, " is returned") ->
         [type |> String.split(" is returned") |> Enum.at(0) |> String.split() |> Enum.at(-1)]
@@ -207,7 +207,9 @@ defmodule TelegramApiJson do
       Enum.any?(ts, &String.contains?(type, &1)) ->
         t = Enum.find(ts, &String.contains?(type, &1))
 
-        [String.split(type, t) |> Enum.at(1) |> String.split() |> Enum.at(0) |> String.trim(",")]
+        ts = String.split(type, t) |> Enum.at(1) |> String.split() |> Enum.at(0) |> good_type()
+
+        [ts]
 
       true ->
         ["any"]
@@ -220,7 +222,7 @@ defmodule TelegramApiJson do
     case type do
       "Int" -> "int"
       "String" -> "str"
-      "True" -> "bool"
+      "True" -> "true"
       other -> other
     end
   end
