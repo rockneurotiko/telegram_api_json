@@ -8174,7 +8174,7 @@
     {
       "type": "get",
       "return": [
-        "object"
+        "StickerSet"
       ],
       "params": [
         {
@@ -8191,7 +8191,7 @@
     {
       "type": "post",
       "return": [
-        "the"
+        "File"
       ],
       "params": [
         {

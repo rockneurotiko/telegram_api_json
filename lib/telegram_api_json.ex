@@ -171,15 +171,22 @@ defmodule TelegramApiJson do
   end
 
   defp extract_return_type(type) do
-    ts = [
+    post_ts = [
       "Returns basic information about the bot in form of a ",
       "returns the edited ",
+      "Returns the uploaded ",
       "Returns exported invite link as ",
       "Returns the new invite link as",
       "Returns a ",
       "returns a ",
       "Returns ",
-      "returns "
+      "returns ",
+      "the stopped "
+    ]
+
+    prev_ts = [
+      " object is returned",
+      " is returned"
     ]
 
     cond do
@@ -192,9 +199,6 @@ defmodule TelegramApiJson do
       String.contains?(type, "File object is returned") ->
         ["File"]
 
-      String.contains?(type, " is returned") ->
-        [type |> String.split(" is returned") |> Enum.at(0) |> String.split() |> Enum.at(-1)]
-
       String.contains?(type, "returns an Array of GameHighScore") ->
         ["array", ["GameHighScore"]]
 
@@ -204,12 +208,17 @@ defmodule TelegramApiJson do
       String.contains?(type, "Returns Array of BotCommand") ->
         ["array", ["BotCommand"]]
 
-      Enum.any?(ts, &String.contains?(type, &1)) ->
-        t = Enum.find(ts, &String.contains?(type, &1))
+      Enum.any?(prev_ts, &String.contains?(type, &1)) ->
+        t = Enum.find(prev_ts, &String.contains?(type, &1))
+        typ = type |> String.split(t) |> Enum.at(0) |> String.split() |> Enum.at(-1)
+        [typ]
 
-        ts = String.split(type, t) |> Enum.at(1) |> String.split() |> Enum.at(0) |> good_type()
+      Enum.any?(post_ts, &String.contains?(type, &1)) ->
+        t = Enum.find(post_ts, &String.contains?(type, &1))
 
-        [ts]
+        typ = type |> String.split(t) |> Enum.at(1) |> String.split() |> Enum.at(0) |> good_type()
+
+        [typ]
 
       true ->
         ["any"]
