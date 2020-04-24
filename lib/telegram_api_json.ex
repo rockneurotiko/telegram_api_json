@@ -116,7 +116,7 @@ defmodule TelegramApiJson do
     {name_row, type_row, opt_row, extra_row} = extract_table_row(row)
     name = Floki.text(name_row)
     types = type_row |> Floki.text() |> parse_types()
-    opt = opt_row |> Floki.text() == "Optional"
+    opt = Enum.count(opt_row) == 1
     description = extra_row |> Floki.text()
 
     %TelegramApiJson.Param{name: name, type: types, optional: opt, description: description}
@@ -124,9 +124,17 @@ defmodule TelegramApiJson do
 
   defp extract_table_row(row) do
     case row |> Floki.find("td") do
-      [name, type, extra] -> {name, type, Floki.find(extra, "em"), extra}
-      [name, type, opt, extra | _] -> {name, type, opt, extra}
+      [name, type, extra] -> {name, type, find_optional(extra), extra}
+      [name, type, opt, extra | _] -> {name, type, keep_optional([opt]), extra}
     end
+  end
+
+  defp find_optional(extra) do
+    extra |> Floki.find("em") |> keep_optional()
+  end
+
+  defp keep_optional(elems) do
+    elems |> Enum.filter(fn e -> Floki.text(e) == "Optional" end)
   end
 
   defp parse_types(type_str) do

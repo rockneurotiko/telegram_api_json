@@ -447,7 +447,7 @@
           "type": [
             "Message"
           ],
-          "optional": false,
+          "optional": true,
           "name": "reply_to_message",
           "description": "Optional. For replies, the original message. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply."
         },
@@ -529,7 +529,7 @@
           "type": [
             "Animation"
           ],
-          "optional": false,
+          "optional": true,
           "name": "animation",
           "description": "Optional. Message is an animation, information about the animation. For backward compatibility, when this field is set, the document field will also be set"
         },
@@ -728,7 +728,7 @@
           "type": [
             "Message"
           ],
-          "optional": false,
+          "optional": true,
           "name": "pinned_message",
           "description": "Optional. Specified message was pinned. Note that the Message object in this field will not contain further reply_to_message fields even if it is itself a reply."
         },
@@ -1483,6 +1483,43 @@
           "optional": true,
           "name": "correct_option_id",
           "description": "Optional. 0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are closed, or was sent (not forwarded) by the bot or to the private chat with the bot."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "explanation",
+          "description": "Optional. Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters"
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "explanation_entities",
+          "description": "Optional. Special entities like usernames, URLs, bot commands, etc. that appear in the explanation"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "open_period",
+          "description": "Optional. Amount of time in seconds the poll will be active after creation"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "close_date",
+          "description": "Optional. Point in time (Unix timestamp) when the poll will be automatically closed"
         }
       ],
       "name": "Poll"
@@ -1491,11 +1528,19 @@
       "params": [
         {
           "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "emoji",
+          "description": "Emoji on which the dice throw animation is based"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": false,
           "name": "value",
-          "description": "Value of the dice, 1-6"
+          "description": "Value of the dice, 1-6 for currently supported base emoji"
         }
       ],
       "name": "Dice"
@@ -1592,7 +1637,7 @@
           "type": [
             "bool"
           ],
-          "optional": false,
+          "optional": true,
           "name": "resize_keyboard",
           "description": "Optional. Requests clients to resize the keyboard vertically for optimal fit (e.g., make the keyboard smaller if there are just two rows of buttons). Defaults to false, in which case the custom keyboard is always of the same height as the app's standard keyboard."
         },
@@ -1600,7 +1645,7 @@
           "type": [
             "bool"
           ],
-          "optional": false,
+          "optional": true,
           "name": "one_time_keyboard",
           "description": "Optional. Requests clients to hide the keyboard as soon as it's been used. The keyboard will still be available, but clients will automatically display the usual letter-keyboard in the chat – the user can press a special button in the input field to see the custom keyboard again. Defaults to false."
         },
@@ -1608,7 +1653,7 @@
           "type": [
             "bool"
           ],
-          "optional": false,
+          "optional": true,
           "name": "selective",
           "description": "Optional. Use this parameter if you want to show the keyboard to specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.\n\nExample: A user requests to change the bot‘s language, bot replies to the request with a keyboard to select the new language. Other users in the group don’t see the keyboard."
         }
@@ -1629,7 +1674,7 @@
           "type": [
             "bool"
           ],
-          "optional": false,
+          "optional": true,
           "name": "request_contact",
           "description": "Optional. If True, the user's phone number will be sent as a contact when the button is pressed. Available in private chats only"
         },
@@ -1637,7 +1682,7 @@
           "type": [
             "bool"
           ],
-          "optional": false,
+          "optional": true,
           "name": "request_location",
           "description": "Optional. If True, the user's current location will be sent when the button is pressed. Available in private chats only"
         },
@@ -1658,7 +1703,7 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "type",
           "description": "Optional. If quiz is passed, the user will be allowed to create only polls in the quiz mode. If regular is passed, only regular polls will be allowed. Otherwise, the user will be allowed to create a poll of any type."
         }
@@ -1679,7 +1724,7 @@
           "type": [
             "bool"
           ],
-          "optional": false,
+          "optional": true,
           "name": "selective",
           "description": "Optional. Use this parameter if you want to remove the keyboard for specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.\n\nExample: A user votes in a poll, bot returns confirmation message in reply to the vote and removes the keyboard for that user, while still showing the keyboard with poll options to users who haven't voted yet."
         }
@@ -1747,7 +1792,7 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "switch_inline_query",
           "description": "Optional. If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot‘s username and the specified inline query in the input field. Can be empty, in which case just the bot’s username will be inserted.\n\nNote: This offers an easy way for users to start using your bot in inline mode when they are currently in a private chat with it. Especially useful when combined with switch_pm… actions – in this case the user will be automatically returned to the chat they switched from, skipping the chat selection screen."
         },
@@ -1757,7 +1802,7 @@
           ],
           "optional": true,
           "name": "switch_inline_query_current_chat",
-          "description": "Optional. If set, pressing the button will insert the bot‘s username and the specified inline query in the current chat's input field. Can be empty, in which case only the bot’s username will be inserted.\n\nThis offers a quick way for the user to open your bot in inline mode in the same chat – good for selecting something from multiple options."
+          "description": "Optional. If set, pressing the button will insert the bot‘s username and the specified inline query in the current chat’s input field. Can be empty, in which case only the bot's username will be inserted.\n\nThis offers a quick way for the user to open your bot in inline mode in the same chat – good for selecting something from multiple options."
         },
         {
           "type": [
@@ -1800,7 +1845,7 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "bot_username",
           "description": "Optional. Username of a bot, which will be used for user authorization. See Setting up a bot for more details. If not specified, the current bot's username will be assumed. The url's domain must be the same as the domain linked with the bot. See Linking your domain to the bot for more details."
         },
@@ -1890,7 +1935,7 @@
           "type": [
             "bool"
           ],
-          "optional": false,
+          "optional": true,
           "name": "selective",
           "description": "Optional. Use this parameter if you want to force reply from specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message."
         }
@@ -2014,7 +2059,7 @@
           ],
           "optional": true,
           "name": "can_promote_members",
-          "description": "Optional. Administrators only. True, if the administrator can add new administrators with a subset of his own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by the user)"
+          "description": "Optional. Administrators only. True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by the user)"
         },
         {
           "type": [
@@ -2232,9 +2277,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the photo caption. See formatting options for more details."
         }
       ],
       "name": "InputMedia"
@@ -2269,9 +2314,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the photo caption. See formatting options for more details."
         }
       ],
       "name": "InputMediaPhoto"
@@ -2315,9 +2360,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the video caption. See formatting options for more details."
         },
         {
           "type": [
@@ -2347,7 +2392,7 @@
           "type": [
             "bool"
           ],
-          "optional": false,
+          "optional": true,
           "name": "supports_streaming",
           "description": "Optional. Pass True, if the uploaded video is suitable for streaming"
         }
@@ -2393,9 +2438,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the animation caption. See formatting options for more details."
         },
         {
           "type": [
@@ -2463,9 +2508,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the audio caption. See formatting options for more details."
         },
         {
           "type": [
@@ -2533,9 +2578,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the document caption. See formatting options for more details."
         }
       ],
       "name": "InputMediaDocument"
@@ -2565,7 +2610,7 @@
           ],
           "optional": true,
           "name": "parse_mode",
-          "description": "Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in your bot's message."
+          "description": "Mode for parsing entities in the message text. See formatting options for more details."
         },
         {
           "type": [
@@ -2884,7 +2929,7 @@
           "type": [
             "bool"
           ],
-          "optional": false,
+          "optional": true,
           "name": "hide_url",
           "description": "Optional. Pass True, if you don't want the URL to be shown in the message"
         },
@@ -3001,9 +3046,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the photo caption. See formatting options for more details."
         },
         {
           "type": [
@@ -3102,9 +3147,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the caption. See formatting options for more details."
         },
         {
           "type": [
@@ -3203,9 +3248,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the caption. See formatting options for more details."
         },
         {
           "type": [
@@ -3288,9 +3333,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the video caption. See formatting options for more details."
         },
         {
           "type": [
@@ -3389,9 +3434,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the audio caption. See formatting options for more details."
         },
         {
           "type": [
@@ -3474,9 +3519,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the voice message caption. See formatting options for more details."
         },
         {
           "type": [
@@ -3543,9 +3588,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the document caption. See formatting options for more details."
         },
         {
           "type": [
@@ -4000,9 +4045,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the photo caption. See formatting options for more details."
         },
         {
           "type": [
@@ -4069,9 +4114,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the caption. See formatting options for more details."
         },
         {
           "type": [
@@ -4138,9 +4183,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the caption. See formatting options for more details."
         },
         {
           "type": [
@@ -4260,9 +4305,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the document caption. See formatting options for more details."
         },
         {
           "type": [
@@ -4337,9 +4382,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the video caption. See formatting options for more details."
         },
         {
           "type": [
@@ -4406,9 +4451,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the voice message caption. See formatting options for more details."
         },
         {
           "type": [
@@ -4467,9 +4512,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Optional. Mode for parsing entities in the audio caption. See formatting options for more details."
         },
         {
           "type": [
@@ -4504,9 +4549,9 @@
           "type": [
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "parse_mode",
-          "description": "Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in your bot's message."
+          "description": "Optional. Mode for parsing entities in the message text. See formatting options for more details."
         },
         {
           "type": [
@@ -5618,7 +5663,7 @@
               ]
             ]
           ],
-          "optional": false,
+          "optional": true,
           "name": "text_entities",
           "description": "Optional. Special entities that appear in text, such as usernames, URLs, bot commands, etc."
         },
@@ -5748,7 +5793,7 @@
           ],
           "optional": true,
           "name": "limit",
-          "description": "Limits the number of updates to be retrieved. Values between 1—100 are accepted. Defaults to 100."
+          "description": "Limits the number of updates to be retrieved. Values between 1-100 are accepted. Defaults to 100."
         },
         {
           "type": [
@@ -5873,7 +5918,7 @@
           ],
           "optional": true,
           "name": "parse_mode",
-          "description": "Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in your bot's message."
+          "description": "Mode for parsing entities in the message text. See formatting options for more details."
         },
         {
           "type": [
@@ -5994,7 +6039,7 @@
           ],
           "optional": true,
           "name": "parse_mode",
-          "description": "Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Mode for parsing entities in the photo caption. See formatting options for more details."
         },
         {
           "type": [
@@ -6064,7 +6109,7 @@
           ],
           "optional": true,
           "name": "parse_mode",
-          "description": "Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Mode for parsing entities in the audio caption. See formatting options for more details."
         },
         {
           "type": [
@@ -6176,7 +6221,7 @@
           ],
           "optional": true,
           "name": "parse_mode",
-          "description": "Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Mode for parsing entities in the document caption. See formatting options for more details."
         },
         {
           "type": [
@@ -6279,7 +6324,7 @@
           ],
           "optional": true,
           "name": "parse_mode",
-          "description": "Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Mode for parsing entities in the video caption. See formatting options for more details."
         },
         {
           "type": [
@@ -6390,7 +6435,7 @@
           ],
           "optional": true,
           "name": "parse_mode",
-          "description": "Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Mode for parsing entities in the animation caption. See formatting options for more details."
         },
         {
           "type": [
@@ -6460,7 +6505,7 @@
           ],
           "optional": true,
           "name": "parse_mode",
-          "description": "Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Mode for parsing entities in the voice message caption. See formatting options for more details."
         },
         {
           "type": [
@@ -6609,7 +6654,7 @@
           ],
           "optional": false,
           "name": "media",
-          "description": "A JSON-serialized array describing photos and videos to be sent, must include 2–10 items"
+          "description": "A JSON-serialized array describing photos and videos to be sent, must include 2-10 items"
         },
         {
           "type": [
@@ -7039,6 +7084,38 @@
         },
         {
           "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "explanation",
+          "description": "Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters with at most 2 line feeds after entities parsing"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "explanation_parse_mode",
+          "description": "Mode for parsing entities in the explanation. See formatting options for more details."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "open_period",
+          "description": "Amount of time in seconds the poll will be active after creation, 5-600. Can't be used together with close_date."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "close_date",
+          "description": "Point in time (Unix timestamp) when the poll will be automatically closed. Must be at least 5 and no more than 600 seconds in the future. Can't be used together with open_period."
+        },
+        {
+          "type": [
             "bool"
           ],
           "optional": true,
@@ -7089,6 +7166,14 @@
           "optional": false,
           "name": "chat_id",
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "emoji",
+          "description": "Emoji on which the dice throw animation is based. Currently, must be one of “” or “”. Defauts to “”"
         },
         {
           "type": [
@@ -7174,7 +7259,7 @@
           ],
           "optional": true,
           "name": "limit",
-          "description": "Limits the number of photos to be retrieved. Values between 1—100 are accepted. Defaults to 100."
+          "description": "Limits the number of photos to be retrieved. Values between 1-100 are accepted. Defaults to 100."
         }
       ],
       "name": "getUserProfilePhotos"
@@ -7383,7 +7468,7 @@
           ],
           "optional": true,
           "name": "can_promote_members",
-          "description": "Pass True, if the administrator can add new administrators with a subset of his own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by him)"
+          "description": "Pass True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by him)"
         }
       ],
       "name": "promoteChatMember"
@@ -7795,7 +7880,7 @@
           ],
           "optional": true,
           "name": "url",
-          "description": "URL that will be opened by the user's client. If you have created a Game and accepted the conditions via @Botfather, specify the URL that opens your game – note that this will only work if the query comes from a callback_game button.\n\nOtherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter."
+          "description": "URL that will be opened by the user's client. If you have created a Game and accepted the conditions via @Botfather, specify the URL that opens your game — note that this will only work if the query comes from a callback_game button.\n\nOtherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter."
         },
         {
           "type": [
@@ -7886,7 +7971,7 @@
           ],
           "optional": true,
           "name": "parse_mode",
-          "description": "Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in your bot's message."
+          "description": "Mode for parsing entities in the message text. See formatting options for more details."
         },
         {
           "type": [
@@ -7952,7 +8037,7 @@
           ],
           "optional": true,
           "name": "parse_mode",
-          "description": "Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption."
+          "description": "Mode for parsing entities in the message caption. See formatting options for more details."
         },
         {
           "type": [
@@ -8208,7 +8293,7 @@
           ],
           "optional": false,
           "name": "png_sticker",
-          "description": "Png image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. More info on Sending Files »"
+          "description": "PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. More info on Sending Files »"
         }
       ],
       "name": "uploadStickerFile"
