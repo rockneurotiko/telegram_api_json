@@ -8,7 +8,7 @@
           ],
           "optional": false,
           "name": "update_id",
-          "description": "The update‘s unique identifier. Update identifiers start from a certain positive number and increase sequentially. This ID becomes especially handy if you’re using Webhooks, since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates for at least a week, then identifier of the next update will be chosen randomly instead of sequentially."
+          "description": "The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially. This ID becomes especially handy if you're using Webhooks, since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates for at least a week, then identifier of the next update will be chosen randomly instead of sequentially."
         },
         {
           "type": [
@@ -191,7 +191,7 @@
           ],
           "optional": false,
           "name": "first_name",
-          "description": "User‘s or bot’s first name"
+          "description": "User's or bot's first name"
         },
         {
           "type": [
@@ -199,7 +199,7 @@
           ],
           "optional": true,
           "name": "last_name",
-          "description": "Optional. User‘s or bot’s last name"
+          "description": "Optional. User's or bot's last name"
         },
         {
           "type": [
@@ -207,7 +207,7 @@
           ],
           "optional": true,
           "name": "username",
-          "description": "Optional. User‘s or bot’s username"
+          "description": "Optional. User's or bot's username"
         },
         {
           "type": [
@@ -453,6 +453,14 @@
         },
         {
           "type": [
+            "User"
+          ],
+          "optional": true,
+          "name": "via_bot",
+          "description": "Optional. Bot through which the message was sent"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": true,
@@ -498,16 +506,11 @@
         },
         {
           "type": [
-            [
-              "array",
-              [
-                "MessageEntity"
-              ]
-            ]
+            "Animation"
           ],
           "optional": true,
-          "name": "caption_entities",
-          "description": "Optional. For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption"
+          "name": "animation",
+          "description": "Optional. Message is an animation, information about the animation. For backward compatibility, when this field is set, the document field will also be set"
         },
         {
           "type": [
@@ -524,22 +527,6 @@
           "optional": true,
           "name": "document",
           "description": "Optional. Message is a general file, information about the file"
-        },
-        {
-          "type": [
-            "Animation"
-          ],
-          "optional": true,
-          "name": "animation",
-          "description": "Optional. Message is an animation, information about the animation. For backward compatibility, when this field is set, the document field will also be set"
-        },
-        {
-          "type": [
-            "Game"
-          ],
-          "optional": true,
-          "name": "game",
-          "description": "Optional. Message is a game, information about the game. More about games »"
         },
         {
           "type": [
@@ -572,19 +559,19 @@
         },
         {
           "type": [
-            "Voice"
-          ],
-          "optional": true,
-          "name": "voice",
-          "description": "Optional. Message is a voice message, information about the file"
-        },
-        {
-          "type": [
             "VideoNote"
           ],
           "optional": true,
           "name": "video_note",
           "description": "Optional. Message is a video note, information about the video message"
+        },
+        {
+          "type": [
+            "Voice"
+          ],
+          "optional": true,
+          "name": "voice",
+          "description": "Optional. Message is a voice message, information about the file"
         },
         {
           "type": [
@@ -596,6 +583,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption"
+        },
+        {
+          "type": [
             "Contact"
           ],
           "optional": true,
@@ -604,19 +604,19 @@
         },
         {
           "type": [
-            "Location"
+            "Dice"
           ],
           "optional": true,
-          "name": "location",
-          "description": "Optional. Message is a shared location, information about the location"
+          "name": "dice",
+          "description": "Optional. Message is a dice with random value from 1 to 6"
         },
         {
           "type": [
-            "Venue"
+            "Game"
           ],
           "optional": true,
-          "name": "venue",
-          "description": "Optional. Message is a venue, information about the venue"
+          "name": "game",
+          "description": "Optional. Message is a game, information about the game. More about games »"
         },
         {
           "type": [
@@ -628,11 +628,19 @@
         },
         {
           "type": [
-            "Dice"
+            "Venue"
           ],
           "optional": true,
-          "name": "dice",
-          "description": "Optional. Message is a dice with random value from 1 to 6"
+          "name": "venue",
+          "description": "Optional. Message is a venue, information about the venue. For backward compatibility, when this field is set, the location field will also be set"
+        },
+        {
+          "type": [
+            "Location"
+          ],
+          "optional": true,
+          "name": "location",
+          "description": "Optional. Message is a shared location, information about the location"
         },
         {
           "type": [
@@ -698,7 +706,7 @@
           ],
           "optional": true,
           "name": "supergroup_chat_created",
-          "description": "Optional. Service message: the supergroup has been created. This field can‘t be received in a message coming through updates, because bot can’t be a member of a supergroup when it is created. It can only be found in reply_to_message if someone replies to a very first message in a directly created supergroup."
+          "description": "Optional. Service message: the supergroup has been created. This field can't be received in a message coming through updates, because bot can't be a member of a supergroup when it is created. It can only be found in reply_to_message if someone replies to a very first message in a directly created supergroup."
         },
         {
           "type": [
@@ -706,7 +714,7 @@
           ],
           "optional": true,
           "name": "channel_chat_created",
-          "description": "Optional. Service message: the channel has been created. This field can‘t be received in a message coming through updates, because bot can’t be a member of a channel when it is created. It can only be found in reply_to_message if someone replies to a very first message in a channel."
+          "description": "Optional. Service message: the channel has been created. This field can't be received in a message coming through updates, because bot can't be a member of a channel when it is created. It can only be found in reply_to_message if someone replies to a very first message in a channel."
         },
         {
           "type": [
@@ -872,6 +880,83 @@
         }
       ],
       "name": "PhotoSize"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "file_id",
+          "description": "Identifier for this file, which can be used to download or reuse the file"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "file_unique_id",
+          "description": "Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "width",
+          "description": "Video width as defined by sender"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "height",
+          "description": "Video height as defined by sender"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "duration",
+          "description": "Duration of the video in seconds as defined by sender"
+        },
+        {
+          "type": [
+            "PhotoSize"
+          ],
+          "optional": true,
+          "name": "thumb",
+          "description": "Optional. Animation thumbnail as defined by sender"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "file_name",
+          "description": "Optional. Original animation filename as defined by sender"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "mime_type",
+          "description": "Optional. MIME type of the file as defined by sender"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "file_size",
+          "description": "Optional. File size"
+        }
+      ],
+      "name": "Animation"
     },
     {
       "params": [
@@ -1087,16 +1172,8 @@
             "int"
           ],
           "optional": false,
-          "name": "width",
-          "description": "Video width as defined by sender"
-        },
-        {
-          "type": [
-            "int"
-          ],
-          "optional": false,
-          "name": "height",
-          "description": "Video height as defined by sender"
+          "name": "length",
+          "description": "Video width and height (diameter of the video message) as defined by sender"
         },
         {
           "type": [
@@ -1112,23 +1189,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Optional. Animation thumbnail as defined by sender"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": true,
-          "name": "file_name",
-          "description": "Optional. Original animation filename as defined by sender"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": true,
-          "name": "mime_type",
-          "description": "Optional. MIME type of the file as defined by sender"
+          "description": "Optional. Video thumbnail"
         },
         {
           "type": [
@@ -1139,7 +1200,7 @@
           "description": "Optional. File size"
         }
       ],
-      "name": "Animation"
+      "name": "VideoNote"
     },
     {
       "params": [
@@ -1193,59 +1254,6 @@
             "str"
           ],
           "optional": false,
-          "name": "file_id",
-          "description": "Identifier for this file, which can be used to download or reuse the file"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": false,
-          "name": "file_unique_id",
-          "description": "Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
-        },
-        {
-          "type": [
-            "int"
-          ],
-          "optional": false,
-          "name": "length",
-          "description": "Video width and height (diameter of the video message) as defined by sender"
-        },
-        {
-          "type": [
-            "int"
-          ],
-          "optional": false,
-          "name": "duration",
-          "description": "Duration of the video in seconds as defined by sender"
-        },
-        {
-          "type": [
-            "PhotoSize"
-          ],
-          "optional": true,
-          "name": "thumb",
-          "description": "Optional. Video thumbnail"
-        },
-        {
-          "type": [
-            "int"
-          ],
-          "optional": true,
-          "name": "file_size",
-          "description": "Optional. File size"
-        }
-      ],
-      "name": "VideoNote"
-    },
-    {
-      "params": [
-        {
-          "type": [
-            "str"
-          ],
-          "optional": false,
           "name": "phone_number",
           "description": "Contact's phone number"
         },
@@ -1288,67 +1296,22 @@
       "params": [
         {
           "type": [
-            "float"
+            "str"
           ],
           "optional": false,
-          "name": "longitude",
-          "description": "Longitude as defined by sender"
+          "name": "emoji",
+          "description": "Emoji on which the dice throw animation is based"
         },
         {
           "type": [
-            "float"
+            "int"
           ],
           "optional": false,
-          "name": "latitude",
-          "description": "Latitude as defined by sender"
+          "name": "value",
+          "description": "Value of the dice, 1-6 for “” and “” base emoji, 1-5 for “” base emoji"
         }
       ],
-      "name": "Location"
-    },
-    {
-      "params": [
-        {
-          "type": [
-            "Location"
-          ],
-          "optional": false,
-          "name": "location",
-          "description": "Venue location"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": false,
-          "name": "title",
-          "description": "Name of the venue"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": false,
-          "name": "address",
-          "description": "Address of the venue"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": true,
-          "name": "foursquare_id",
-          "description": "Optional. Foursquare identifier of the venue"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": true,
-          "name": "foursquare_type",
-          "description": "Optional. Foursquare type of the venue. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)"
-        }
-      ],
-      "name": "Venue"
+      "name": "Dice"
     },
     {
       "params": [
@@ -1528,22 +1491,67 @@
       "params": [
         {
           "type": [
-            "str"
+            "float"
           ],
           "optional": false,
-          "name": "emoji",
-          "description": "Emoji on which the dice throw animation is based"
+          "name": "longitude",
+          "description": "Longitude as defined by sender"
         },
         {
           "type": [
-            "int"
+            "float"
           ],
           "optional": false,
-          "name": "value",
-          "description": "Value of the dice, 1-6 for currently supported base emoji"
+          "name": "latitude",
+          "description": "Latitude as defined by sender"
         }
       ],
-      "name": "Dice"
+      "name": "Location"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "Location"
+          ],
+          "optional": false,
+          "name": "location",
+          "description": "Venue location"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "title",
+          "description": "Name of the venue"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "address",
+          "description": "Address of the venue"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "foursquare_id",
+          "description": "Optional. Foursquare identifier of the venue"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "foursquare_type",
+          "description": "Optional. Foursquare type of the venue. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)"
+        }
+      ],
+      "name": "Venue"
     },
     {
       "params": [
@@ -1655,7 +1663,7 @@
           ],
           "optional": true,
           "name": "selective",
-          "description": "Optional. Use this parameter if you want to show the keyboard to specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.\n\nExample: A user requests to change the bot‘s language, bot replies to the request with a keyboard to select the new language. Other users in the group don’t see the keyboard."
+          "description": "Optional. Use this parameter if you want to show the keyboard to specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.\n\nExample: A user requests to change the bot's language, bot replies to the request with a keyboard to select the new language. Other users in the group don't see the keyboard."
         }
       ],
       "name": "ReplyKeyboardMarkup"
@@ -1794,7 +1802,7 @@
           ],
           "optional": true,
           "name": "switch_inline_query",
-          "description": "Optional. If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot‘s username and the specified inline query in the input field. Can be empty, in which case just the bot’s username will be inserted.\n\nNote: This offers an easy way for users to start using your bot in inline mode when they are currently in a private chat with it. Especially useful when combined with switch_pm… actions – in this case the user will be automatically returned to the chat they switched from, skipping the chat selection screen."
+          "description": "Optional. If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. Can be empty, in which case just the bot's username will be inserted.\n\nNote: This offers an easy way for users to start using your bot in inline mode when they are currently in a private chat with it. Especially useful when combined with switch_pm… actions – in this case the user will be automatically returned to the chat they switched from, skipping the chat selection screen."
         },
         {
           "type": [
@@ -1802,7 +1810,7 @@
           ],
           "optional": true,
           "name": "switch_inline_query_current_chat",
-          "description": "Optional. If set, pressing the button will insert the bot‘s username and the specified inline query in the current chat’s input field. Can be empty, in which case only the bot's username will be inserted.\n\nThis offers a quick way for the user to open your bot in inline mode in the same chat – good for selecting something from multiple options."
+          "description": "Optional. If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. Can be empty, in which case only the bot's username will be inserted.\n\nThis offers a quick way for the user to open your bot in inline mode in the same chat – good for selecting something from multiple options."
         },
         {
           "type": [
@@ -1929,7 +1937,7 @@
           ],
           "optional": false,
           "name": "force_reply",
-          "description": "Shows reply interface to the user, as if they manually selected the bot‘s message and tapped ’Reply'"
+          "description": "Shows reply interface to the user, as if they manually selected the bot's message and tapped 'Reply'"
         },
         {
           "type": [
@@ -2346,7 +2354,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -2424,7 +2432,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -2494,7 +2502,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -2564,7 +2572,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -3125,7 +3133,15 @@
           ],
           "optional": false,
           "name": "thumb_url",
-          "description": "URL of the static thumbnail for the result (jpeg or gif)"
+          "description": "URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "thumb_mime_type",
+          "description": "Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”"
         },
         {
           "type": [
@@ -3226,7 +3242,15 @@
           ],
           "optional": false,
           "name": "thumb_url",
-          "description": "URL of the static thumbnail (jpeg or gif) for the result"
+          "description": "URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "thumb_mime_type",
+          "description": "Optional. MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”"
         },
         {
           "type": [
@@ -5847,7 +5871,7 @@
           ],
           "optional": true,
           "name": "max_connections",
-          "description": "Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to 40. Use lower values to limit the load on your bot‘s server, and higher values to increase your bot’s throughput."
+          "description": "Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to 40. Use lower values to limit the load on your bot's server, and higher values to increase your bot's throughput."
         },
         {
           "type": [
@@ -6142,7 +6166,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -6205,7 +6229,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -6308,7 +6332,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -6419,7 +6443,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -6592,7 +6616,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail‘s width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can’t be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files »"
         },
         {
           "type": [
@@ -7173,7 +7197,7 @@
           ],
           "optional": true,
           "name": "emoji",
-          "description": "Emoji on which the dice throw animation is based. Currently, must be one of “” or “”. Defauts to “”"
+          "description": "Emoji on which the dice throw animation is based. Currently, must be one of “”, “”, or “”. Dice can have values 1-6 for “” and “”, and values 1-5 for “”. Defaults to “”"
         },
         {
           "type": [
@@ -7370,7 +7394,7 @@
           ],
           "optional": false,
           "name": "permissions",
-          "description": "New user permissions"
+          "description": "A JSON-serialized object for new user permissions"
         },
         {
           "type": [
@@ -8399,7 +8423,7 @@
             "file",
             "str"
           ],
-          "optional": false,
+          "optional": true,
           "name": "png_sticker",
           "description": "PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files »"
         },
@@ -8555,7 +8579,7 @@
           ],
           "optional": true,
           "name": "next_offset",
-          "description": "Pass the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don‘t support pagination. Offset length can’t exceed 64 bytes."
+          "description": "Pass the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don't support pagination. Offset length can't exceed 64 bytes."
         },
         {
           "type": [
@@ -8571,7 +8595,7 @@
           ],
           "optional": true,
           "name": "switch_pm_parameter",
-          "description": "Deep-linking parameter for the /start message sent to the bot when user presses the switch button. 1-64 characters, only A-Z, a-z, 0-9, _ and - are allowed.\n\nExample: An inline bot that sends YouTube videos can ask the user to connect the bot to their YouTube account to adapt search results accordingly. To do this, it displays a ‘Connect your YouTube account’ button above the results, or even before showing any. The user presses the button, switches to a private chat with the bot and, in doing so, passes a start parameter that instructs the bot to return an oauth link. Once done, the bot can offer a switch_inline button so that the user can easily return to the chat where they wanted to use the bot's inline capabilities."
+          "description": "Deep-linking parameter for the /start message sent to the bot when user presses the switch button. 1-64 characters, only A-Z, a-z, 0-9, _ and - are allowed.\n\nExample: An inline bot that sends YouTube videos can ask the user to connect the bot to their YouTube account to adapt search results accordingly. To do this, it displays a 'Connect your YouTube account' button above the results, or even before showing any. The user presses the button, switches to a private chat with the bot and, in doing so, passes a start parameter that instructs the bot to return an oauth link. Once done, the bot can offer a switch_inline button so that the user can easily return to the chat where they wanted to use the bot's inline capabilities."
         }
       ],
       "name": "answerInlineQuery"
@@ -8657,7 +8681,7 @@
           ],
           "optional": true,
           "name": "provider_data",
-          "description": "JSON-encoded data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider."
+          "description": "A JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider."
         },
         {
           "type": [
@@ -8927,7 +8951,7 @@
           ],
           "optional": true,
           "name": "reply_markup",
-          "description": "A JSON-serialized object for an inline keyboard. If empty, one ‘Play game_title’ button will be shown. If not empty, the first button must launch the game."
+          "description": "A JSON-serialized object for an inline keyboard. If empty, one 'Play game_title' button will be shown. If not empty, the first button must launch the game."
         }
       ],
       "name": "sendGame"
