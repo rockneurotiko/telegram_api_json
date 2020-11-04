@@ -185,6 +185,7 @@ defmodule TelegramApiJson do
       "Returns the uploaded ",
       "Returns exported invite link as ",
       "Returns the new invite link as",
+      "Returns the",
       "Returns a ",
       "returns a ",
       "Returns ",
@@ -202,6 +203,9 @@ defmodule TelegramApiJson do
         ["array", ["Update"]]
 
       String.contains?(type, "array of the sent Messages is returned") ->
+        ["array", ["Message"]]
+
+      String.contains?(type, "On success, an array of Messages") ->
         ["array", ["Message"]]
 
       String.contains?(type, "File object is returned") ->

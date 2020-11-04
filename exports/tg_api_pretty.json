@@ -6810,7 +6810,7 @@
     {
       "type": "post",
       "return": [
-        "the"
+        "MessageId"
       ],
       "params": [
         {
@@ -7674,7 +7674,10 @@
     {
       "type": "post",
       "return": [
-        "sent"
+        "array",
+        [
+          "Message"
+        ]
       ],
       "params": [
         {
