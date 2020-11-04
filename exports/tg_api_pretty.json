@@ -129,6 +129,14 @@
         },
         {
           "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "ip_address",
+          "description": "Optional. Currently used webhook IP address"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": true,
@@ -307,6 +315,14 @@
             "str"
           ],
           "optional": true,
+          "name": "bio",
+          "description": "Optional. Bio of the other party in a private chat. Returned only in getChat."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
           "name": "description",
           "description": "Optional. Description, for groups, supergroups and channel chats. Returned only in getChat."
         },
@@ -324,7 +340,7 @@
           ],
           "optional": true,
           "name": "pinned_message",
-          "description": "Optional. Pinned message, for groups, supergroups and channels. Returned only in getChat."
+          "description": "Optional. The most recent pinned message (by sending date). Returned only in getChat."
         },
         {
           "type": [
@@ -357,6 +373,22 @@
           "optional": true,
           "name": "can_set_sticker_set",
           "description": "Optional. True, if the bot can change the group sticker set. Returned only in getChat."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "linked_chat_id",
+          "description": "Optional. Unique identifier for the linked chat, i.e. the discussion group identifier for a channel and vice versa; for supergroups and channel chats. This identifier may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier. Returned only in getChat."
+        },
+        {
+          "type": [
+            "ChatLocation"
+          ],
+          "optional": true,
+          "name": "location",
+          "description": "Optional. For supergroups, the location to which the supergroup is connected. Returned only in getChat."
         }
       ],
       "name": "Chat"
@@ -378,6 +410,14 @@
           "optional": true,
           "name": "from",
           "description": "Optional. Sender, empty for messages sent to channels"
+        },
+        {
+          "type": [
+            "Chat"
+          ],
+          "optional": true,
+          "name": "sender_chat",
+          "description": "Optional. Sender of the message, sent on behalf of a chat. The channel itself for channel messages. The supergroup itself for messages from anonymous group administrators. The linked channel for messages automatically forwarded to the discussion group"
         },
         {
           "type": [
@@ -409,7 +449,7 @@
           ],
           "optional": true,
           "name": "forward_from_chat",
-          "description": "Optional. For messages forwarded from channels, information about the original channel"
+          "description": "Optional. For messages forwarded from channels or from anonymous administrators, information about the original sender chat"
         },
         {
           "type": [
@@ -481,7 +521,7 @@
           ],
           "optional": true,
           "name": "author_signature",
-          "description": "Optional. Signature of the post author for messages in channels"
+          "description": "Optional. Signature of the post author for messages in channels, or the custom title of an anonymous group administrator"
         },
         {
           "type": [
@@ -774,6 +814,14 @@
         },
         {
           "type": [
+            "ProximityAlertTriggered"
+          ],
+          "optional": true,
+          "name": "proximity_alert_triggered",
+          "description": "Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location."
+        },
+        {
+          "type": [
             "InlineKeyboardMarkup"
           ],
           "optional": true,
@@ -782,6 +830,19 @@
         }
       ],
       "name": "Message"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "message_id",
+          "description": "Unique message identifier"
+        }
+      ],
+      "name": "MessageId"
     },
     {
       "params": [
@@ -1005,6 +1066,14 @@
             "str"
           ],
           "optional": true,
+          "name": "file_name",
+          "description": "Optional. Original filename as defined by sender"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
           "name": "mime_type",
           "description": "Optional. MIME type of the file as defined by sender"
         },
@@ -1129,6 +1198,14 @@
           "optional": true,
           "name": "thumb",
           "description": "Optional. Video thumbnail"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "file_name",
+          "description": "Optional. Original filename as defined by sender"
         },
         {
           "type": [
@@ -1308,7 +1385,7 @@
           ],
           "optional": false,
           "name": "value",
-          "description": "Value of the dice, 1-6 for “” and “” base emoji, 1-5 for “” base emoji"
+          "description": "Value of the dice, 1-6 for “” and “” base emoji, 1-5 for “” and “” base emoji, 1-64 for “” base emoji"
         }
       ],
       "name": "Dice"
@@ -1504,6 +1581,38 @@
           "optional": false,
           "name": "latitude",
           "description": "Latitude as defined by sender"
+        },
+        {
+          "type": [
+            "float"
+          ],
+          "optional": true,
+          "name": "horizontal_accuracy",
+          "description": "Optional. The radius of uncertainty for the location, measured in meters; 0-1500"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "live_period",
+          "description": "Optional. Time relative to the message sending date, during which the location can be updated, in seconds. For active live locations only."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "heading",
+          "description": "Optional. The direction in which user is moving, in degrees; 1-360. For active live locations only."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "proximity_alert_radius",
+          "description": "Optional. Maximum distance for proximity alerts about approaching another chat member, in meters. For sent live locations only."
         }
       ],
       "name": "Location"
@@ -1516,7 +1625,7 @@
           ],
           "optional": false,
           "name": "location",
-          "description": "Venue location"
+          "description": "Venue location. Can't be a live location"
         },
         {
           "type": [
@@ -1549,9 +1658,54 @@
           "optional": true,
           "name": "foursquare_type",
           "description": "Optional. Foursquare type of the venue. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "google_place_id",
+          "description": "Optional. Google Places identifier of the venue"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "google_place_type",
+          "description": "Optional. Google Places type of the venue. (See supported types.)"
         }
       ],
       "name": "Venue"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "User"
+          ],
+          "optional": false,
+          "name": "traveler",
+          "description": "User that triggered the alert"
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": false,
+          "name": "watcher",
+          "description": "User that set the alert"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "distance",
+          "description": "The distance between the users"
+        }
+      ],
+      "name": "ProximityAlertTriggered"
     },
     {
       "params": [
@@ -2015,11 +2169,11 @@
         },
         {
           "type": [
-            "int"
+            "bool"
           ],
           "optional": true,
-          "name": "until_date",
-          "description": "Optional. Restricted and kicked only. Date when restrictions will be lifted for this user; unix time"
+          "name": "is_anonymous",
+          "description": "Optional. Owner and administrators only. True, if the user's presence in the chat is hidden"
         },
         {
           "type": [
@@ -2140,6 +2294,14 @@
           "optional": true,
           "name": "can_add_web_page_previews",
           "description": "Optional. Restricted only. True, if the user is allowed to add web page previews to their messages"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "until_date",
+          "description": "Optional. Restricted and kicked only. Date when restrictions will be lifted for this user; unix time"
         }
       ],
       "name": "ChatMember"
@@ -2217,6 +2379,27 @@
       "params": [
         {
           "type": [
+            "Location"
+          ],
+          "optional": false,
+          "name": "location",
+          "description": "The location to which the supergroup is connected. Can't be a live location."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "address",
+          "description": "Location address; 1-64 characters, as defined by the chat owner"
+        }
+      ],
+      "name": "ChatLocation"
+    },
+    {
+      "params": [
+        {
+          "type": [
             "str"
           ],
           "optional": false,
@@ -2288,6 +2471,19 @@
           "optional": true,
           "name": "parse_mode",
           "description": "Optional. Mode for parsing entities in the photo caption. See formatting options for more details."
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
         }
       ],
       "name": "InputMedia"
@@ -2325,6 +2521,19 @@
           "optional": true,
           "name": "parse_mode",
           "description": "Optional. Mode for parsing entities in the photo caption. See formatting options for more details."
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
         }
       ],
       "name": "InputMediaPhoto"
@@ -2371,6 +2580,19 @@
           "optional": true,
           "name": "parse_mode",
           "description": "Optional. Mode for parsing entities in the video caption. See formatting options for more details."
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -2452,6 +2674,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": true,
@@ -2522,6 +2757,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": true,
@@ -2589,6 +2837,27 @@
           "optional": true,
           "name": "parse_mode",
           "description": "Optional. Mode for parsing entities in the document caption. See formatting options for more details."
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "disable_content_type_detection",
+          "description": "Optional. Disables automatic server-side content type detection for files uploaded using multipart/form-data. Always true, if the document is sent as part of an album."
         }
       ],
       "name": "InputMediaDocument"
@@ -2622,6 +2891,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "entities",
+          "description": "List of special entities that appear in message text, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "bool"
           ],
           "optional": true,
@@ -2643,6 +2925,14 @@
           "optional": true,
           "name": "reply_to_message_id",
           "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -3060,6 +3350,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "InlineKeyboardMarkup"
           ],
           "optional": true,
@@ -3166,6 +3469,19 @@
           "optional": true,
           "name": "parse_mode",
           "description": "Optional. Mode for parsing entities in the caption. See formatting options for more details."
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -3278,6 +3594,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "InlineKeyboardMarkup"
           ],
           "optional": true,
@@ -3360,6 +3689,19 @@
           "optional": true,
           "name": "parse_mode",
           "description": "Optional. Mode for parsing entities in the video caption. See formatting options for more details."
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -3464,6 +3806,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "str"
           ],
           "optional": true,
@@ -3549,6 +3904,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": true,
@@ -3615,6 +3983,19 @@
           "optional": true,
           "name": "parse_mode",
           "description": "Optional. Mode for parsing entities in the document caption. See formatting options for more details."
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -3727,11 +4108,35 @@
         },
         {
           "type": [
+            "float"
+          ],
+          "optional": true,
+          "name": "horizontal_accuracy",
+          "description": "Optional. The radius of uncertainty for the location, measured in meters; 0-1500"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": true,
           "name": "live_period",
           "description": "Optional. Period in seconds for which the location can be updated, should be between 60 and 86400."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "heading",
+          "description": "Optional. For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "proximity_alert_radius",
+          "description": "Optional. For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified."
         },
         {
           "type": [
@@ -3841,6 +4246,22 @@
           "optional": true,
           "name": "foursquare_type",
           "description": "Optional. Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "google_place_id",
+          "description": "Optional. Google Places identifier of the venue"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "google_place_type",
+          "description": "Optional. Google Places type of the venue. (See supported types.)"
         },
         {
           "type": [
@@ -4075,6 +4496,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "InlineKeyboardMarkup"
           ],
           "optional": true,
@@ -4144,6 +4578,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "InlineKeyboardMarkup"
           ],
           "optional": true,
@@ -4210,6 +4657,19 @@
           "optional": true,
           "name": "parse_mode",
           "description": "Optional. Mode for parsing entities in the caption. See formatting options for more details."
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -4335,6 +4795,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "InlineKeyboardMarkup"
           ],
           "optional": true,
@@ -4412,6 +4885,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "InlineKeyboardMarkup"
           ],
           "optional": true,
@@ -4481,6 +4967,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "InlineKeyboardMarkup"
           ],
           "optional": true,
@@ -4542,6 +5041,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "InlineKeyboardMarkup"
           ],
           "optional": true,
@@ -4579,6 +5091,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "entities",
+          "description": "Optional. List of special entities that appear in message text, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "bool"
           ],
           "optional": true,
@@ -4608,11 +5133,35 @@
         },
         {
           "type": [
+            "float"
+          ],
+          "optional": true,
+          "name": "horizontal_accuracy",
+          "description": "Optional. The radius of uncertainty for the location, measured in meters; 0-1500"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": true,
           "name": "live_period",
           "description": "Optional. Period in seconds for which the location can be updated, should be between 60 and 86400."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "heading",
+          "description": "Optional. For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "proximity_alert_radius",
+          "description": "Optional. For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified."
         }
       ],
       "name": "InputLocationMessageContent"
@@ -4666,6 +5215,22 @@
           "optional": true,
           "name": "foursquare_type",
           "description": "Optional. Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "google_place_id",
+          "description": "Optional. Google Places identifier of the venue"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "google_place_type",
+          "description": "Optional. Google Places type of the venue. (See supported types.)"
         }
       ],
       "name": "InputVenueMessageContent"
@@ -5867,6 +6432,14 @@
         },
         {
           "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "ip_address",
+          "description": "The fixed IP address which will be used to send webhook requests instead of the IP address resolved through DNS"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": true,
@@ -5884,7 +6457,15 @@
           ],
           "optional": true,
           "name": "allowed_updates",
-          "description": "A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all updates regardless of type (default). If not specified, the previous setting will be used.\n\nPlease note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time."
+          "description": "A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all updates regardless of type (default). If not specified, the previous setting will be used.\nPlease note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time."
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "drop_pending_updates",
+          "description": "Pass True to drop all pending updates"
         }
       ],
       "name": "setWebhook"
@@ -5912,6 +6493,186 @@
       ],
       "params": [],
       "name": "getMe"
+    },
+    {
+      "type": "post",
+      "return": [
+        "true"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "text",
+          "description": "Text of the message to be sent, 1-4096 characters after entities parsing"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "parse_mode",
+          "description": "Mode for parsing entities in the message text. See formatting options for more details."
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "entities",
+          "description": "List of special entities that appear in message text, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "disable_web_page_preview",
+          "description": "Disables link previews for links in this message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "disable_notification",
+          "description": "Sends the message silently. Users will receive a notification with no sound."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "reply_to_message_id",
+          "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+        },
+        {
+          "type": [
+            "InlineKeyboardMarkup",
+            "ReplyKeyboardMarkup",
+            "ReplyKeyboardRemove",
+            "ForceReply"
+          ],
+          "optional": true,
+          "name": "reply_markup",
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
+        }
+      ],
+      "name": "logOut"
+    },
+    {
+      "type": "post",
+      "return": [
+        "true"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "text",
+          "description": "Text of the message to be sent, 1-4096 characters after entities parsing"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "parse_mode",
+          "description": "Mode for parsing entities in the message text. See formatting options for more details."
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "entities",
+          "description": "List of special entities that appear in message text, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "disable_web_page_preview",
+          "description": "Disables link previews for links in this message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "disable_notification",
+          "description": "Sends the message silently. Users will receive a notification with no sound."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "reply_to_message_id",
+          "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+        },
+        {
+          "type": [
+            "InlineKeyboardMarkup",
+            "ReplyKeyboardMarkup",
+            "ReplyKeyboardRemove",
+            "ForceReply"
+          ],
+          "optional": true,
+          "name": "reply_markup",
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
+        }
+      ],
+      "name": "close"
     },
     {
       "type": "post",
@@ -5946,6 +6707,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "entities",
+          "description": "List of special entities that appear in message text, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "bool"
           ],
           "optional": true,
@@ -5967,6 +6741,14 @@
           "optional": true,
           "name": "reply_to_message_id",
           "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -6028,6 +6810,105 @@
     {
       "type": "post",
       "return": [
+        "the"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "from_chat_id",
+          "description": "Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "message_id",
+          "description": "Message identifier in the chat specified in from_chat_id"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "caption",
+          "description": "New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "parse_mode",
+          "description": "Mode for parsing entities in the new caption. See formatting options for more details."
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "List of special entities that appear in the new caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "disable_notification",
+          "description": "Sends the message silently. Users will receive a notification with no sound."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "reply_to_message_id",
+          "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+        },
+        {
+          "type": [
+            "InlineKeyboardMarkup",
+            "ReplyKeyboardMarkup",
+            "ReplyKeyboardRemove",
+            "ForceReply"
+          ],
+          "optional": true,
+          "name": "reply_markup",
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
+        }
+      ],
+      "name": "copyMessage"
+    },
+    {
+      "type": "post",
+      "return": [
         "Message"
       ],
       "params": [
@@ -6067,6 +6948,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "bool"
           ],
           "optional": true,
@@ -6080,6 +6974,14 @@
           "optional": true,
           "name": "reply_to_message_id",
           "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -6137,6 +7039,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": true,
@@ -6183,6 +7098,14 @@
           "optional": true,
           "name": "reply_to_message_id",
           "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -6249,6 +7172,27 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "disable_content_type_detection",
+          "description": "Disables automatic server-side content type detection for files uploaded using multipart/form-data"
+        },
+        {
+          "type": [
             "bool"
           ],
           "optional": true,
@@ -6262,6 +7206,14 @@
           "optional": true,
           "name": "reply_to_message_id",
           "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -6352,6 +7304,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "bool"
           ],
           "optional": true,
@@ -6373,6 +7338,14 @@
           "optional": true,
           "name": "reply_to_message_id",
           "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -6463,6 +7436,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "bool"
           ],
           "optional": true,
@@ -6476,6 +7462,14 @@
           "optional": true,
           "name": "reply_to_message_id",
           "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -6533,6 +7527,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "List of special entities that appear in the caption, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": true,
@@ -6554,6 +7561,14 @@
           "optional": true,
           "name": "reply_to_message_id",
           "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -6636,6 +7651,14 @@
         },
         {
           "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+        },
+        {
+          "type": [
             "InlineKeyboardMarkup",
             "ReplyKeyboardMarkup",
             "ReplyKeyboardRemove",
@@ -6651,10 +7674,7 @@
     {
       "type": "post",
       "return": [
-        "array",
-        [
-          "Message"
-        ]
+        "sent"
       ],
       "params": [
         {
@@ -6671,14 +7691,14 @@
             [
               "array",
               [
-                "InputMediaPhoto",
+                "InputMediaAudio, InputMediaDocument, InputMediaPhoto",
                 "InputMediaVideo"
               ]
             ]
           ],
           "optional": false,
           "name": "media",
-          "description": "A JSON-serialized array describing photos and videos to be sent, must include 2-10 items"
+          "description": "A JSON-serialized array describing messages to be sent, must include 2-10 items"
         },
         {
           "type": [
@@ -6686,7 +7706,7 @@
           ],
           "optional": true,
           "name": "disable_notification",
-          "description": "Sends the messages silently. Users will receive a notification with no sound."
+          "description": "Sends messages silently. Users will receive a notification with no sound."
         },
         {
           "type": [
@@ -6695,6 +7715,14 @@
           "optional": true,
           "name": "reply_to_message_id",
           "description": "If the messages are a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
         }
       ],
       "name": "sendMediaGroup"
@@ -6732,11 +7760,35 @@
         },
         {
           "type": [
+            "float"
+          ],
+          "optional": true,
+          "name": "horizontal_accuracy",
+          "description": "The radius of uncertainty for the location, measured in meters; 0-1500"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": true,
           "name": "live_period",
           "description": "Period in seconds for which the location will be updated (see Live Locations, should be between 60 and 86400."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "heading",
+          "description": "For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "proximity_alert_radius",
+          "description": "For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified."
         },
         {
           "type": [
@@ -6753,6 +7805,14 @@
           "optional": true,
           "name": "reply_to_message_id",
           "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -6814,6 +7874,30 @@
           "optional": false,
           "name": "longitude",
           "description": "Longitude of new location"
+        },
+        {
+          "type": [
+            "float"
+          ],
+          "optional": true,
+          "name": "horizontal_accuracy",
+          "description": "The radius of uncertainty for the location, measured in meters; 0-1500"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "heading",
+          "description": "Direction in which the user is moving, in degrees. Must be between 1 and 360 if specified."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "proximity_alert_radius",
+          "description": "Maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified."
         },
         {
           "type": [
@@ -6933,6 +8017,22 @@
         },
         {
           "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "google_place_id",
+          "description": "Google Places identifier of the venue"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "google_place_type",
+          "description": "Google Places type of the venue. (See supported types.)"
+        },
+        {
+          "type": [
             "bool"
           ],
           "optional": true,
@@ -6946,6 +8046,14 @@
           "optional": true,
           "name": "reply_to_message_id",
           "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -7026,6 +8134,14 @@
         },
         {
           "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+        },
+        {
+          "type": [
             "InlineKeyboardMarkup",
             "ReplyKeyboardMarkup",
             "ReplyKeyboardRemove",
@@ -7059,7 +8175,7 @@
           ],
           "optional": false,
           "name": "question",
-          "description": "Poll question, 1-255 characters"
+          "description": "Poll question, 1-300 characters"
         },
         {
           "type": [
@@ -7124,6 +8240,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "explanation_entities",
+          "description": "List of special entities that appear in the poll explanation, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": true,
@@ -7164,6 +8293,14 @@
         },
         {
           "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+        },
+        {
+          "type": [
             "InlineKeyboardMarkup",
             "ReplyKeyboardMarkup",
             "ReplyKeyboardRemove",
@@ -7197,7 +8334,7 @@
           ],
           "optional": true,
           "name": "emoji",
-          "description": "Emoji on which the dice throw animation is based. Currently, must be one of “”, “”, or “”. Dice can have values 1-6 for “” and “”, and values 1-5 for “”. Defaults to “”"
+          "description": "Emoji on which the dice throw animation is based. Currently, must be one of “”, “”, “”, “”, or “”. Dice can have values 1-6 for “” and “”, values 1-5 for “” and “”, and values 1-64 for “”. Defaults to “”"
         },
         {
           "type": [
@@ -7214,6 +8351,14 @@
           "optional": true,
           "name": "reply_to_message_id",
           "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -7361,6 +8506,14 @@
           "optional": false,
           "name": "user_id",
           "description": "Unique identifier of the target user"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "only_if_banned",
+          "description": "Do nothing if the user is not banned"
         }
       ],
       "name": "unbanChatMember"
@@ -7429,6 +8582,14 @@
           "optional": false,
           "name": "user_id",
           "description": "Unique identifier of the target user"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "is_anonymous",
+          "description": "Pass True, if the administrator's presence in the chat is hidden"
         },
         {
           "type": [
@@ -7700,7 +8861,7 @@
           ],
           "optional": true,
           "name": "disable_notification",
-          "description": "Pass True, if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels."
+          "description": "Pass True, if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats."
         }
       ],
       "name": "pinChatMessage"
@@ -7719,9 +8880,35 @@
           "optional": false,
           "name": "chat_id",
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "message_id",
+          "description": "Identifier of a message to unpin. If not specified, the most recent pinned message (by sending date) will be unpinned."
         }
       ],
       "name": "unpinChatMessage"
+    },
+    {
+      "type": "post",
+      "return": [
+        "true"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        }
+      ],
+      "name": "unpinAllChatMessages"
     },
     {
       "type": "post",
@@ -7999,6 +9186,19 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "entities",
+          "description": "List of special entities that appear in message text, which can be specified instead of parse_mode"
+        },
+        {
+          "type": [
             "bool"
           ],
           "optional": true,
@@ -8062,6 +9262,19 @@
           "optional": true,
           "name": "parse_mode",
           "description": "Mode for parsing entities in the message caption. See formatting options for more details."
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "caption_entities",
+          "description": "List of special entities that appear in the caption, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -8265,6 +9478,14 @@
           "optional": true,
           "name": "reply_to_message_id",
           "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -8789,6 +10010,14 @@
         },
         {
           "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+        },
+        {
+          "type": [
             "InlineKeyboardMarkup"
           ],
           "optional": true,
@@ -8944,6 +10173,14 @@
           "optional": true,
           "name": "reply_to_message_id",
           "description": "If the message is a reply, ID of the original message"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
