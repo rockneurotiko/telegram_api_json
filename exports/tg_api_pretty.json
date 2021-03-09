@@ -9035,7 +9035,7 @@
     {
       "type": "post",
       "return": [
-        "edited"
+        "ChatInviteLink"
       ],
       "params": [
         {
@@ -9077,7 +9077,7 @@
     {
       "type": "post",
       "return": [
-        "revoked"
+        "ChatInviteLink"
       ],
       "params": [
         {
@@ -9422,7 +9422,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -10118,7 +10118,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -10394,7 +10394,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -10440,7 +10440,7 @@
     {
       "type": "post",
       "return": [
-        "True"
+        "true"
       ],
       "params": [
         {
@@ -10560,7 +10560,8 @@
     {
       "type": "post",
       "return": [
-        "Message"
+        "Message",
+        "true"
       ],
       "params": [
         {

@@ -178,24 +178,20 @@ defmodule TelegramApiJson do
     end
   end
 
+  @simple_return_r ~r{(?:r|R)eturns (?:the |a )?([^\s]+)}
+  @as_object_r ~r{(?:r|R)eturns the (?:.+ )?(?:as |a |as a )([^\s]+)}
+  @is_returned_r ~r{([^\s]+) (?:object )?is returned}
+
+  @all_type_regexes_r [@as_object_r, @simple_return_r, @is_returned_r]
+
   defp extract_return_type(type) do
     post_ts = [
       "Returns basic information about the bot in form of a ",
-      "returns the edited ",
-      "Returns the uploaded ",
-      "Returns exported invite link as ",
-      "Returns the new invite link as",
-      "Returns the",
-      "Returns a ",
-      "returns a ",
-      "Returns ",
-      "returns "
+      "Returns the uploaded "
     ]
 
     prev_ts = [
-      " object is returned",
-      " with the final results is returned",
-      " is returned"
+      " with the final results is returned"
     ]
 
     cond do
@@ -220,6 +216,13 @@ defmodule TelegramApiJson do
       String.contains?(type, "Returns Array of BotCommand") ->
         ["array", ["BotCommand"]]
 
+      String.contains?(
+        type,
+        "On success, if the message was sent by the bot, returns the edited Message"
+      ) ->
+        # Special case for setGameScore https://core.telegram.org/bots/api#setgamescore
+        ["Message", "true"]
+
       Enum.any?(prev_ts, &String.contains?(type, &1)) ->
         t = Enum.find(prev_ts, &String.contains?(type, &1))
         typ = type |> String.split(t) |> Enum.at(0) |> String.split() |> Enum.at(-1)
@@ -233,7 +236,15 @@ defmodule TelegramApiJson do
         [typ]
 
       true ->
-        ["any"]
+        Enum.reduce_while(@all_type_regexes_r, ["any"], fn r, acc ->
+          case Regex.run(r, type) do
+            nil ->
+              {:cont, acc}
+
+            match ->
+              {:halt, match |> Enum.take(-1) |> Enum.map(&good_type/1)}
+          end
+        end)
     end
   end
 
