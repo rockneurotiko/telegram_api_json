@@ -97,6 +97,22 @@
           "optional": true,
           "name": "poll_answer",
           "description": "Optional. A user changed their answer in a non-anonymous poll. Bots receive new votes only in polls that were sent by the bot itself."
+        },
+        {
+          "type": [
+            "ChatMemberUpdated"
+          ],
+          "optional": true,
+          "name": "my_chat_member",
+          "description": "Optional. The bot's chat member status was updated in a chat. For private chats, this update is received only when the bot is blocked or unblocked by the user."
+        },
+        {
+          "type": [
+            "ChatMemberUpdated"
+          ],
+          "optional": true,
+          "name": "chat_member",
+          "description": "Optional. A chat member's status was updated in a chat. The bot must be an administrator in the chat and must explicitly specify “chat_member” in the list of allowed_updates to receive these updates."
         }
       ],
       "name": "Update"
@@ -183,7 +199,7 @@
           ],
           "optional": false,
           "name": "id",
-          "description": "Unique identifier for this user or bot"
+          "description": "Unique identifier for this user or bot. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier."
         },
         {
           "type": [
@@ -260,7 +276,7 @@
           ],
           "optional": false,
           "name": "id",
-          "description": "Unique identifier for this chat. This number may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier."
+          "description": "Unique identifier for this chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier."
         },
         {
           "type": [
@@ -332,7 +348,7 @@
           ],
           "optional": true,
           "name": "invite_link",
-          "description": "Optional. Chat invite link, for groups, supergroups and channel chats. Each administrator in a chat generates their own invite links, so the bot must first generate the link using exportChatInviteLink. Returned only in getChat."
+          "description": "Optional. Primary invite link, for groups, supergroups and channel chats. Returned only in getChat."
         },
         {
           "type": [
@@ -357,6 +373,14 @@
           "optional": true,
           "name": "slow_mode_delay",
           "description": "Optional. For supergroups, the minimum allowed delay between consecutive messages sent by each unpriviledged user. Returned only in getChat."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "message_auto_delete_time",
+          "description": "Optional. The time after which all messages sent to the chat will be automatically deleted; in seconds. Returned only in getChat."
         },
         {
           "type": [
@@ -648,7 +672,7 @@
           ],
           "optional": true,
           "name": "dice",
-          "description": "Optional. Message is a dice with random value from 1 to 6"
+          "description": "Optional. Message is a dice with random value"
         },
         {
           "type": [
@@ -758,11 +782,19 @@
         },
         {
           "type": [
+            "MessageAutoDeleteTimerChanged"
+          ],
+          "optional": true,
+          "name": "message_auto_delete_timer_changed",
+          "description": "Optional. Service message: auto-delete timer settings changed in the chat"
+        },
+        {
+          "type": [
             "int"
           ],
           "optional": true,
           "name": "migrate_to_chat_id",
-          "description": "Optional. The group has been migrated to a supergroup with the specified identifier. This number may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier."
+          "description": "Optional. The group has been migrated to a supergroup with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier."
         },
         {
           "type": [
@@ -770,7 +802,7 @@
           ],
           "optional": true,
           "name": "migrate_from_chat_id",
-          "description": "Optional. The supergroup has been migrated from a group with the specified identifier. This number may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier."
+          "description": "Optional. The supergroup has been migrated from a group with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier."
         },
         {
           "type": [
@@ -819,6 +851,30 @@
           "optional": true,
           "name": "proximity_alert_triggered",
           "description": "Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location."
+        },
+        {
+          "type": [
+            "VoiceChatStarted"
+          ],
+          "optional": true,
+          "name": "voice_chat_started",
+          "description": "Optional. Service message: voice chat started"
+        },
+        {
+          "type": [
+            "VoiceChatEnded"
+          ],
+          "optional": true,
+          "name": "voice_chat_ended",
+          "description": "Optional. Service message: voice chat ended"
+        },
+        {
+          "type": [
+            "VoiceChatParticipantsInvited"
+          ],
+          "optional": true,
+          "name": "voice_chat_participants_invited",
+          "description": "Optional. Service message: new participants invited to a voice chat"
         },
         {
           "type": [
@@ -1356,7 +1412,7 @@
           ],
           "optional": true,
           "name": "user_id",
-          "description": "Optional. Contact's user identifier in Telegram"
+          "description": "Optional. Contact's user identifier in Telegram. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier."
         },
         {
           "type": [
@@ -1385,7 +1441,7 @@
           ],
           "optional": false,
           "name": "value",
-          "description": "Value of the dice, 1-6 for “” and “” base emoji, 1-5 for “” and “” base emoji, 1-64 for “” base emoji"
+          "description": "Value of the dice, 1-6 for “”, “” and “” base emoji, 1-5 for “” and “” base emoji, 1-64 for “” base emoji"
         }
       ],
       "name": "Dice"
@@ -1461,7 +1517,7 @@
           ],
           "optional": false,
           "name": "question",
-          "description": "Poll question, 1-255 characters"
+          "description": "Poll question, 1-300 characters"
         },
         {
           "type": [
@@ -1706,6 +1762,63 @@
         }
       ],
       "name": "ProximityAlertTriggered"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "message_auto_delete_time",
+          "description": "New auto-delete time for messages in the chat"
+        }
+      ],
+      "name": "MessageAutoDeleteTimerChanged"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "duration",
+          "description": "Voice chat duration; in seconds"
+        }
+      ],
+      "name": "VoiceChatStarted"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "duration",
+          "description": "Voice chat duration; in seconds"
+        }
+      ],
+      "name": "VoiceChatEnded"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            [
+              "array",
+              [
+                "User"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "users",
+          "description": "Optional. New members that were invited to the voice chat"
+        }
+      ],
+      "name": "VoiceChatParticipantsInvited"
     },
     {
       "params": [
@@ -2145,6 +2258,59 @@
       "params": [
         {
           "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "invite_link",
+          "description": "The invite link. If the link was created by another chat administrator, then the second part of the link will be replaced with “…”."
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": false,
+          "name": "creator",
+          "description": "Creator of the link"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "is_primary",
+          "description": "True, if the link is primary"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "is_revoked",
+          "description": "True, if the link is revoked"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "expire_date",
+          "description": "Optional. Point in time (Unix timestamp) when the link will expire or has been expired"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "member_limit",
+          "description": "Optional. Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999"
+        }
+      ],
+      "name": "ChatInviteLink"
+    },
+    {
+      "params": [
+        {
+          "type": [
             "User"
           ],
           "optional": false,
@@ -2188,6 +2354,14 @@
             "bool"
           ],
           "optional": true,
+          "name": "can_manage_chat",
+          "description": "Optional. Administrators only. True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergoups and ignore slow mode. Implied by any other administrator privilege"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
           "name": "can_post_messages",
           "description": "Optional. Administrators only. True, if the administrator can post in the channel; channels only"
         },
@@ -2206,6 +2380,14 @@
           "optional": true,
           "name": "can_delete_messages",
           "description": "Optional. Administrators only. True, if the administrator can delete messages of other users"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_manage_voice_chats",
+          "description": "Optional. Administrators only. True, if the administrator can manage voice chats"
         },
         {
           "type": [
@@ -2305,6 +2487,59 @@
         }
       ],
       "name": "ChatMember"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "Chat"
+          ],
+          "optional": false,
+          "name": "chat",
+          "description": "Chat the user belongs to"
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": false,
+          "name": "from",
+          "description": "Performer of the action, which resulted in the change"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "date",
+          "description": "Date the change was done in Unix time"
+        },
+        {
+          "type": [
+            "ChatMember"
+          ],
+          "optional": false,
+          "name": "old_chat_member",
+          "description": "Previous information about the chat member"
+        },
+        {
+          "type": [
+            "ChatMember"
+          ],
+          "optional": false,
+          "name": "new_chat_member",
+          "description": "New information about the chat member"
+        },
+        {
+          "type": [
+            "ChatInviteLink"
+          ],
+          "optional": true,
+          "name": "invite_link",
+          "description": "Optional. Chat invite link, which was used by the user to join the chat; for joining by invite link events only."
+        }
+      ],
+      "name": "ChatMemberUpdated"
     },
     {
       "params": [
@@ -2425,7 +2660,7 @@
           ],
           "optional": true,
           "name": "migrate_to_chat_id",
-          "description": "Optional. The group has been migrated to a supergroup with the specified identifier. This number may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier."
+          "description": "Optional. The group has been migrated to a supergroup with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier."
         },
         {
           "type": [
@@ -6928,7 +7163,7 @@
           ],
           "optional": false,
           "name": "photo",
-          "description": "Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. More info on Sending Files »"
+          "description": "Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More info on Sending Files »"
         },
         {
           "type": [
@@ -8337,7 +8572,7 @@
           ],
           "optional": true,
           "name": "emoji",
-          "description": "Emoji on which the dice throw animation is based. Currently, must be one of “”, “”, “”, “”, or “”. Dice can have values 1-6 for “” and “”, values 1-5 for “” and “”, and values 1-64 for “”. Defaults to “”"
+          "description": "Emoji on which the dice throw animation is based. Currently, must be one of “”, “”, “”, “”, “”, or “”. Dice can have values 1-6 for “”, “” and “”, values 1-5 for “” and “”, and values 1-64 for “”. Defaults to “”"
         },
         {
           "type": [
@@ -8398,7 +8633,7 @@
           ],
           "optional": false,
           "name": "action",
-          "description": "Type of action to broadcast. Choose one, depending on what the user is about to receive: typing for text messages, upload_photo for photos, record_video or upload_video for videos, record_audio or upload_audio for audio files, upload_document for general files, find_location for location data, record_video_note or upload_video_note for video notes."
+          "description": "Type of action to broadcast. Choose one, depending on what the user is about to receive: typing for text messages, upload_photo for photos, record_video or upload_video for videos, record_voice or upload_voice for voice notes, upload_document for general files, find_location for location data, record_video_note or upload_video_note for video notes."
         }
       ],
       "name": "sendChatAction"
@@ -8482,7 +8717,15 @@
           ],
           "optional": true,
           "name": "until_date",
-          "description": "Date when the user will be unbanned, unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever"
+          "description": "Date when the user will be unbanned, unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever. Applied for supergroups and channels only."
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "revoke_messages",
+          "description": "Pass True to delete all messages from the chat for the user that is being removed. If False, the user will be able to see messages in the group that were sent before the user was removed. Always True for supergroups and channels."
         }
       ],
       "name": "kickChatMember"
@@ -8599,8 +8842,8 @@
             "bool"
           ],
           "optional": true,
-          "name": "can_change_info",
-          "description": "Pass True, if the administrator can change chat title, photo and other settings"
+          "name": "can_manage_chat",
+          "description": "Pass True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergoups and ignore slow mode. Implied by any other administrator privilege"
         },
         {
           "type": [
@@ -8631,8 +8874,8 @@
             "bool"
           ],
           "optional": true,
-          "name": "can_invite_users",
-          "description": "Pass True, if the administrator can invite new users to the chat"
+          "name": "can_manage_voice_chats",
+          "description": "Pass True, if the administrator can manage voice chats, supergroups only"
         },
         {
           "type": [
@@ -8647,16 +8890,32 @@
             "bool"
           ],
           "optional": true,
-          "name": "can_pin_messages",
-          "description": "Pass True, if the administrator can pin messages, supergroups only"
+          "name": "can_promote_members",
+          "description": "Pass True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by him)"
         },
         {
           "type": [
             "bool"
           ],
           "optional": true,
-          "name": "can_promote_members",
-          "description": "Pass True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by him)"
+          "name": "can_change_info",
+          "description": "Pass True, if the administrator can change chat title, photo and other settings"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_invite_users",
+          "description": "Pass True, if the administrator can invite new users to the chat"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_pin_messages",
+          "description": "Pass True, if the administrator can pin messages, supergroups only"
         }
       ],
       "name": "promoteChatMember"
@@ -8738,6 +8997,108 @@
         }
       ],
       "name": "exportChatInviteLink"
+    },
+    {
+      "type": "post",
+      "return": [
+        "ChatInviteLink"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "expire_date",
+          "description": "Point in time (Unix timestamp) when the link will expire"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "member_limit",
+          "description": "Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999"
+        }
+      ],
+      "name": "createChatInviteLink"
+    },
+    {
+      "type": "post",
+      "return": [
+        "edited"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "invite_link",
+          "description": "The invite link to edit"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "expire_date",
+          "description": "Point in time (Unix timestamp) when the link will expire"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "member_limit",
+          "description": "Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999"
+        }
+      ],
+      "name": "editChatInviteLink"
+    },
+    {
+      "type": "post",
+      "return": [
+        "revoked"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier of the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "invite_link",
+          "description": "The invite link to revoke"
+        }
+      ],
+      "name": "revokeChatInviteLink"
     },
     {
       "type": "post",
