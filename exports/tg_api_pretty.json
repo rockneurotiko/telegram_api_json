@@ -1947,6 +1947,14 @@
         },
         {
           "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "input_field_placeholder",
+          "description": "Optional. The placeholder to be shown in the input field when the keyboard is active; 1-64 characters"
+        },
+        {
+          "type": [
             "bool"
           ],
           "optional": true,
@@ -2229,6 +2237,14 @@
         },
         {
           "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "input_field_placeholder",
+          "description": "Optional. The placeholder to be shown in the input field when the reply is active; 1-64 characters"
+        },
+        {
+          "type": [
             "bool"
           ],
           "optional": true,
@@ -2332,6 +2348,14 @@
       "params": [
         {
           "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "status",
+          "description": "The member's status in the chat, always “creator”"
+        },
+        {
+          "type": [
             "User"
           ],
           "optional": false,
@@ -2340,11 +2364,11 @@
         },
         {
           "type": [
-            "str"
+            "bool"
           ],
           "optional": false,
-          "name": "status",
-          "description": "The member's status in the chat. Can be “creator”, “administrator”, “member”, “restricted”, “left” or “kicked”"
+          "name": "is_anonymous",
+          "description": "True, if the user's presence in the chat is hidden"
         },
         {
           "type": [
@@ -2352,31 +2376,100 @@
           ],
           "optional": true,
           "name": "custom_title",
-          "description": "Optional. Owner and administrators only. Custom title for this user"
+          "description": "Optional. Custom title for this user"
+        }
+      ],
+      "name": "ChatMemberOwner"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "status",
+          "description": "The member's status in the chat, always “administrator”"
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": false,
+          "name": "user",
+          "description": "Information about the user"
         },
         {
           "type": [
             "bool"
           ],
-          "optional": true,
-          "name": "is_anonymous",
-          "description": "Optional. Owner and administrators only. True, if the user's presence in the chat is hidden"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
+          "optional": false,
           "name": "can_be_edited",
-          "description": "Optional. Administrators only. True, if the bot is allowed to edit administrator privileges of that user"
+          "description": "True, if the bot is allowed to edit administrator privileges of that user"
         },
         {
           "type": [
             "bool"
           ],
-          "optional": true,
+          "optional": false,
+          "name": "is_anonymous",
+          "description": "True, if the user's presence in the chat is hidden"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
           "name": "can_manage_chat",
-          "description": "Optional. Administrators only. True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
+          "description": "True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "can_delete_messages",
+          "description": "True, if the administrator can delete messages of other users"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "can_manage_voice_chats",
+          "description": "True, if the administrator can manage voice chats"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "can_restrict_members",
+          "description": "True, if the administrator can restrict, ban or unban chat members"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "can_promote_members",
+          "description": "True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by the user)"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "can_change_info",
+          "description": "True, if the user is allowed to change the chat title, photo and other settings"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "can_invite_users",
+          "description": "True, if the user is allowed to invite new users to the chat"
         },
         {
           "type": [
@@ -2384,7 +2477,7 @@
           ],
           "optional": true,
           "name": "can_post_messages",
-          "description": "Optional. Administrators only. True, if the administrator can post in the channel; channels only"
+          "description": "Optional. True, if the administrator can post in the channel; channels only"
         },
         {
           "type": [
@@ -2392,55 +2485,7 @@
           ],
           "optional": true,
           "name": "can_edit_messages",
-          "description": "Optional. Administrators only. True, if the administrator can edit messages of other users and can pin messages; channels only"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "can_delete_messages",
-          "description": "Optional. Administrators only. True, if the administrator can delete messages of other users"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "can_manage_voice_chats",
-          "description": "Optional. Administrators only. True, if the administrator can manage voice chats"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "can_restrict_members",
-          "description": "Optional. Administrators only. True, if the administrator can restrict, ban or unban chat members"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "can_promote_members",
-          "description": "Optional. Administrators only. True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by the user)"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "can_change_info",
-          "description": "Optional. Administrators and restricted only. True, if the user is allowed to change the chat title, photo and other settings"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "can_invite_users",
-          "description": "Optional. Administrators and restricted only. True, if the user is allowed to invite new users to the chat"
+          "description": "Optional. True, if the administrator can edit messages of other users and can pin messages; channels only"
         },
         {
           "type": [
@@ -2448,66 +2493,190 @@
           ],
           "optional": true,
           "name": "can_pin_messages",
-          "description": "Optional. Administrators and restricted only. True, if the user is allowed to pin messages; groups and supergroups only"
+          "description": "Optional. True, if the user is allowed to pin messages; groups and supergroups only"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "custom_title",
+          "description": "Optional. Custom title for this user"
+        }
+      ],
+      "name": "ChatMemberAdministrator"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "status",
+          "description": "The member's status in the chat, always “member”"
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": false,
+          "name": "user",
+          "description": "Information about the user"
+        }
+      ],
+      "name": "ChatMemberMember"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "status",
+          "description": "The member's status in the chat, always “restricted”"
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": false,
+          "name": "user",
+          "description": "Information about the user"
         },
         {
           "type": [
             "bool"
           ],
-          "optional": true,
+          "optional": false,
           "name": "is_member",
-          "description": "Optional. Restricted only. True, if the user is a member of the chat at the moment of the request"
+          "description": "True, if the user is a member of the chat at the moment of the request"
         },
         {
           "type": [
             "bool"
           ],
-          "optional": true,
+          "optional": false,
+          "name": "can_change_info",
+          "description": "True, if the user is allowed to change the chat title, photo and other settings"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "can_invite_users",
+          "description": "True, if the user is allowed to invite new users to the chat"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "can_pin_messages",
+          "description": "True, if the user is allowed to pin messages"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
           "name": "can_send_messages",
-          "description": "Optional. Restricted only. True, if the user is allowed to send text messages, contacts, locations and venues"
+          "description": "True, if the user is allowed to send text messages, contacts, locations and venues"
         },
         {
           "type": [
             "bool"
           ],
-          "optional": true,
+          "optional": false,
           "name": "can_send_media_messages",
-          "description": "Optional. Restricted only. True, if the user is allowed to send audios, documents, photos, videos, video notes and voice notes"
+          "description": "True, if the user is allowed to send audios, documents, photos, videos, video notes and voice notes"
         },
         {
           "type": [
             "bool"
           ],
-          "optional": true,
+          "optional": false,
           "name": "can_send_polls",
-          "description": "Optional. Restricted only. True, if the user is allowed to send polls"
+          "description": "True, if the user is allowed to send polls"
         },
         {
           "type": [
             "bool"
           ],
-          "optional": true,
+          "optional": false,
           "name": "can_send_other_messages",
-          "description": "Optional. Restricted only. True, if the user is allowed to send animations, games, stickers and use inline bots"
+          "description": "True, if the user is allowed to send animations, games, stickers and use inline bots"
         },
         {
           "type": [
             "bool"
           ],
-          "optional": true,
+          "optional": false,
           "name": "can_add_web_page_previews",
-          "description": "Optional. Restricted only. True, if the user is allowed to add web page previews to their messages"
+          "description": "True, if the user is allowed to add web page previews to their messages"
         },
         {
           "type": [
             "int"
           ],
-          "optional": true,
+          "optional": false,
           "name": "until_date",
-          "description": "Optional. Restricted and kicked only. Date when restrictions will be lifted for this user; unix time"
+          "description": "Date when restrictions will be lifted for this user; unix time. If 0, then the user is restricted forever"
         }
       ],
-      "name": "ChatMember"
+      "name": "ChatMemberRestricted"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "status",
+          "description": "The member's status in the chat, always “left”"
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": false,
+          "name": "user",
+          "description": "Information about the user"
+        }
+      ],
+      "name": "ChatMemberLeft"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "status",
+          "description": "The member's status in the chat, always “kicked”"
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": false,
+          "name": "user",
+          "description": "Information about the user"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "until_date",
+          "description": "Date when restrictions will be lifted for this user; unix time. If 0, then the user is banned forever"
+        }
+      ],
+      "name": "ChatMemberBanned"
     },
     {
       "params": [
@@ -2672,6 +2841,145 @@
         }
       ],
       "name": "BotCommand"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Scope type, must be default"
+        }
+      ],
+      "name": "BotCommandScope"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Scope type, must be default"
+        }
+      ],
+      "name": "BotCommandScopeDefault"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Scope type, must be all_private_chats"
+        }
+      ],
+      "name": "BotCommandScopeAllPrivateChats"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Scope type, must be all_group_chats"
+        }
+      ],
+      "name": "BotCommandScopeAllGroupChats"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Scope type, must be all_chat_administrators"
+        }
+      ],
+      "name": "BotCommandScopeAllChatAdministrators"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Scope type, must be chat"
+        },
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
+        }
+      ],
+      "name": "BotCommandScopeChat"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Scope type, must be chat_administrators"
+        },
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
+        }
+      ],
+      "name": "BotCommandScopeChatAdministrators"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Scope type, must be chat_member"
+        },
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "user_id",
+          "description": "Unique identifier of the target user"
+        }
+      ],
+      "name": "BotCommandScopeChatMember"
     },
     {
       "params": [
@@ -3156,7 +3464,7 @@
           ],
           "optional": true,
           "name": "entities",
-          "description": "List of special entities that appear in message text, which can be specified instead of parse_mode"
+          "description": "A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -6975,7 +7283,7 @@
           ],
           "optional": true,
           "name": "entities",
-          "description": "List of special entities that appear in message text, which can be specified instead of parse_mode"
+          "description": "A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -7065,7 +7373,7 @@
           ],
           "optional": true,
           "name": "entities",
-          "description": "List of special entities that appear in message text, which can be specified instead of parse_mode"
+          "description": "A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -7155,7 +7463,7 @@
           ],
           "optional": true,
           "name": "entities",
-          "description": "List of special entities that appear in message text, which can be specified instead of parse_mode"
+          "description": "A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -7305,7 +7613,7 @@
           ],
           "optional": true,
           "name": "caption_entities",
-          "description": "List of special entities that appear in the new caption, which can be specified instead of parse_mode"
+          "description": "A JSON-serialized list of special entities that appear in the new caption, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -7396,7 +7704,7 @@
           ],
           "optional": true,
           "name": "caption_entities",
-          "description": "List of special entities that appear in the caption, which can be specified instead of parse_mode"
+          "description": "A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -7487,7 +7795,7 @@
           ],
           "optional": true,
           "name": "caption_entities",
-          "description": "List of special entities that appear in the caption, which can be specified instead of parse_mode"
+          "description": "A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -7620,7 +7928,7 @@
           ],
           "optional": true,
           "name": "caption_entities",
-          "description": "List of special entities that appear in the caption, which can be specified instead of parse_mode"
+          "description": "A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -7752,7 +8060,7 @@
           ],
           "optional": true,
           "name": "caption_entities",
-          "description": "List of special entities that appear in the caption, which can be specified instead of parse_mode"
+          "description": "A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -7884,7 +8192,7 @@
           ],
           "optional": true,
           "name": "caption_entities",
-          "description": "List of special entities that appear in the caption, which can be specified instead of parse_mode"
+          "description": "A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -7975,7 +8283,7 @@
           ],
           "optional": true,
           "name": "caption_entities",
-          "description": "List of special entities that appear in the caption, which can be specified instead of parse_mode"
+          "description": "A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -8355,7 +8663,8 @@
     {
       "type": "post",
       "return": [
-        "Message"
+        "Message",
+        "true"
       ],
       "params": [
         {
@@ -8691,7 +9000,7 @@
           ],
           "optional": true,
           "name": "explanation_entities",
-          "description": "List of special entities that appear in the poll explanation, which can be specified instead of parse_mode"
+          "description": "A JSON-serialized list of special entities that appear in the poll explanation, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -8932,7 +9241,7 @@
           "description": "Pass True to delete all messages from the chat for the user that is being removed. If False, the user will be able to see messages in the group that were sent before the user was removed. Always True for supergroups and channels."
         }
       ],
-      "name": "kickChatMember"
+      "name": "banChatMember"
     },
     {
       "type": "post",
@@ -9179,7 +9488,7 @@
           ],
           "optional": false,
           "name": "permissions",
-          "description": "New default chat permissions"
+          "description": "A JSON-serialized object for new default chat permissions"
         }
       ],
       "name": "setChatPermissions"
@@ -9551,7 +9860,7 @@
           "description": "Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)"
         }
       ],
-      "name": "getChatMembersCount"
+      "name": "getChatMemberCount"
     },
     {
       "type": "get",
@@ -9690,9 +9999,50 @@
           "optional": false,
           "name": "commands",
           "description": "A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be specified."
+        },
+        {
+          "type": [
+            "BotCommandScope"
+          ],
+          "optional": true,
+          "name": "scope",
+          "description": "A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "language_code",
+          "description": "A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands"
         }
       ],
       "name": "setMyCommands"
+    },
+    {
+      "type": "post",
+      "return": [
+        "true"
+      ],
+      "params": [
+        {
+          "type": [
+            "BotCommandScope"
+          ],
+          "optional": true,
+          "name": "scope",
+          "description": "A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "language_code",
+          "description": "A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands"
+        }
+      ],
+      "name": "deleteMyCommands"
     },
     {
       "type": "get",
@@ -9763,7 +10113,7 @@
           ],
           "optional": true,
           "name": "entities",
-          "description": "List of special entities that appear in message text, which can be specified instead of parse_mode"
+          "description": "A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -9842,7 +10192,7 @@
           ],
           "optional": true,
           "name": "caption_entities",
-          "description": "List of special entities that appear in the caption, which can be specified instead of parse_mode"
+          "description": "A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode"
         },
         {
           "type": [
@@ -10895,6 +11245,17 @@
     }
   ],
   "generics": [
+    {
+      "subtypes": [
+        "ChatMemberOwner",
+        "ChatMemberAdministrator",
+        "ChatMemberMember",
+        "ChatMemberRestricted",
+        "ChatMemberLeft",
+        "ChatMemberBanned"
+      ],
+      "name": "ChatMember"
+    },
     {
       "subtypes": [
         "InlineQueryResultCachedAudio",
