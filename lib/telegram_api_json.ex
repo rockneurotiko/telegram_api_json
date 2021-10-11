@@ -26,7 +26,8 @@ defmodule TelegramApiJson do
     "InlineQueryResult",
     "InputMessageContent",
     "PassportElementError",
-    "ChatMember"
+    "ChatMember",
+    "BotCommandScope"
   ]
   @zero_parameters ["getMe", "deleteWebhook", "getWebhookInfo", "getMyCommands"]
 
