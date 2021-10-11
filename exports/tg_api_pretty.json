@@ -2853,19 +2853,6 @@
           "description": "Scope type, must be default"
         }
       ],
-      "name": "BotCommandScope"
-    },
-    {
-      "params": [
-        {
-          "type": [
-            "str"
-          ],
-          "optional": false,
-          "name": "type",
-          "description": "Scope type, must be default"
-        }
-      ],
       "name": "BotCommandScopeDefault"
     },
     {
@@ -11255,6 +11242,18 @@
         "ChatMemberBanned"
       ],
       "name": "ChatMember"
+    },
+    {
+      "subtypes": [
+        "BotCommandScopeDefault",
+        "BotCommandScopeAllPrivateChats",
+        "BotCommandScopeAllGroupChats",
+        "BotCommandScopeAllChatAdministrators",
+        "BotCommandScopeChat",
+        "BotCommandScopeChatAdministrators",
+        "BotCommandScopeChatMember"
+      ],
+      "name": "BotCommandScope"
     },
     {
       "subtypes": [
