@@ -115,7 +115,8 @@
           "description": "Optional. A chat member's status was updated in a chat. The bot must be an administrator in the chat and must explicitly specify “chat_member” in the list of allowed_updates to receive these updates."
         }
       ],
-      "name": "Update"
+      "name": "Update",
+      "description": "This object represents an incoming update.\nAt most one of the optional parameters can be present in any given update."
     },
     {
       "params": [
@@ -189,7 +190,8 @@
           "description": "Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat_member"
         }
       ],
-      "name": "WebhookInfo"
+      "name": "WebhookInfo",
+      "description": "Contains information about the current status of a webhook."
     },
     {
       "params": [
@@ -266,7 +268,8 @@
           "description": "Optional. True, if the bot supports inline queries. Returned only in getMe."
         }
       ],
-      "name": "User"
+      "name": "User",
+      "description": "This object represents a Telegram user or bot."
     },
     {
       "params": [
@@ -415,7 +418,8 @@
           "description": "Optional. For supergroups, the location to which the supergroup is connected. Returned only in getChat."
         }
       ],
-      "name": "Chat"
+      "name": "Chat",
+      "description": "This object represents a chat."
     },
     {
       "params": [
@@ -893,7 +897,8 @@
           "description": "Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons."
         }
       ],
-      "name": "Message"
+      "name": "Message",
+      "description": "This object represents a message."
     },
     {
       "params": [
@@ -906,7 +911,8 @@
           "description": "Unique message identifier"
         }
       ],
-      "name": "MessageId"
+      "name": "MessageId",
+      "description": "This object represents a unique message identifier."
     },
     {
       "params": [
@@ -959,7 +965,8 @@
           "description": "Optional. For “pre” only, the programming language of the entity text"
         }
       ],
-      "name": "MessageEntity"
+      "name": "MessageEntity",
+      "description": "This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc."
     },
     {
       "params": [
@@ -1004,7 +1011,8 @@
           "description": "Optional. File size"
         }
       ],
-      "name": "PhotoSize"
+      "name": "PhotoSize",
+      "description": "This object represents one size of a photo or a file / sticker thumbnail."
     },
     {
       "params": [
@@ -1081,7 +1089,8 @@
           "description": "Optional. File size"
         }
       ],
-      "name": "Animation"
+      "name": "Animation",
+      "description": "This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound)."
     },
     {
       "params": [
@@ -1158,7 +1167,8 @@
           "description": "Optional. Thumbnail of the album cover to which the music file belongs"
         }
       ],
-      "name": "Audio"
+      "name": "Audio",
+      "description": "This object represents an audio file to be treated as music by the Telegram clients."
     },
     {
       "params": [
@@ -1211,7 +1221,8 @@
           "description": "Optional. File size"
         }
       ],
-      "name": "Document"
+      "name": "Document",
+      "description": "This object represents a general file (as opposed to photos, voice messages and audio files)."
     },
     {
       "params": [
@@ -1288,7 +1299,8 @@
           "description": "Optional. File size"
         }
       ],
-      "name": "Video"
+      "name": "Video",
+      "description": "This object represents a video file."
     },
     {
       "params": [
@@ -1341,7 +1353,8 @@
           "description": "Optional. File size"
         }
       ],
-      "name": "VideoNote"
+      "name": "VideoNote",
+      "description": "This object represents a video message (available in Telegram apps as of v.4.0)."
     },
     {
       "params": [
@@ -1386,7 +1399,8 @@
           "description": "Optional. File size"
         }
       ],
-      "name": "Voice"
+      "name": "Voice",
+      "description": "This object represents a voice note."
     },
     {
       "params": [
@@ -1431,7 +1445,8 @@
           "description": "Optional. Additional data about the contact in the form of a vCard"
         }
       ],
-      "name": "Contact"
+      "name": "Contact",
+      "description": "This object represents a phone contact."
     },
     {
       "params": [
@@ -1452,7 +1467,8 @@
           "description": "Value of the dice, 1-6 for “”, “” and “” base emoji, 1-5 for “” and “” base emoji, 1-64 for “” base emoji"
         }
       ],
-      "name": "Dice"
+      "name": "Dice",
+      "description": "This object represents an animated emoji that displays a random value."
     },
     {
       "params": [
@@ -1473,7 +1489,8 @@
           "description": "Number of users that voted for this option"
         }
       ],
-      "name": "PollOption"
+      "name": "PollOption",
+      "description": "This object contains information about one answer option in a poll."
     },
     {
       "params": [
@@ -1507,7 +1524,8 @@
           "description": "0-based identifiers of answer options, chosen by the user. May be empty if the user retracted their vote."
         }
       ],
-      "name": "PollAnswer"
+      "name": "PollAnswer",
+      "description": "This object represents an answer of a user in a non-anonymous poll."
     },
     {
       "params": [
@@ -1626,7 +1644,8 @@
           "description": "Optional. Point in time (Unix timestamp) when the poll will be automatically closed"
         }
       ],
-      "name": "Poll"
+      "name": "Poll",
+      "description": "This object contains information about a poll."
     },
     {
       "params": [
@@ -1679,7 +1698,8 @@
           "description": "Optional. Maximum distance for proximity alerts about approaching another chat member, in meters. For sent live locations only."
         }
       ],
-      "name": "Location"
+      "name": "Location",
+      "description": "This object represents a point on the map."
     },
     {
       "params": [
@@ -1740,7 +1760,8 @@
           "description": "Optional. Google Places type of the venue. (See supported types.)"
         }
       ],
-      "name": "Venue"
+      "name": "Venue",
+      "description": "This object represents a venue."
     },
     {
       "params": [
@@ -1769,7 +1790,8 @@
           "description": "The distance between the users"
         }
       ],
-      "name": "ProximityAlertTriggered"
+      "name": "ProximityAlertTriggered",
+      "description": "This object represents the content of a service message, sent whenever a user in the chat triggers a proximity alert set by another user."
     },
     {
       "params": [
@@ -1782,7 +1804,8 @@
           "description": "New auto-delete time for messages in the chat"
         }
       ],
-      "name": "MessageAutoDeleteTimerChanged"
+      "name": "MessageAutoDeleteTimerChanged",
+      "description": "This object represents a service message about a change in auto-delete timer settings."
     },
     {
       "params": [
@@ -1795,7 +1818,8 @@
           "description": "Point in time (Unix timestamp) when the voice chat is supposed to be started by a chat administrator"
         }
       ],
-      "name": "VoiceChatScheduled"
+      "name": "VoiceChatScheduled",
+      "description": "This object represents a service message about a voice chat scheduled in the chat."
     },
     {
       "params": [
@@ -1808,7 +1832,8 @@
           "description": "Voice chat duration; in seconds"
         }
       ],
-      "name": "VoiceChatStarted"
+      "name": "VoiceChatStarted",
+      "description": "This object represents a service message about a voice chat started in the chat. Currently holds no information."
     },
     {
       "params": [
@@ -1821,7 +1846,8 @@
           "description": "Voice chat duration; in seconds"
         }
       ],
-      "name": "VoiceChatEnded"
+      "name": "VoiceChatEnded",
+      "description": "This object represents a service message about a voice chat ended in the chat."
     },
     {
       "params": [
@@ -1839,7 +1865,8 @@
           "description": "Optional. New members that were invited to the voice chat"
         }
       ],
-      "name": "VoiceChatParticipantsInvited"
+      "name": "VoiceChatParticipantsInvited",
+      "description": "This object represents a service message about new members invited to a voice chat."
     },
     {
       "params": [
@@ -1870,7 +1897,8 @@
           "description": "Requested profile pictures (in up to 4 sizes each)"
         }
       ],
-      "name": "UserProfilePhotos"
+      "name": "UserProfilePhotos",
+      "description": "This object represent a user's profile pictures."
     },
     {
       "params": [
@@ -1907,7 +1935,8 @@
           "description": "Optional. File path. Use https://api.telegram.org/file/bot<token>/<file_path> to get the file."
         }
       ],
-      "name": "File"
+      "name": "File",
+      "description": "This object represents a file ready to be downloaded. The file can be downloaded via the link https://api.telegram.org/file/bot<token>/<file_path>. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile."
     },
     {
       "params": [
@@ -1962,7 +1991,8 @@
           "description": "Optional. Use this parameter if you want to show the keyboard to specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.\n\nExample: A user requests to change the bot's language, bot replies to the request with a keyboard to select the new language. Other users in the group don't see the keyboard."
         }
       ],
-      "name": "ReplyKeyboardMarkup"
+      "name": "ReplyKeyboardMarkup",
+      "description": "This object represents a custom keyboard with reply options (see Introduction to bots for details and examples)."
     },
     {
       "params": [
@@ -1999,7 +2029,8 @@
           "description": "Optional. If specified, the user will be asked to create a poll and send it to the bot when the button is pressed. Available in private chats only"
         }
       ],
-      "name": "KeyboardButton"
+      "name": "KeyboardButton",
+      "description": "This object represents one button of the reply keyboard. For simple text buttons String can be used instead of this object to specify text of the button. Optional fields request_contact, request_location, and request_poll are mutually exclusive."
     },
     {
       "params": [
@@ -2012,7 +2043,8 @@
           "description": "Optional. If quiz is passed, the user will be allowed to create only polls in the quiz mode. If regular is passed, only regular polls will be allowed. Otherwise, the user will be allowed to create a poll of any type."
         }
       ],
-      "name": "KeyboardButtonPollType"
+      "name": "KeyboardButtonPollType",
+      "description": "This object represents type of a poll, which is allowed to be created and sent when the corresponding button is pressed."
     },
     {
       "params": [
@@ -2033,7 +2065,8 @@
           "description": "Optional. Use this parameter if you want to remove the keyboard for specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.\n\nExample: A user votes in a poll, bot returns confirmation message in reply to the vote and removes the keyboard for that user, while still showing the keyboard with poll options to users who haven't voted yet."
         }
       ],
-      "name": "ReplyKeyboardRemove"
+      "name": "ReplyKeyboardRemove",
+      "description": "Upon receiving a message with this object, Telegram clients will remove the current custom keyboard and display the default letter-keyboard. By default, custom keyboards are displayed until a new keyboard is sent by a bot. An exception is made for one-time keyboards that are hidden immediately after the user presses a button (see ReplyKeyboardMarkup)."
     },
     {
       "params": [
@@ -2056,7 +2089,8 @@
           "description": "Array of button rows, each represented by an Array of InlineKeyboardButton objects"
         }
       ],
-      "name": "InlineKeyboardMarkup"
+      "name": "InlineKeyboardMarkup",
+      "description": "This object represents an inline keyboard that appears right next to the message it belongs to."
     },
     {
       "params": [
@@ -2125,7 +2159,8 @@
           "description": "Optional. Specify True, to send a Pay button.\n\nNOTE: This type of button must always be the first button in the first row."
         }
       ],
-      "name": "InlineKeyboardButton"
+      "name": "InlineKeyboardButton",
+      "description": "This object represents one button of an inline keyboard. You must use exactly one of the optional fields."
     },
     {
       "params": [
@@ -2162,7 +2197,8 @@
           "description": "Optional. Pass True to request the permission for your bot to send messages to the user."
         }
       ],
-      "name": "LoginUrl"
+      "name": "LoginUrl",
+      "description": "This object represents a parameter of the inline keyboard button used to automatically authorize a user. Serves as a great replacement for the Telegram Login Widget when the user is coming from Telegram. All the user needs to do is tap/click a button and confirm that they want to log in:"
     },
     {
       "params": [
@@ -2223,7 +2259,8 @@
           "description": "Optional. Short name of a Game to be returned, serves as the unique identifier for the game"
         }
       ],
-      "name": "CallbackQuery"
+      "name": "CallbackQuery",
+      "description": "This object represents an incoming callback query from a callback button in an inline keyboard. If the button that originated the query was attached to a message sent by the bot, the field message will be present. If the button was attached to a message sent via the bot (in inline mode), the field inline_message_id will be present. Exactly one of the fields data or game_short_name will be present."
     },
     {
       "params": [
@@ -2252,7 +2289,8 @@
           "description": "Optional. Use this parameter if you want to force reply from specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message."
         }
       ],
-      "name": "ForceReply"
+      "name": "ForceReply",
+      "description": "Upon receiving a message with this object, Telegram clients will display a reply interface to the user (act as if the user has selected the bot's message and tapped 'Reply'). This can be extremely useful if you want to create user-friendly step-by-step interfaces without having to sacrifice privacy mode."
     },
     {
       "params": [
@@ -2289,7 +2327,8 @@
           "description": "Unique file identifier of big (640x640) chat photo, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
         }
       ],
-      "name": "ChatPhoto"
+      "name": "ChatPhoto",
+      "description": "This object represents a chat photo."
     },
     {
       "params": [
@@ -2342,7 +2381,8 @@
           "description": "Optional. Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999"
         }
       ],
-      "name": "ChatInviteLink"
+      "name": "ChatInviteLink",
+      "description": "Represents an invite link for a chat."
     },
     {
       "params": [
@@ -2379,7 +2419,8 @@
           "description": "Optional. Custom title for this user"
         }
       ],
-      "name": "ChatMemberOwner"
+      "name": "ChatMemberOwner",
+      "description": "Represents a chat member that owns the chat and has all administrator privileges."
     },
     {
       "params": [
@@ -2504,7 +2545,8 @@
           "description": "Optional. Custom title for this user"
         }
       ],
-      "name": "ChatMemberAdministrator"
+      "name": "ChatMemberAdministrator",
+      "description": "Represents a chat member that has some additional privileges."
     },
     {
       "params": [
@@ -2525,7 +2567,8 @@
           "description": "Information about the user"
         }
       ],
-      "name": "ChatMemberMember"
+      "name": "ChatMemberMember",
+      "description": "Represents a chat member that has no additional privileges or restrictions."
     },
     {
       "params": [
@@ -2626,7 +2669,8 @@
           "description": "Date when restrictions will be lifted for this user; unix time. If 0, then the user is restricted forever"
         }
       ],
-      "name": "ChatMemberRestricted"
+      "name": "ChatMemberRestricted",
+      "description": "Represents a chat member that is under certain restrictions in the chat. Supergroups only."
     },
     {
       "params": [
@@ -2647,7 +2691,8 @@
           "description": "Information about the user"
         }
       ],
-      "name": "ChatMemberLeft"
+      "name": "ChatMemberLeft",
+      "description": "Represents a chat member that isn't currently a member of the chat, but may join it themselves."
     },
     {
       "params": [
@@ -2676,7 +2721,8 @@
           "description": "Date when restrictions will be lifted for this user; unix time. If 0, then the user is banned forever"
         }
       ],
-      "name": "ChatMemberBanned"
+      "name": "ChatMemberBanned",
+      "description": "Represents a chat member that was banned in the chat and can't return to the chat or view chat messages."
     },
     {
       "params": [
@@ -2729,7 +2775,8 @@
           "description": "Optional. Chat invite link, which was used by the user to join the chat; for joining by invite link events only."
         }
       ],
-      "name": "ChatMemberUpdated"
+      "name": "ChatMemberUpdated",
+      "description": "This object represents changes in the status of a chat member."
     },
     {
       "params": [
@@ -2798,7 +2845,8 @@
           "description": "Optional. True, if the user is allowed to pin messages. Ignored in public supergroups"
         }
       ],
-      "name": "ChatPermissions"
+      "name": "ChatPermissions",
+      "description": "Describes actions that a non-administrator user is allowed to take in a chat."
     },
     {
       "params": [
@@ -2819,7 +2867,8 @@
           "description": "Location address; 1-64 characters, as defined by the chat owner"
         }
       ],
-      "name": "ChatLocation"
+      "name": "ChatLocation",
+      "description": "Represents a location to which a chat is connected."
     },
     {
       "params": [
@@ -2840,7 +2889,8 @@
           "description": "Description of the command, 3-256 characters."
         }
       ],
-      "name": "BotCommand"
+      "name": "BotCommand",
+      "description": "This object represents a bot command."
     },
     {
       "params": [
@@ -2853,7 +2903,8 @@
           "description": "Scope type, must be default"
         }
       ],
-      "name": "BotCommandScopeDefault"
+      "name": "BotCommandScopeDefault",
+      "description": "Represents the default scope of bot commands. Default commands are used if no commands with a narrower scope are specified for the user."
     },
     {
       "params": [
@@ -2866,7 +2917,8 @@
           "description": "Scope type, must be all_private_chats"
         }
       ],
-      "name": "BotCommandScopeAllPrivateChats"
+      "name": "BotCommandScopeAllPrivateChats",
+      "description": "Represents the scope of bot commands, covering all private chats."
     },
     {
       "params": [
@@ -2879,7 +2931,8 @@
           "description": "Scope type, must be all_group_chats"
         }
       ],
-      "name": "BotCommandScopeAllGroupChats"
+      "name": "BotCommandScopeAllGroupChats",
+      "description": "Represents the scope of bot commands, covering all group and supergroup chats."
     },
     {
       "params": [
@@ -2892,7 +2945,8 @@
           "description": "Scope type, must be all_chat_administrators"
         }
       ],
-      "name": "BotCommandScopeAllChatAdministrators"
+      "name": "BotCommandScopeAllChatAdministrators",
+      "description": "Represents the scope of bot commands, covering all group and supergroup chat administrators."
     },
     {
       "params": [
@@ -2914,7 +2968,8 @@
           "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
         }
       ],
-      "name": "BotCommandScopeChat"
+      "name": "BotCommandScopeChat",
+      "description": "Represents the scope of bot commands, covering a specific chat."
     },
     {
       "params": [
@@ -2936,7 +2991,8 @@
           "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
         }
       ],
-      "name": "BotCommandScopeChatAdministrators"
+      "name": "BotCommandScopeChatAdministrators",
+      "description": "Represents the scope of bot commands, covering all administrators of a specific group or supergroup chat."
     },
     {
       "params": [
@@ -2966,7 +3022,8 @@
           "description": "Unique identifier of the target user"
         }
       ],
-      "name": "BotCommandScopeChatMember"
+      "name": "BotCommandScopeChatMember",
+      "description": "Represents the scope of bot commands, covering a specific member of a group or supergroup chat."
     },
     {
       "params": [
@@ -2987,7 +3044,8 @@
           "description": "Optional. In case of exceeding flood control, the number of seconds left to wait before the request can be repeated"
         }
       ],
-      "name": "ResponseParameters"
+      "name": "ResponseParameters",
+      "description": "Contains information about why a request was unsuccessful."
     },
     {
       "params": [
@@ -3037,7 +3095,8 @@
           "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
         }
       ],
-      "name": "InputMedia"
+      "name": "InputMedia",
+      "description": "This object represents the content of a media message to be sent. It should be one of"
     },
     {
       "params": [
@@ -3087,7 +3146,8 @@
           "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
         }
       ],
-      "name": "InputMediaPhoto"
+      "name": "InputMediaPhoto",
+      "description": "Represents a photo to be sent."
     },
     {
       "params": [
@@ -3178,7 +3238,8 @@
           "description": "Optional. Pass True, if the uploaded video is suitable for streaming"
         }
       ],
-      "name": "InputMediaVideo"
+      "name": "InputMediaVideo",
+      "description": "Represents a video to be sent."
     },
     {
       "params": [
@@ -3261,7 +3322,8 @@
           "description": "Optional. Animation duration"
         }
       ],
-      "name": "InputMediaAnimation"
+      "name": "InputMediaAnimation",
+      "description": "Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent."
     },
     {
       "params": [
@@ -3344,7 +3406,8 @@
           "description": "Optional. Title of the audio"
         }
       ],
-      "name": "InputMediaAudio"
+      "name": "InputMediaAudio",
+      "description": "Represents an audio file to be treated as music to be sent."
     },
     {
       "params": [
@@ -3411,7 +3474,8 @@
           "description": "Optional. Disables automatic server-side content type detection for files uploaded using multipart/form-data. Always true, if the document is sent as part of an album."
         }
       ],
-      "name": "InputMediaDocument"
+      "name": "InputMediaDocument",
+      "description": "Represents a general file to be sent."
     },
     {
       "params": [
@@ -3497,7 +3561,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "InputFile"
+      "name": "InputFile",
+      "description": "This object represents the contents of a file to be uploaded. Must be posted using multipart/form-data in the usual way that files are uploaded via the browser."
     },
     {
       "params": [
@@ -3582,7 +3647,8 @@
           "description": "Optional. File size"
         }
       ],
-      "name": "Sticker"
+      "name": "Sticker",
+      "description": "This object represents a sticker."
     },
     {
       "params": [
@@ -3640,7 +3706,8 @@
           "description": "Optional. Sticker set thumbnail in the .WEBP or .TGS format"
         }
       ],
-      "name": "StickerSet"
+      "name": "StickerSet",
+      "description": "This object represents a sticker set."
     },
     {
       "params": [
@@ -3677,7 +3744,8 @@
           "description": "Mask scaling coefficient. For example, 2.0 means double size."
         }
       ],
-      "name": "MaskPosition"
+      "name": "MaskPosition",
+      "description": "This object describes the position on faces where a mask should be placed by default."
     },
     {
       "params": [
@@ -3730,7 +3798,8 @@
           "description": "Optional. Sender location, only for bots that request user location"
         }
       ],
-      "name": "InlineQuery"
+      "name": "InlineQuery",
+      "description": "This object represents an incoming inline query. When the user sends an empty query, your bot could return some default or trending results."
     },
     {
       "params": [
@@ -3823,7 +3892,8 @@
           "description": "Optional. Thumbnail height"
         }
       ],
-      "name": "InlineQueryResultArticle"
+      "name": "InlineQueryResultArticle",
+      "description": "Represents a link to an article or web page."
     },
     {
       "params": [
@@ -3937,7 +4007,8 @@
           "description": "Optional. Content of the message to be sent instead of the photo"
         }
       ],
-      "name": "InlineQueryResultPhoto"
+      "name": "InlineQueryResultPhoto",
+      "description": "Represents a link to a photo. By default, this photo will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the photo."
     },
     {
       "params": [
@@ -4059,7 +4130,8 @@
           "description": "Optional. Content of the message to be sent instead of the GIF animation"
         }
       ],
-      "name": "InlineQueryResultGif"
+      "name": "InlineQueryResultGif",
+      "description": "Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation."
     },
     {
       "params": [
@@ -4181,7 +4253,8 @@
           "description": "Optional. Content of the message to be sent instead of the video animation"
         }
       ],
-      "name": "InlineQueryResultMpeg4Gif"
+      "name": "InlineQueryResultMpeg4Gif",
+      "description": "Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default, this animated MPEG-4 file will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation."
     },
     {
       "params": [
@@ -4311,7 +4384,8 @@
           "description": "Optional. Content of the message to be sent instead of the video. This field is required if InlineQueryResultVideo is used to send an HTML-page as a result (e.g., a YouTube video)."
         }
       ],
-      "name": "InlineQueryResultVideo"
+      "name": "InlineQueryResultVideo",
+      "description": "Represents a link to a page containing an embedded video player or a video file. By default, this video file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the video."
     },
     {
       "params": [
@@ -4409,7 +4483,8 @@
           "description": "Optional. Content of the message to be sent instead of the audio"
         }
       ],
-      "name": "InlineQueryResultAudio"
+      "name": "InlineQueryResultAudio",
+      "description": "Represents a link to an MP3 audio file. By default, this audio file will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the audio."
     },
     {
       "params": [
@@ -4499,7 +4574,8 @@
           "description": "Optional. Content of the message to be sent instead of the voice recording"
         }
       ],
-      "name": "InlineQueryResultVoice"
+      "name": "InlineQueryResultVoice",
+      "description": "Represents a link to a voice recording in an .OGG container encoded with OPUS. By default, this voice recording will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the the voice message."
     },
     {
       "params": [
@@ -4621,7 +4697,8 @@
           "description": "Optional. Thumbnail height"
         }
       ],
-      "name": "InlineQueryResultDocument"
+      "name": "InlineQueryResultDocument",
+      "description": "Represents a link to a file. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file. Currently, only .PDF and .ZIP files can be sent using this method."
     },
     {
       "params": [
@@ -4738,7 +4815,8 @@
           "description": "Optional. Thumbnail height"
         }
       ],
-      "name": "InlineQueryResultLocation"
+      "name": "InlineQueryResultLocation",
+      "description": "Represents a location on a map. By default, the location will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the location."
     },
     {
       "params": [
@@ -4863,7 +4941,8 @@
           "description": "Optional. Thumbnail height"
         }
       ],
-      "name": "InlineQueryResultVenue"
+      "name": "InlineQueryResultVenue",
+      "description": "Represents a venue. By default, the venue will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the venue."
     },
     {
       "params": [
@@ -4956,7 +5035,8 @@
           "description": "Optional. Thumbnail height"
         }
       ],
-      "name": "InlineQueryResultContact"
+      "name": "InlineQueryResultContact",
+      "description": "Represents a contact with a phone number. By default, this contact will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the contact."
     },
     {
       "params": [
@@ -4993,7 +5073,8 @@
           "description": "Optional. Inline keyboard attached to the message"
         }
       ],
-      "name": "InlineQueryResultGame"
+      "name": "InlineQueryResultGame",
+      "description": "Represents a Game."
     },
     {
       "params": [
@@ -5083,7 +5164,8 @@
           "description": "Optional. Content of the message to be sent instead of the photo"
         }
       ],
-      "name": "InlineQueryResultCachedPhoto"
+      "name": "InlineQueryResultCachedPhoto",
+      "description": "Represents a link to a photo stored on the Telegram servers. By default, this photo will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the photo."
     },
     {
       "params": [
@@ -5165,7 +5247,8 @@
           "description": "Optional. Content of the message to be sent instead of the GIF animation"
         }
       ],
-      "name": "InlineQueryResultCachedGif"
+      "name": "InlineQueryResultCachedGif",
+      "description": "Represents a link to an animated GIF file stored on the Telegram servers. By default, this animated GIF file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with specified content instead of the animation."
     },
     {
       "params": [
@@ -5247,7 +5330,8 @@
           "description": "Optional. Content of the message to be sent instead of the video animation"
         }
       ],
-      "name": "InlineQueryResultCachedMpeg4Gif"
+      "name": "InlineQueryResultCachedMpeg4Gif",
+      "description": "Represents a link to a video animation (H.264/MPEG-4 AVC video without sound) stored on the Telegram servers. By default, this animated MPEG-4 file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation."
     },
     {
       "params": [
@@ -5292,7 +5376,8 @@
           "description": "Optional. Content of the message to be sent instead of the sticker"
         }
       ],
-      "name": "InlineQueryResultCachedSticker"
+      "name": "InlineQueryResultCachedSticker",
+      "description": "Represents a link to a sticker stored on the Telegram servers. By default, this sticker will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the sticker."
     },
     {
       "params": [
@@ -5382,7 +5467,8 @@
           "description": "Optional. Content of the message to be sent instead of the file"
         }
       ],
-      "name": "InlineQueryResultCachedDocument"
+      "name": "InlineQueryResultCachedDocument",
+      "description": "Represents a link to a file stored on the Telegram servers. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file."
     },
     {
       "params": [
@@ -5472,7 +5558,8 @@
           "description": "Optional. Content of the message to be sent instead of the video"
         }
       ],
-      "name": "InlineQueryResultCachedVideo"
+      "name": "InlineQueryResultCachedVideo",
+      "description": "Represents a link to a video file stored on the Telegram servers. By default, this video file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the video."
     },
     {
       "params": [
@@ -5554,7 +5641,8 @@
           "description": "Optional. Content of the message to be sent instead of the voice message"
         }
       ],
-      "name": "InlineQueryResultCachedVoice"
+      "name": "InlineQueryResultCachedVoice",
+      "description": "Represents a link to a voice message stored on the Telegram servers. By default, this voice message will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the voice message."
     },
     {
       "params": [
@@ -5628,7 +5716,8 @@
           "description": "Optional. Content of the message to be sent instead of the audio"
         }
       ],
-      "name": "InlineQueryResultCachedAudio"
+      "name": "InlineQueryResultCachedAudio",
+      "description": "Represents a link to an MP3 audio file stored on the Telegram servers. By default, this audio file will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the audio."
     },
     {
       "params": [
@@ -5670,7 +5759,8 @@
           "description": "Optional. Disables link previews for links in the sent message"
         }
       ],
-      "name": "InputTextMessageContent"
+      "name": "InputTextMessageContent",
+      "description": "Represents the content of a text message to be sent as the result of an inline query."
     },
     {
       "params": [
@@ -5723,7 +5813,8 @@
           "description": "Optional. For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified."
         }
       ],
-      "name": "InputLocationMessageContent"
+      "name": "InputLocationMessageContent",
+      "description": "Represents the content of a location message to be sent as the result of an inline query."
     },
     {
       "params": [
@@ -5792,7 +5883,8 @@
           "description": "Optional. Google Places type of the venue. (See supported types.)"
         }
       ],
-      "name": "InputVenueMessageContent"
+      "name": "InputVenueMessageContent",
+      "description": "Represents the content of a venue message to be sent as the result of an inline query."
     },
     {
       "params": [
@@ -5829,7 +5921,8 @@
           "description": "Optional. Additional data about the contact in the form of a vCard, 0-2048 bytes"
         }
       ],
-      "name": "InputContactMessageContent"
+      "name": "InputContactMessageContent",
+      "description": "Represents the content of a contact message to be sent as the result of an inline query."
     },
     {
       "params": [
@@ -6004,7 +6097,8 @@
           "description": "Optional. Pass True, if the final price depends on the shipping method"
         }
       ],
-      "name": "InputInvoiceMessageContent"
+      "name": "InputInvoiceMessageContent",
+      "description": "Represents the content of an invoice message to be sent as the result of an inline query."
     },
     {
       "params": [
@@ -6049,7 +6143,8 @@
           "description": "The query that was used to obtain the result"
         }
       ],
-      "name": "ChosenInlineResult"
+      "name": "ChosenInlineResult",
+      "description": "Represents a result of an inline query that was chosen by the user and sent to their chat partner."
     },
     {
       "params": [
@@ -6070,7 +6165,8 @@
           "description": "Price of the product in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies)."
         }
       ],
-      "name": "LabeledPrice"
+      "name": "LabeledPrice",
+      "description": "This object represents a portion of the price for goods or services."
     },
     {
       "params": [
@@ -6115,7 +6211,8 @@
           "description": "Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies)."
         }
       ],
-      "name": "Invoice"
+      "name": "Invoice",
+      "description": "This object contains basic information about an invoice."
     },
     {
       "params": [
@@ -6168,7 +6265,8 @@
           "description": "Address post code"
         }
       ],
-      "name": "ShippingAddress"
+      "name": "ShippingAddress",
+      "description": "This object represents a shipping address."
     },
     {
       "params": [
@@ -6205,7 +6303,8 @@
           "description": "Optional. User shipping address"
         }
       ],
-      "name": "OrderInfo"
+      "name": "OrderInfo",
+      "description": "This object represents information about an order."
     },
     {
       "params": [
@@ -6239,7 +6338,8 @@
           "description": "List of price portions"
         }
       ],
-      "name": "ShippingOption"
+      "name": "ShippingOption",
+      "description": "This object represents one shipping option."
     },
     {
       "params": [
@@ -6300,7 +6400,8 @@
           "description": "Provider payment identifier"
         }
       ],
-      "name": "SuccessfulPayment"
+      "name": "SuccessfulPayment",
+      "description": "This object contains basic information about a successful payment."
     },
     {
       "params": [
@@ -6337,7 +6438,8 @@
           "description": "User specified shipping address"
         }
       ],
-      "name": "ShippingQuery"
+      "name": "ShippingQuery",
+      "description": "This object contains information about an incoming shipping query."
     },
     {
       "params": [
@@ -6398,7 +6500,8 @@
           "description": "Optional. Order info provided by the user"
         }
       ],
-      "name": "PreCheckoutQuery"
+      "name": "PreCheckoutQuery",
+      "description": "This object contains information about an incoming pre-checkout query."
     },
     {
       "params": [
@@ -6424,7 +6527,8 @@
           "description": "Encrypted credentials required to decrypt the data"
         }
       ],
-      "name": "PassportData"
+      "name": "PassportData",
+      "description": "Contains information about Telegram Passport data shared with the bot by the user."
     },
     {
       "params": [
@@ -6461,7 +6565,8 @@
           "description": "Unix time when the file was uploaded"
         }
       ],
-      "name": "PassportFile"
+      "name": "PassportFile",
+      "description": "This object represents a file uploaded to Telegram Passport. Currently all Telegram Passport files are in JPEG format when decrypted and don't exceed 10MB."
     },
     {
       "params": [
@@ -6556,7 +6661,8 @@
           "description": "Base64-encoded element hash for using in PassportElementErrorUnspecified"
         }
       ],
-      "name": "EncryptedPassportElement"
+      "name": "EncryptedPassportElement",
+      "description": "Contains information about documents or other Telegram Passport elements shared with the bot by the user."
     },
     {
       "params": [
@@ -6585,7 +6691,8 @@
           "description": "Base64-encoded secret, encrypted with the bot's public RSA key, required for data decryption"
         }
       ],
-      "name": "EncryptedCredentials"
+      "name": "EncryptedCredentials",
+      "description": "Contains data required for decrypting and authenticating EncryptedPassportElement. See the Telegram Passport Documentation for a complete description of the data decryption and authentication processes."
     },
     {
       "params": [
@@ -6630,7 +6737,8 @@
           "description": "Error message"
         }
       ],
-      "name": "PassportElementErrorDataField"
+      "name": "PassportElementErrorDataField",
+      "description": "Represents an issue in one of the data fields that was provided by the user. The error is considered resolved when the field's value changes."
     },
     {
       "params": [
@@ -6667,7 +6775,8 @@
           "description": "Error message"
         }
       ],
-      "name": "PassportElementErrorFrontSide"
+      "name": "PassportElementErrorFrontSide",
+      "description": "Represents an issue with the front side of a document. The error is considered resolved when the file with the front side of the document changes."
     },
     {
       "params": [
@@ -6704,7 +6813,8 @@
           "description": "Error message"
         }
       ],
-      "name": "PassportElementErrorReverseSide"
+      "name": "PassportElementErrorReverseSide",
+      "description": "Represents an issue with the reverse side of a document. The error is considered resolved when the file with reverse side of the document changes."
     },
     {
       "params": [
@@ -6741,7 +6851,8 @@
           "description": "Error message"
         }
       ],
-      "name": "PassportElementErrorSelfie"
+      "name": "PassportElementErrorSelfie",
+      "description": "Represents an issue with the selfie with a document. The error is considered resolved when the file with the selfie changes."
     },
     {
       "params": [
@@ -6778,7 +6889,8 @@
           "description": "Error message"
         }
       ],
-      "name": "PassportElementErrorFile"
+      "name": "PassportElementErrorFile",
+      "description": "Represents an issue with a document scan. The error is considered resolved when the file with the document scan changes."
     },
     {
       "params": [
@@ -6820,7 +6932,8 @@
           "description": "Error message"
         }
       ],
-      "name": "PassportElementErrorFiles"
+      "name": "PassportElementErrorFiles",
+      "description": "Represents an issue with a list of scans. The error is considered resolved when the list of files containing the scans changes."
     },
     {
       "params": [
@@ -6857,7 +6970,8 @@
           "description": "Error message"
         }
       ],
-      "name": "PassportElementErrorTranslationFile"
+      "name": "PassportElementErrorTranslationFile",
+      "description": "Represents an issue with one of the files that constitute the translation of a document. The error is considered resolved when the file changes."
     },
     {
       "params": [
@@ -6899,7 +7013,8 @@
           "description": "Error message"
         }
       ],
-      "name": "PassportElementErrorTranslationFiles"
+      "name": "PassportElementErrorTranslationFiles",
+      "description": "Represents an issue with the translated version of a document. The error is considered resolved when a file with the document translation change."
     },
     {
       "params": [
@@ -6936,7 +7051,8 @@
           "description": "Error message"
         }
       ],
-      "name": "PassportElementErrorUnspecified"
+      "name": "PassportElementErrorUnspecified",
+      "description": "Represents an issue in an unspecified place. The error is considered resolved when new data is added."
     },
     {
       "params": [
@@ -6999,7 +7115,8 @@
           "description": "Optional. Animation that will be displayed in the game message in chats. Upload via BotFather"
         }
       ],
-      "name": "Game"
+      "name": "Game",
+      "description": "This object represents a game. Use BotFather to create and edit games, their short names will act as unique identifiers."
     },
     {
       "params": [
@@ -7060,7 +7177,8 @@
           "description": "Required if chat_id and message_id are not specified. Identifier of the inline message"
         }
       ],
-      "name": "CallbackGame"
+      "name": "CallbackGame",
+      "description": "A placeholder, currently holds no information. Use BotFather to set up your game."
     },
     {
       "params": [
@@ -7089,7 +7207,8 @@
           "description": "Score"
         }
       ],
-      "name": "GameHighScore"
+      "name": "GameHighScore",
+      "description": "This object represents one row of the high scores table for a game."
     }
   ],
   "methods": [
@@ -7140,7 +7259,8 @@
           "description": "A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member (default). If not specified, the previous setting will be used.\n\nPlease note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time."
         }
       ],
-      "name": "getUpdates"
+      "name": "getUpdates",
+      "description": "Use this method to receive incoming updates using long polling (wiki). An Array of Update objects is returned."
     },
     {
       "type": "post",
@@ -7202,7 +7322,8 @@
           "description": "Pass True to drop all pending updates"
         }
       ],
-      "name": "setWebhook"
+      "name": "setWebhook",
+      "description": "Use this method to specify a url and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified url, containing a JSON-serialized Update. In case of an unsuccessful request, we will give up after a reasonable amount of attempts. Returns True on success."
     },
     {
       "type": "post",
@@ -7210,7 +7331,8 @@
         "true"
       ],
       "params": [],
-      "name": "deleteWebhook"
+      "name": "deleteWebhook",
+      "description": "Use this method to remove webhook integration if you decide to switch back to getUpdates. Returns True on success."
     },
     {
       "type": "get",
@@ -7218,7 +7340,8 @@
         "WebhookInfo"
       ],
       "params": [],
-      "name": "getWebhookInfo"
+      "name": "getWebhookInfo",
+      "description": "Use this method to get current webhook status. Requires no parameters. On success, returns a WebhookInfo object. If the bot is using getUpdates, will return an object with the url field empty."
     },
     {
       "type": "get",
@@ -7226,7 +7349,8 @@
         "User"
       ],
       "params": [],
-      "name": "getMe"
+      "name": "getMe",
+      "description": "A simple method for testing your bot's auth token. Requires no parameters. Returns basic information about the bot in form of a User object."
     },
     {
       "type": "post",
@@ -7316,7 +7440,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "logOut"
+      "name": "logOut",
+      "description": "Use this method to log out from the cloud Bot API server before launching the bot locally. You must log out the bot before running it locally, otherwise there is no guarantee that the bot will receive updates. After a successful call, you can immediately log in on a local server, but will not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on success. Requires no parameters."
     },
     {
       "type": "post",
@@ -7406,7 +7531,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "close"
+      "name": "close",
+      "description": "Use this method to close the bot instance before moving it from one local server to another. You need to delete the webhook before calling this method to ensure that the bot isn't launched again after server restart. The method will return error 429 in the first 10 minutes after the bot is launched. Returns True on success. Requires no parameters."
     },
     {
       "type": "post",
@@ -7496,7 +7622,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "sendMessage"
+      "name": "sendMessage",
+      "description": "Use this method to send text messages. On success, the sent Message is returned."
     },
     {
       "type": "post",
@@ -7539,7 +7666,8 @@
           "description": "Message identifier in the chat specified in from_chat_id"
         }
       ],
-      "name": "forwardMessage"
+      "name": "forwardMessage",
+      "description": "Use this method to forward messages of any kind. Service messages can't be forwarded. On success, the sent Message is returned."
     },
     {
       "type": "post",
@@ -7638,7 +7766,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "copyMessage"
+      "name": "copyMessage",
+      "description": "Use this method to copy messages of any kind. Service messages and invoice messages can't be copied. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success."
     },
     {
       "type": "post",
@@ -7729,7 +7858,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "sendPhoto"
+      "name": "sendPhoto",
+      "description": "Use this method to send photos. On success, the sent Message is returned."
     },
     {
       "type": "post",
@@ -7853,7 +7983,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "sendAudio"
+      "name": "sendAudio",
+      "description": "Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future."
     },
     {
       "type": "post",
@@ -7961,7 +8092,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "sendDocument"
+      "name": "sendDocument",
+      "description": "Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future."
     },
     {
       "type": "post",
@@ -8093,7 +8225,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "sendVideo"
+      "name": "sendVideo",
+      "description": "Use this method to send video files, Telegram clients support mp4 videos (other formats may be sent as Document). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future."
     },
     {
       "type": "post",
@@ -8217,7 +8350,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "sendAnimation"
+      "name": "sendAnimation",
+      "description": "Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future."
     },
     {
       "type": "post",
@@ -8316,7 +8450,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "sendVoice"
+      "name": "sendVoice",
+      "description": "Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS (other formats may be sent as Audio or Document). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future."
     },
     {
       "type": "post",
@@ -8403,7 +8538,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "sendVideoNote"
+      "name": "sendVideoNote",
+      "description": "As of v.4.0, Telegram clients support rounded square mp4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned."
     },
     {
       "type": "post",
@@ -8462,7 +8598,8 @@
           "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
         }
       ],
-      "name": "sendMediaGroup"
+      "name": "sendMediaGroup",
+      "description": "Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Messages that were sent is returned."
     },
     {
       "type": "post",
@@ -8563,7 +8700,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "sendLocation"
+      "name": "sendLocation",
+      "description": "Use this method to send point on the map. On success, the sent Message is returned."
     },
     {
       "type": "post",
@@ -8645,7 +8783,8 @@
           "description": "A JSON-serialized object for a new inline keyboard."
         }
       ],
-      "name": "editMessageLiveLocation"
+      "name": "editMessageLiveLocation",
+      "description": "Use this method to edit live location messages. A location can be edited until its live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned."
     },
     {
       "type": "post",
@@ -8688,7 +8827,8 @@
           "description": "A JSON-serialized object for a new inline keyboard."
         }
       ],
-      "name": "stopMessageLiveLocation"
+      "name": "stopMessageLiveLocation",
+      "description": "Use this method to stop updating a live location message before live_period expires. On success, if the message is not an inline message, the edited Message is returned, otherwise True is returned."
     },
     {
       "type": "post",
@@ -8805,7 +8945,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "sendVenue"
+      "name": "sendVenue",
+      "description": "Use this method to send information about a venue. On success, the sent Message is returned."
     },
     {
       "type": "post",
@@ -8890,7 +9031,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove keyboard or to force a reply from the user."
         }
       ],
-      "name": "sendContact"
+      "name": "sendContact",
+      "description": "Use this method to send phone contacts. On success, the sent Message is returned."
     },
     {
       "type": "post",
@@ -9049,7 +9191,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "sendPoll"
+      "name": "sendPoll",
+      "description": "Use this method to send a native poll. On success, the sent Message is returned."
     },
     {
       "type": "post",
@@ -9110,7 +9253,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "sendDice"
+      "name": "sendDice",
+      "description": "Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned."
     },
     {
       "type": "post",
@@ -9136,7 +9280,8 @@
           "description": "Type of action to broadcast. Choose one, depending on what the user is about to receive: typing for text messages, upload_photo for photos, record_video or upload_video for videos, record_voice or upload_voice for voice notes, upload_document for general files, find_location for location data, record_video_note or upload_video_note for video notes."
         }
       ],
-      "name": "sendChatAction"
+      "name": "sendChatAction",
+      "description": "Use this method when you need to tell the user that something is happening on the bot's side. The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status). Returns True on success."
     },
     {
       "type": "get",
@@ -9169,7 +9314,8 @@
           "description": "Limits the number of photos to be retrieved. Values between 1-100 are accepted. Defaults to 100."
         }
       ],
-      "name": "getUserProfilePhotos"
+      "name": "getUserProfilePhotos",
+      "description": "Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object."
     },
     {
       "type": "get",
@@ -9186,7 +9332,8 @@
           "description": "File identifier to get info about"
         }
       ],
-      "name": "getFile"
+      "name": "getFile",
+      "description": "Use this method to get basic info about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot<token>/<file_path>, where <file_path> is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again."
     },
     {
       "type": "post",
@@ -9228,7 +9375,8 @@
           "description": "Pass True to delete all messages from the chat for the user that is being removed. If False, the user will be able to see messages in the group that were sent before the user was removed. Always True for supergroups and channels."
         }
       ],
-      "name": "banChatMember"
+      "name": "banChatMember",
+      "description": "Use this method to ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success."
     },
     {
       "type": "post",
@@ -9262,7 +9410,8 @@
           "description": "Do nothing if the user is not banned"
         }
       ],
-      "name": "unbanChatMember"
+      "name": "unbanChatMember",
+      "description": "Use this method to unban a previously banned user in a supergroup or channel. The user will not return to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this to work. By default, this method guarantees that after the call the user is not a member of the chat, but will be able to join it. So if the user is a member of the chat they will also be removed from the chat. If you don't want this, use the parameter only_if_banned. Returns True on success."
     },
     {
       "type": "post",
@@ -9304,7 +9453,8 @@
           "description": "Date when restrictions will be lifted for the user, unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever"
         }
       ],
-      "name": "restrictChatMember"
+      "name": "restrictChatMember",
+      "description": "Use this method to restrict a user in a supergroup. The bot must be an administrator in the supergroup for this to work and must have the appropriate admin rights. Pass True for all permissions to lift restrictions from a user. Returns True on success."
     },
     {
       "type": "post",
@@ -9418,7 +9568,8 @@
           "description": "Pass True, if the administrator can pin messages, supergroups only"
         }
       ],
-      "name": "promoteChatMember"
+      "name": "promoteChatMember",
+      "description": "Use this method to promote or demote a user in a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Pass False for all boolean parameters to demote a user. Returns True on success."
     },
     {
       "type": "post",
@@ -9452,7 +9603,8 @@
           "description": "New custom title for the administrator; 0-16 characters, emoji are not allowed"
         }
       ],
-      "name": "setChatAdministratorCustomTitle"
+      "name": "setChatAdministratorCustomTitle",
+      "description": "Use this method to set a custom title for an administrator in a supergroup promoted by the bot. Returns True on success."
     },
     {
       "type": "post",
@@ -9478,7 +9630,8 @@
           "description": "A JSON-serialized object for new default chat permissions"
         }
       ],
-      "name": "setChatPermissions"
+      "name": "setChatPermissions",
+      "description": "Use this method to set default chat permissions for all members. The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members admin rights. Returns True on success."
     },
     {
       "type": "post",
@@ -9496,7 +9649,8 @@
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
         }
       ],
-      "name": "exportChatInviteLink"
+      "name": "exportChatInviteLink",
+      "description": "Use this method to generate a new primary invite link for a chat; any previously generated primary link is revoked. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the new invite link as String on success."
     },
     {
       "type": "post",
@@ -9530,7 +9684,8 @@
           "description": "Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999"
         }
       ],
-      "name": "createChatInviteLink"
+      "name": "createChatInviteLink",
+      "description": "Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. The link can be revoked using the method revokeChatInviteLink. Returns the new invite link as ChatInviteLink object."
     },
     {
       "type": "post",
@@ -9572,7 +9727,8 @@
           "description": "Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999"
         }
       ],
-      "name": "editChatInviteLink"
+      "name": "editChatInviteLink",
+      "description": "Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the edited invite link as a ChatInviteLink object."
     },
     {
       "type": "post",
@@ -9598,7 +9754,8 @@
           "description": "The invite link to revoke"
         }
       ],
-      "name": "revokeChatInviteLink"
+      "name": "revokeChatInviteLink",
+      "description": "Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the revoked invite link as ChatInviteLink object."
     },
     {
       "type": "post",
@@ -9624,7 +9781,8 @@
           "description": "New chat photo, uploaded using multipart/form-data"
         }
       ],
-      "name": "setChatPhoto"
+      "name": "setChatPhoto",
+      "description": "Use this method to set a new profile photo for the chat. Photos can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success."
     },
     {
       "type": "post",
@@ -9642,7 +9800,8 @@
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
         }
       ],
-      "name": "deleteChatPhoto"
+      "name": "deleteChatPhoto",
+      "description": "Use this method to delete a chat photo. Photos can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success."
     },
     {
       "type": "post",
@@ -9668,7 +9827,8 @@
           "description": "New chat title, 1-255 characters"
         }
       ],
-      "name": "setChatTitle"
+      "name": "setChatTitle",
+      "description": "Use this method to change the title of a chat. Titles can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success."
     },
     {
       "type": "post",
@@ -9694,7 +9854,8 @@
           "description": "New chat description, 0-255 characters"
         }
       ],
-      "name": "setChatDescription"
+      "name": "setChatDescription",
+      "description": "Use this method to change the description of a group, a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success."
     },
     {
       "type": "post",
@@ -9728,7 +9889,8 @@
           "description": "Pass True, if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats."
         }
       ],
-      "name": "pinChatMessage"
+      "name": "pinChatMessage",
+      "description": "Use this method to add a message to the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' admin right in a supergroup or 'can_edit_messages' admin right in a channel. Returns True on success."
     },
     {
       "type": "post",
@@ -9754,7 +9916,8 @@
           "description": "Identifier of a message to unpin. If not specified, the most recent pinned message (by sending date) will be unpinned."
         }
       ],
-      "name": "unpinChatMessage"
+      "name": "unpinChatMessage",
+      "description": "Use this method to remove a message from the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' admin right in a supergroup or 'can_edit_messages' admin right in a channel. Returns True on success."
     },
     {
       "type": "post",
@@ -9772,7 +9935,8 @@
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
         }
       ],
-      "name": "unpinAllChatMessages"
+      "name": "unpinAllChatMessages",
+      "description": "Use this method to clear the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' admin right in a supergroup or 'can_edit_messages' admin right in a channel. Returns True on success."
     },
     {
       "type": "post",
@@ -9790,7 +9954,8 @@
           "description": "Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)"
         }
       ],
-      "name": "leaveChat"
+      "name": "leaveChat",
+      "description": "Use this method for your bot to leave a group, supergroup or channel. Returns True on success."
     },
     {
       "type": "get",
@@ -9808,7 +9973,8 @@
           "description": "Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)"
         }
       ],
-      "name": "getChat"
+      "name": "getChat",
+      "description": "Use this method to get up to date information about the chat (current name of the user for one-on-one conversations, current username of a user, group or channel, etc.). Returns a Chat object on success."
     },
     {
       "type": "get",
@@ -9829,7 +9995,8 @@
           "description": "Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)"
         }
       ],
-      "name": "getChatAdministrators"
+      "name": "getChatAdministrators",
+      "description": "Use this method to get a list of administrators in a chat. On success, returns an Array of ChatMember objects that contains information about all chat administrators except other bots. If the chat is a group or a supergroup and no administrators were appointed, only the creator will be returned."
     },
     {
       "type": "get",
@@ -9847,7 +10014,8 @@
           "description": "Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)"
         }
       ],
-      "name": "getChatMemberCount"
+      "name": "getChatMemberCount",
+      "description": "Use this method to get the number of members in a chat. Returns Int on success."
     },
     {
       "type": "get",
@@ -9873,7 +10041,8 @@
           "description": "Unique identifier of the target user"
         }
       ],
-      "name": "getChatMember"
+      "name": "getChatMember",
+      "description": "Use this method to get information about a member of a chat. Returns a ChatMember object on success."
     },
     {
       "type": "post",
@@ -9899,7 +10068,8 @@
           "description": "Name of the sticker set to be set as the group sticker set"
         }
       ],
-      "name": "setChatStickerSet"
+      "name": "setChatStickerSet",
+      "description": "Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method. Returns True on success."
     },
     {
       "type": "post",
@@ -9917,7 +10087,8 @@
           "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
         }
       ],
-      "name": "deleteChatStickerSet"
+      "name": "deleteChatStickerSet",
+      "description": "Use this method to delete a group sticker set from a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method. Returns True on success."
     },
     {
       "type": "post",
@@ -9966,7 +10137,8 @@
           "description": "The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to 0."
         }
       ],
-      "name": "answerCallbackQuery"
+      "name": "answerCallbackQuery",
+      "description": "Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, True is returned."
     },
     {
       "type": "post",
@@ -10004,7 +10176,8 @@
           "description": "A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands"
         }
       ],
-      "name": "setMyCommands"
+      "name": "setMyCommands",
+      "description": "Use this method to change the list of the bot's commands. See https://core.telegram.org/bots#commands for more details about bot commands. Returns True on success."
     },
     {
       "type": "post",
@@ -10029,7 +10202,8 @@
           "description": "A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands"
         }
       ],
-      "name": "deleteMyCommands"
+      "name": "deleteMyCommands",
+      "description": "Use this method to delete the list of the bot's commands for the given scope and user language. After deletion, higher level commands will be shown to affected users. Returns True on success."
     },
     {
       "type": "get",
@@ -10040,7 +10214,8 @@
         ]
       ],
       "params": [],
-      "name": "getMyCommands"
+      "name": "getMyCommands",
+      "description": "Use this method to get the current list of the bot's commands for the given scope and user language. Returns Array of BotCommand on success. If commands aren't set, an empty list is returned."
     },
     {
       "type": "post",
@@ -10119,7 +10294,8 @@
           "description": "A JSON-serialized object for an inline keyboard."
         }
       ],
-      "name": "editMessageText"
+      "name": "editMessageText",
+      "description": "Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned."
     },
     {
       "type": "post",
@@ -10190,7 +10366,8 @@
           "description": "A JSON-serialized object for an inline keyboard."
         }
       ],
-      "name": "editMessageCaption"
+      "name": "editMessageCaption",
+      "description": "Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned."
     },
     {
       "type": "post",
@@ -10240,7 +10417,8 @@
           "description": "A JSON-serialized object for a new inline keyboard."
         }
       ],
-      "name": "editMessageMedia"
+      "name": "editMessageMedia",
+      "description": "Use this method to edit animation, audio, document, photo, or video messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned."
     },
     {
       "type": "post",
@@ -10282,7 +10460,8 @@
           "description": "A JSON-serialized object for an inline keyboard."
         }
       ],
-      "name": "editMessageReplyMarkup"
+      "name": "editMessageReplyMarkup",
+      "description": "Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned."
     },
     {
       "type": "post",
@@ -10316,7 +10495,8 @@
           "description": "A JSON-serialized object for a new message inline keyboard."
         }
       ],
-      "name": "stopPoll"
+      "name": "stopPoll",
+      "description": "Use this method to stop a poll which was sent by the bot. On success, the stopped Poll is returned."
     },
     {
       "type": "post",
@@ -10342,7 +10522,8 @@
           "description": "Identifier of the message to delete"
         }
       ],
-      "name": "deleteMessage"
+      "name": "deleteMessage",
+      "description": "Use this method to delete a message, including service messages, with the following limitations:\n- A message can only be deleted if it was sent less than 48 hours ago.\n- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.\n- Bots can delete outgoing messages in private chats, groups, and supergroups.\n- Bots can delete incoming messages in private chats.\n- Bots granted can_post_messages permissions can delete outgoing messages in channels.\n- If the bot is an administrator of a group, it can delete any message there.\n- If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.\nReturns True on success."
     },
     {
       "type": "post",
@@ -10404,7 +10585,8 @@
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
-      "name": "sendSticker"
+      "name": "sendSticker",
+      "description": "Use this method to send static .WEBP or animated .TGS stickers. On success, the sent Message is returned."
     },
     {
       "type": "get",
@@ -10421,7 +10603,8 @@
           "description": "Name of the sticker set"
         }
       ],
-      "name": "getStickerSet"
+      "name": "getStickerSet",
+      "description": "Use this method to get a sticker set. On success, a StickerSet object is returned."
     },
     {
       "type": "post",
@@ -10446,7 +10629,8 @@
           "description": "PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. More info on Sending Files »"
         }
       ],
-      "name": "uploadStickerFile"
+      "name": "uploadStickerFile",
+      "description": "Use this method to upload a .PNG file with a sticker for later use in createNewStickerSet and addStickerToSet methods (can be used multiple times). Returns the uploaded File on success."
     },
     {
       "type": "post",
@@ -10520,7 +10704,8 @@
           "description": "A JSON-serialized object for position where the mask should be placed on faces"
         }
       ],
-      "name": "createNewStickerSet"
+      "name": "createNewStickerSet",
+      "description": "Use this method to create a new sticker set owned by a user. The bot will be able to edit the sticker set thus created. You must use exactly one of the fields png_sticker or tgs_sticker. Returns True on success."
     },
     {
       "type": "post",
@@ -10578,7 +10763,8 @@
           "description": "A JSON-serialized object for position where the mask should be placed on faces"
         }
       ],
-      "name": "addStickerToSet"
+      "name": "addStickerToSet",
+      "description": "Use this method to add a new sticker to a set created by the bot. You must use exactly one of the fields png_sticker or tgs_sticker. Animated stickers can be added to animated sticker sets and only to them. Animated sticker sets can have up to 50 stickers. Static sticker sets can have up to 120 stickers. Returns True on success."
     },
     {
       "type": "post",
@@ -10603,7 +10789,8 @@
           "description": "New sticker position in the set, zero-based"
         }
       ],
-      "name": "setStickerPositionInSet"
+      "name": "setStickerPositionInSet",
+      "description": "Use this method to move a sticker in a set created by the bot to a specific position. Returns True on success."
     },
     {
       "type": "post",
@@ -10620,7 +10807,8 @@
           "description": "File identifier of the sticker"
         }
       ],
-      "name": "deleteStickerFromSet"
+      "name": "deleteStickerFromSet",
+      "description": "Use this method to delete a sticker from a set created by the bot. Returns True on success."
     },
     {
       "type": "post",
@@ -10654,7 +10842,8 @@
           "description": "A PNG image with the thumbnail, must be up to 128 kilobytes in size and have width and height exactly 100px, or a TGS animation with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/animated_stickers#technical-requirements for animated sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files ». Animated sticker set thumbnail can't be uploaded via HTTP URL."
         }
       ],
-      "name": "setStickerSetThumb"
+      "name": "setStickerSetThumb",
+      "description": "Use this method to set the thumbnail of a sticker set. Animated thumbnails can be set for animated sticker sets only. Returns True on success."
     },
     {
       "type": "post",
@@ -10724,7 +10913,8 @@
           "description": "Deep-linking parameter for the /start message sent to the bot when user presses the switch button. 1-64 characters, only A-Z, a-z, 0-9, _ and - are allowed.\n\nExample: An inline bot that sends YouTube videos can ask the user to connect the bot to their YouTube account to adapt search results accordingly. To do this, it displays a 'Connect your YouTube account' button above the results, or even before showing any. The user presses the button, switches to a private chat with the bot and, in doing so, passes a start parameter that instructs the bot to return an oauth link. Once done, the bot can offer a switch_inline button so that the user can easily return to the chat where they wanted to use the bot's inline capabilities."
         }
       ],
-      "name": "answerInlineQuery"
+      "name": "answerInlineQuery",
+      "description": "Use this method to send answers to an inline query. On success, True is returned.\nNo more than 50 results per query are allowed."
     },
     {
       "type": "post",
@@ -10952,7 +11142,8 @@
           "description": "A JSON-serialized object for an inline keyboard. If empty, one 'Pay total price' button will be shown. If not empty, the first button must be a Pay button."
         }
       ],
-      "name": "sendInvoice"
+      "name": "sendInvoice",
+      "description": "Use this method to send invoices. On success, the sent Message is returned."
     },
     {
       "type": "post",
@@ -10998,7 +11189,8 @@
           "description": "Required if ok is False. Error message in human readable form that explains why it is impossible to complete the order (e.g. \"Sorry, delivery to your desired address is unavailable'). Telegram will display this message to the user."
         }
       ],
-      "name": "answerShippingQuery"
+      "name": "answerShippingQuery",
+      "description": "If you sent an invoice requesting a shipping address and the parameter is_flexible was specified, the Bot API will send an Update with a shipping_query field to the bot. Use this method to reply to shipping queries. On success, True is returned."
     },
     {
       "type": "post",
@@ -11031,7 +11223,8 @@
           "description": "Required if ok is False. Error message in human readable form that explains the reason for failure to proceed with the checkout (e.g. \"Sorry, somebody just bought the last of our amazing black T-shirts while you were busy filling out your payment details. Please choose a different color or garment!\"). Telegram will display this message to the user."
         }
       ],
-      "name": "answerPreCheckoutQuery"
+      "name": "answerPreCheckoutQuery",
+      "description": "Once the user has confirmed their payment and shipping details, the Bot API sends the final confirmation in the form of an Update with the field pre_checkout_query. Use this method to respond to such pre-checkout queries. On success, True is returned. Note: The Bot API must receive an answer within 10 seconds after the pre-checkout query was sent."
     },
     {
       "type": "post",
@@ -11061,7 +11254,8 @@
           "description": "A JSON-serialized array describing the errors"
         }
       ],
-      "name": "setPassportDataErrors"
+      "name": "setPassportDataErrors",
+      "description": "Informs a user that some of the Telegram Passport elements they provided contains errors. The user will not be able to re-submit their Passport to you until the errors are fixed (the contents of the field for which you returned the error must change). Returns True on success."
     },
     {
       "type": "post",
@@ -11118,7 +11312,8 @@
           "description": "A JSON-serialized object for an inline keyboard. If empty, one 'Play game_title' button will be shown. If not empty, the first button must launch the game."
         }
       ],
-      "name": "sendGame"
+      "name": "sendGame",
+      "description": "Use this method to send a game. On success, the sent Message is returned."
     },
     {
       "type": "post",
@@ -11184,7 +11379,8 @@
           "description": "Required if chat_id and message_id are not specified. Identifier of the inline message"
         }
       ],
-      "name": "setGameScore"
+      "name": "setGameScore",
+      "description": "Use this method to set the score of the specified user in a game message. On success, if the message is not an inline message, the Message is returned, otherwise True is returned. Returns an error, if the new score is not greater than the user's current score in the chat and force is False."
     },
     {
       "type": "get",
@@ -11228,7 +11424,8 @@
           "description": "Required if chat_id and message_id are not specified. Identifier of the inline message"
         }
       ],
-      "name": "getGameHighScores"
+      "name": "getGameHighScores",
+      "description": "Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. On success, returns an Array of GameHighScore objects."
     }
   ],
   "generics": [

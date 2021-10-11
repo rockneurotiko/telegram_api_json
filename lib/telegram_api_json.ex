@@ -8,11 +8,11 @@ defmodule TelegramApiJson do
   end
 
   defmodule Model do
-    defstruct [:name, params: []]
+    defstruct [:name, :description, params: []]
   end
 
   defmodule Method do
-    defstruct [:name, :type, :return, params: []]
+    defstruct [:name, :type, :return, :description, params: []]
   end
 
   defmodule Param do
@@ -96,14 +96,16 @@ defmodule TelegramApiJson do
 
   defp extract_model(name, tree) do
     Logger.debug("Extracting model: #{name}")
+    description = tree |> find_next("p") |> Floki.text()
     params = tree |> find_next("table") |> extract_table_params()
 
-    %TelegramApiJson.Model{name: name, params: params}
+    %TelegramApiJson.Model{name: name, description: description, params: params}
   end
 
   defp extract_method(name, tree) do
     type = if String.starts_with?(name, "get"), do: "get", else: "post"
-    returned = tree |> find_next("p") |> Floki.text() |> extract_return_type()
+    description = tree |> find_next("p") |> Floki.text()
+    returned = description |> extract_return_type()
 
     params =
       case name in @zero_parameters do
@@ -111,7 +113,13 @@ defmodule TelegramApiJson do
         false -> tree |> find_next("table") |> extract_table_params()
       end
 
-    %TelegramApiJson.Method{name: name, type: type, return: returned, params: params}
+    %TelegramApiJson.Method{
+      name: name,
+      type: type,
+      return: returned,
+      description: description,
+      params: params
+    }
   end
 
   defp extract_table_params(table) do
