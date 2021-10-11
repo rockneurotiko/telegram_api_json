@@ -22,7 +22,12 @@ defmodule TelegramApiJson do
   @url "https://core.telegram.org/bots/api"
 
   @skip []
-  @generic_types ["InlineQueryResult", "InputMessageContent", "PassportElementError"]
+  @generic_types [
+    "InlineQueryResult",
+    "InputMessageContent",
+    "PassportElementError",
+    "ChatMember"
+  ]
   @zero_parameters ["getMe", "deleteWebhook", "getWebhookInfo", "getMyCommands"]
 
   def scrape() do
@@ -218,9 +223,9 @@ defmodule TelegramApiJson do
 
       String.contains?(
         type,
-        "On success, if the message was sent by the bot, returns the edited Message"
+        "On success, if the message is not an inline message"
       ) ->
-        # Special case for setGameScore https://core.telegram.org/bots/api#setgamescore
+        # Special case for setGameScore and stopMessageLiveLocation https://core.telegram.org/bots/api#setgamescore
         ["Message", "true"]
 
       Enum.any?(prev_ts, &String.contains?(type, &1)) ->
