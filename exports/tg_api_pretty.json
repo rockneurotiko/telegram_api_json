@@ -181,6 +181,14 @@
             "int"
           ],
           "optional": true,
+          "name": "last_synchronization_error_date",
+          "description": "Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
           "name": "max_connections",
           "description": "Optional. Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery"
         },
@@ -898,35 +906,43 @@
         },
         {
           "type": [
-            "VoiceChatScheduled"
+            "VideoChatScheduled"
           ],
           "optional": true,
-          "name": "voice_chat_scheduled",
-          "description": "Optional. Service message: voice chat scheduled"
+          "name": "video_chat_scheduled",
+          "description": "Optional. Service message: video chat scheduled"
         },
         {
           "type": [
-            "VoiceChatStarted"
+            "VideoChatStarted"
           ],
           "optional": true,
-          "name": "voice_chat_started",
-          "description": "Optional. Service message: voice chat started"
+          "name": "video_chat_started",
+          "description": "Optional. Service message: video chat started"
         },
         {
           "type": [
-            "VoiceChatEnded"
+            "VideoChatEnded"
           ],
           "optional": true,
-          "name": "voice_chat_ended",
-          "description": "Optional. Service message: voice chat ended"
+          "name": "video_chat_ended",
+          "description": "Optional. Service message: video chat ended"
         },
         {
           "type": [
-            "VoiceChatParticipantsInvited"
+            "VideoChatParticipantsInvited"
           ],
           "optional": true,
-          "name": "voice_chat_participants_invited",
-          "description": "Optional. Service message: new participants invited to a voice chat"
+          "name": "video_chat_participants_invited",
+          "description": "Optional. Service message: new participants invited to a video chat"
+        },
+        {
+          "type": [
+            "WebAppData"
+          ],
+          "optional": true,
+          "name": "web_app_data",
+          "description": "Optional. Service message: data sent by a Web App"
         },
         {
           "type": [
@@ -1807,6 +1823,28 @@
       "params": [
         {
           "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "data",
+          "description": "The data. Be aware that a bad client can send arbitrary data in this field."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "button_text",
+          "description": "Text of the web_app keyboard button, from which the Web App was opened. Be aware that a bad client can send arbitrary data in this field."
+        }
+      ],
+      "name": "WebAppData",
+      "description": "Contains data sent from a Web App to the bot."
+    },
+    {
+      "params": [
+        {
+          "type": [
             "User"
           ],
           "optional": false,
@@ -1855,11 +1893,11 @@
           ],
           "optional": false,
           "name": "start_date",
-          "description": "Point in time (Unix timestamp) when the voice chat is supposed to be started by a chat administrator"
+          "description": "Point in time (Unix timestamp) when the video chat is supposed to be started by a chat administrator"
         }
       ],
-      "name": "VoiceChatScheduled",
-      "description": "This object represents a service message about a voice chat scheduled in the chat."
+      "name": "VideoChatScheduled",
+      "description": "This object represents a service message about a video chat scheduled in the chat."
     },
     {
       "params": [
@@ -1869,11 +1907,11 @@
           ],
           "optional": false,
           "name": "duration",
-          "description": "Voice chat duration in seconds"
+          "description": "Video chat duration in seconds"
         }
       ],
-      "name": "VoiceChatStarted",
-      "description": "This object represents a service message about a voice chat started in the chat. Currently holds no information."
+      "name": "VideoChatStarted",
+      "description": "This object represents a service message about a video chat started in the chat. Currently holds no information."
     },
     {
       "params": [
@@ -1883,11 +1921,11 @@
           ],
           "optional": false,
           "name": "duration",
-          "description": "Voice chat duration in seconds"
+          "description": "Video chat duration in seconds"
         }
       ],
-      "name": "VoiceChatEnded",
-      "description": "This object represents a service message about a voice chat ended in the chat."
+      "name": "VideoChatEnded",
+      "description": "This object represents a service message about a video chat ended in the chat."
     },
     {
       "params": [
@@ -1900,13 +1938,13 @@
               ]
             ]
           ],
-          "optional": true,
+          "optional": false,
           "name": "users",
-          "description": "Optional. New members that were invited to the voice chat"
+          "description": "New members that were invited to the video chat"
         }
       ],
-      "name": "VoiceChatParticipantsInvited",
-      "description": "This object represents a service message about new members invited to a voice chat."
+      "name": "VideoChatParticipantsInvited",
+      "description": "This object represents a service message about new members invited to a video chat."
     },
     {
       "params": [
@@ -1982,6 +2020,20 @@
       "params": [
         {
           "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "url",
+          "description": "An HTTPS URL of a Web App to be opened with additional data as specified in Initializing Web Apps"
+        }
+      ],
+      "name": "WebAppInfo",
+      "description": "Contains information about a Web App."
+    },
+    {
+      "params": [
+        {
+          "type": [
             [
               "array",
               [
@@ -2050,7 +2102,7 @@
           ],
           "optional": true,
           "name": "request_contact",
-          "description": "Optional. If True, the user's phone number will be sent as a contact when the button is pressed. Available in private chats only"
+          "description": "Optional. If True, the user's phone number will be sent as a contact when the button is pressed. Available in private chats only."
         },
         {
           "type": [
@@ -2058,7 +2110,7 @@
           ],
           "optional": true,
           "name": "request_location",
-          "description": "Optional. If True, the user's current location will be sent when the button is pressed. Available in private chats only"
+          "description": "Optional. If True, the user's current location will be sent when the button is pressed. Available in private chats only."
         },
         {
           "type": [
@@ -2066,11 +2118,19 @@
           ],
           "optional": true,
           "name": "request_poll",
-          "description": "Optional. If specified, the user will be asked to create a poll and send it to the bot when the button is pressed. Available in private chats only"
+          "description": "Optional. If specified, the user will be asked to create a poll and send it to the bot when the button is pressed. Available in private chats only."
+        },
+        {
+          "type": [
+            "WebAppInfo"
+          ],
+          "optional": true,
+          "name": "web_app",
+          "description": "Optional. If specified, the described Web App will be launched when the button is pressed. The Web App will be able to send a “web_app_data” service message. Available in private chats only."
         }
       ],
       "name": "KeyboardButton",
-      "description": "This object represents one button of the reply keyboard. For simple text buttons String can be used instead of this object to specify text of the button. Optional fields request_contact, request_location, and request_poll are mutually exclusive."
+      "description": "This object represents one button of the reply keyboard. For simple text buttons String can be used instead of this object to specify text of the button. Optional fields web_app, request_contact, request_location, and request_poll are mutually exclusive."
     },
     {
       "params": [
@@ -2152,19 +2212,27 @@
         },
         {
           "type": [
-            "LoginUrl"
-          ],
-          "optional": true,
-          "name": "login_url",
-          "description": "Optional. An HTTP URL used to automatically authorize the user. Can be used as a replacement for the Telegram Login Widget."
-        },
-        {
-          "type": [
             "str"
           ],
           "optional": true,
           "name": "callback_data",
           "description": "Optional. Data to be sent in a callback query to the bot when button is pressed, 1-64 bytes"
+        },
+        {
+          "type": [
+            "WebAppInfo"
+          ],
+          "optional": true,
+          "name": "web_app",
+          "description": "Optional. Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery. Available only in private chats between a user and the bot."
+        },
+        {
+          "type": [
+            "LoginUrl"
+          ],
+          "optional": true,
+          "name": "login_url",
+          "description": "Optional. An HTTP URL used to automatically authorize the user. Can be used as a replacement for the Telegram Login Widget."
         },
         {
           "type": [
@@ -2452,6 +2520,100 @@
       "params": [
         {
           "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "is_anonymous",
+          "description": "True, if the user's presence in the chat is hidden"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "can_manage_chat",
+          "description": "True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "can_delete_messages",
+          "description": "True, if the administrator can delete messages of other users"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "can_manage_video_chats",
+          "description": "True, if the administrator can manage video chats"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "can_restrict_members",
+          "description": "True, if the administrator can restrict, ban or unban chat members"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "can_promote_members",
+          "description": "True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by the user)"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "can_change_info",
+          "description": "True, if the user is allowed to change the chat title, photo and other settings"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "can_invite_users",
+          "description": "True, if the user is allowed to invite new users to the chat"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_post_messages",
+          "description": "Optional. True, if the administrator can post in the channel; channels only"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_edit_messages",
+          "description": "Optional. True, if the administrator can edit messages of other users and can pin messages; channels only"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_pin_messages",
+          "description": "Optional. True, if the user is allowed to pin messages; groups and supergroups only"
+        }
+      ],
+      "name": "ChatAdministratorRights",
+      "description": "Represents the rights of an administrator in a chat."
+    },
+    {
+      "params": [
+        {
+          "type": [
             "str"
           ],
           "optional": false,
@@ -2541,8 +2703,8 @@
             "bool"
           ],
           "optional": false,
-          "name": "can_manage_voice_chats",
-          "description": "True, if the administrator can manage voice chats"
+          "name": "can_manage_video_chats",
+          "description": "True, if the administrator can manage video chats"
         },
         {
           "type": [
@@ -3139,6 +3301,78 @@
       "params": [
         {
           "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Type of the button, must be commands"
+        }
+      ],
+      "name": "MenuButton",
+      "description": "This object describes the bot's menu button in a private chat. It should be one of"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Type of the button, must be commands"
+        }
+      ],
+      "name": "MenuButtonCommands",
+      "description": "Represents a menu button, which opens the bot's list of commands."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Type of the button, must be web_app"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "text",
+          "description": "Text on the button"
+        },
+        {
+          "type": [
+            "WebAppInfo"
+          ],
+          "optional": false,
+          "name": "web_app",
+          "description": "Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery."
+        }
+      ],
+      "name": "MenuButtonWebApp",
+      "description": "Represents a menu button, which launches a Web App."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Type of the button, must be default"
+        }
+      ],
+      "name": "MenuButtonDefault",
+      "description": "Describes that no specific value for the menu button was set."
+    },
+    {
+      "params": [
+        {
+          "type": [
             "int"
           ],
           "optional": true,
@@ -3726,6 +3960,14 @@
         },
         {
           "type": [
+            "bool"
+          ],
+          "optional": false,
+          "name": "is_video",
+          "description": "True, if the sticker is a video sticker"
+        },
+        {
+          "type": [
             "PhotoSize"
           ],
           "optional": true,
@@ -3799,6 +4041,14 @@
             "bool"
           ],
           "optional": false,
+          "name": "is_video",
+          "description": "True, if the sticker set contains video stickers"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": false,
           "name": "contains_masks",
           "description": "True, if the sticker set contains masks"
         },
@@ -3821,7 +4071,7 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "Optional. Sticker set thumbnail in the .WEBP or .TGS format"
+          "description": "Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format"
         }
       ],
       "name": "StickerSet",
@@ -6263,6 +6513,20 @@
       ],
       "name": "ChosenInlineResult",
       "description": "Represents a result of an inline query that was chosen by the user and sent to their chat partner."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "inline_message_id",
+          "description": "Optional. Identifier of the sent inline message. Available only if there is an inline keyboard attached to the message."
+        }
+      ],
+      "name": "SentWebAppMessage",
+      "description": "Contains information about an inline message sent by a Web App on behalf of a user."
     },
     {
       "params": [
@@ -9653,7 +9917,7 @@
           ],
           "optional": false,
           "name": "chat_id",
-          "description": "Unique identifier for the target group or username of the target supergroup or channel (in the format @username)"
+          "description": "Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)"
         },
         {
           "type": [
@@ -9786,8 +10050,8 @@
             "bool"
           ],
           "optional": true,
-          "name": "can_manage_voice_chats",
-          "description": "Pass True, if the administrator can manage voice chats"
+          "name": "can_manage_video_chats",
+          "description": "Pass True, if the administrator can manage video chats"
         },
         {
           "type": [
@@ -10622,6 +10886,94 @@
     {
       "type": "post",
       "return": [
+        "true"
+      ],
+      "params": [
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "chat_id",
+          "description": "Unique identifier for the target private chat. If not specified, default bot's menu button will be changed"
+        },
+        {
+          "type": [
+            "MenuButton"
+          ],
+          "optional": true,
+          "name": "menu_button",
+          "description": "A JSON-serialized object for the new bot's menu button. Defaults to MenuButtonDefault"
+        }
+      ],
+      "name": "setChatMenuButton",
+      "description": "Use this method to change the bot's menu button in a private chat, or the default menu button. Returns True on success."
+    },
+    {
+      "type": "get",
+      "return": [
+        "MenuButton"
+      ],
+      "params": [
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "chat_id",
+          "description": "Unique identifier for the target private chat. If not specified, default bot's menu button will be returned"
+        }
+      ],
+      "name": "getChatMenuButton",
+      "description": "Use this method to get the current value of the bot's menu button in a private chat, or the default menu button. Returns MenuButton on success."
+    },
+    {
+      "type": "post",
+      "return": [
+        "true"
+      ],
+      "params": [
+        {
+          "type": [
+            "ChatAdministratorRights"
+          ],
+          "optional": true,
+          "name": "rights",
+          "description": "A JSON-serialized object describing new default administrator rights. If not specified, the default administrator rights will be cleared."
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "for_channels",
+          "description": "Pass True to change the default administrator rights of the bot in channels. Otherwise, the default administrator rights of the bot for groups and supergroups will be changed."
+        }
+      ],
+      "name": "setMyDefaultAdministratorRights",
+      "description": "Use this method to change the default administrator rights requested by the bot when it's added as an administrator to groups or channels. These rights will be suggested to users, but they are are free to modify the list before adding the bot. Returns True on success."
+    },
+    {
+      "type": "get",
+      "return": [
+        "ChatAdministratorRights"
+      ],
+      "params": [
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "for_channels",
+          "description": "Pass True to get default administrator rights of the bot in channels. Otherwise, default administrator rights of the bot for groups and supergroups will be returned."
+        }
+      ],
+      "name": "getMyDefaultAdministratorRights",
+      "description": "Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success."
+    },
+    {
+      "type": "post",
+      "return": [
         "Message"
       ],
       "params": [
@@ -10996,7 +11348,7 @@
         }
       ],
       "name": "sendSticker",
-      "description": "Use this method to send static .WEBP or animated .TGS stickers. On success, the sent Message is returned."
+      "description": "Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned."
     },
     {
       "type": "get",
@@ -11062,7 +11414,7 @@
           ],
           "optional": false,
           "name": "name",
-          "description": "Short name of sticker set, to be used in t.me/addstickers/ URLs (e.g., animals). Can contain only english letters, digits and underscores. Must begin with a letter, can't contain consecutive underscores and must end in “_by_<bot username>”. <bot_username> is case insensitive. 1-64 characters."
+          "description": "Short name of sticker set, to be used in t.me/addstickers/ URLs (e.g., animals). Can contain only english letters, digits and underscores. Must begin with a letter, can't contain consecutive underscores and must end in \"_by_<bot_username>\". <bot_username> is case insensitive. 1-64 characters."
         },
         {
           "type": [
@@ -11087,7 +11439,15 @@
           ],
           "optional": true,
           "name": "tgs_sticker",
-          "description": "TGS animation with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/animated_stickers#technical-requirements for technical requirements"
+          "description": "TGS animation with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/stickers#animated-sticker-requirements for technical requirements"
+        },
+        {
+          "type": [
+            "file"
+          ],
+          "optional": true,
+          "name": "webm_sticker",
+          "description": "WEBM video with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/stickers#video-sticker-requirements for technical requirements"
         },
         {
           "type": [
@@ -11115,7 +11475,7 @@
         }
       ],
       "name": "createNewStickerSet",
-      "description": "Use this method to create a new sticker set owned by a user. The bot will be able to edit the sticker set thus created. You must use exactly one of the fields png_sticker or tgs_sticker. Returns True on success."
+      "description": "Use this method to create a new sticker set owned by a user. The bot will be able to edit the sticker set thus created. You must use exactly one of the fields png_sticker, tgs_sticker, or webm_sticker. Returns True on success."
     },
     {
       "type": "post",
@@ -11154,7 +11514,15 @@
           ],
           "optional": true,
           "name": "tgs_sticker",
-          "description": "TGS animation with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/animated_stickers#technical-requirements for technical requirements"
+          "description": "TGS animation with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/stickers#animated-sticker-requirements for technical requirements"
+        },
+        {
+          "type": [
+            "file"
+          ],
+          "optional": true,
+          "name": "webm_sticker",
+          "description": "WEBM video with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/stickers#video-sticker-requirements for technical requirements"
         },
         {
           "type": [
@@ -11174,7 +11542,7 @@
         }
       ],
       "name": "addStickerToSet",
-      "description": "Use this method to add a new sticker to a set created by the bot. You must use exactly one of the fields png_sticker or tgs_sticker. Animated stickers can be added to animated sticker sets and only to them. Animated sticker sets can have up to 50 stickers. Static sticker sets can have up to 120 stickers. Returns True on success."
+      "description": "Use this method to add a new sticker to a set created by the bot. You must use exactly one of the fields png_sticker, tgs_sticker, or webm_sticker. Animated stickers can be added to animated sticker sets and only to them. Animated sticker sets can have up to 50 stickers. Static sticker sets can have up to 120 stickers. Returns True on success."
     },
     {
       "type": "post",
@@ -11249,11 +11617,11 @@
           ],
           "optional": true,
           "name": "thumb",
-          "description": "A PNG image with the thumbnail, must be up to 128 kilobytes in size and have width and height exactly 100px, or a TGS animation with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/animated_stickers#technical-requirements for animated sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files ». Animated sticker set thumbnail can't be uploaded via HTTP URL."
+          "description": "A PNG image with the thumbnail, must be up to 128 kilobytes in size and have width and height exactly 100px, or a TGS animation with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#animated-sticker-requirements for animated sticker technical requirements, or a WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-sticker-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files ». Animated sticker set thumbnails can't be uploaded via HTTP URL."
         }
       ],
       "name": "setStickerSetThumb",
-      "description": "Use this method to set the thumbnail of a sticker set. Animated thumbnails can be set for animated sticker sets only. Returns True on success."
+      "description": "Use this method to set the thumbnail of a sticker set. Animated thumbnails can be set for animated sticker sets only. Video thumbnails can be set only for video sticker sets only. Returns True on success."
     },
     {
       "type": "post",
@@ -11325,6 +11693,32 @@
       ],
       "name": "answerInlineQuery",
       "description": "Use this method to send answers to an inline query. On success, True is returned.\nNo more than 50 results per query are allowed."
+    },
+    {
+      "type": "post",
+      "return": [
+        "SentWebAppMessage"
+      ],
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "web_app_query_id",
+          "description": "Unique identifier for the query to be answered"
+        },
+        {
+          "type": [
+            "InlineQueryResult"
+          ],
+          "optional": false,
+          "name": "result",
+          "description": "A JSON-serialized object describing the message to be sent"
+        }
+      ],
+      "name": "answerWebAppQuery",
+      "description": "Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a SentWebAppMessage object is returned."
     },
     {
       "type": "post",
