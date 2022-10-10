@@ -382,6 +382,14 @@
             "bool"
           ],
           "optional": true,
+          "name": "has_restricted_voice_and_video_messages",
+          "description": "Optional. True, if the privacy settings of the other party restrict sending voice and video note messages in the private chat. Returned only in getChat."
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
           "name": "join_to_send_messages",
           "description": "Optional. True, if users need to join the supergroup before they can send messages. Returned only in getChat."
         },
@@ -1010,7 +1018,7 @@
           ],
           "optional": false,
           "name": "type",
-          "description": "Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag), “cashtag” ($USD), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames)"
+          "description": "Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag), “cashtag” ($USD), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames), “custom_emoji” (for inline custom emoji stickers)"
         },
         {
           "type": [
@@ -1051,6 +1059,14 @@
           "optional": true,
           "name": "language",
           "description": "Optional. For “pre” only, the programming language of the entity text"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "custom_emoji_id",
+          "description": "Optional. For “custom_emoji” only, unique identifier of the custom emoji. Use getCustomEmojiStickers to get full information about the sticker"
         }
       ],
       "name": "MessageEntity",
@@ -2310,7 +2326,7 @@
           ],
           "optional": false,
           "name": "url",
-          "description": "An HTTP URL to be opened with user authorization data added to the query string when the button is pressed. If the user refuses to provide authorization data, the original URL without information about the user will be opened. The data added is the same as described in Receiving authorization data.\n\nNOTE: You must always check the hash of the received data to verify the authentication and the integrity of the data as described in Checking authorization."
+          "description": "An HTTPS URL to be opened with user authorization data added to the query string when the button is pressed. If the user refuses to provide authorization data, the original URL without information about the user will be opened. The data added is the same as described in Receiving authorization data.\n\nNOTE: You must always check the hash of the received data to verify the authentication and the integrity of the data as described in Checking authorization."
         },
         {
           "type": [
@@ -3611,7 +3627,7 @@
           ],
           "optional": true,
           "name": "supports_streaming",
-          "description": "Optional. Pass True, if the uploaded video is suitable for streaming"
+          "description": "Optional. Pass True if the uploaded video is suitable for streaming"
         }
       ],
       "name": "InputMediaVideo",
@@ -3931,7 +3947,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -3965,6 +3981,14 @@
           "optional": false,
           "name": "file_unique_id",
           "description": "Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Type of the sticker, currently one of “regular”, “mask”, “custom_emoji”. The type of the sticker is independent from its format, which is determined by the fields is_animated and is_video."
         },
         {
           "type": [
@@ -4028,7 +4052,7 @@
           ],
           "optional": true,
           "name": "premium_animation",
-          "description": "Optional. Premium animation for the sticker, if the sticker is premium"
+          "description": "Optional. For premium regular stickers, premium animation for the sticker"
         },
         {
           "type": [
@@ -4037,6 +4061,14 @@
           "optional": true,
           "name": "mask_position",
           "description": "Optional. For mask stickers, the position where the mask should be placed"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "custom_emoji_id",
+          "description": "Optional. For custom emoji stickers, unique identifier of the custom emoji"
         },
         {
           "type": [
@@ -4070,6 +4102,14 @@
         },
         {
           "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "sticker_type",
+          "description": "Type of stickers in the set, currently one of “regular”, “mask”, “custom_emoji”"
+        },
+        {
+          "type": [
             "bool"
           ],
           "optional": false,
@@ -4083,14 +4123,6 @@
           "optional": false,
           "name": "is_video",
           "description": "True, if the sticker set contains video stickers"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": false,
-          "name": "contains_masks",
-          "description": "True, if the sticker set contains masks"
         },
         {
           "type": [
@@ -4265,7 +4297,7 @@
           ],
           "optional": true,
           "name": "hide_url",
-          "description": "Optional. Pass True, if you don't want the URL to be shown in the message"
+          "description": "Optional. Pass True if you don't want the URL to be shown in the message"
         },
         {
           "type": [
@@ -6454,7 +6486,7 @@
           ],
           "optional": true,
           "name": "need_name",
-          "description": "Optional. Pass True, if you require the user's full name to complete the order"
+          "description": "Optional. Pass True if you require the user's full name to complete the order"
         },
         {
           "type": [
@@ -6462,7 +6494,7 @@
           ],
           "optional": true,
           "name": "need_phone_number",
-          "description": "Optional. Pass True, if you require the user's phone number to complete the order"
+          "description": "Optional. Pass True if you require the user's phone number to complete the order"
         },
         {
           "type": [
@@ -6470,7 +6502,7 @@
           ],
           "optional": true,
           "name": "need_email",
-          "description": "Optional. Pass True, if you require the user's email address to complete the order"
+          "description": "Optional. Pass True if you require the user's email address to complete the order"
         },
         {
           "type": [
@@ -6478,7 +6510,7 @@
           ],
           "optional": true,
           "name": "need_shipping_address",
-          "description": "Optional. Pass True, if you require the user's shipping address to complete the order"
+          "description": "Optional. Pass True if you require the user's shipping address to complete the order"
         },
         {
           "type": [
@@ -6486,7 +6518,7 @@
           ],
           "optional": true,
           "name": "send_phone_number_to_provider",
-          "description": "Optional. Pass True, if the user's phone number should be sent to provider"
+          "description": "Optional. Pass True if the user's phone number should be sent to provider"
         },
         {
           "type": [
@@ -6494,7 +6526,7 @@
           ],
           "optional": true,
           "name": "send_email_to_provider",
-          "description": "Optional. Pass True, if the user's email address should be sent to provider"
+          "description": "Optional. Pass True if the user's email address should be sent to provider"
         },
         {
           "type": [
@@ -6502,7 +6534,7 @@
           ],
           "optional": true,
           "name": "is_flexible",
-          "description": "Optional. Pass True, if the final price depends on the shipping method"
+          "description": "Optional. Pass True if the final price depends on the shipping method"
         }
       ],
       "name": "InputInvoiceMessageContent",
@@ -7564,7 +7596,7 @@
           ],
           "optional": true,
           "name": "force",
-          "description": "Pass True, if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters"
+          "description": "Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters"
         },
         {
           "type": [
@@ -7572,7 +7604,7 @@
           ],
           "optional": true,
           "name": "disable_edit_message",
-          "description": "Pass True, if the game message should not be automatically edited to include the current scoreboard"
+          "description": "Pass True if the game message should not be automatically edited to include the current scoreboard"
         },
         {
           "type": [
@@ -7682,7 +7714,7 @@
         }
       ],
       "name": "getUpdates",
-      "description": "Use this method to receive incoming updates using long polling (wiki). An Array of Update objects is returned."
+      "description": "Use this method to receive incoming updates using long polling (wiki). Returns an Array of Update objects."
     },
     {
       "type": "post",
@@ -7864,7 +7896,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -7963,7 +7995,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -8062,7 +8094,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -8222,7 +8254,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -8237,7 +8269,7 @@
         }
       ],
       "name": "copyMessage",
-      "description": "Use this method to copy messages of any kind. Service messages and invoice messages can't be copied. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success."
+      "description": "Use this method to copy messages of any kind. Service messages and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success."
     },
     {
       "type": "post",
@@ -8322,7 +8354,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -8455,7 +8487,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -8572,7 +8604,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -8681,7 +8713,7 @@
           ],
           "optional": true,
           "name": "supports_streaming",
-          "description": "Pass True, if the uploaded video is suitable for streaming"
+          "description": "Pass True if the uploaded video is suitable for streaming"
         },
         {
           "type": [
@@ -8713,7 +8745,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -8846,7 +8878,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -8954,7 +8986,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -9050,7 +9082,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -9129,7 +9161,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         }
       ],
       "name": "sendMediaGroup",
@@ -9228,7 +9260,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -9481,7 +9513,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -9575,7 +9607,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -9586,7 +9618,7 @@
           ],
           "optional": true,
           "name": "reply_markup",
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove keyboard or to force a reply from the user."
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ],
       "name": "sendContact",
@@ -9711,7 +9743,7 @@
           ],
           "optional": true,
           "name": "is_closed",
-          "description": "Pass True, if the poll needs to be immediately closed. This can be useful for poll preview."
+          "description": "Pass True if the poll needs to be immediately closed. This can be useful for poll preview."
         },
         {
           "type": [
@@ -9743,7 +9775,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -9813,7 +9845,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -10059,7 +10091,7 @@
           ],
           "optional": true,
           "name": "is_anonymous",
-          "description": "Pass True, if the administrator's presence in the chat is hidden"
+          "description": "Pass True if the administrator's presence in the chat is hidden"
         },
         {
           "type": [
@@ -10067,7 +10099,7 @@
           ],
           "optional": true,
           "name": "can_manage_chat",
-          "description": "Pass True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
+          "description": "Pass True if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
         },
         {
           "type": [
@@ -10075,7 +10107,7 @@
           ],
           "optional": true,
           "name": "can_post_messages",
-          "description": "Pass True, if the administrator can create channel posts, channels only"
+          "description": "Pass True if the administrator can create channel posts, channels only"
         },
         {
           "type": [
@@ -10083,7 +10115,7 @@
           ],
           "optional": true,
           "name": "can_edit_messages",
-          "description": "Pass True, if the administrator can edit messages of other users and can pin messages, channels only"
+          "description": "Pass True if the administrator can edit messages of other users and can pin messages, channels only"
         },
         {
           "type": [
@@ -10091,7 +10123,7 @@
           ],
           "optional": true,
           "name": "can_delete_messages",
-          "description": "Pass True, if the administrator can delete messages of other users"
+          "description": "Pass True if the administrator can delete messages of other users"
         },
         {
           "type": [
@@ -10099,7 +10131,7 @@
           ],
           "optional": true,
           "name": "can_manage_video_chats",
-          "description": "Pass True, if the administrator can manage video chats"
+          "description": "Pass True if the administrator can manage video chats"
         },
         {
           "type": [
@@ -10107,7 +10139,7 @@
           ],
           "optional": true,
           "name": "can_restrict_members",
-          "description": "Pass True, if the administrator can restrict, ban or unban chat members"
+          "description": "Pass True if the administrator can restrict, ban or unban chat members"
         },
         {
           "type": [
@@ -10115,7 +10147,7 @@
           ],
           "optional": true,
           "name": "can_promote_members",
-          "description": "Pass True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by him)"
+          "description": "Pass True if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by him)"
         },
         {
           "type": [
@@ -10123,7 +10155,7 @@
           ],
           "optional": true,
           "name": "can_change_info",
-          "description": "Pass True, if the administrator can change chat title, photo and other settings"
+          "description": "Pass True if the administrator can change chat title, photo and other settings"
         },
         {
           "type": [
@@ -10131,7 +10163,7 @@
           ],
           "optional": true,
           "name": "can_invite_users",
-          "description": "Pass True, if the administrator can invite new users to the chat"
+          "description": "Pass True if the administrator can invite new users to the chat"
         },
         {
           "type": [
@@ -10139,7 +10171,7 @@
           ],
           "optional": true,
           "name": "can_pin_messages",
-          "description": "Pass True, if the administrator can pin messages, supergroups only"
+          "description": "Pass True if the administrator can pin messages, supergroups only"
         }
       ],
       "name": "promoteChatMember",
@@ -10600,7 +10632,7 @@
           ],
           "optional": true,
           "name": "disable_notification",
-          "description": "Pass True, if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats."
+          "description": "Pass True if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats."
         }
       ],
       "name": "pinChatMessage",
@@ -10710,7 +10742,7 @@
         }
       ],
       "name": "getChatAdministrators",
-      "description": "Use this method to get a list of administrators in a chat. On success, returns an Array of ChatMember objects that contains information about all chat administrators except other bots. If the chat is a group or a supergroup and no administrators were appointed, only the creator will be returned."
+      "description": "Use this method to get a list of administrators in a chat, which aren't bots. Returns an Array of ChatMember objects."
     },
     {
       "type": "get",
@@ -10891,7 +10923,7 @@
         }
       ],
       "name": "setMyCommands",
-      "description": "Use this method to change the list of the bot's commands. See https://core.telegram.org/bots#commands for more details about bot commands. Returns True on success."
+      "description": "Use this method to change the list of the bot's commands. See this manual for more details about bot commands. Returns True on success."
     },
     {
       "type": "post",
@@ -10929,7 +10961,7 @@
       ],
       "params": [],
       "name": "getMyCommands",
-      "description": "Use this method to get the current list of the bot's commands for the given scope and user language. Returns Array of BotCommand on success. If commands aren't set, an empty list is returned."
+      "description": "Use this method to get the current list of the bot's commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren't set, an empty list is returned."
     },
     {
       "type": "post",
@@ -11381,7 +11413,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -11415,6 +11447,32 @@
       ],
       "name": "getStickerSet",
       "description": "Use this method to get a sticker set. On success, a StickerSet object is returned."
+    },
+    {
+      "type": "get",
+      "return": [
+        "array",
+        [
+          "Sticker"
+        ]
+      ],
+      "params": [
+        {
+          "type": [
+            [
+              "array",
+              [
+                "str"
+              ]
+            ]
+          ],
+          "optional": false,
+          "name": "custom_emoji_ids",
+          "description": "List of custom emoji identifiers. At most 200 custom emoji identifiers can be specified."
+        }
+      ],
+      "name": "getCustomEmojiStickers",
+      "description": "Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of Sticker objects."
     },
     {
       "type": "post",
@@ -11501,17 +11559,17 @@
           "type": [
             "str"
           ],
-          "optional": false,
-          "name": "emojis",
-          "description": "One or more emoji corresponding to the sticker"
+          "optional": true,
+          "name": "sticker_type",
+          "description": "Type of stickers in the set, pass “regular” or “mask”. Custom emoji sticker sets can't be created via the Bot API at the moment. By default, a regular sticker set is created."
         },
         {
           "type": [
-            "bool"
+            "str"
           ],
-          "optional": true,
-          "name": "contains_masks",
-          "description": "Pass True, if a set of mask stickers should be created"
+          "optional": false,
+          "name": "emojis",
+          "description": "One or more emoji corresponding to the sticker"
         },
         {
           "type": [
@@ -11712,7 +11770,7 @@
           ],
           "optional": true,
           "name": "is_personal",
-          "description": "Pass True, if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query"
+          "description": "Pass True if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query"
         },
         {
           "type": [
@@ -11911,7 +11969,7 @@
           ],
           "optional": true,
           "name": "need_name",
-          "description": "Pass True, if you require the user's full name to complete the order"
+          "description": "Pass True if you require the user's full name to complete the order"
         },
         {
           "type": [
@@ -11919,7 +11977,7 @@
           ],
           "optional": true,
           "name": "need_phone_number",
-          "description": "Pass True, if you require the user's phone number to complete the order"
+          "description": "Pass True if you require the user's phone number to complete the order"
         },
         {
           "type": [
@@ -11927,7 +11985,7 @@
           ],
           "optional": true,
           "name": "need_email",
-          "description": "Pass True, if you require the user's email address to complete the order"
+          "description": "Pass True if you require the user's email address to complete the order"
         },
         {
           "type": [
@@ -11935,7 +11993,7 @@
           ],
           "optional": true,
           "name": "need_shipping_address",
-          "description": "Pass True, if you require the user's shipping address to complete the order"
+          "description": "Pass True if you require the user's shipping address to complete the order"
         },
         {
           "type": [
@@ -11943,7 +12001,7 @@
           ],
           "optional": true,
           "name": "send_phone_number_to_provider",
-          "description": "Pass True, if the user's phone number should be sent to provider"
+          "description": "Pass True if the user's phone number should be sent to provider"
         },
         {
           "type": [
@@ -11951,7 +12009,7 @@
           ],
           "optional": true,
           "name": "send_email_to_provider",
-          "description": "Pass True, if the user's email address should be sent to provider"
+          "description": "Pass True if the user's email address should be sent to provider"
         },
         {
           "type": [
@@ -11959,7 +12017,7 @@
           ],
           "optional": true,
           "name": "is_flexible",
-          "description": "Pass True, if the final price depends on the shipping method"
+          "description": "Pass True if the final price depends on the shipping method"
         },
         {
           "type": [
@@ -11991,7 +12049,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -12131,7 +12189,7 @@
           ],
           "optional": true,
           "name": "need_name",
-          "description": "Pass True, if you require the user's full name to complete the order"
+          "description": "Pass True if you require the user's full name to complete the order"
         },
         {
           "type": [
@@ -12139,7 +12197,7 @@
           ],
           "optional": true,
           "name": "need_phone_number",
-          "description": "Pass True, if you require the user's phone number to complete the order"
+          "description": "Pass True if you require the user's phone number to complete the order"
         },
         {
           "type": [
@@ -12147,7 +12205,7 @@
           ],
           "optional": true,
           "name": "need_email",
-          "description": "Pass True, if you require the user's email address to complete the order"
+          "description": "Pass True if you require the user's email address to complete the order"
         },
         {
           "type": [
@@ -12155,7 +12213,7 @@
           ],
           "optional": true,
           "name": "need_shipping_address",
-          "description": "Pass True, if you require the user's shipping address to complete the order"
+          "description": "Pass True if you require the user's shipping address to complete the order"
         },
         {
           "type": [
@@ -12163,7 +12221,7 @@
           ],
           "optional": true,
           "name": "send_phone_number_to_provider",
-          "description": "Pass True, if the user's phone number should be sent to the provider"
+          "description": "Pass True if the user's phone number should be sent to the provider"
         },
         {
           "type": [
@@ -12171,7 +12229,7 @@
           ],
           "optional": true,
           "name": "send_email_to_provider",
-          "description": "Pass True, if the user's email address should be sent to the provider"
+          "description": "Pass True if the user's email address should be sent to the provider"
         },
         {
           "type": [
@@ -12179,7 +12237,7 @@
           ],
           "optional": true,
           "name": "is_flexible",
-          "description": "Pass True, if the final price depends on the shipping method"
+          "description": "Pass True if the final price depends on the shipping method"
         }
       ],
       "name": "createInvoiceLink",
@@ -12205,7 +12263,7 @@
           ],
           "optional": false,
           "name": "ok",
-          "description": "Specify True if delivery to the specified address is possible and False if there are any problems (for example, if delivery to the specified address is not possible)"
+          "description": "Pass True if delivery to the specified address is possible and False if there are any problems (for example, if delivery to the specified address is not possible)"
         },
         {
           "type": [
@@ -12349,7 +12407,7 @@
           ],
           "optional": true,
           "name": "allow_sending_without_reply",
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "type": [
@@ -12392,7 +12450,7 @@
           ],
           "optional": true,
           "name": "force",
-          "description": "Pass True, if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters"
+          "description": "Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters"
         },
         {
           "type": [
@@ -12400,7 +12458,7 @@
           ],
           "optional": true,
           "name": "disable_edit_message",
-          "description": "Pass True, if the game message should not be automatically edited to include the current scoreboard"
+          "description": "Pass True if the game message should not be automatically edited to include the current scoreboard"
         },
         {
           "type": [
@@ -12473,7 +12531,7 @@
         }
       ],
       "name": "getGameHighScores",
-      "description": "Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. On success, returns an Array of GameHighScore objects."
+      "description": "Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. Returns an Array of GameHighScore objects."
     }
   ],
   "generics": [
