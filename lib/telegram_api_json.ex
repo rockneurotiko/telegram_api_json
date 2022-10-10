@@ -204,16 +204,9 @@ defmodule TelegramApiJson do
       "Returns the uploaded "
     ]
 
-    prev_ts = [
-      " with the final results is returned"
-    ]
-
     cond do
-      String.contains?(type, "Array of Update objects is returned") ->
+      String.contains?(type, "Returns an Array of Update") ->
         ["array", ["Update"]]
-
-      String.contains?(type, "array of the sent Messages is returned") ->
-        ["array", ["Message"]]
 
       String.contains?(type, "On success, an array of Messages") ->
         ["array", ["Message"]]
@@ -221,14 +214,17 @@ defmodule TelegramApiJson do
       String.contains?(type, "File object is returned") ->
         ["File"]
 
-      String.contains?(type, "returns an Array of GameHighScore") ->
+      String.contains?(type, "Returns an Array of GameHighScore") ->
         ["array", ["GameHighScore"]]
 
-      String.contains?(type, "returns an Array of ChatMember") ->
+      String.contains?(type, "Returns an Array of ChatMember") ->
         ["array", ["ChatMember"]]
 
-      String.contains?(type, "Returns Array of BotCommand") ->
+      String.contains?(type, "Returns an Array of BotCommand") ->
         ["array", ["BotCommand"]]
+
+      String.contains?(type, "Returns an Array of Sticker") ->
+        ["array", ["Sticker"]]
 
       String.contains?(
         type,
@@ -236,11 +232,6 @@ defmodule TelegramApiJson do
       ) ->
         # Special case for setGameScore and stopMessageLiveLocation https://core.telegram.org/bots/api#setgamescore
         ["Message", "true"]
-
-      Enum.any?(prev_ts, &String.contains?(type, &1)) ->
-        t = Enum.find(prev_ts, &String.contains?(type, &1))
-        typ = type |> String.split(t) |> Enum.at(0) |> String.split() |> Enum.at(-1)
-        [typ]
 
       Enum.any?(post_ts, &String.contains?(type, &1)) ->
         t = Enum.find(post_ts, &String.contains?(type, &1))
