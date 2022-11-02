@@ -3356,20 +3356,6 @@
           "description": "Type of the button, must be commands"
         }
       ],
-      "name": "MenuButton",
-      "description": "This object describes the bot's menu button in a private chat. It should be one of"
-    },
-    {
-      "params": [
-        {
-          "type": [
-            "str"
-          ],
-          "optional": false,
-          "name": "type",
-          "description": "Type of the button, must be commands"
-        }
-      ],
       "name": "MenuButtonCommands",
       "description": "Represents a menu button, which opens the bot's list of commands."
     },
@@ -12557,6 +12543,14 @@
         "BotCommandScopeChatMember"
       ],
       "name": "BotCommandScope"
+    },
+    {
+      "subtypes": [
+        "MenuButtonCommands",
+        "MenuButtonWebApp",
+        "MenuButtonDefault"
+      ],
+      "name": "MenuButton"
     },
     {
       "subtypes": [
