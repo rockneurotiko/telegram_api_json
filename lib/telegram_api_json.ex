@@ -201,6 +201,7 @@ defmodule TelegramApiJson do
 
   defp extract_return_type(type) do
     post_ts = [
+      "Returns information about the created topic as a ",
       "Returns basic information about the bot in form of a ",
       "Returns the uploaded "
     ]
