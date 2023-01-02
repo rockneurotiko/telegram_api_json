@@ -30,6 +30,7 @@ defmodule TelegramApiJson do
     "BotCommandScope",
     "MenuButton"
   ]
+
   @zero_parameters ["getMe", "deleteWebhook", "getWebhookInfo", "getMyCommands"]
 
   def scrape() do
@@ -65,6 +66,11 @@ defmodule TelegramApiJson do
         result = %{result | generics: result.generics ++ [generic]}
         analyze_html(rest, result)
 
+      empty_object?(rest) ->
+        model = empty_object(name, rest)
+        result = %{result | models: result.models ++ [model]}
+        analyze_html(rest, result)
+
       isupper?(name) ->
         case length(String.split(name)) do
           1 ->
@@ -86,6 +92,18 @@ defmodule TelegramApiJson do
   end
 
   defp analyze_html([_ | rest], result), do: analyze_html(rest, result)
+
+  defp empty_object?([{"p", _, _} = elem | _rest]) do
+    text = Floki.text(elem)
+
+    String.contains?(text, "Currently holds no information")
+  end
+
+  defp empty_object(name, tree) do
+    Logger.debug("Building empty object: #{name}")
+    description = tree |> find_next("p") |> Floki.text()
+    %TelegramApiJson.Model{name: name, description: description, params: []}
+  end
 
   defp extract_generic(name, tree) do
     Logger.debug("Extracting generic: #{name}")
