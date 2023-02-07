@@ -167,7 +167,7 @@ defmodule TelegramApiJson do
   end
 
   defp keep_optional(elems) do
-    elems |> Enum.filter(fn e -> Floki.text(e) == "Optional" end)
+    elems |> Enum.filter(fn e -> Floki.text(e) =~ "Optional" end)
   end
 
   defp parse_types(type_str) do
@@ -295,8 +295,22 @@ defmodule TelegramApiJson do
     tree |> Floki.find(find) |> Enum.at(0)
   end
 
-  defp get_html() do
-    {:ok, resp} = HTTPoison.get(@url)
+  def get_html() do
+    opts = [
+      # :hackney options
+      hackney: [
+        # :ssl options
+        ssl_options: [
+          # CA certificate used to validate server cert; path(), "string" is ok
+          cacertfile: "/Users/mgarcial/Downloads/gartner_ca_bundle_20210429.pem"
+          # certfile:  # client certificate, signed by CA; path(), "string" is ok
+          # keyfile:  # private key for client.crt; path(). "string" is ok
+          # password:  # password for keyfile; string(), "string" not ok, use 'char list'
+        ]
+      ]
+    ]
+
+    {:ok, resp} = HTTPoison.get(@url, [], opts)
     resp.body
   end
 end
