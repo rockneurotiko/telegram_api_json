@@ -2485,7 +2485,7 @@
         }
       ],
       "name": "KeyboardButtonRequestUser",
-      "description": "This object defines the criteria used to request a suitable user. The identifier of the selected user will be shared with the bot when the corresponding button is pressed."
+      "description": "This object defines the criteria used to request a suitable user. The identifier of the selected user will be shared with the bot when the corresponding button is pressed. More about requesting users »"
     },
     {
       "params": [
@@ -2555,7 +2555,7 @@
         }
       ],
       "name": "KeyboardButtonRequestChat",
-      "description": "This object defines the criteria used to request a suitable chat. The identifier of the selected chat will be shared with the bot when the corresponding button is pressed."
+      "description": "This object defines the criteria used to request a suitable chat. The identifier of the selected chat will be shared with the bot when the corresponding button is pressed. More about requesting chats »"
     },
     {
       "params": [
@@ -4454,109 +4454,6 @@
       "params": [
         {
           "type": [
-            "int",
-            "str"
-          ],
-          "optional": false,
-          "name": "chat_id",
-          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
-        },
-        {
-          "type": [
-            "int"
-          ],
-          "optional": true,
-          "name": "message_thread_id",
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": false,
-          "name": "text",
-          "description": "Text of the message to be sent, 1-4096 characters after entities parsing"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": true,
-          "name": "parse_mode",
-          "description": "Mode for parsing entities in the message text. See formatting options for more details."
-        },
-        {
-          "type": [
-            [
-              "array",
-              [
-                "MessageEntity"
-              ]
-            ]
-          ],
-          "optional": true,
-          "name": "entities",
-          "description": "A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "disable_web_page_preview",
-          "description": "Disables link previews for links in this message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "disable_notification",
-          "description": "Sends the message silently. Users will receive a notification with no sound."
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "protect_content",
-          "description": "Protects the contents of the sent message from forwarding and saving"
-        },
-        {
-          "type": [
-            "int"
-          ],
-          "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
-        },
-        {
-          "type": [
-            "InlineKeyboardMarkup",
-            "ReplyKeyboardMarkup",
-            "ReplyKeyboardRemove",
-            "ForceReply"
-          ],
-          "optional": true,
-          "name": "reply_markup",
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
-        }
-      ],
-      "name": "InputFile",
-      "description": "This object represents the contents of a file to be uploaded. Must be posted using multipart/form-data in the usual way that files are uploaded via the browser."
-    },
-    {
-      "params": [
-        {
-          "type": [
             "str"
           ],
           "optional": false,
@@ -4793,7 +4690,7 @@
           ],
           "optional": false,
           "name": "sticker",
-          "description": "The added sticker. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. Animated and video stickers can't be uploaded via HTTP URL. More information on Sending Files »"
+          "description": "The added sticker. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, upload a new one using multipart/form-data, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. Animated and video stickers can't be uploaded via HTTP URL. More information on Sending Files »"
         },
         {
           "type": [

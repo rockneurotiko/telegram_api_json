@@ -21,7 +21,7 @@ defmodule TelegramApiJson do
 
   @url "https://core.telegram.org/bots/api"
 
-  @skip []
+  @skip ["InputFile"]
   @generic_types [
     "InlineQueryResult",
     "InputMessageContent",
