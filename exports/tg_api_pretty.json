@@ -4129,65 +4129,6 @@
           "description": "Optional. Pass True if the photo needs to be covered with a spoiler animation"
         }
       ],
-      "name": "InputMedia",
-      "description": "This object represents the content of a media message to be sent. It should be one of"
-    },
-    {
-      "params": [
-        {
-          "type": [
-            "str"
-          ],
-          "optional": false,
-          "name": "type",
-          "description": "Type of the result, must be photo"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": false,
-          "name": "media",
-          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": true,
-          "name": "caption",
-          "description": "Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": true,
-          "name": "parse_mode",
-          "description": "Optional. Mode for parsing entities in the photo caption. See formatting options for more details."
-        },
-        {
-          "type": [
-            [
-              "array",
-              [
-                "MessageEntity"
-              ]
-            ]
-          ],
-          "optional": true,
-          "name": "caption_entities",
-          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "has_spoiler",
-          "description": "Optional. Pass True if the photo needs to be covered with a spoiler animation"
-        }
-      ],
       "name": "InputMediaPhoto",
       "description": "Represents a photo to be sent."
     },
@@ -4885,7 +4826,7 @@
           ],
           "optional": true,
           "name": "web_app",
-          "description": "Optional. Description of the Web App that will be launched when the user presses the button. The Web App will be able to switch back to the inline mode using the method web_app_switch_inline_query inside the Web App."
+          "description": "Optional. Description of the Web App that will be launched when the user presses the button. The Web App will be able to switch back to the inline mode using the method switchInlineQuery inside the Web App."
         },
         {
           "type": [
@@ -14043,6 +13984,16 @@
         "MenuButtonDefault"
       ],
       "name": "MenuButton"
+    },
+    {
+      "subtypes": [
+        "InputMediaAnimation",
+        "InputMediaDocument",
+        "InputMediaAudio",
+        "InputMediaPhoto",
+        "InputMediaVideo"
+      ],
+      "name": "InputMedia"
     },
     {
       "subtypes": [

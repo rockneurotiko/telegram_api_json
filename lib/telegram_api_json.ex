@@ -28,7 +28,8 @@ defmodule TelegramApiJson do
     "PassportElementError",
     "ChatMember",
     "BotCommandScope",
-    "MenuButton"
+    "MenuButton",
+    "InputMedia"
   ]
 
   @zero_parameters ["getMe", "deleteWebhook", "getWebhookInfo", "getMyCommands"]
