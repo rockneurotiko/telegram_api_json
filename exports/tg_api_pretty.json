@@ -8391,7 +8391,16 @@
       "return": [
         "true"
       ],
-      "params": [],
+      "params": [
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "drop_pending_updates",
+          "description": "Pass True to drop all pending updates"
+        }
+      ],
       "name": "deleteWebhook",
       "description": "Use this method to remove webhook integration if you decide to switch back to getUpdates. Returns True on success."
     },
@@ -11974,7 +11983,24 @@
           "BotCommand"
         ]
       ],
-      "params": [],
+      "params": [
+        {
+          "type": [
+            "BotCommandScope"
+          ],
+          "optional": true,
+          "name": "scope",
+          "description": "A JSON-serialized object, describing scope of users. Defaults to BotCommandScopeDefault."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "language_code",
+          "description": "A two-letter ISO 639-1 language code or an empty string"
+        }
+      ],
       "name": "getMyCommands",
       "description": "Use this method to get the current list of the bot's commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren't set, an empty list is returned."
     },
