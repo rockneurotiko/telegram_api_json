@@ -227,25 +227,25 @@ defmodule TelegramApiJson do
 
     cond do
       String.contains?(type, "Returns an Array of Update") ->
-        ["array", ["Update"]]
+        [["array", ["Update"]]]
 
       String.contains?(type, "On success, an array of Messages") ->
-        ["array", ["Message"]]
+        [["array", ["Message"]]]
 
       String.contains?(type, "File object is returned") ->
         ["File"]
 
       String.contains?(type, "Returns an Array of GameHighScore") ->
-        ["array", ["GameHighScore"]]
+        [["array", ["GameHighScore"]]]
 
       String.contains?(type, "Returns an Array of ChatMember") ->
-        ["array", ["ChatMember"]]
+        [["array", ["ChatMember"]]]
 
       String.contains?(type, "Returns an Array of BotCommand") ->
-        ["array", ["BotCommand"]]
+        [["array", ["BotCommand"]]]
 
       String.contains?(type, "Returns an Array of Sticker") ->
-        ["array", ["Sticker"]]
+        [["array", ["Sticker"]]]
 
       String.contains?(
         type,
