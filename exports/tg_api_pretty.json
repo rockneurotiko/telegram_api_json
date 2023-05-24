@@ -8268,9 +8268,11 @@
     {
       "type": "get",
       "return": [
-        "array",
         [
-          "Update"
+          "array",
+          [
+            "Update"
+          ]
         ]
       ],
       "params": [
@@ -9830,9 +9832,11 @@
     {
       "type": "post",
       "return": [
-        "array",
         [
-          "Message"
+          "array",
+          [
+            "Message"
+          ]
         ]
       ],
       "params": [
@@ -11406,9 +11410,11 @@
     {
       "type": "get",
       "return": [
-        "array",
         [
-          "ChatMember"
+          "array",
+          [
+            "ChatMember"
+          ]
         ]
       ],
       "params": [
@@ -11520,9 +11526,11 @@
     {
       "type": "get",
       "return": [
-        "array",
         [
-          "Sticker"
+          "array",
+          [
+            "Sticker"
+          ]
         ]
       ],
       "params": [
@@ -11978,9 +11986,11 @@
     {
       "type": "get",
       "return": [
-        "array",
         [
-          "BotCommand"
+          "array",
+          [
+            "BotCommand"
+          ]
         ]
       ],
       "params": [
@@ -12767,9 +12777,11 @@
     {
       "type": "get",
       "return": [
-        "array",
         [
-          "Sticker"
+          "array",
+          [
+            "Sticker"
+          ]
         ]
       ],
       "params": [
@@ -13936,9 +13948,11 @@
     {
       "type": "get",
       "return": [
-        "array",
         [
-          "GameHighScore"
+          "array",
+          [
+            "GameHighScore"
+          ]
         ]
       ],
       "params": [
