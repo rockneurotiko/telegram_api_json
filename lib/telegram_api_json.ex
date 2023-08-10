@@ -32,7 +32,7 @@ defmodule TelegramApiJson do
     "InputMedia"
   ]
 
-  @zero_parameters ["getMe", "getWebhookInfo"]
+  @zero_parameters ["getMe", "getWebhookInfo", "logOut", "close"]
 
   def scrape() do
     tree() |> analyze_html(%__MODULE__{})
