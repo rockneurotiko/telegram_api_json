@@ -392,6 +392,14 @@
         },
         {
           "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "emoji_status_expiration_date",
+          "description": "Optional. Expiration date of the emoji status of the other party in a private chat in Unix time, if any. Returned only in getChat."
+        },
+        {
+          "type": [
             "str"
           ],
           "optional": true,
@@ -765,6 +773,14 @@
           "optional": true,
           "name": "sticker",
           "description": "Optional. Message is a sticker, information about the sticker"
+        },
+        {
+          "type": [
+            "Story"
+          ],
+          "optional": true,
+          "name": "story",
+          "description": "Optional. Message is a forwarded story"
         },
         {
           "type": [
@@ -1470,6 +1486,11 @@
       "description": "This object represents a general file (as opposed to photos, voice messages and audio files)."
     },
     {
+      "params": [],
+      "name": "Story",
+      "description": "This object represents a message about a forwarded story in the chat. Currently holds no information."
+    },
+    {
       "params": [
         {
           "type": [
@@ -1749,11 +1770,19 @@
         },
         {
           "type": [
+            "Chat"
+          ],
+          "optional": true,
+          "name": "voter_chat",
+          "description": "Optional. The chat that changed the answer to the poll, if the voter is anonymous"
+        },
+        {
+          "type": [
             "User"
           ],
-          "optional": false,
+          "optional": true,
           "name": "user",
-          "description": "The user, who changed the answer to the poll"
+          "description": "Optional. The user that changed the answer to the poll, if the voter isn't anonymous"
         },
         {
           "type": [
@@ -1766,7 +1795,7 @@
           ],
           "optional": false,
           "name": "option_ids",
-          "description": "0-based identifiers of answer options, chosen by the user. May be empty if the user retracted their vote."
+          "description": "0-based identifiers of chosen answer options. May be empty if the vote was retracted."
         }
       ],
       "name": "PollAnswer",
@@ -3444,7 +3473,7 @@
           ],
           "optional": false,
           "name": "until_date",
-          "description": "Date when restrictions will be lifted for this user; unix time. If 0, then the user is restricted forever"
+          "description": "Date when restrictions will be lifted for this user; Unix time. If 0, then the user is restricted forever"
         }
       ],
       "name": "ChatMemberRestricted",
@@ -3496,7 +3525,7 @@
           ],
           "optional": false,
           "name": "until_date",
-          "description": "Date when restrictions will be lifted for this user; unix time. If 0, then the user is banned forever"
+          "description": "Date when restrictions will be lifted for this user; Unix time. If 0, then the user is banned forever"
         }
       ],
       "name": "ChatMemberBanned",
@@ -10435,7 +10464,7 @@
           ],
           "optional": true,
           "name": "until_date",
-          "description": "Date when the user will be unbanned, unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever. Applied for supergroups and channels only."
+          "description": "Date when the user will be unbanned; Unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever. Applied for supergroups and channels only."
         },
         {
           "type": [
@@ -10529,7 +10558,7 @@
           ],
           "optional": true,
           "name": "until_date",
-          "description": "Date when restrictions will be lifted for the user, unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever"
+          "description": "Date when restrictions will be lifted for the user; Unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever"
         }
       ],
       "name": "restrictChatMember",
@@ -11671,6 +11700,25 @@
       ],
       "name": "unhideGeneralForumTopic",
       "description": "Use this method to unhide the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns True on success."
+    },
+    {
+      "type": "post",
+      "return": [
+        "true"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
+        }
+      ],
+      "name": "unpinAllGeneralForumTopicMessages",
+      "description": "Use this method to clear the list of pinned messages in a General forum topic. The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup. Returns True on success."
     },
     {
       "type": "post",
