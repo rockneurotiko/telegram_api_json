@@ -19,7 +19,7 @@ defmodule TelegramApiJson.MixProject do
 
   defp deps do
     [
-      {:httpoison, "~> 1.3.0"},
+      {:httpoison, "~> 2.2"},
       {:poison, "~> 4.0"},
       {:floki, "~> 0.20.0"}
     ]

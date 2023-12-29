@@ -44,6 +44,22 @@
         },
         {
           "type": [
+            "MessageReactionUpdated"
+          ],
+          "optional": true,
+          "name": "message_reaction",
+          "description": "Optional. A reaction to a message was changed by a user. The bot must be an administrator in the chat and must explicitly specify \"message_reaction\" in the list of allowed_updates to receive these updates. The update isn't received for reactions set by bots."
+        },
+        {
+          "type": [
+            "MessageReactionCountUpdated"
+          ],
+          "optional": true,
+          "name": "message_reaction_count",
+          "description": "Optional. Reactions to a message with anonymous reactions were changed. The bot must be an administrator in the chat and must explicitly specify \"message_reaction_count\" in the list of allowed_updates to receive these updates."
+        },
+        {
+          "type": [
             "InlineQuery"
           ],
           "optional": true,
@@ -112,7 +128,7 @@
           ],
           "optional": true,
           "name": "chat_member",
-          "description": "Optional. A chat member's status was updated in a chat. The bot must be an administrator in the chat and must explicitly specify “chat_member” in the list of allowed_updates to receive these updates."
+          "description": "Optional. A chat member's status was updated in a chat. The bot must be an administrator in the chat and must explicitly specify \"chat_member\" in the list of allowed_updates to receive these updates."
         },
         {
           "type": [
@@ -121,6 +137,22 @@
           "optional": true,
           "name": "chat_join_request",
           "description": "Optional. A request to join the chat has been sent. The bot must have the can_invite_users administrator right in the chat to receive these updates."
+        },
+        {
+          "type": [
+            "ChatBoostUpdated"
+          ],
+          "optional": true,
+          "name": "chat_boost",
+          "description": "Optional. A chat boost was added or changed. The bot must be an administrator in the chat to receive these updates."
+        },
+        {
+          "type": [
+            "ChatBoostRemoved"
+          ],
+          "optional": true,
+          "name": "removed_chat_boost",
+          "description": "Optional. A boost was removed from a chat. The bot must be an administrator in the chat to receive these updates."
         }
       ],
       "name": "Update",
@@ -384,11 +416,56 @@
         },
         {
           "type": [
+            [
+              "array",
+              [
+                "ReactionType"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "available_reactions",
+          "description": "Optional. List of available reactions allowed in the chat. If omitted, then all emoji reactions are allowed. Returned only in getChat."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "accent_color_id",
+          "description": "Optional. Identifier of the accent color for the chat name and backgrounds of the chat photo, reply header, and link preview. See accent colors for more details. Returned only in getChat. Always returned in getChat."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "background_custom_emoji_id",
+          "description": "Optional. Custom emoji identifier of emoji chosen by the chat for the reply header and link preview background. Returned only in getChat."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "profile_accent_color_id",
+          "description": "Optional. Identifier of the accent color for the chat's profile background. See profile accent colors for more details. Returned only in getChat."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "profile_background_custom_emoji_id",
+          "description": "Optional. Custom emoji identifier of the emoji chosen by the chat for its profile background. Returned only in getChat."
+        },
+        {
+          "type": [
             "str"
           ],
           "optional": true,
           "name": "emoji_status_custom_emoji_id",
-          "description": "Optional. Custom emoji identifier of emoji status of the other party in a private chat. Returned only in getChat."
+          "description": "Optional. Custom emoji identifier of the emoji status of the chat or the other party in a private chat. Returned only in getChat."
         },
         {
           "type": [
@@ -396,7 +473,7 @@
           ],
           "optional": true,
           "name": "emoji_status_expiration_date",
-          "description": "Optional. Expiration date of the emoji status of the other party in a private chat in Unix time, if any. Returned only in getChat."
+          "description": "Optional. Expiration date of the emoji status of the chat or the other party in a private chat, in Unix time, if any. Returned only in getChat."
         },
         {
           "type": [
@@ -512,6 +589,14 @@
         },
         {
           "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "has_visible_history",
+          "description": "Optional. True, if new chat members will have access to old messages; available only to chat administrators. Returned only in getChat."
+        },
+        {
+          "type": [
             "str"
           ],
           "optional": true,
@@ -586,7 +671,7 @@
           ],
           "optional": false,
           "name": "date",
-          "description": "Date the message was sent in Unix time"
+          "description": "Date the message was sent in Unix time. It is always a positive number, representing a valid date."
         },
         {
           "type": [
@@ -594,55 +679,15 @@
           ],
           "optional": false,
           "name": "chat",
-          "description": "Conversation the message belongs to"
+          "description": "Chat the message belongs to"
         },
         {
           "type": [
-            "User"
+            "MessageOrigin"
           ],
           "optional": true,
-          "name": "forward_from",
-          "description": "Optional. For forwarded messages, sender of the original message"
-        },
-        {
-          "type": [
-            "Chat"
-          ],
-          "optional": true,
-          "name": "forward_from_chat",
-          "description": "Optional. For messages forwarded from channels or from anonymous administrators, information about the original sender chat"
-        },
-        {
-          "type": [
-            "int"
-          ],
-          "optional": true,
-          "name": "forward_from_message_id",
-          "description": "Optional. For messages forwarded from channels, identifier of the original message in the channel"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": true,
-          "name": "forward_signature",
-          "description": "Optional. For forwarded messages that were originally sent in channels or by an anonymous chat administrator, signature of the message sender if present"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": true,
-          "name": "forward_sender_name",
-          "description": "Optional. Sender's name for messages forwarded from users who disallow adding a link to their account in forwarded messages"
-        },
-        {
-          "type": [
-            "int"
-          ],
-          "optional": true,
-          "name": "forward_date",
-          "description": "Optional. For forwarded messages, date the original message was sent in Unix time"
+          "name": "forward_origin",
+          "description": "Optional. Information about the original message for forwarded messages"
         },
         {
           "type": [
@@ -666,7 +711,23 @@
           ],
           "optional": true,
           "name": "reply_to_message",
-          "description": "Optional. For replies, the original message. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply."
+          "description": "Optional. For replies in the same chat and message thread, the original message. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply."
+        },
+        {
+          "type": [
+            "ExternalReplyInfo"
+          ],
+          "optional": true,
+          "name": "external_reply",
+          "description": "Optional. Information about the message that is being replied to, which may come from another chat or forum topic"
+        },
+        {
+          "type": [
+            "TextQuote"
+          ],
+          "optional": true,
+          "name": "quote",
+          "description": "Optional. For replies that quote part of the original message, the quoted part of the message"
         },
         {
           "type": [
@@ -728,6 +789,14 @@
           "optional": true,
           "name": "entities",
           "description": "Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text"
+        },
+        {
+          "type": [
+            "LinkPreviewOptions"
+          ],
+          "optional": true,
+          "name": "link_preview_options",
+          "description": "Optional. Options used for link preview generation for the message, if it is a text message and link preview options were changed"
         },
         {
           "type": [
@@ -983,11 +1052,11 @@
         },
         {
           "type": [
-            "Message"
+            "MaybeInaccessibleMessage"
           ],
           "optional": true,
           "name": "pinned_message",
-          "description": "Optional. Specified message was pinned. Note that the Message object in this field will not contain further reply_to_message fields even if it is itself a reply."
+          "description": "Optional. Specified message was pinned. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply."
         },
         {
           "type": [
@@ -1007,11 +1076,11 @@
         },
         {
           "type": [
-            "UserShared"
+            "UsersShared"
           ],
           "optional": true,
-          "name": "user_shared",
-          "description": "Optional. Service message: a user was shared with the bot"
+          "name": "users_shared",
+          "description": "Optional. Service message: users were shared with the bot"
         },
         {
           "type": [
@@ -1035,7 +1104,7 @@
           ],
           "optional": true,
           "name": "write_access_allowed",
-          "description": "Optional. Service message: the user allowed the bot added to the attachment menu to write messages"
+          "description": "Optional. Service message: the user allowed the bot to write messages after adding it to the attachment or side menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method requestWriteAccess"
         },
         {
           "type": [
@@ -1100,6 +1169,38 @@
           "optional": true,
           "name": "general_forum_topic_unhidden",
           "description": "Optional. Service message: the 'General' forum topic unhidden"
+        },
+        {
+          "type": [
+            "GiveawayCreated"
+          ],
+          "optional": true,
+          "name": "giveaway_created",
+          "description": "Optional. Service message: a scheduled giveaway was created"
+        },
+        {
+          "type": [
+            "Giveaway"
+          ],
+          "optional": true,
+          "name": "giveaway",
+          "description": "Optional. The message is a scheduled giveaway message"
+        },
+        {
+          "type": [
+            "GiveawayWinners"
+          ],
+          "optional": true,
+          "name": "giveaway_winners",
+          "description": "Optional. A giveaway with public winners was completed"
+        },
+        {
+          "type": [
+            "GiveawayCompleted"
+          ],
+          "optional": true,
+          "name": "giveaway_completed",
+          "description": "Optional. Service message: a giveaway without public winners was completed"
         },
         {
           "type": [
@@ -1171,11 +1272,103 @@
       "params": [
         {
           "type": [
+            "Chat"
+          ],
+          "optional": false,
+          "name": "chat",
+          "description": "Chat the message belonged to"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "message_id",
+          "description": "Unique message identifier inside the chat"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "date",
+          "description": "Always 0. The field can be used to differentiate regular and inaccessible messages."
+        }
+      ],
+      "name": "InaccessibleMessage",
+      "description": "This object describes a message that was deleted or is otherwise inaccessible to the bot."
+    },
+    {
+      "params": [
+        {
+          "type": [
             "str"
           ],
           "optional": false,
           "name": "type",
-          "description": "Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag), “cashtag” ($USD), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames), “custom_emoji” (for inline custom emoji stickers)"
+          "description": "Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag), “cashtag” ($USD), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames), “custom_emoji” (for inline custom emoji stickers)"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "offset",
+          "description": "Offset in UTF-16 code units to the start of the entity"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "length",
+          "description": "Length of the entity in UTF-16 code units"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "url",
+          "description": "Optional. For “text_link” only, URL that will be opened after user taps on the text"
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": true,
+          "name": "user",
+          "description": "Optional. For “text_mention” only, the mentioned user"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "language",
+          "description": "Optional. For “pre” only, the programming language of the entity text"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "custom_emoji_id",
+          "description": "Optional. For “custom_emoji” only, unique identifier of the custom emoji. Use getCustomEmojiStickers to get full information about the sticker"
+        }
+      ],
+      "name": "MaybeInaccessibleMessage",
+      "description": "This object describes a message that can be inaccessible to the bot. It can be one of"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag), “cashtag” ($USD), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames), “custom_emoji” (for inline custom emoji stickers)"
         },
         {
           "type": [
@@ -1228,6 +1421,486 @@
       ],
       "name": "MessageEntity",
       "description": "This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "text",
+          "description": "Text of the quoted part of a message that is replied to by the given message"
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "entities",
+          "description": "Optional. Special entities that appear in the quote. Currently, only bold, italic, underline, strikethrough, spoiler, and custom_emoji entities are kept in quotes."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "position",
+          "description": "Approximate quote position in the original message in UTF-16 code units as specified by the sender"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "is_manual",
+          "description": "Optional. True, if the quote was chosen manually by the message sender. Otherwise, the quote was added automatically by the server."
+        }
+      ],
+      "name": "TextQuote",
+      "description": "This object contains information about the quoted part of a message that is replied to by the given message."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "MessageOrigin"
+          ],
+          "optional": false,
+          "name": "origin",
+          "description": "Origin of the message replied to by the given message"
+        },
+        {
+          "type": [
+            "Chat"
+          ],
+          "optional": true,
+          "name": "chat",
+          "description": "Optional. Chat the original message belongs to. Available only if the chat is a supergroup or a channel."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "message_id",
+          "description": "Optional. Unique message identifier inside the original chat. Available only if the original chat is a supergroup or a channel."
+        },
+        {
+          "type": [
+            "LinkPreviewOptions"
+          ],
+          "optional": true,
+          "name": "link_preview_options",
+          "description": "Optional. Options used for link preview generation for the original message, if it is a text message"
+        },
+        {
+          "type": [
+            "Animation"
+          ],
+          "optional": true,
+          "name": "animation",
+          "description": "Optional. Message is an animation, information about the animation"
+        },
+        {
+          "type": [
+            "Audio"
+          ],
+          "optional": true,
+          "name": "audio",
+          "description": "Optional. Message is an audio file, information about the file"
+        },
+        {
+          "type": [
+            "Document"
+          ],
+          "optional": true,
+          "name": "document",
+          "description": "Optional. Message is a general file, information about the file"
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "PhotoSize"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "photo",
+          "description": "Optional. Message is a photo, available sizes of the photo"
+        },
+        {
+          "type": [
+            "Sticker"
+          ],
+          "optional": true,
+          "name": "sticker",
+          "description": "Optional. Message is a sticker, information about the sticker"
+        },
+        {
+          "type": [
+            "Story"
+          ],
+          "optional": true,
+          "name": "story",
+          "description": "Optional. Message is a forwarded story"
+        },
+        {
+          "type": [
+            "Video"
+          ],
+          "optional": true,
+          "name": "video",
+          "description": "Optional. Message is a video, information about the video"
+        },
+        {
+          "type": [
+            "VideoNote"
+          ],
+          "optional": true,
+          "name": "video_note",
+          "description": "Optional. Message is a video note, information about the video message"
+        },
+        {
+          "type": [
+            "Voice"
+          ],
+          "optional": true,
+          "name": "voice",
+          "description": "Optional. Message is a voice message, information about the file"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "has_media_spoiler",
+          "description": "Optional. True, if the message media is covered by a spoiler animation"
+        },
+        {
+          "type": [
+            "Contact"
+          ],
+          "optional": true,
+          "name": "contact",
+          "description": "Optional. Message is a shared contact, information about the contact"
+        },
+        {
+          "type": [
+            "Dice"
+          ],
+          "optional": true,
+          "name": "dice",
+          "description": "Optional. Message is a dice with random value"
+        },
+        {
+          "type": [
+            "Game"
+          ],
+          "optional": true,
+          "name": "game",
+          "description": "Optional. Message is a game, information about the game. More about games »"
+        },
+        {
+          "type": [
+            "Giveaway"
+          ],
+          "optional": true,
+          "name": "giveaway",
+          "description": "Optional. Message is a scheduled giveaway, information about the giveaway"
+        },
+        {
+          "type": [
+            "GiveawayWinners"
+          ],
+          "optional": true,
+          "name": "giveaway_winners",
+          "description": "Optional. A giveaway with public winners was completed"
+        },
+        {
+          "type": [
+            "Invoice"
+          ],
+          "optional": true,
+          "name": "invoice",
+          "description": "Optional. Message is an invoice for a payment, information about the invoice. More about payments »"
+        },
+        {
+          "type": [
+            "Location"
+          ],
+          "optional": true,
+          "name": "location",
+          "description": "Optional. Message is a shared location, information about the location"
+        },
+        {
+          "type": [
+            "Poll"
+          ],
+          "optional": true,
+          "name": "poll",
+          "description": "Optional. Message is a native poll, information about the poll"
+        },
+        {
+          "type": [
+            "Venue"
+          ],
+          "optional": true,
+          "name": "venue",
+          "description": "Optional. Message is a venue, information about the venue"
+        }
+      ],
+      "name": "ExternalReplyInfo",
+      "description": "This object contains information about a message that is being replied to, which may come from another chat or forum topic."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "message_id",
+          "description": "Identifier of the message that will be replied to in the current chat, or in the chat chat_id if it is specified"
+        },
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": true,
+          "name": "chat_id",
+          "description": "Optional. If the message to be replied to is from a different chat, unique identifier for the chat or username of the channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "allow_sending_without_reply",
+          "description": "Optional. Pass True if the message should be sent even if the specified message to be replied to is not found; can be used only for replies in the same chat and forum topic."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "quote",
+          "description": "Optional. Quoted part of the message to be replied to; 0-1024 characters after entities parsing. The quote must be an exact substring of the message to be replied to, including bold, italic, underline, strikethrough, spoiler, and custom_emoji entities. The message will fail to send if the quote isn't found in the original message."
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "quote_parse_mode",
+          "description": "Optional. Mode for parsing entities in the quote. See formatting options for more details."
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "quote_entities",
+          "description": "Optional. A JSON-serialized list of special entities that appear in the quote. It can be specified instead of quote_parse_mode."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "quote_position",
+          "description": "Optional. Position of the quote in the original message in UTF-16 code units"
+        }
+      ],
+      "name": "ReplyParameters",
+      "description": "Describes reply parameters for the message that is being sent."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Type of the message origin, always “user”"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "date",
+          "description": "Date the message was sent originally in Unix time"
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": false,
+          "name": "sender_user",
+          "description": "User that sent the message originally"
+        }
+      ],
+      "name": "MessageOrigin",
+      "description": "This object describes the origin of a message. It can be one of"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Type of the message origin, always “user”"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "date",
+          "description": "Date the message was sent originally in Unix time"
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": false,
+          "name": "sender_user",
+          "description": "User that sent the message originally"
+        }
+      ],
+      "name": "MessageOriginUser",
+      "description": "The message was originally sent by a known user."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Type of the message origin, always “hidden_user”"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "date",
+          "description": "Date the message was sent originally in Unix time"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "sender_user_name",
+          "description": "Name of the user that sent the message originally"
+        }
+      ],
+      "name": "MessageOriginHiddenUser",
+      "description": "The message was originally sent by an unknown user."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Type of the message origin, always “chat”"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "date",
+          "description": "Date the message was sent originally in Unix time"
+        },
+        {
+          "type": [
+            "Chat"
+          ],
+          "optional": false,
+          "name": "sender_chat",
+          "description": "Chat that sent the message originally"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "author_signature",
+          "description": "Optional. For messages originally sent by an anonymous chat administrator, original message author signature"
+        }
+      ],
+      "name": "MessageOriginChat",
+      "description": "The message was originally sent on behalf of a chat to a group chat."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Type of the message origin, always “channel”"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "date",
+          "description": "Date the message was sent originally in Unix time"
+        },
+        {
+          "type": [
+            "Chat"
+          ],
+          "optional": false,
+          "name": "chat",
+          "description": "Channel chat to which the message was originally sent"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "message_id",
+          "description": "Unique message identifier inside the chat"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "author_signature",
+          "description": "Optional. Signature of the original post author"
+        }
+      ],
+      "name": "MessageOriginChannel",
+      "description": "The message was originally sent to a channel chat."
     },
     {
       "params": [
@@ -2187,15 +2860,20 @@
         },
         {
           "type": [
-            "int"
+            [
+              "array",
+              [
+                "int"
+              ]
+            ]
           ],
           "optional": false,
-          "name": "user_id",
-          "description": "Identifier of the shared user. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot may not have access to the user and could be unable to use this identifier, unless the user is already known to the bot by some other means."
+          "name": "user_ids",
+          "description": "Identifiers of the shared users. These numbers may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting them. But they have at most 52 significant bits, so 64-bit integers or double-precision float types are safe for storing these identifiers. The bot may not have access to the users and could be unable to use these identifiers, unless the users are already known to the bot by some other means."
         }
       ],
-      "name": "UserShared",
-      "description": "This object contains information about the user whose identifier was shared with the bot using a KeyboardButtonRequestUser button."
+      "name": "UsersShared",
+      "description": "This object contains information about the users whose identifiers were shared with the bot using a KeyboardButtonRequestUsers button."
     },
     {
       "params": [
@@ -2223,15 +2901,31 @@
       "params": [
         {
           "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "from_request",
+          "description": "Optional. True, if the access was granted after the user accepted an explicit request from a Web App sent by the method requestWriteAccess"
+        },
+        {
+          "type": [
             "str"
           ],
           "optional": true,
           "name": "web_app_name",
-          "description": "Optional. Name of the Web App which was launched from a link"
+          "description": "Optional. Name of the Web App, if the access was granted when the Web App was launched from a link"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "from_attachment_menu",
+          "description": "Optional. True, if the access was granted when the bot was added to the attachment or side menu"
         }
       ],
       "name": "WriteAccessAllowed",
-      "description": "This object represents a service message about a user allowing a bot to write messages after adding the bot to the attachment menu or launching a Web App from a link."
+      "description": "This object represents a service message about a user allowing a bot to write messages after adding it to the attachment menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method requestWriteAccess."
     },
     {
       "params": [
@@ -2284,6 +2978,266 @@
       ],
       "name": "VideoChatParticipantsInvited",
       "description": "This object represents a service message about new members invited to a video chat."
+    },
+    {
+      "params": [],
+      "name": "GiveawayCreated",
+      "description": "This object represents a service message about the creation of a scheduled giveaway. Currently holds no information."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            [
+              "array",
+              [
+                "Chat"
+              ]
+            ]
+          ],
+          "optional": false,
+          "name": "chats",
+          "description": "The list of chats which the user must join to participate in the giveaway"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "winners_selection_date",
+          "description": "Point in time (Unix timestamp) when winners of the giveaway will be selected"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "winner_count",
+          "description": "The number of users which are supposed to be selected as winners of the giveaway"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "only_new_members",
+          "description": "Optional. True, if only users who join the chats after the giveaway started should be eligible to win"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "has_public_winners",
+          "description": "Optional. True, if the list of giveaway winners will be visible to everyone"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "prize_description",
+          "description": "Optional. Description of additional giveaway prize"
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "str"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "country_codes",
+          "description": "Optional. A list of two-letter ISO 3166-1 alpha-2 country codes indicating the countries from which eligible users for the giveaway must come. If empty, then all users can participate in the giveaway. Users with a phone number that was bought on Fragment can always participate in giveaways."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "premium_subscription_month_count",
+          "description": "Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for"
+        }
+      ],
+      "name": "Giveaway",
+      "description": "This object represents a message about a scheduled giveaway."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "Chat"
+          ],
+          "optional": false,
+          "name": "chat",
+          "description": "The chat that created the giveaway"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "giveaway_message_id",
+          "description": "Identifier of the messsage with the giveaway in the chat"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "winners_selection_date",
+          "description": "Point in time (Unix timestamp) when winners of the giveaway were selected"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "winner_count",
+          "description": "Total number of winners in the giveaway"
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "User"
+              ]
+            ]
+          ],
+          "optional": false,
+          "name": "winners",
+          "description": "List of up to 100 winners of the giveaway"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "additional_chat_count",
+          "description": "Optional. The number of other chats the user had to join in order to be eligible for the giveaway"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "premium_subscription_month_count",
+          "description": "Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "unclaimed_prize_count",
+          "description": "Optional. Number of undistributed prizes"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "only_new_members",
+          "description": "Optional. True, if only users who had joined the chats after the giveaway started were eligible to win"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "was_refunded",
+          "description": "Optional. True, if the giveaway was canceled because the payment for it was refunded"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "prize_description",
+          "description": "Optional. Description of additional giveaway prize"
+        }
+      ],
+      "name": "GiveawayWinners",
+      "description": "This object represents a message about the completion of a giveaway with public winners."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "winner_count",
+          "description": "Number of winners in the giveaway"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "unclaimed_prize_count",
+          "description": "Optional. Number of undistributed prizes"
+        },
+        {
+          "type": [
+            "Message"
+          ],
+          "optional": true,
+          "name": "giveaway_message",
+          "description": "Optional. Message with the giveaway that was completed, if it wasn't deleted"
+        }
+      ],
+      "name": "GiveawayCompleted",
+      "description": "This object represents a service message about the completion of a giveaway without public winners."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "is_disabled",
+          "description": "Optional. True, if the link preview is disabled"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": true,
+          "name": "url",
+          "description": "Optional. URL to use for the link preview. If empty, then the first URL found in the message text will be used"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "prefer_small_media",
+          "description": "Optional. True, if the media in the link preview is suppposed to be shrunk; ignored if the URL isn't explicitly specified or media size change isn't supported for the preview"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "prefer_large_media",
+          "description": "Optional. True, if the media in the link preview is suppposed to be enlarged; ignored if the URL isn't explicitly specified or media size change isn't supported for the preview"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "show_above_text",
+          "description": "Optional. True, if the link preview must be shown above the message text; otherwise, the link preview will be shown below the message text"
+        }
+      ],
+      "name": "LinkPreviewOptions",
+      "description": "Describes the options used for link preview generation."
     },
     {
       "params": [
@@ -2445,11 +3399,11 @@
         },
         {
           "type": [
-            "KeyboardButtonRequestUser"
+            "KeyboardButtonRequestUsers"
           ],
           "optional": true,
-          "name": "request_user",
-          "description": "Optional. If specified, pressing the button will open a list of suitable users. Tapping on any user will send their identifier to the bot in a “user_shared” service message. Available in private chats only."
+          "name": "request_users",
+          "description": "Optional. If specified, pressing the button will open a list of suitable users. Identifiers of selected users will be sent to the bot in a “users_shared” service message. Available in private chats only."
         },
         {
           "type": [
@@ -2503,7 +3457,7 @@
           ],
           "optional": false,
           "name": "request_id",
-          "description": "Signed 32-bit identifier of the request, which will be received back in the UserShared object. Must be unique within the message"
+          "description": "Signed 32-bit identifier of the request that will be received back in the UsersShared object. Must be unique within the message"
         },
         {
           "type": [
@@ -2511,7 +3465,7 @@
           ],
           "optional": true,
           "name": "user_is_bot",
-          "description": "Optional. Pass True to request a bot, pass False to request a regular user. If not specified, no additional restrictions are applied."
+          "description": "Optional. Pass True to request bots, pass False to request regular users. If not specified, no additional restrictions are applied."
         },
         {
           "type": [
@@ -2519,11 +3473,19 @@
           ],
           "optional": true,
           "name": "user_is_premium",
-          "description": "Optional. Pass True to request a premium user, pass False to request a non-premium user. If not specified, no additional restrictions are applied."
+          "description": "Optional. Pass True to request premium users, pass False to request non-premium users. If not specified, no additional restrictions are applied."
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "max_quantity",
+          "description": "Optional. The maximum number of users to be selected; 1-10. Defaults to 1."
         }
       ],
-      "name": "KeyboardButtonRequestUser",
-      "description": "This object defines the criteria used to request a suitable user. The identifier of the selected user will be shared with the bot when the corresponding button is pressed. More about requesting users »"
+      "name": "KeyboardButtonRequestUsers",
+      "description": "This object defines the criteria used to request suitable users. The identifiers of the selected users will be shared with the bot when the corresponding button is pressed. More about requesting users »"
     },
     {
       "params": [
@@ -2845,11 +3807,11 @@
         },
         {
           "type": [
-            "Message"
+            "MaybeInaccessibleMessage"
           ],
           "optional": true,
           "name": "message",
-          "description": "Optional. Message with the callback button that originated the query. Note that message content and message date will not be available if the message is too old"
+          "description": "Optional. Message sent by the bot with the callback button that originated the query"
         },
         {
           "type": [
@@ -3049,7 +4011,7 @@
           ],
           "optional": false,
           "name": "can_manage_chat",
-          "description": "True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
+          "description": "True, if the administrator can access the chat event log, boost list in channels, see channel members, report spam messages, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
         },
         {
           "type": [
@@ -3073,7 +4035,7 @@
           ],
           "optional": false,
           "name": "can_restrict_members",
-          "description": "True, if the administrator can restrict, ban or unban chat members"
+          "description": "True, if the administrator can restrict, ban or unban chat members, or access supergroup statistics"
         },
         {
           "type": [
@@ -3105,7 +4067,7 @@
           ],
           "optional": true,
           "name": "can_post_messages",
-          "description": "Optional. True, if the administrator can post in the channel; channels only"
+          "description": "Optional. True, if the administrator can post messages in the channel, or access channel statistics; channels only"
         },
         {
           "type": [
@@ -3128,12 +4090,98 @@
             "bool"
           ],
           "optional": true,
+          "name": "can_post_stories",
+          "description": "Optional. True, if the administrator can post stories in the channel; channels only"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_edit_stories",
+          "description": "Optional. True, if the administrator can edit stories posted by other users; channels only"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_delete_stories",
+          "description": "Optional. True, if the administrator can delete stories posted by other users; channels only"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
           "name": "can_manage_topics",
           "description": "Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only"
         }
       ],
       "name": "ChatAdministratorRights",
       "description": "Represents the rights of an administrator in a chat."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "Chat"
+          ],
+          "optional": false,
+          "name": "chat",
+          "description": "Chat the user belongs to"
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": false,
+          "name": "from",
+          "description": "Performer of the action, which resulted in the change"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "date",
+          "description": "Date the change was done in Unix time"
+        },
+        {
+          "type": [
+            "ChatMember"
+          ],
+          "optional": false,
+          "name": "old_chat_member",
+          "description": "Previous information about the chat member"
+        },
+        {
+          "type": [
+            "ChatMember"
+          ],
+          "optional": false,
+          "name": "new_chat_member",
+          "description": "New information about the chat member"
+        },
+        {
+          "type": [
+            "ChatInviteLink"
+          ],
+          "optional": true,
+          "name": "invite_link",
+          "description": "Optional. Chat invite link, which was used by the user to join the chat; for joining by invite link events only."
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "via_chat_folder_invite_link",
+          "description": "Optional. True, if the user joined the chat via a chat folder invite link"
+        }
+      ],
+      "name": "ChatMemberUpdated",
+      "description": "This object represents changes in the status of a chat member."
     },
     {
       "params": [
@@ -3213,7 +4261,7 @@
           ],
           "optional": false,
           "name": "can_manage_chat",
-          "description": "True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
+          "description": "True, if the administrator can access the chat event log, boost list in channels, see channel members, report spam messages, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
         },
         {
           "type": [
@@ -3237,7 +4285,7 @@
           ],
           "optional": false,
           "name": "can_restrict_members",
-          "description": "True, if the administrator can restrict, ban or unban chat members"
+          "description": "True, if the administrator can restrict, ban or unban chat members, or access supergroup statistics"
         },
         {
           "type": [
@@ -3269,7 +4317,7 @@
           ],
           "optional": true,
           "name": "can_post_messages",
-          "description": "Optional. True, if the administrator can post in the channel; channels only"
+          "description": "Optional. True, if the administrator can post messages in the channel, or access channel statistics; channels only"
         },
         {
           "type": [
@@ -3286,6 +4334,30 @@
           "optional": true,
           "name": "can_pin_messages",
           "description": "Optional. True, if the user is allowed to pin messages; groups and supergroups only"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_post_stories",
+          "description": "Optional. True, if the administrator can post stories in the channel; channels only"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_edit_stories",
+          "description": "Optional. True, if the administrator can edit stories posted by other users; channels only"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_delete_stories",
+          "description": "Optional. True, if the administrator can delete stories posted by other users; channels only"
         },
         {
           "type": [
@@ -3361,7 +4433,7 @@
           ],
           "optional": false,
           "name": "can_send_messages",
-          "description": "True, if the user is allowed to send text messages, contacts, invoices, locations and venues"
+          "description": "True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues"
         },
         {
           "type": [
@@ -3539,68 +4611,6 @@
           ],
           "optional": false,
           "name": "chat",
-          "description": "Chat the user belongs to"
-        },
-        {
-          "type": [
-            "User"
-          ],
-          "optional": false,
-          "name": "from",
-          "description": "Performer of the action, which resulted in the change"
-        },
-        {
-          "type": [
-            "int"
-          ],
-          "optional": false,
-          "name": "date",
-          "description": "Date the change was done in Unix time"
-        },
-        {
-          "type": [
-            "ChatMember"
-          ],
-          "optional": false,
-          "name": "old_chat_member",
-          "description": "Previous information about the chat member"
-        },
-        {
-          "type": [
-            "ChatMember"
-          ],
-          "optional": false,
-          "name": "new_chat_member",
-          "description": "New information about the chat member"
-        },
-        {
-          "type": [
-            "ChatInviteLink"
-          ],
-          "optional": true,
-          "name": "invite_link",
-          "description": "Optional. Chat invite link, which was used by the user to join the chat; for joining by invite link events only."
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "via_chat_folder_invite_link",
-          "description": "Optional. True, if the user joined the chat via a chat folder invite link"
-        }
-      ],
-      "name": "ChatMemberUpdated",
-      "description": "This object represents changes in the status of a chat member."
-    },
-    {
-      "params": [
-        {
-          "type": [
-            "Chat"
-          ],
-          "optional": false,
-          "name": "chat",
           "description": "Chat to which the request was sent"
         },
         {
@@ -3617,7 +4627,7 @@
           ],
           "optional": false,
           "name": "user_chat_id",
-          "description": "Identifier of a private chat with the user who sent the join request. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot can use this identifier for 24 hours to send messages until the join request is processed, assuming no other administrator contacted the user."
+          "description": "Identifier of a private chat with the user who sent the join request. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot can use this identifier for 5 minutes to send messages until the join request is processed, assuming no other administrator contacted the user."
         },
         {
           "type": [
@@ -3655,7 +4665,7 @@
           ],
           "optional": true,
           "name": "can_send_messages",
-          "description": "Optional. True, if the user is allowed to send text messages, contacts, invoices, locations and venues"
+          "description": "Optional. True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues"
         },
         {
           "type": [
@@ -3786,6 +4796,209 @@
       ],
       "name": "ChatLocation",
       "description": "Represents a location to which a chat is connected."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Type of the reaction, always “emoji”"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "emoji",
+          "description": "Reaction emoji. Currently, it can be one of \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\""
+        }
+      ],
+      "name": "ReactionType",
+      "description": "This object describes the type of a reaction. Currently, it can be one of"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Type of the reaction, always “emoji”"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "emoji",
+          "description": "Reaction emoji. Currently, it can be one of \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\""
+        }
+      ],
+      "name": "ReactionTypeEmoji",
+      "description": "The reaction is based on an emoji."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Type of the reaction, always “custom_emoji”"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "custom_emoji",
+          "description": "Custom emoji identifier"
+        }
+      ],
+      "name": "ReactionTypeCustomEmoji",
+      "description": "The reaction is based on a custom emoji."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "ReactionType"
+          ],
+          "optional": false,
+          "name": "type",
+          "description": "Type of the reaction"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "total_count",
+          "description": "Number of times the reaction was added"
+        }
+      ],
+      "name": "ReactionCount",
+      "description": "Represents a reaction added to a message along with the number of times it was added."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "Chat"
+          ],
+          "optional": false,
+          "name": "chat",
+          "description": "The chat containing the message the user reacted to"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "message_id",
+          "description": "Unique identifier of the message inside the chat"
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": true,
+          "name": "user",
+          "description": "Optional. The user that changed the reaction, if the user isn't anonymous"
+        },
+        {
+          "type": [
+            "Chat"
+          ],
+          "optional": true,
+          "name": "actor_chat",
+          "description": "Optional. The chat on behalf of which the reaction was changed, if the user is anonymous"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "date",
+          "description": "Date of the change in Unix time"
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "ReactionType"
+              ]
+            ]
+          ],
+          "optional": false,
+          "name": "old_reaction",
+          "description": "Previous list of reaction types that were set by the user"
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "ReactionType"
+              ]
+            ]
+          ],
+          "optional": false,
+          "name": "new_reaction",
+          "description": "New list of reaction types that have been set by the user"
+        }
+      ],
+      "name": "MessageReactionUpdated",
+      "description": "This object represents a change of a reaction on a message performed by a user."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "Chat"
+          ],
+          "optional": false,
+          "name": "chat",
+          "description": "The chat containing the message"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "message_id",
+          "description": "Unique message identifier inside the chat"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "date",
+          "description": "Date of the change in Unix time"
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "ReactionCount"
+              ]
+            ]
+          ],
+          "optional": false,
+          "name": "reactions",
+          "description": "List of reactions that are present on the message"
+        }
+      ],
+      "name": "MessageReactionCountUpdated",
+      "description": "This object represents reaction changes on a message with anonymous reactions."
     },
     {
       "params": [
@@ -4079,6 +5292,227 @@
       ],
       "name": "MenuButtonDefault",
       "description": "Describes that no specific value for the menu button was set."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "source",
+          "description": "Source of the boost, always “premium”"
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": false,
+          "name": "user",
+          "description": "User that boosted the chat"
+        }
+      ],
+      "name": "ChatBoostSource",
+      "description": "This object describes the source of a chat boost. It can be one of"
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "source",
+          "description": "Source of the boost, always “premium”"
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": false,
+          "name": "user",
+          "description": "User that boosted the chat"
+        }
+      ],
+      "name": "ChatBoostSourcePremium",
+      "description": "The boost was obtained by subscribing to Telegram Premium or by gifting a Telegram Premium subscription to another user."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "source",
+          "description": "Source of the boost, always “gift_code”"
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": false,
+          "name": "user",
+          "description": "User for which the gift code was created"
+        }
+      ],
+      "name": "ChatBoostSourceGiftCode",
+      "description": "The boost was obtained by the creation of Telegram Premium gift codes to boost a chat. Each such code boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "source",
+          "description": "Source of the boost, always “giveaway”"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "giveaway_message_id",
+          "description": "Identifier of a message in the chat with the giveaway; the message could have been deleted already. May be 0 if the message isn't sent yet."
+        },
+        {
+          "type": [
+            "User"
+          ],
+          "optional": true,
+          "name": "user",
+          "description": "Optional. User that won the prize in the giveaway if any"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "is_unclaimed",
+          "description": "Optional. True, if the giveaway was completed, but there was no user to win the prize"
+        }
+      ],
+      "name": "ChatBoostSourceGiveaway",
+      "description": "The boost was obtained by the creation of a Telegram Premium giveaway. This boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "boost_id",
+          "description": "Unique identifier of the boost"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "add_date",
+          "description": "Point in time (Unix timestamp) when the chat was boosted"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "expiration_date",
+          "description": "Point in time (Unix timestamp) when the boost will automatically expire, unless the booster's Telegram Premium subscription is prolonged"
+        },
+        {
+          "type": [
+            "ChatBoostSource"
+          ],
+          "optional": false,
+          "name": "source",
+          "description": "Source of the added boost"
+        }
+      ],
+      "name": "ChatBoost",
+      "description": "This object contains information about a chat boost."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "Chat"
+          ],
+          "optional": false,
+          "name": "chat",
+          "description": "Chat which was boosted"
+        },
+        {
+          "type": [
+            "ChatBoost"
+          ],
+          "optional": false,
+          "name": "boost",
+          "description": "Infomation about the chat boost"
+        }
+      ],
+      "name": "ChatBoostUpdated",
+      "description": "This object represents a boost added to a chat or changed."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            "Chat"
+          ],
+          "optional": false,
+          "name": "chat",
+          "description": "Chat which was boosted"
+        },
+        {
+          "type": [
+            "str"
+          ],
+          "optional": false,
+          "name": "boost_id",
+          "description": "Unique identifier of the boost"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "remove_date",
+          "description": "Point in time (Unix timestamp) when the boost was removed"
+        },
+        {
+          "type": [
+            "ChatBoostSource"
+          ],
+          "optional": false,
+          "name": "source",
+          "description": "Source of the removed boost"
+        }
+      ],
+      "name": "ChatBoostRemoved",
+      "description": "This object represents a boost removed from a chat."
+    },
+    {
+      "params": [
+        {
+          "type": [
+            [
+              "array",
+              [
+                "ChatBoost"
+              ]
+            ]
+          ],
+          "optional": false,
+          "name": "boosts",
+          "description": "The list of boosts added to the chat by the user"
+        }
+      ],
+      "name": "UserChatBoosts",
+      "description": "This object represents a list of boosts added to a chat by a user."
     },
     {
       "params": [
@@ -6820,11 +8254,11 @@
         },
         {
           "type": [
-            "bool"
+            "LinkPreviewOptions"
           ],
           "optional": true,
-          "name": "disable_web_page_preview",
-          "description": "Optional. Disables link previews for links in the sent message"
+          "name": "link_preview_options",
+          "description": "Optional. Link preview generation options for the message"
         }
       ],
       "name": "InputTextMessageContent",
@@ -8340,7 +9774,7 @@
           ],
           "optional": true,
           "name": "allowed_updates",
-          "description": "A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member (default). If not specified, the previous setting will be used.\n\nPlease note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time."
+          "description": "A JSON-serialized list of the update types you want your bot to receive. For example, specify [\"message\", \"edited_channel_post\", \"callback_query\"] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count (default). If not specified, the previous setting will be used.\n\nPlease note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time."
         }
       ],
       "name": "getUpdates",
@@ -8395,7 +9829,7 @@
           ],
           "optional": true,
           "name": "allowed_updates",
-          "description": "A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member (default). If not specified, the previous setting will be used.\nPlease note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time."
+          "description": "A JSON-serialized list of the update types you want your bot to receive. For example, specify [\"message\", \"edited_channel_post\", \"callback_query\"] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count (default). If not specified, the previous setting will be used.\nPlease note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time."
         },
         {
           "type": [
@@ -8525,11 +9959,11 @@
         },
         {
           "type": [
-            "bool"
+            "LinkPreviewOptions"
           ],
           "optional": true,
-          "name": "disable_web_page_preview",
-          "description": "Disables link previews for links in this message"
+          "name": "link_preview_options",
+          "description": "Link preview generation options for the message"
         },
         {
           "type": [
@@ -8549,19 +9983,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
@@ -8636,7 +10062,72 @@
         }
       ],
       "name": "forwardMessage",
-      "description": "Use this method to forward messages of any kind. Service messages can't be forwarded. On success, the sent Message is returned."
+      "description": "Use this method to forward messages of any kind. Service messages and messages with protected content can't be forwarded. On success, the sent Message is returned."
+    },
+    {
+      "type": "post",
+      "return": [
+        "messages"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "message_thread_id",
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
+        },
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "from_chat_id",
+          "description": "Unique identifier for the chat where the original messages were sent (or channel username in the format @channelusername)"
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "int"
+              ]
+            ]
+          ],
+          "optional": false,
+          "name": "message_ids",
+          "description": "Identifiers of 1-100 messages in the chat from_chat_id to forward. The identifiers must be specified in a strictly increasing order."
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "disable_notification",
+          "description": "Sends the messages silently. Users will receive a notification with no sound."
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "protect_content",
+          "description": "Protects the contents of the forwarded messages from forwarding and saving"
+        }
+      ],
+      "name": "forwardMessages",
+      "description": "Use this method to forward multiple messages of any kind. If some of the specified messages can't be found or forwarded, they are skipped. Service messages and messages with protected content can't be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned."
     },
     {
       "type": "post",
@@ -8725,19 +10216,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
@@ -8752,7 +10235,80 @@
         }
       ],
       "name": "copyMessage",
-      "description": "Use this method to copy messages of any kind. Service messages and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success."
+      "description": "Use this method to copy messages of any kind. Service messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success."
+    },
+    {
+      "type": "post",
+      "return": [
+        "messages"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": true,
+          "name": "message_thread_id",
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
+        },
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "from_chat_id",
+          "description": "Unique identifier for the chat where the original messages were sent (or channel username in the format @channelusername)"
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "int"
+              ]
+            ]
+          ],
+          "optional": false,
+          "name": "message_ids",
+          "description": "Identifiers of 1-100 messages in the chat from_chat_id to copy. The identifiers must be specified in a strictly increasing order."
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "disable_notification",
+          "description": "Sends the messages silently. Users will receive a notification with no sound."
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "protect_content",
+          "description": "Protects the contents of the sent messages from forwarding and saving"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "remove_caption",
+          "description": "Pass True to copy the messages without their captions"
+        }
+      ],
+      "name": "copyMessages",
+      "description": "Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an array of MessageId of the sent messages is returned."
     },
     {
       "type": "post",
@@ -8841,19 +10397,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
@@ -8982,19 +10530,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
@@ -9107,19 +10647,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
@@ -9264,19 +10796,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
@@ -9413,19 +10937,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
@@ -9529,19 +11045,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
@@ -9633,19 +11141,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
@@ -9722,19 +11222,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the messages are a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         }
       ],
       "name": "sendMediaGroup",
@@ -9829,19 +11321,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
@@ -9963,19 +11447,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
@@ -10065,19 +11541,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
@@ -10241,19 +11709,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
@@ -10319,19 +11779,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
@@ -10382,6 +11834,54 @@
       ],
       "name": "sendChatAction",
       "description": "Use this method when you need to tell the user that something is happening on the bot's side. The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status). Returns True on success."
+    },
+    {
+      "type": "post",
+      "return": [
+        "true"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "message_id",
+          "description": "Identifier of the target message"
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "ReactionType"
+              ]
+            ]
+          ],
+          "optional": true,
+          "name": "reaction",
+          "description": "New list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators."
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "is_big",
+          "description": "Pass True to set the reaction with a big animation"
+        }
+      ],
+      "name": "setMessageReaction",
+      "description": "Use this method to change the chosen reactions on a message. Service messages can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. In albums, bots must react to the first message. Returns True on success."
     },
     {
       "type": "get",
@@ -10601,23 +12101,7 @@
           ],
           "optional": true,
           "name": "can_manage_chat",
-          "description": "Pass True if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "can_post_messages",
-          "description": "Pass True if the administrator can create channel posts, channels only"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "can_edit_messages",
-          "description": "Pass True if the administrator can edit messages of other users and can pin messages, channels only"
+          "description": "Pass True if the administrator can access the chat event log, boost list in channels, see channel members, report spam messages, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
         },
         {
           "type": [
@@ -10641,7 +12125,7 @@
           ],
           "optional": true,
           "name": "can_restrict_members",
-          "description": "Pass True if the administrator can restrict, ban or unban chat members"
+          "description": "Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics"
         },
         {
           "type": [
@@ -10672,8 +12156,48 @@
             "bool"
           ],
           "optional": true,
+          "name": "can_post_messages",
+          "description": "Pass True if the administrator can post messages in the channel, or access channel statistics; channels only"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_edit_messages",
+          "description": "Pass True if the administrator can edit messages of other users and can pin messages; channels only"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
           "name": "can_pin_messages",
           "description": "Pass True if the administrator can pin messages, supergroups only"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_post_stories",
+          "description": "Pass True if the administrator can post stories in the channel; channels only"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_edit_stories",
+          "description": "Pass True if the administrator can edit stories posted by other users; channels only"
+        },
+        {
+          "type": [
+            "bool"
+          ],
+          "optional": true,
+          "name": "can_delete_stories",
+          "description": "Pass True if the administrator can delete stories posted by other users; channels only"
         },
         {
           "type": [
@@ -11238,7 +12762,7 @@
         }
       ],
       "name": "getChat",
-      "description": "Use this method to get up to date information about the chat (current name of the user for one-on-one conversations, current username of a user, group or channel, etc.). Returns a Chat object on success."
+      "description": "Use this method to get up to date information about the chat. Returns a Chat object on success."
     },
     {
       "type": "get",
@@ -11771,6 +13295,33 @@
       "description": "Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, True is returned."
     },
     {
+      "type": "get",
+      "return": [
+        "UserChatBoosts"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the chat or username of the channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            "int"
+          ],
+          "optional": false,
+          "name": "user_id",
+          "description": "Unique identifier of the target user"
+        }
+      ],
+      "name": "getUserChatBoosts",
+      "description": "Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object."
+    },
+    {
       "type": "post",
       "return": [
         "true"
@@ -12148,11 +13699,11 @@
         },
         {
           "type": [
-            "bool"
+            "LinkPreviewOptions"
           ],
           "optional": true,
-          "name": "disable_web_page_preview",
-          "description": "Disables link previews for links in this message"
+          "name": "link_preview_options",
+          "description": "Link preview generation options for the message"
         },
         {
           "type": [
@@ -12524,6 +14075,38 @@
     {
       "type": "post",
       "return": [
+        "true"
+      ],
+      "params": [
+        {
+          "type": [
+            "int",
+            "str"
+          ],
+          "optional": false,
+          "name": "chat_id",
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "type": [
+            [
+              "array",
+              [
+                "int"
+              ]
+            ]
+          ],
+          "optional": false,
+          "name": "message_ids",
+          "description": "Identifiers of 1-100 messages to delete. See deleteMessage for limitations on which messages can be deleted"
+        }
+      ],
+      "name": "deleteMessages",
+      "description": "Use this method to delete multiple messages simultaneously. If some of the specified messages can't be found, they are skipped. Returns True on success."
+    },
+    {
+      "type": "post",
+      "return": [
         "Message"
       ],
       "params": [
@@ -12579,19 +14162,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
@@ -13338,19 +14913,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
@@ -13704,19 +15271,11 @@
         },
         {
           "type": [
-            "int"
+            "ReplyParameters"
           ],
           "optional": true,
-          "name": "reply_to_message_id",
-          "description": "If the message is a reply, ID of the original message"
-        },
-        {
-          "type": [
-            "bool"
-          ],
-          "optional": true,
-          "name": "allow_sending_without_reply",
-          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
+          "name": "reply_parameters",
+          "description": "Description of the message to reply to"
         },
         {
           "type": [
