@@ -1397,68 +1397,6 @@
           "description": "Optional. For “custom_emoji” only, unique identifier of the custom emoji. Use getCustomEmojiStickers to get full information about the sticker"
         }
       ],
-      "name": "MaybeInaccessibleMessage",
-      "description": "This object describes a message that can be inaccessible to the bot. It can be one of"
-    },
-    {
-      "params": [
-        {
-          "type": [
-            "str"
-          ],
-          "optional": false,
-          "name": "type",
-          "description": "Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag), “cashtag” ($USD), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames), “custom_emoji” (for inline custom emoji stickers)"
-        },
-        {
-          "type": [
-            "int"
-          ],
-          "optional": false,
-          "name": "offset",
-          "description": "Offset in UTF-16 code units to the start of the entity"
-        },
-        {
-          "type": [
-            "int"
-          ],
-          "optional": false,
-          "name": "length",
-          "description": "Length of the entity in UTF-16 code units"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": true,
-          "name": "url",
-          "description": "Optional. For “text_link” only, URL that will be opened after user taps on the text"
-        },
-        {
-          "type": [
-            "User"
-          ],
-          "optional": true,
-          "name": "user",
-          "description": "Optional. For “text_mention” only, the mentioned user"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": true,
-          "name": "language",
-          "description": "Optional. For “pre” only, the programming language of the entity text"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": true,
-          "name": "custom_emoji_id",
-          "description": "Optional. For “custom_emoji” only, unique identifier of the custom emoji. Use getCustomEmojiStickers to get full information about the sticker"
-        }
-      ],
       "name": "MessageEntity",
       "description": "This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc."
     },
@@ -1767,36 +1705,6 @@
       ],
       "name": "ReplyParameters",
       "description": "Describes reply parameters for the message that is being sent."
-    },
-    {
-      "params": [
-        {
-          "type": [
-            "str"
-          ],
-          "optional": false,
-          "name": "type",
-          "description": "Type of the message origin, always “user”"
-        },
-        {
-          "type": [
-            "int"
-          ],
-          "optional": false,
-          "name": "date",
-          "description": "Date the message was sent originally in Unix time"
-        },
-        {
-          "type": [
-            "User"
-          ],
-          "optional": false,
-          "name": "sender_user",
-          "description": "User that sent the message originally"
-        }
-      ],
-      "name": "MessageOrigin",
-      "description": "This object describes the origin of a message. It can be one of"
     },
     {
       "params": [
@@ -4162,7 +4070,7 @@
           ],
           "optional": true,
           "name": "can_post_messages",
-          "description": "Optional. True, if the administrator can post messages in the channel, or access channel statistics; channels only"
+          "description": "Optional. True, if the administrator can post messages in the channel, or access channel statistics; for channels only"
         },
         {
           "type": [
@@ -4170,7 +4078,7 @@
           ],
           "optional": true,
           "name": "can_edit_messages",
-          "description": "Optional. True, if the administrator can edit messages of other users and can pin messages; channels only"
+          "description": "Optional. True, if the administrator can edit messages of other users and can pin messages; for channels only"
         },
         {
           "type": [
@@ -4178,7 +4086,7 @@
           ],
           "optional": true,
           "name": "can_pin_messages",
-          "description": "Optional. True, if the user is allowed to pin messages; groups and supergroups only"
+          "description": "Optional. True, if the user is allowed to pin messages; for groups and supergroups only"
         },
         {
           "type": [
@@ -4186,7 +4094,7 @@
           ],
           "optional": true,
           "name": "can_manage_topics",
-          "description": "Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only"
+          "description": "Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only"
         }
       ],
       "name": "ChatAdministratorRights",
@@ -4412,7 +4320,7 @@
           ],
           "optional": true,
           "name": "can_post_messages",
-          "description": "Optional. True, if the administrator can post messages in the channel, or access channel statistics; channels only"
+          "description": "Optional. True, if the administrator can post messages in the channel, or access channel statistics; for channels only"
         },
         {
           "type": [
@@ -4420,7 +4328,7 @@
           ],
           "optional": true,
           "name": "can_edit_messages",
-          "description": "Optional. True, if the administrator can edit messages of other users and can pin messages; channels only"
+          "description": "Optional. True, if the administrator can edit messages of other users and can pin messages; for channels only"
         },
         {
           "type": [
@@ -4428,7 +4336,7 @@
           ],
           "optional": true,
           "name": "can_pin_messages",
-          "description": "Optional. True, if the user is allowed to pin messages; groups and supergroups only"
+          "description": "Optional. True, if the user is allowed to pin messages; for groups and supergroups only"
         },
         {
           "type": [
@@ -4436,7 +4344,7 @@
           ],
           "optional": true,
           "name": "can_manage_topics",
-          "description": "Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only"
+          "description": "Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only"
         },
         {
           "type": [
@@ -4867,28 +4775,6 @@
       ],
       "name": "ChatLocation",
       "description": "Represents a location to which a chat is connected."
-    },
-    {
-      "params": [
-        {
-          "type": [
-            "str"
-          ],
-          "optional": false,
-          "name": "type",
-          "description": "Type of the reaction, always “emoji”"
-        },
-        {
-          "type": [
-            "str"
-          ],
-          "optional": false,
-          "name": "emoji",
-          "description": "Reaction emoji. Currently, it can be one of \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\""
-        }
-      ],
-      "name": "ReactionType",
-      "description": "This object describes the type of a reaction. Currently, it can be one of"
     },
     {
       "params": [
@@ -5363,28 +5249,6 @@
       ],
       "name": "MenuButtonDefault",
       "description": "Describes that no specific value for the menu button was set."
-    },
-    {
-      "params": [
-        {
-          "type": [
-            "str"
-          ],
-          "optional": false,
-          "name": "source",
-          "description": "Source of the boost, always “premium”"
-        },
-        {
-          "type": [
-            "User"
-          ],
-          "optional": false,
-          "name": "user",
-          "description": "User that boosted the chat"
-        }
-      ],
-      "name": "ChatBoostSource",
-      "description": "This object describes the source of a chat boost. It can be one of"
     },
     {
       "params": [
@@ -9171,7 +9035,7 @@
           ],
           "optional": true,
           "name": "data",
-          "description": "Optional. Base64-encoded encrypted Telegram Passport element data provided by the user, available for “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport” and “address” types. Can be decrypted and verified using the accompanying EncryptedCredentials."
+          "description": "Optional. Base64-encoded encrypted Telegram Passport element data provided by the user; available only for “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport” and “address” types. Can be decrypted and verified using the accompanying EncryptedCredentials."
         },
         {
           "type": [
@@ -9179,7 +9043,7 @@
           ],
           "optional": true,
           "name": "phone_number",
-          "description": "Optional. User's verified phone number, available only for “phone_number” type"
+          "description": "Optional. User's verified phone number; available only for “phone_number” type"
         },
         {
           "type": [
@@ -9187,7 +9051,7 @@
           ],
           "optional": true,
           "name": "email",
-          "description": "Optional. User's verified email address, available only for “email” type"
+          "description": "Optional. User's verified email address; available only for “email” type"
         },
         {
           "type": [
@@ -9200,7 +9064,7 @@
           ],
           "optional": true,
           "name": "files",
-          "description": "Optional. Array of encrypted files with documents provided by the user, available for “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration” and “temporary_registration” types. Files can be decrypted and verified using the accompanying EncryptedCredentials."
+          "description": "Optional. Array of encrypted files with documents provided by the user; available only for “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration” and “temporary_registration” types. Files can be decrypted and verified using the accompanying EncryptedCredentials."
         },
         {
           "type": [
@@ -9208,7 +9072,7 @@
           ],
           "optional": true,
           "name": "front_side",
-          "description": "Optional. Encrypted file with the front side of the document, provided by the user. Available for “passport”, “driver_license”, “identity_card” and “internal_passport”. The file can be decrypted and verified using the accompanying EncryptedCredentials."
+          "description": "Optional. Encrypted file with the front side of the document, provided by the user; available only for “passport”, “driver_license”, “identity_card” and “internal_passport”. The file can be decrypted and verified using the accompanying EncryptedCredentials."
         },
         {
           "type": [
@@ -9216,7 +9080,7 @@
           ],
           "optional": true,
           "name": "reverse_side",
-          "description": "Optional. Encrypted file with the reverse side of the document, provided by the user. Available for “driver_license” and “identity_card”. The file can be decrypted and verified using the accompanying EncryptedCredentials."
+          "description": "Optional. Encrypted file with the reverse side of the document, provided by the user; available only for “driver_license” and “identity_card”. The file can be decrypted and verified using the accompanying EncryptedCredentials."
         },
         {
           "type": [
@@ -9224,7 +9088,7 @@
           ],
           "optional": true,
           "name": "selfie",
-          "description": "Optional. Encrypted file with the selfie of the user holding a document, provided by the user; available for “passport”, “driver_license”, “identity_card” and “internal_passport”. The file can be decrypted and verified using the accompanying EncryptedCredentials."
+          "description": "Optional. Encrypted file with the selfie of the user holding a document, provided by the user; available if requested for “passport”, “driver_license”, “identity_card” and “internal_passport”. The file can be decrypted and verified using the accompanying EncryptedCredentials."
         },
         {
           "type": [
@@ -9237,7 +9101,7 @@
           ],
           "optional": true,
           "name": "translation",
-          "description": "Optional. Array of encrypted files with translated versions of documents provided by the user. Available if requested for “passport”, “driver_license”, “identity_card”, “internal_passport”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration” and “temporary_registration” types. Files can be decrypted and verified using the accompanying EncryptedCredentials."
+          "description": "Optional. Array of encrypted files with translated versions of documents provided by the user; available if requested for “passport”, “driver_license”, “identity_card”, “internal_passport”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration” and “temporary_registration” types. Files can be decrypted and verified using the accompanying EncryptedCredentials."
         },
         {
           "type": [
@@ -10178,7 +10042,7 @@
           ],
           "optional": false,
           "name": "message_ids",
-          "description": "Identifiers of 1-100 messages in the chat from_chat_id to forward. The identifiers must be specified in a strictly increasing order."
+          "description": "A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to forward. The identifiers must be specified in a strictly increasing order."
         },
         {
           "type": [
@@ -10351,7 +10215,7 @@
           ],
           "optional": false,
           "name": "message_ids",
-          "description": "Identifiers of 1-100 messages in the chat from_chat_id to copy. The identifiers must be specified in a strictly increasing order."
+          "description": "A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to copy. The identifiers must be specified in a strictly increasing order."
         },
         {
           "type": [
@@ -11892,7 +11756,7 @@
           ],
           "optional": true,
           "name": "message_thread_id",
-          "description": "Unique identifier for the target message thread; supergroups only"
+          "description": "Unique identifier for the target message thread; for supergroups only"
         },
         {
           "type": [
@@ -11940,7 +11804,7 @@
           ],
           "optional": true,
           "name": "reaction",
-          "description": "New list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators."
+          "description": "A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators."
         },
         {
           "type": [
@@ -12252,7 +12116,7 @@
           ],
           "optional": true,
           "name": "can_post_messages",
-          "description": "Pass True if the administrator can post messages in the channel, or access channel statistics; channels only"
+          "description": "Pass True if the administrator can post messages in the channel, or access channel statistics; for channels only"
         },
         {
           "type": [
@@ -12260,7 +12124,7 @@
           ],
           "optional": true,
           "name": "can_edit_messages",
-          "description": "Pass True if the administrator can edit messages of other users and can pin messages; channels only"
+          "description": "Pass True if the administrator can edit messages of other users and can pin messages; for channels only"
         },
         {
           "type": [
@@ -12268,7 +12132,7 @@
           ],
           "optional": true,
           "name": "can_pin_messages",
-          "description": "Pass True if the administrator can pin messages, supergroups only"
+          "description": "Pass True if the administrator can pin messages; for supergroups only"
         },
         {
           "type": [
@@ -12276,7 +12140,7 @@
           ],
           "optional": true,
           "name": "can_manage_topics",
-          "description": "Pass True if the user is allowed to create, rename, close, and reopen forum topics, supergroups only"
+          "description": "Pass True if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only"
         }
       ],
       "name": "promoteChatMember",
@@ -14169,7 +14033,7 @@
           ],
           "optional": false,
           "name": "message_ids",
-          "description": "Identifiers of 1-100 messages to delete. See deleteMessage for limitations on which messages can be deleted"
+          "description": "A JSON-serialized list of 1-100 identifiers of messages to delete. See deleteMessage for limitations on which messages can be deleted"
         }
       ],
       "name": "deleteMessages",
@@ -14294,7 +14158,7 @@
           ],
           "optional": false,
           "name": "custom_emoji_ids",
-          "description": "List of custom emoji identifiers. At most 200 custom emoji identifiers can be specified."
+          "description": "A JSON-serialized list of custom emoji identifiers. At most 200 custom emoji identifiers can be specified."
         }
       ],
       "name": "getCustomEmojiStickers",
@@ -15478,6 +15342,22 @@
   "generics": [
     {
       "subtypes": [
+        "Message",
+        "InaccessibleMessage"
+      ],
+      "name": "MaybeInaccessibleMessage"
+    },
+    {
+      "subtypes": [
+        "MessageOriginUser",
+        "MessageOriginHiddenUser",
+        "MessageOriginChat",
+        "MessageOriginChannel"
+      ],
+      "name": "MessageOrigin"
+    },
+    {
+      "subtypes": [
         "ChatMemberOwner",
         "ChatMemberAdministrator",
         "ChatMemberMember",
@@ -15486,6 +15366,13 @@
         "ChatMemberBanned"
       ],
       "name": "ChatMember"
+    },
+    {
+      "subtypes": [
+        "ReactionTypeEmoji",
+        "ReactionTypeCustomEmoji"
+      ],
+      "name": "ReactionType"
     },
     {
       "subtypes": [
@@ -15506,6 +15393,14 @@
         "MenuButtonDefault"
       ],
       "name": "MenuButton"
+    },
+    {
+      "subtypes": [
+        "ChatBoostSourcePremium",
+        "ChatBoostSourceGiftCode",
+        "ChatBoostSourceGiveaway"
+      ],
+      "name": "ChatBoostSource"
     },
     {
       "subtypes": [
