@@ -29,7 +29,11 @@ defmodule TelegramApiJson do
     "ChatMember",
     "BotCommandScope",
     "MenuButton",
-    "InputMedia"
+    "InputMedia",
+    "MaybeInaccessibleMessage",
+    "ChatBoostSource",
+    "MessageOrigin",
+    "ReactionType"
   ]
 
   @zero_parameters ["getMe", "getWebhookInfo", "logOut", "close"]
