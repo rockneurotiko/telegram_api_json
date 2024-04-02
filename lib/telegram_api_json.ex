@@ -104,6 +104,8 @@ defmodule TelegramApiJson do
     String.contains?(text, "Currently holds no information")
   end
 
+  defp empty_object?([{"table", _, _} | _rest]), do: false
+
   defp empty_object(name, tree) do
     Logger.debug("Building empty object: #{name}")
     description = tree |> find_next("p") |> Floki.text()
@@ -120,11 +122,14 @@ defmodule TelegramApiJson do
 
   defp extract_model(name, tree) do
     Logger.debug("Extracting model: #{name}")
-    description = tree |> find_next("p") |> Floki.text()
+    description = extract_model_description(tree) |> Floki.text()
     params = tree |> find_next("table") |> extract_table_params()
 
     %TelegramApiJson.Model{name: name, description: description, params: params}
   end
+
+  defp extract_model_description([{"p", _, text} | _]), do: text
+  defp extract_model_description(_), do: "No description available."
 
   defp extract_method(name, tree) do
     type = if String.starts_with?(name, "get"), do: "get", else: "post"
