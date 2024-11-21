@@ -33,7 +33,13 @@ defmodule TelegramApiJson do
     "MaybeInaccessibleMessage",
     "ChatBoostSource",
     "MessageOrigin",
-    "ReactionType"
+    "ReactionType",
+    "PaidMedia",
+    "InputPaidMedia",
+    "RevenueWithdrawalState",
+    "TransactionPartner",
+    "BackgroundFill",
+    "BackgroundType"
   ]
 
   @zero_parameters ["getMe", "getWebhookInfo", "logOut", "close"]
