@@ -132,6 +132,14 @@
         },
         {
           "optional": true,
+          "description": "Optional. A user purchased paid media with a non-empty payload sent by the bot in a non-channel chat",
+          "type": [
+            "PaidMediaPurchased"
+          ],
+          "name": "purchased_paid_media"
+        },
+        {
+          "optional": true,
           "description": "Optional. New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot",
           "type": [
             "Poll"
@@ -370,6 +378,14 @@
             "bool"
           ],
           "name": "can_connect_to_business"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the bot has a main Web App. Returned only in getMe.",
+          "type": [
+            "bool"
+          ],
+          "name": "has_main_web_app"
         }
       ],
       "description": "This object represents a Telegram user or bot.",
@@ -699,6 +715,14 @@
         },
         {
           "optional": true,
+          "description": "Optional. True, if paid media messages can be sent or forwarded to the channel chat. The field is available only for channel chats.",
+          "type": [
+            "bool"
+          ],
+          "name": "can_send_paid_media"
+        },
+        {
+          "optional": true,
           "description": "Optional. For supergroups, the minimum allowed delay between consecutive messages sent by each unprivileged user; in seconds",
           "type": [
             "int"
@@ -801,7 +825,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Unique message identifier inside this chat",
+          "description": "Unique message identifier inside this chat. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent",
           "type": [
             "int"
           ],
@@ -817,7 +841,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Sender of the message; empty for messages sent to channels. For backward compatibility, the field contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.",
+          "description": "Optional. Sender of the message; may be empty for messages sent to channels. For backward compatibility, if the message was sent on behalf of a chat, the field contains a fake sender user in non-channel chats",
           "type": [
             "User"
           ],
@@ -825,7 +849,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Sender of the message, sent on behalf of a chat. For example, the channel itself for channel posts, the supergroup itself for messages from anonymous group administrators, the linked channel for messages automatically forwarded to the discussion group. For backward compatibility, the field from contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.",
+          "description": "Optional. Sender of the message when sent on behalf of a chat. For example, the supergroup itself for messages sent by its anonymous administrators or a linked channel for messages automatically forwarded to the channel's discussion group. For backward compatibility, if the message was sent on behalf of a chat, the field from contains a fake sender user in non-channel chats.",
           "type": [
             "Chat"
           ],
@@ -1038,6 +1062,14 @@
         },
         {
           "optional": true,
+          "description": "Optional. Message contains paid media; information about the paid media",
+          "type": [
+            "PaidMediaInfo"
+          ],
+          "name": "paid_media"
+        },
+        {
+          "optional": true,
           "description": "Optional. Message is a photo, available sizes of the photo",
           "type": [
             [
@@ -1091,7 +1123,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Caption for the animation, audio, document, photo, video or voice",
+          "description": "Optional. Caption for the animation, audio, document, paid media, photo, video or voice",
           "type": [
             "str"
           ],
@@ -1298,6 +1330,14 @@
         },
         {
           "optional": true,
+          "description": "Optional. Message is a service message about a refunded payment, information about the payment. More about payments »",
+          "type": [
+            "RefundedPayment"
+          ],
+          "name": "refunded_payment"
+        },
+        {
+          "optional": true,
           "description": "Optional. Service message: users were shared with the bot",
           "type": [
             "UsersShared"
@@ -1496,7 +1536,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Unique message identifier",
+          "description": "Unique message identifier. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent",
           "type": [
             "int"
           ],
@@ -1540,7 +1580,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag), “cashtag” ($USD), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “expandable_blockquote” (collapsed-by-default block quotation), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames), “custom_emoji” (for inline custom emoji stickers)",
+          "description": "Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag or #hashtag@chatusername), “cashtag” ($USD or $USD@chatusername), “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org), “phone_number” (+1-212-555-0123), “bold” (bold text), “italic” (italic text), “underline” (underlined text), “strikethrough” (strikethrough text), “spoiler” (spoiler message), “blockquote” (block quotation), “expandable_blockquote” (collapsed-by-default block quotation), “code” (monowidth string), “pre” (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames), “custom_emoji” (for inline custom emoji stickers)",
           "type": [
             "str"
           ],
@@ -1698,6 +1738,14 @@
             "Document"
           ],
           "name": "document"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Message contains paid media; information about the paid media",
+          "type": [
+            "PaidMediaInfo"
+          ],
+          "name": "paid_media"
         },
         {
           "optional": true,
@@ -2114,7 +2162,7 @@
         },
         {
           "optional": false,
-          "description": "Video width as defined by sender",
+          "description": "Video width as defined by the sender",
           "type": [
             "int"
           ],
@@ -2122,7 +2170,7 @@
         },
         {
           "optional": false,
-          "description": "Video height as defined by sender",
+          "description": "Video height as defined by the sender",
           "type": [
             "int"
           ],
@@ -2130,7 +2178,7 @@
         },
         {
           "optional": false,
-          "description": "Duration of the video in seconds as defined by sender",
+          "description": "Duration of the video in seconds as defined by the sender",
           "type": [
             "int"
           ],
@@ -2138,7 +2186,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Animation thumbnail as defined by sender",
+          "description": "Optional. Animation thumbnail as defined by the sender",
           "type": [
             "PhotoSize"
           ],
@@ -2146,7 +2194,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Original animation filename as defined by sender",
+          "description": "Optional. Original animation filename as defined by the sender",
           "type": [
             "str"
           ],
@@ -2154,7 +2202,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. MIME type of the file as defined by sender",
+          "description": "Optional. MIME type of the file as defined by the sender",
           "type": [
             "str"
           ],
@@ -2192,7 +2240,7 @@
         },
         {
           "optional": false,
-          "description": "Duration of the audio in seconds as defined by sender",
+          "description": "Duration of the audio in seconds as defined by the sender",
           "type": [
             "int"
           ],
@@ -2200,7 +2248,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Performer of the audio as defined by sender or by audio tags",
+          "description": "Optional. Performer of the audio as defined by the sender or by audio tags",
           "type": [
             "str"
           ],
@@ -2208,7 +2256,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Title of the audio as defined by sender or by audio tags",
+          "description": "Optional. Title of the audio as defined by the sender or by audio tags",
           "type": [
             "str"
           ],
@@ -2216,7 +2264,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Original filename as defined by sender",
+          "description": "Optional. Original filename as defined by the sender",
           "type": [
             "str"
           ],
@@ -2224,7 +2272,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. MIME type of the file as defined by sender",
+          "description": "Optional. MIME type of the file as defined by the sender",
           "type": [
             "str"
           ],
@@ -2270,7 +2318,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Document thumbnail as defined by sender",
+          "description": "Optional. Document thumbnail as defined by the sender",
           "type": [
             "PhotoSize"
           ],
@@ -2278,7 +2326,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Original filename as defined by sender",
+          "description": "Optional. Original filename as defined by the sender",
           "type": [
             "str"
           ],
@@ -2286,7 +2334,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. MIME type of the file as defined by sender",
+          "description": "Optional. MIME type of the file as defined by the sender",
           "type": [
             "str"
           ],
@@ -2346,7 +2394,7 @@
         },
         {
           "optional": false,
-          "description": "Video width as defined by sender",
+          "description": "Video width as defined by the sender",
           "type": [
             "int"
           ],
@@ -2354,7 +2402,7 @@
         },
         {
           "optional": false,
-          "description": "Video height as defined by sender",
+          "description": "Video height as defined by the sender",
           "type": [
             "int"
           ],
@@ -2362,7 +2410,7 @@
         },
         {
           "optional": false,
-          "description": "Duration of the video in seconds as defined by sender",
+          "description": "Duration of the video in seconds as defined by the sender",
           "type": [
             "int"
           ],
@@ -2378,7 +2426,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Original filename as defined by sender",
+          "description": "Optional. Original filename as defined by the sender",
           "type": [
             "str"
           ],
@@ -2386,7 +2434,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. MIME type of the file as defined by sender",
+          "description": "Optional. MIME type of the file as defined by the sender",
           "type": [
             "str"
           ],
@@ -2424,7 +2472,7 @@
         },
         {
           "optional": false,
-          "description": "Video width and height (diameter of the video message) as defined by sender",
+          "description": "Video width and height (diameter of the video message) as defined by the sender",
           "type": [
             "int"
           ],
@@ -2432,7 +2480,7 @@
         },
         {
           "optional": false,
-          "description": "Duration of the video in seconds as defined by sender",
+          "description": "Duration of the video in seconds as defined by the sender",
           "type": [
             "int"
           ],
@@ -2478,7 +2526,7 @@
         },
         {
           "optional": false,
-          "description": "Duration of the audio in seconds as defined by sender",
+          "description": "Duration of the audio in seconds as defined by the sender",
           "type": [
             "int"
           ],
@@ -2486,7 +2534,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. MIME type of the file as defined by sender",
+          "description": "Optional. MIME type of the file as defined by the sender",
           "type": [
             "str"
           ],
@@ -2503,6 +2551,120 @@
       ],
       "description": "This object represents a voice note.",
       "name": "Voice"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "The number of Telegram Stars that must be paid to buy access to the media",
+          "type": [
+            "int"
+          ],
+          "name": "star_count"
+        },
+        {
+          "optional": false,
+          "description": "Information about the paid media",
+          "type": [
+            [
+              "array",
+              [
+                "PaidMedia"
+              ]
+            ]
+          ],
+          "name": "paid_media"
+        }
+      ],
+      "description": "Describes the paid media added to a message.",
+      "name": "PaidMediaInfo"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the paid media, always “preview”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Media width as defined by the sender",
+          "type": [
+            "int"
+          ],
+          "name": "width"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Media height as defined by the sender",
+          "type": [
+            "int"
+          ],
+          "name": "height"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Duration of the media in seconds as defined by the sender",
+          "type": [
+            "int"
+          ],
+          "name": "duration"
+        }
+      ],
+      "description": "The paid media isn't available before the payment.",
+      "name": "PaidMediaPreview"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the paid media, always “photo”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The photo",
+          "type": [
+            [
+              "array",
+              [
+                "PhotoSize"
+              ]
+            ]
+          ],
+          "name": "photo"
+        }
+      ],
+      "description": "The paid media is a photo.",
+      "name": "PaidMediaPhoto"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the paid media, always “video”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The video",
+          "type": [
+            "Video"
+          ],
+          "name": "video"
+        }
+      ],
+      "description": "The paid media is a video.",
+      "name": "PaidMediaVideo"
     },
     {
       "params": [
@@ -2639,7 +2801,7 @@
           "name": "text_entities"
         }
       ],
-      "description": "This object contains information about one answer option in a poll to send.",
+      "description": "This object contains information about one answer option in a poll to be sent.",
       "name": "InputPollOption"
     },
     {
@@ -2822,7 +2984,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Latitude as defined by sender",
+          "description": "Latitude as defined by the sender",
           "type": [
             "float"
           ],
@@ -2830,7 +2992,7 @@
         },
         {
           "optional": false,
-          "description": "Longitude as defined by sender",
+          "description": "Longitude as defined by the sender",
           "type": [
             "float"
           ],
@@ -3033,28 +3195,6 @@
           "name": "color"
         }
       ],
-      "description": "This object describes the way a background is filled based on the selected colors. Currently, it can be one of",
-      "name": "BackgroundFill"
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Type of the background fill, always “solid”",
-          "type": [
-            "str"
-          ],
-          "name": "type"
-        },
-        {
-          "optional": false,
-          "description": "The color of the background fill in the RGB24 format",
-          "type": [
-            "int"
-          ],
-          "name": "color"
-        }
-      ],
       "description": "The background is filled using the selected color.",
       "name": "BackgroundFillSolid"
     },
@@ -3122,36 +3262,6 @@
       ],
       "description": "The background is a freeform gradient that rotates after every message in the chat.",
       "name": "BackgroundFillFreeformGradient"
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Type of the background, always “fill”",
-          "type": [
-            "str"
-          ],
-          "name": "type"
-        },
-        {
-          "optional": false,
-          "description": "The background fill",
-          "type": [
-            "BackgroundFill"
-          ],
-          "name": "fill"
-        },
-        {
-          "optional": false,
-          "description": "Dimming of the background in dark themes, as a percentage; 0-100",
-          "type": [
-            "int"
-          ],
-          "name": "dark_theme_dimming"
-        }
-      ],
-      "description": "This object describes the type of a background. Currently, it can be one of",
-      "name": "BackgroundType"
     },
     {
       "params": [
@@ -3603,8 +3713,17 @@
       "name": "VideoChatParticipantsInvited"
     },
     {
-      "params": [],
-      "description": "This object represents a service message about the creation of a scheduled giveaway. Currently holds no information.",
+      "params": [
+        {
+          "optional": true,
+          "description": "Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only",
+          "type": [
+            "int"
+          ],
+          "name": "prize_star_count"
+        }
+      ],
+      "description": "This object represents a service message about the creation of a scheduled giveaway.",
       "name": "GiveawayCreated"
     },
     {
@@ -3677,7 +3796,15 @@
         },
         {
           "optional": true,
-          "description": "Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for",
+          "description": "Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only",
+          "type": [
+            "int"
+          ],
+          "name": "prize_star_count"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for; for Telegram Premium giveaways only",
           "type": [
             "int"
           ],
@@ -3744,7 +3871,15 @@
         },
         {
           "optional": true,
-          "description": "Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for",
+          "description": "Optional. The number of Telegram Stars that were split between giveaway winners; for Telegram Star giveaways only",
+          "type": [
+            "int"
+          ],
+          "name": "prize_star_count"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for; for Telegram Premium giveaways only",
           "type": [
             "int"
           ],
@@ -3811,6 +3946,14 @@
             "Message"
           ],
           "name": "giveaway_message"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the giveaway is a Telegram Star giveaway. Otherwise, currently, the giveaway is a Telegram Premium giveaway.",
+          "type": [
+            "bool"
+          ],
+          "name": "is_star_giveaway"
         }
       ],
       "description": "This object represents a service message about the completion of a giveaway without public winners.",
@@ -4356,6 +4499,14 @@
         },
         {
           "optional": true,
+          "description": "Optional. Description of the button that copies the specified text to the clipboard.",
+          "type": [
+            "CopyTextButton"
+          ],
+          "name": "copy_text"
+        },
+        {
+          "optional": true,
           "description": "Optional. Description of the game that will be launched when the user presses the button.\n\nNOTE: This type of button must always be the first button in the first row.",
           "type": [
             "CallbackGame"
@@ -4457,6 +4608,20 @@
       ],
       "description": "This object represents an inline button that switches the current user to inline mode in a chosen chat, with an optional default inline query.",
       "name": "SwitchInlineQueryChosenChat"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "The text to be copied to the clipboard; 1-256 characters",
+          "type": [
+            "str"
+          ],
+          "name": "text"
+        }
+      ],
+      "description": "This object represents an inline keyboard button that copies specified text to the clipboard.",
+      "name": "CopyTextButton"
     },
     {
       "params": [
@@ -4661,6 +4826,22 @@
             "int"
           ],
           "name": "pending_join_request_count"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The number of seconds the subscription will be active for before the next payment",
+          "type": [
+            "int"
+          ],
+          "name": "subscription_period"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat using the link",
+          "type": [
+            "int"
+          ],
+          "name": "subscription_price"
         }
       ],
       "description": "Represents an invite link for a chat.",
@@ -5075,6 +5256,14 @@
             "User"
           ],
           "name": "user"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Date when the user's subscription will expire; Unix time",
+          "type": [
+            "int"
+          ],
+          "name": "until_date"
         }
       ],
       "description": "Represents a chat member that has no additional privileges or restrictions.",
@@ -5655,6 +5844,20 @@
       "params": [
         {
           "optional": false,
+          "description": "Type of the reaction, always “paid”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        }
+      ],
+      "description": "The reaction is paid.",
+      "name": "ReactionTypePaid"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
           "description": "Type of the reaction",
           "type": [
             "ReactionType"
@@ -6057,7 +6260,7 @@
         },
         {
           "optional": false,
-          "description": "Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery.",
+          "description": "Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery. Alternatively, a t.me link to a Web App of the bot can be specified in the object instead of the Web App's URL, in which case the Web App will be opened as if the user pressed the link.",
           "type": [
             "WebAppInfo"
           ],
@@ -6145,11 +6348,19 @@
         },
         {
           "optional": true,
-          "description": "Optional. User that won the prize in the giveaway if any",
+          "description": "Optional. User that won the prize in the giveaway if any; for Telegram Premium giveaways only",
           "type": [
             "User"
           ],
           "name": "user"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only",
+          "type": [
+            "int"
+          ],
+          "name": "prize_star_count"
         },
         {
           "optional": true,
@@ -6160,7 +6371,7 @@
           "name": "is_unclaimed"
         }
       ],
-      "description": "The boost was obtained by the creation of a Telegram Premium giveaway. This boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription.",
+      "description": "The boost was obtained by the creation of a Telegram Premium or a Telegram Star giveaway. This boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription for Telegram Premium giveaways and prize_star_count / 500 times for one year for Telegram Star giveaways.",
       "name": "ChatBoostSourceGiveaway"
     },
     {
@@ -6822,6 +7033,91 @@
       "params": [
         {
           "optional": false,
+          "description": "Type of the media, must be photo",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »",
+          "type": [
+            "str"
+          ],
+          "name": "media"
+        }
+      ],
+      "description": "The paid media to send is a photo.",
+      "name": "InputPaidMediaPhoto"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the media, must be video",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »",
+          "type": [
+            "str"
+          ],
+          "name": "media"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »",
+          "type": [
+            "file",
+            "str"
+          ],
+          "name": "thumbnail"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Video width",
+          "type": [
+            "int"
+          ],
+          "name": "width"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Video height",
+          "type": [
+            "int"
+          ],
+          "name": "height"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Video duration in seconds",
+          "type": [
+            "int"
+          ],
+          "name": "duration"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Pass True if the uploaded video is suitable for streaming",
+          "type": [
+            "bool"
+          ],
+          "name": "supports_streaming"
+        }
+      ],
+      "description": "The paid media to send is a video.",
+      "name": "InputPaidMediaVideo"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
           "description": "Identifier for this file, which can be used to download or reuse the file",
           "type": [
             "str"
@@ -7089,6 +7385,71 @@
       ],
       "description": "This object describes a sticker to be added to a sticker set.",
       "name": "InputSticker"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the gift",
+          "type": [
+            "str"
+          ],
+          "name": "id"
+        },
+        {
+          "optional": false,
+          "description": "The sticker that represents the gift",
+          "type": [
+            "Sticker"
+          ],
+          "name": "sticker"
+        },
+        {
+          "optional": false,
+          "description": "The number of Telegram Stars that must be paid to send the sticker",
+          "type": [
+            "int"
+          ],
+          "name": "star_count"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The total number of the gifts of this type that can be sent; for limited gifts only",
+          "type": [
+            "int"
+          ],
+          "name": "total_count"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The number of remaining gifts of this type that can be sent; for limited gifts only",
+          "type": [
+            "int"
+          ],
+          "name": "remaining_count"
+        }
+      ],
+      "description": "This object represents a gift that can be sent by the bot.",
+      "name": "Gift"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "The list of gifts",
+          "type": [
+            [
+              "array",
+              [
+                "Gift"
+              ]
+            ]
+          ],
+          "name": "gifts"
+        }
+      ],
+      "description": "This object represent a list of gifts.",
+      "name": "Gifts"
     },
     {
       "params": [
@@ -9381,7 +9742,7 @@
         },
         {
           "optional": false,
-          "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.",
+          "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.",
           "type": [
             "str"
           ],
@@ -9601,6 +9962,28 @@
       "params": [
         {
           "optional": false,
+          "description": "Unique identifier of the prepared message",
+          "type": [
+            "str"
+          ],
+          "name": "id"
+        },
+        {
+          "optional": false,
+          "description": "Expiration date of the prepared message, in Unix time. Expired prepared messages can no longer be used",
+          "type": [
+            "int"
+          ],
+          "name": "expiration_date"
+        }
+      ],
+      "description": "Describes an inline message to be sent by a user of a Mini App.",
+      "name": "PreparedInlineMessage"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
           "description": "Portion label",
           "type": [
             "str"
@@ -9812,11 +10195,35 @@
         },
         {
           "optional": false,
-          "description": "Bot specified invoice payload",
+          "description": "Bot-specified invoice payload",
           "type": [
             "str"
           ],
           "name": "invoice_payload"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Expiration date of the subscription, in Unix time; for recurring payments only",
+          "type": [
+            "int"
+          ],
+          "name": "subscription_expiration_date"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the payment is a recurring payment for a subscription",
+          "type": [
+            "bool"
+          ],
+          "name": "is_recurring"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the payment is the first payment for a subscription",
+          "type": [
+            "bool"
+          ],
+          "name": "is_first_recurring"
         },
         {
           "optional": true,
@@ -9858,6 +10265,52 @@
       "params": [
         {
           "optional": false,
+          "description": "Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars. Currently, always “XTR”",
+          "type": [
+            "str"
+          ],
+          "name": "currency"
+        },
+        {
+          "optional": false,
+          "description": "Total refunded price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45, total_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).",
+          "type": [
+            "int"
+          ],
+          "name": "total_amount"
+        },
+        {
+          "optional": false,
+          "description": "Bot-specified invoice payload",
+          "type": [
+            "str"
+          ],
+          "name": "invoice_payload"
+        },
+        {
+          "optional": false,
+          "description": "Telegram payment identifier",
+          "type": [
+            "str"
+          ],
+          "name": "telegram_payment_charge_id"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Provider payment identifier",
+          "type": [
+            "str"
+          ],
+          "name": "provider_payment_charge_id"
+        }
+      ],
+      "description": "This object contains basic information about a refunded payment.",
+      "name": "RefundedPayment"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
           "description": "Unique query identifier",
           "type": [
             "str"
@@ -9874,7 +10327,7 @@
         },
         {
           "optional": false,
-          "description": "Bot specified invoice payload",
+          "description": "Bot-specified invoice payload",
           "type": [
             "str"
           ],
@@ -9928,7 +10381,7 @@
         },
         {
           "optional": false,
-          "description": "Bot specified invoice payload",
+          "description": "Bot-specified invoice payload",
           "type": [
             "str"
           ],
@@ -9958,15 +10411,23 @@
       "params": [
         {
           "optional": false,
-          "description": "Type of the state, always “pending”",
+          "description": "User who purchased the media",
+          "type": [
+            "User"
+          ],
+          "name": "from"
+        },
+        {
+          "optional": false,
+          "description": "Bot-specified paid media payload",
           "type": [
             "str"
           ],
-          "name": "type"
+          "name": "paid_media_payload"
         }
       ],
-      "description": "This object describes the state of a revenue withdrawal operation. Currently, it can be one of",
-      "name": "RevenueWithdrawalState"
+      "description": "This object contains information about a paid media purchase.",
+      "name": "PaidMediaPurchased"
     },
     {
       "params": [
@@ -10030,23 +10491,68 @@
       "params": [
         {
           "optional": false,
-          "description": "Type of the transaction partner, always “fragment”",
+          "description": "Type of the transaction partner, always “user”",
           "type": [
             "str"
           ],
           "name": "type"
         },
         {
-          "optional": true,
-          "description": "Optional. State of the transaction if the transaction is outgoing",
+          "optional": false,
+          "description": "Information about the user",
           "type": [
-            "RevenueWithdrawalState"
+            "User"
           ],
-          "name": "withdrawal_state"
+          "name": "user"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Bot-specified invoice payload",
+          "type": [
+            "str"
+          ],
+          "name": "invoice_payload"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The duration of the paid subscription",
+          "type": [
+            "int"
+          ],
+          "name": "subscription_period"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Information about the paid media bought by the user",
+          "type": [
+            [
+              "array",
+              [
+                "PaidMedia"
+              ]
+            ]
+          ],
+          "name": "paid_media"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Bot-specified paid media payload",
+          "type": [
+            "str"
+          ],
+          "name": "paid_media_payload"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The gift sent to the user by the bot",
+          "type": [
+            "str"
+          ],
+          "name": "gift"
         }
       ],
-      "description": "This object describes the source of a transaction, or its recipient for outgoing transactions. Currently, it can be one of",
-      "name": "TransactionPartner"
+      "description": "Describes a transaction with a user.",
+      "name": "TransactionPartnerUser"
     },
     {
       "params": [
@@ -10074,7 +10580,21 @@
       "params": [
         {
           "optional": false,
-          "description": "Type of the transaction partner, always “user”",
+          "description": "Type of the transaction partner, always “telegram_ads”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        }
+      ],
+      "description": "Describes a withdrawal transaction to the Telegram Ads platform.",
+      "name": "TransactionPartnerTelegramAds"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the transaction partner, always “telegram_api”",
           "type": [
             "str"
           ],
@@ -10082,15 +10602,15 @@
         },
         {
           "optional": false,
-          "description": "Information about the user",
+          "description": "The number of successful requests that exceeded regular limits and were therefore billed",
           "type": [
-            "User"
+            "int"
           ],
-          "name": "user"
+          "name": "request_count"
         }
       ],
-      "description": "Describes a transaction with a user.",
-      "name": "TransactionPartnerUser"
+      "description": "Describes a transaction with payment for paid broadcasting.",
+      "name": "TransactionPartnerTelegramApi"
     },
     {
       "params": [
@@ -10110,7 +10630,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Unique identifier of the transaction. Coincides with the identifer of the original transaction for refund transactions. Coincides with SuccessfulPayment.telegram_payment_charge_id for successful incoming payments from users.",
+          "description": "Unique identifier of the transaction. Coincides with the identifier of the original transaction for refund transactions. Coincides with SuccessfulPayment.telegram_payment_charge_id for successful incoming payments from users.",
           "type": [
             "str"
           ],
@@ -10898,6 +11418,31 @@
     },
     {
       "subtypes": [
+        "PaidMediaPreview",
+        "PaidMediaPhoto",
+        "PaidMediaVideo"
+      ],
+      "name": "PaidMedia"
+    },
+    {
+      "subtypes": [
+        "BackgroundFillSolid",
+        "BackgroundFillGradient",
+        "BackgroundFillFreeformGradient"
+      ],
+      "name": "BackgroundFill"
+    },
+    {
+      "subtypes": [
+        "BackgroundTypeFill",
+        "BackgroundTypeWallpaper",
+        "BackgroundTypePattern",
+        "BackgroundTypeChatTheme"
+      ],
+      "name": "BackgroundType"
+    },
+    {
+      "subtypes": [
         "ChatMemberOwner",
         "ChatMemberAdministrator",
         "ChatMemberMember",
@@ -10910,7 +11455,8 @@
     {
       "subtypes": [
         "ReactionTypeEmoji",
-        "ReactionTypeCustomEmoji"
+        "ReactionTypeCustomEmoji",
+        "ReactionTypePaid"
       ],
       "name": "ReactionType"
     },
@@ -10954,6 +11500,13 @@
     },
     {
       "subtypes": [
+        "InputPaidMediaPhoto",
+        "InputPaidMediaVideo"
+      ],
+      "name": "InputPaidMedia"
+    },
+    {
+      "subtypes": [
         "InlineQueryResultCachedAudio",
         "InlineQueryResultCachedDocument",
         "InlineQueryResultCachedGif",
@@ -10986,6 +11539,24 @@
         "InputInvoiceMessageContent"
       ],
       "name": "InputMessageContent"
+    },
+    {
+      "subtypes": [
+        "RevenueWithdrawalStatePending",
+        "RevenueWithdrawalStateSucceeded",
+        "RevenueWithdrawalStateFailed"
+      ],
+      "name": "RevenueWithdrawalState"
+    },
+    {
+      "subtypes": [
+        "TransactionPartnerUser",
+        "TransactionPartnerFragment",
+        "TransactionPartnerTelegramAds",
+        "TransactionPartnerTelegramApi",
+        "TransactionPartnerOther"
+      ],
+      "name": "TransactionPartner"
     },
     {
       "subtypes": [
@@ -11262,6 +11833,14 @@
         },
         {
           "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
+        },
+        {
+          "optional": true,
           "description": "Unique identifier of the message effect to be added to the message; for private chats only",
           "type": [
             "str"
@@ -11511,6 +12090,14 @@
         },
         {
           "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
+        },
+        {
+          "optional": true,
           "description": "Description of the message to reply to",
           "type": [
             "ReplyParameters"
@@ -11529,7 +12116,7 @@
           "name": "reply_markup"
         }
       ],
-      "description": "Use this method to copy messages of any kind. Service messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.",
+      "description": "Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.",
       "type": "post",
       "name": "copyMessage",
       "return": [
@@ -11602,7 +12189,7 @@
           "name": "remove_caption"
         }
       ],
-      "description": "Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an array of MessageId of the sent messages is returned.",
+      "description": "Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an array of MessageId of the sent messages is returned.",
       "type": "post",
       "name": "copyMessages",
       "return": [
@@ -11705,6 +12292,14 @@
             "bool"
           ],
           "name": "protect_content"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
         },
         {
           "optional": true,
@@ -11857,6 +12452,14 @@
         },
         {
           "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
+        },
+        {
+          "optional": true,
           "description": "Unique identifier of the message effect to be added to the message; for private chats only",
           "type": [
             "str"
@@ -11987,6 +12590,14 @@
             "bool"
           ],
           "name": "protect_content"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
         },
         {
           "optional": true,
@@ -12163,6 +12774,14 @@
         },
         {
           "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
+        },
+        {
+          "optional": true,
           "description": "Unique identifier of the message effect to be added to the message; for private chats only",
           "type": [
             "str"
@@ -12328,6 +12947,14 @@
         },
         {
           "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
+        },
+        {
+          "optional": true,
           "description": "Unique identifier of the message effect to be added to the message; for private chats only",
           "type": [
             "str"
@@ -12452,6 +13079,14 @@
         },
         {
           "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
+        },
+        {
+          "optional": true,
           "description": "Unique identifier of the message effect to be added to the message; for private chats only",
           "type": [
             "str"
@@ -12564,6 +13199,14 @@
         },
         {
           "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
+        },
+        {
+          "optional": true,
           "description": "Unique identifier of the message effect to be added to the message; for private chats only",
           "type": [
             "str"
@@ -12593,6 +13236,142 @@
       "description": "As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.",
       "type": "post",
       "name": "sendVideoNote",
+      "return": [
+        "Message"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": true,
+          "description": "Unique identifier of the business connection on behalf of which the message will be sent",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": false,
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername). If the chat is a channel, all Telegram Star proceeds from this media will be credited to the chat's balance. Otherwise, they will be credited to the bot's balance.",
+          "type": [
+            "int",
+            "str"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": false,
+          "description": "The number of Telegram Stars that must be paid to buy access to the media; 1-2500",
+          "type": [
+            "int"
+          ],
+          "name": "star_count"
+        },
+        {
+          "optional": false,
+          "description": "A JSON-serialized array describing the media to be sent; up to 10 items",
+          "type": [
+            [
+              "array",
+              [
+                "InputPaidMedia"
+              ]
+            ]
+          ],
+          "name": "media"
+        },
+        {
+          "optional": true,
+          "description": "Bot-defined paid media payload, 0-128 bytes. This will not be displayed to the user, use it for your internal processes.",
+          "type": [
+            "str"
+          ],
+          "name": "payload"
+        },
+        {
+          "optional": true,
+          "description": "Media caption, 0-1024 characters after entities parsing",
+          "type": [
+            "str"
+          ],
+          "name": "caption"
+        },
+        {
+          "optional": true,
+          "description": "Mode for parsing entities in the media caption. See formatting options for more details.",
+          "type": [
+            "str"
+          ],
+          "name": "parse_mode"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode",
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "name": "caption_entities"
+        },
+        {
+          "optional": true,
+          "description": "Pass True, if the caption must be shown above the message media",
+          "type": [
+            "bool"
+          ],
+          "name": "show_caption_above_media"
+        },
+        {
+          "optional": true,
+          "description": "Sends the message silently. Users will receive a notification with no sound.",
+          "type": [
+            "bool"
+          ],
+          "name": "disable_notification"
+        },
+        {
+          "optional": true,
+          "description": "Protects the contents of the sent message from forwarding and saving",
+          "type": [
+            "bool"
+          ],
+          "name": "protect_content"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
+        },
+        {
+          "optional": true,
+          "description": "Description of the message to reply to",
+          "type": [
+            "ReplyParameters"
+          ],
+          "name": "reply_parameters"
+        },
+        {
+          "optional": true,
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user",
+          "type": [
+            "InlineKeyboardMarkup",
+            "ReplyKeyboardMarkup",
+            "ReplyKeyboardRemove",
+            "ForceReply"
+          ],
+          "name": "reply_markup"
+        }
+      ],
+      "description": "Use this method to send paid media. On success, the sent Message is returned.",
+      "type": "post",
+      "name": "sendPaidMedia",
       "return": [
         "Message"
       ]
@@ -12653,6 +13432,14 @@
             "bool"
           ],
           "name": "protect_content"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
         },
         {
           "optional": true,
@@ -12773,6 +13560,14 @@
             "bool"
           ],
           "name": "protect_content"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
         },
         {
           "optional": true,
@@ -12918,6 +13713,14 @@
         },
         {
           "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
+        },
+        {
+          "optional": true,
           "description": "Unique identifier of the message effect to be added to the message; for private chats only",
           "type": [
             "str"
@@ -13025,6 +13828,14 @@
             "bool"
           ],
           "name": "protect_content"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
         },
         {
           "optional": true,
@@ -13233,6 +14044,14 @@
         },
         {
           "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
+        },
+        {
+          "optional": true,
           "description": "Unique identifier of the message effect to be added to the message; for private chats only",
           "type": [
             "str"
@@ -13316,6 +14135,14 @@
             "bool"
           ],
           "name": "protect_content"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
         },
         {
           "optional": true,
@@ -13416,7 +14243,7 @@
         },
         {
           "optional": true,
-          "description": "A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators.",
+          "description": "A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators. Paid reactions can't be used by bots.",
           "type": [
             [
               "array",
@@ -13436,7 +14263,7 @@
           "name": "is_big"
         }
       ],
-      "description": "Use this method to change the chosen reactions on a message. Service messages can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Returns True on success.",
+      "description": "Use this method to change the chosen reactions on a message. Service messages can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can't use paid reactions. Returns True on success.",
       "type": "post",
       "name": "setMessageReaction",
       "return": [
@@ -13475,6 +14302,40 @@
       "name": "getUserProfilePhotos",
       "return": [
         "UserProfilePhotos"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the target user",
+          "type": [
+            "int"
+          ],
+          "name": "user_id"
+        },
+        {
+          "optional": true,
+          "description": "Custom emoji identifier of the emoji status to set. Pass an empty string to remove the status.",
+          "type": [
+            "str"
+          ],
+          "name": "emoji_status_custom_emoji_id"
+        },
+        {
+          "optional": true,
+          "description": "Expiration date of the emoji status, if any",
+          "type": [
+            "int"
+          ],
+          "name": "emoji_status_expiration_date"
+        }
+      ],
+      "description": "Changes the emoji status for a given user that previously allowed the bot to manage their emoji status via the Mini App method requestEmojiStatusAccess. Returns True on success.",
+      "type": "post",
+      "name": "setUserEmojiStatus",
+      "return": [
+        "true"
       ]
     },
     {
@@ -14028,6 +14889,84 @@
       "params": [
         {
           "optional": false,
+          "description": "Unique identifier for the target channel chat or username of the target channel (in the format @channelusername)",
+          "type": [
+            "int",
+            "str"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": true,
+          "description": "Invite link name; 0-32 characters",
+          "type": [
+            "str"
+          ],
+          "name": "name"
+        },
+        {
+          "optional": false,
+          "description": "The number of seconds the subscription will be active for before the next payment. Currently, it must always be 2592000 (30 days).",
+          "type": [
+            "int"
+          ],
+          "name": "subscription_period"
+        },
+        {
+          "optional": false,
+          "description": "The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat; 1-2500",
+          "type": [
+            "int"
+          ],
+          "name": "subscription_price"
+        }
+      ],
+      "description": "Use this method to create a subscription invite link for a channel chat. The bot must have the can_invite_users administrator rights. The link can be edited using the method editChatSubscriptionInviteLink or revoked using the method revokeChatInviteLink. Returns the new invite link as a ChatInviteLink object.",
+      "type": "post",
+      "name": "createChatSubscriptionInviteLink",
+      "return": [
+        "ChatInviteLink"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
+          "type": [
+            "int",
+            "str"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": false,
+          "description": "The invite link to edit",
+          "type": [
+            "str"
+          ],
+          "name": "invite_link"
+        },
+        {
+          "optional": true,
+          "description": "Invite link name; 0-32 characters",
+          "type": [
+            "str"
+          ],
+          "name": "name"
+        }
+      ],
+      "description": "Use this method to edit a subscription invite link created by the bot. The bot must have the can_invite_users administrator rights. Returns the edited invite link as a ChatInviteLink object.",
+      "type": "post",
+      "name": "editChatSubscriptionInviteLink",
+      "return": [
+        "ChatInviteLink"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
           "description": "Unique identifier of the target chat or username of the target channel (in the format @channelusername)",
           "type": [
             "int",
@@ -14208,6 +15147,14 @@
     {
       "params": [
         {
+          "optional": true,
+          "description": "Unique identifier of the business connection on behalf of which the message will be pinned",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
           "optional": false,
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
           "type": [
@@ -14243,6 +15190,14 @@
     {
       "params": [
         {
+          "optional": true,
+          "description": "Unique identifier of the business connection on behalf of which the message will be unpinned",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
           "optional": false,
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
           "type": [
@@ -14253,7 +15208,7 @@
         },
         {
           "optional": true,
-          "description": "Identifier of a message to unpin. If not specified, the most recent pinned message (by sending date) will be unpinned.",
+          "description": "Identifier of the message to unpin. Required if business_connection_id is specified. If not specified, the most recent pinned message (by sending date) will be unpinned.",
           "type": [
             "int"
           ],
@@ -14567,7 +15522,7 @@
           "name": "icon_custom_emoji_id"
         }
       ],
-      "description": "Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.",
+      "description": "Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.",
       "type": "post",
       "name": "editForumTopic",
       "return": [
@@ -14702,7 +15657,7 @@
           "name": "name"
         }
       ],
-      "description": "Use this method to edit the name of the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have can_manage_topics administrator rights. Returns True on success.",
+      "description": "Use this method to edit the name of the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns True on success.",
       "type": "post",
       "name": "editGeneralForumTopic",
       "return": [
@@ -15443,7 +16398,7 @@
           "name": "reply_markup"
         }
       ],
-      "description": "Use this method to edit animation, audio, document, photo, or video messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.",
+      "description": "Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.",
       "type": "post",
       "name": "editMessageMedia",
       "return": [
@@ -15813,6 +16768,14 @@
             "bool"
           ],
           "name": "protect_content"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
         },
         {
           "optional": true,
@@ -16246,7 +17209,7 @@
         },
         {
           "optional": true,
-          "description": "A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animated-sticker-requirements for animated sticker technical requirements), or a WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-sticker-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files ». Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.",
+          "description": "A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animation-requirements for animated sticker technical requirements), or a WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files ». Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.",
           "type": [
             "file",
             "str"
@@ -16309,6 +17272,116 @@
       "description": "Use this method to delete a sticker set that was created by the bot. Returns True on success.",
       "type": "post",
       "name": "deleteStickerSet",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the target user that will receive the gift",
+          "type": [
+            "int"
+          ],
+          "name": "user_id"
+        },
+        {
+          "optional": false,
+          "description": "Identifier of the gift",
+          "type": [
+            "str"
+          ],
+          "name": "gift_id"
+        },
+        {
+          "optional": true,
+          "description": "Text that will be shown along with the gift; 0-255 characters",
+          "type": [
+            "str"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": true,
+          "description": "Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.",
+          "type": [
+            "str"
+          ],
+          "name": "text_parse_mode"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.",
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "name": "text_entities"
+        }
+      ],
+      "description": "Returns the list of gifts that can be sent by the bot to users. Requires no parameters. Returns a Gifts object.",
+      "type": "get",
+      "name": "getAvailableGifts",
+      "return": [
+        "Gifts"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the target user that will receive the gift",
+          "type": [
+            "int"
+          ],
+          "name": "user_id"
+        },
+        {
+          "optional": false,
+          "description": "Identifier of the gift",
+          "type": [
+            "str"
+          ],
+          "name": "gift_id"
+        },
+        {
+          "optional": true,
+          "description": "Text that will be shown along with the gift; 0-255 characters",
+          "type": [
+            "str"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": true,
+          "description": "Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.",
+          "type": [
+            "str"
+          ],
+          "name": "text_parse_mode"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.",
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "name": "text_entities"
+        }
+      ],
+      "description": "Sends a gift to the given user. The gift can't be converted to Telegram Stars by the user. Returns True on success.",
+      "type": "post",
+      "name": "sendGift",
       "return": [
         "true"
       ]
@@ -16406,6 +17479,64 @@
       "params": [
         {
           "optional": false,
+          "description": "Unique identifier of the target user that can use the prepared message",
+          "type": [
+            "int"
+          ],
+          "name": "user_id"
+        },
+        {
+          "optional": false,
+          "description": "A JSON-serialized object describing the message to be sent",
+          "type": [
+            "InlineQueryResult"
+          ],
+          "name": "result"
+        },
+        {
+          "optional": true,
+          "description": "Pass True if the message can be sent to private chats with users",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_user_chats"
+        },
+        {
+          "optional": true,
+          "description": "Pass True if the message can be sent to private chats with bots",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_bot_chats"
+        },
+        {
+          "optional": true,
+          "description": "Pass True if the message can be sent to group and supergroup chats",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_group_chats"
+        },
+        {
+          "optional": true,
+          "description": "Pass True if the message can be sent to channel chats",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_channel_chats"
+        }
+      ],
+      "description": "Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.",
+      "type": "post",
+      "name": "savePreparedInlineMessage",
+      "return": [
+        "PreparedInlineMessage"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
           "type": [
             "int",
@@ -16439,7 +17570,7 @@
         },
         {
           "optional": false,
-          "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.",
+          "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.",
           "type": [
             "str"
           ],
@@ -16617,6 +17748,14 @@
         },
         {
           "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
+        },
+        {
+          "optional": true,
           "description": "Unique identifier of the message effect to be added to the message; for private chats only",
           "type": [
             "str"
@@ -16650,6 +17789,14 @@
     {
       "params": [
         {
+          "optional": true,
+          "description": "Unique identifier of the business connection on behalf of which the link will be created. For payments in Telegram Stars only.",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
           "optional": false,
           "description": "Product name, 1-32 characters",
           "type": [
@@ -16667,7 +17814,7 @@
         },
         {
           "optional": false,
-          "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.",
+          "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.",
           "type": [
             "str"
           ],
@@ -16701,6 +17848,14 @@
             ]
           ],
           "name": "prices"
+        },
+        {
+          "optional": true,
+          "description": "The number of seconds the subscription will be active for before the next payment. The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user.",
+          "type": [
+            "int"
+          ],
+          "name": "subscription_period"
         },
         {
           "optional": true,
@@ -16964,6 +18119,40 @@
       "params": [
         {
           "optional": false,
+          "description": "Identifier of the user whose subscription will be edited",
+          "type": [
+            "int"
+          ],
+          "name": "user_id"
+        },
+        {
+          "optional": false,
+          "description": "Telegram payment identifier for the subscription",
+          "type": [
+            "str"
+          ],
+          "name": "telegram_payment_charge_id"
+        },
+        {
+          "optional": false,
+          "description": "Pass True to cancel extension of the user subscription; the subscription must be active up to the end of the current subscription period. Pass False to allow the user to re-enable a subscription that was previously canceled by the bot.",
+          "type": [
+            "bool"
+          ],
+          "name": "is_canceled"
+        }
+      ],
+      "description": "Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.",
+      "type": "post",
+      "name": "editUserStarSubscription",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
           "description": "User identifier",
           "type": [
             "int"
@@ -17040,6 +18229,14 @@
             "bool"
           ],
           "name": "protect_content"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
         },
         {
           "optional": true,
