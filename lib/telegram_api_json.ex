@@ -42,7 +42,7 @@ defmodule TelegramApiJson do
     "BackgroundType"
   ]
 
-  @zero_parameters ["getMe", "getWebhookInfo", "logOut", "close"]
+  @zero_parameters ["getMe", "getWebhookInfo", "logOut", "close", "getAvailableGifts"]
 
   def scrape() do
     tree() |> analyze_html(%__MODULE__{})
@@ -243,6 +243,9 @@ defmodule TelegramApiJson do
     cond do
       String.contains?(type, "Returns an Array of Update") ->
         [["array", ["Update"]]]
+
+      String.contains?(type, "On success, an array of MessageId") ->
+        [["array", ["MessageId"]]]
 
       String.contains?(type, "On success, an array of Messages") ->
         [["array", ["Message"]]]
