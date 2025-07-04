@@ -181,7 +181,7 @@ defmodule TelegramApiJson do
   end
 
   defp find_optional(extra) do
-    extra |> Floki.find("em") |> keep_optional()
+    extra |> Floki.find("td") |> keep_optional()
   end
 
   defp keep_optional(elems) do
