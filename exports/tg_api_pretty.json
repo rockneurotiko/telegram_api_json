@@ -20890,24 +20890,7 @@
       ]
     },
     {
-      "params": [
-        {
-          "optional": true,
-          "description": "Number of transactions to skip in the response",
-          "type": [
-            "int"
-          ],
-          "name": "offset"
-        },
-        {
-          "optional": true,
-          "description": "The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to 100.",
-          "type": [
-            "int"
-          ],
-          "name": "limit"
-        }
-      ],
+      "params": [],
       "description": "A method to get the current Telegram Stars balance of the bot. Requires no parameters. On success, returns a StarAmount object.",
       "type": "get",
       "name": "getMyStarBalance",

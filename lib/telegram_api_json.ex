@@ -44,7 +44,14 @@ defmodule TelegramApiJson do
     "InputStoryContent"
   ]
 
-  @zero_parameters ["getMe", "getWebhookInfo", "logOut", "close", "getAvailableGifts"]
+  @zero_parameters [
+    "getMe",
+    "getWebhookInfo",
+    "logOut",
+    "close",
+    "getAvailableGifts",
+    "getMyStarBalance"
+  ]
 
   def scrape() do
     tree() |> analyze_html(%__MODULE__{})
