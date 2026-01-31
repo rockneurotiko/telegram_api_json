@@ -386,6 +386,14 @@
             "bool"
           ],
           "name": "has_main_web_app"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the bot has forum topic mode enabled in private chats. Returned only in getMe.",
+          "type": [
+            "bool"
+          ],
+          "name": "has_topics_enabled"
         }
       ],
       "description": "This object represents a Telegram user or bot.",
@@ -448,6 +456,14 @@
             "bool"
           ],
           "name": "is_forum"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the chat is the direct messages chat of a channel",
+          "type": [
+            "bool"
+          ],
+          "name": "is_direct_messages"
         }
       ],
       "description": "This object represents a chat.",
@@ -510,6 +526,14 @@
             "bool"
           ],
           "name": "is_forum"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the chat is the direct messages chat of a channel",
+          "type": [
+            "bool"
+          ],
+          "name": "is_direct_messages"
         },
         {
           "optional": false,
@@ -587,6 +611,14 @@
             "Chat"
           ],
           "name": "personal_chat"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Information about the corresponding channel chat; for direct messages chats only",
+          "type": [
+            "Chat"
+          ],
+          "name": "parent_chat"
         },
         {
           "optional": true,
@@ -824,6 +856,30 @@
             "ChatLocation"
           ],
           "name": "location"
+        },
+        {
+          "optional": true,
+          "description": "Optional. For private chats, the rating of the user if any",
+          "type": [
+            "UserRating"
+          ],
+          "name": "rating"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The color scheme based on a unique gift that must be used for the chat's name, message replies and link previews",
+          "type": [
+            "UniqueGiftColors"
+          ],
+          "name": "unique_gift_colors"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The number of Telegram Stars a general user have to pay to send a message to the chat",
+          "type": [
+            "int"
+          ],
+          "name": "paid_message_star_count"
         }
       ],
       "description": "This object contains full information about a chat.",
@@ -841,11 +897,19 @@
         },
         {
           "optional": true,
-          "description": "Optional. Unique identifier of a message thread to which the message belongs; for supergroups only",
+          "description": "Optional. Unique identifier of a message thread or forum topic to which the message belongs; for supergroups and private chats only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Information about the direct messages chat topic that contains the message",
+          "type": [
+            "DirectMessagesTopic"
+          ],
+          "name": "direct_messages_topic"
         },
         {
           "optional": true,
@@ -913,7 +977,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. True, if the message is sent to a forum topic",
+          "description": "Optional. True, if the message is sent to a topic in a forum supergroup or a private chat with the bot",
           "type": [
             "bool"
           ],
@@ -961,6 +1025,14 @@
         },
         {
           "optional": true,
+          "description": "Optional. Identifier of the specific checklist task that is being replied to",
+          "type": [
+            "int"
+          ],
+          "name": "reply_to_checklist_task_id"
+        },
+        {
+          "optional": true,
           "description": "Optional. Bot through which the message was sent",
           "type": [
             "User"
@@ -990,6 +1062,14 @@
             "bool"
           ],
           "name": "is_from_offline"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the message is a paid post. Note that such posts must not be deleted for 24 hours to receive the payment and can't be edited.",
+          "type": [
+            "bool"
+          ],
+          "name": "is_paid_post"
         },
         {
           "optional": true,
@@ -1043,6 +1123,14 @@
             "LinkPreviewOptions"
           ],
           "name": "link_preview_options"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Information about suggested post parameters if the message is a suggested post in a channel direct messages chat. If the message is an approved or declined suggested post, then it can't be edited.",
+          "type": [
+            "SuggestedPostInfo"
+          ],
+          "name": "suggested_post_info"
         },
         {
           "optional": true,
@@ -1394,6 +1482,14 @@
         },
         {
           "optional": true,
+          "description": "Optional. Service message: upgrade of a gift was purchased after the gift was sent",
+          "type": [
+            "GiftInfo"
+          ],
+          "name": "gift_upgrade_sent"
+        },
+        {
+          "optional": true,
           "description": "Optional. The domain name of the website on which the user has logged in. More about Telegram Login »",
           "type": [
             "str"
@@ -1551,6 +1647,46 @@
             "PaidMessagePriceChanged"
           ],
           "name": "paid_message_price_changed"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Service message: a suggested post was approved",
+          "type": [
+            "SuggestedPostApproved"
+          ],
+          "name": "suggested_post_approved"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Service message: approval of a suggested post has failed",
+          "type": [
+            "SuggestedPostApprovalFailed"
+          ],
+          "name": "suggested_post_approval_failed"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Service message: a suggested post was declined",
+          "type": [
+            "SuggestedPostDeclined"
+          ],
+          "name": "suggested_post_declined"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Service message: payment for a suggested post was received",
+          "type": [
+            "SuggestedPostPaid"
+          ],
+          "name": "suggested_post_paid"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Service message: payment for a suggested post was refunded",
+          "type": [
+            "SuggestedPostRefunded"
+          ],
+          "name": "suggested_post_refunded"
         },
         {
           "optional": true,
@@ -1976,7 +2112,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. If the message to be replied to is from a different chat, unique identifier for the chat or username of the channel (in the format @channelusername). Not supported for messages sent on behalf of a business account.",
+          "description": "Optional. If the message to be replied to is from a different chat, unique identifier for the chat or username of the channel (in the format @channelusername). Not supported for messages sent on behalf of a business account and messages from channel direct messages chats.",
           "type": [
             "int",
             "str"
@@ -2027,6 +2163,14 @@
             "int"
           ],
           "name": "quote_position"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Identifier of the specific checklist task to be replied to",
+          "type": [
+            "int"
+          ],
+          "name": "checklist_task_id"
         }
       ],
       "description": "Describes reply parameters for the message that is being sent.",
@@ -3114,11 +3258,19 @@
         },
         {
           "optional": true,
-          "description": "Optional. User that completed the task; omitted if the task wasn't completed",
+          "description": "Optional. User that completed the task; omitted if the task wasn't completed by a user",
           "type": [
             "User"
           ],
           "name": "completed_by_user"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Chat that completed the task; omitted if the task wasn't completed by a chat",
+          "type": [
+            "Chat"
+          ],
+          "name": "completed_by_chat"
         },
         {
           "optional": true,
@@ -3836,6 +3988,14 @@
             "str"
           ],
           "name": "icon_custom_emoji_id"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the name of the topic wasn't specified explicitly by its creator and likely needs to be changed by the bot",
+          "type": [
+            "bool"
+          ],
+          "name": "is_name_implicit"
         }
       ],
       "description": "This object represents a service message about a new forum topic created in the chat.",
@@ -4134,6 +4294,140 @@
       "params": [
         {
           "optional": true,
+          "description": "Optional. Message containing the suggested post. Note that the Message object in this field will not contain the reply_to_message field even if it itself is a reply.",
+          "type": [
+            "Message"
+          ],
+          "name": "suggested_post_message"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Amount paid for the post",
+          "type": [
+            "SuggestedPostPrice"
+          ],
+          "name": "price"
+        },
+        {
+          "optional": false,
+          "description": "Date when the post will be published",
+          "type": [
+            "int"
+          ],
+          "name": "send_date"
+        }
+      ],
+      "description": "Describes a service message about the approval of a suggested post.",
+      "name": "SuggestedPostApproved"
+    },
+    {
+      "params": [
+        {
+          "optional": true,
+          "description": "Optional. Message containing the suggested post whose approval has failed. Note that the Message object in this field will not contain the reply_to_message field even if it itself is a reply.",
+          "type": [
+            "Message"
+          ],
+          "name": "suggested_post_message"
+        },
+        {
+          "optional": false,
+          "description": "Expected price of the post",
+          "type": [
+            "SuggestedPostPrice"
+          ],
+          "name": "price"
+        }
+      ],
+      "description": "Describes a service message about the failed approval of a suggested post. Currently, only caused by insufficient user funds at the time of approval.",
+      "name": "SuggestedPostApprovalFailed"
+    },
+    {
+      "params": [
+        {
+          "optional": true,
+          "description": "Optional. Message containing the suggested post. Note that the Message object in this field will not contain the reply_to_message field even if it itself is a reply.",
+          "type": [
+            "Message"
+          ],
+          "name": "suggested_post_message"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Comment with which the post was declined",
+          "type": [
+            "str"
+          ],
+          "name": "comment"
+        }
+      ],
+      "description": "Describes a service message about the rejection of a suggested post.",
+      "name": "SuggestedPostDeclined"
+    },
+    {
+      "params": [
+        {
+          "optional": true,
+          "description": "Optional. Message containing the suggested post. Note that the Message object in this field will not contain the reply_to_message field even if it itself is a reply.",
+          "type": [
+            "Message"
+          ],
+          "name": "suggested_post_message"
+        },
+        {
+          "optional": false,
+          "description": "Currency in which the payment was made. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins",
+          "type": [
+            "str"
+          ],
+          "name": "currency"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The amount of the currency that was received by the channel in nanotoncoins; for payments in toncoins only",
+          "type": [
+            "int"
+          ],
+          "name": "amount"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The amount of Telegram Stars that was received by the channel; for payments in Telegram Stars only",
+          "type": [
+            "StarAmount"
+          ],
+          "name": "star_amount"
+        }
+      ],
+      "description": "Describes a service message about a successful payment for a suggested post.",
+      "name": "SuggestedPostPaid"
+    },
+    {
+      "params": [
+        {
+          "optional": true,
+          "description": "Optional. Message containing the suggested post. Note that the Message object in this field will not contain the reply_to_message field even if it itself is a reply.",
+          "type": [
+            "Message"
+          ],
+          "name": "suggested_post_message"
+        },
+        {
+          "optional": false,
+          "description": "Reason for the refund. Currently, one of “post_deleted” if the post was deleted within 24 hours of being posted or removed from scheduled messages without being posted, or “payment_refunded” if the payer refunded their payment.",
+          "type": [
+            "str"
+          ],
+          "name": "reason"
+        }
+      ],
+      "description": "Describes a service message about a payment refund for a suggested post.",
+      "name": "SuggestedPostRefunded"
+    },
+    {
+      "params": [
+        {
+          "optional": true,
           "description": "Optional. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only",
           "type": [
             "int"
@@ -4422,6 +4716,102 @@
       ],
       "description": "Describes the options used for link preview generation.",
       "name": "LinkPreviewOptions"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Currency in which the post will be paid. Currently, must be one of “XTR” for Telegram Stars or “TON” for toncoins",
+          "type": [
+            "str"
+          ],
+          "name": "currency"
+        },
+        {
+          "optional": false,
+          "description": "The amount of the currency that will be paid for the post in the smallest units of the currency, i.e. Telegram Stars or nanotoncoins. Currently, price in Telegram Stars must be between 5 and 100000, and price in nanotoncoins must be between 10000000 and 10000000000000.",
+          "type": [
+            "int"
+          ],
+          "name": "amount"
+        }
+      ],
+      "description": "Describes the price of a suggested post.",
+      "name": "SuggestedPostPrice"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "State of the suggested post. Currently, it can be one of “pending”, “approved”, “declined”.",
+          "type": [
+            "str"
+          ],
+          "name": "state"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Proposed price of the post. If the field is omitted, then the post is unpaid.",
+          "type": [
+            "SuggestedPostPrice"
+          ],
+          "name": "price"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Proposed send date of the post. If the field is omitted, then the post can be published at any time within 30 days at the sole discretion of the user or administrator who approves it.",
+          "type": [
+            "int"
+          ],
+          "name": "send_date"
+        }
+      ],
+      "description": "Contains information about a suggested post.",
+      "name": "SuggestedPostInfo"
+    },
+    {
+      "params": [
+        {
+          "optional": true,
+          "description": "Optional. Proposed price for the post. If the field is omitted, then the post is unpaid.",
+          "type": [
+            "SuggestedPostPrice"
+          ],
+          "name": "price"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Proposed send date of the post. If specified, then the date must be between 300 second and 2678400 seconds (30 days) in the future. If the field is omitted, then the post can be published at any time within 30 days at the sole discretion of the user who approves it.",
+          "type": [
+            "int"
+          ],
+          "name": "send_date"
+        }
+      ],
+      "description": "Contains parameters of a post that is being suggested by the bot.",
+      "name": "SuggestedPostParameters"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the topic. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.",
+          "type": [
+            "int"
+          ],
+          "name": "topic_id"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Information about the user that created the topic. Currently, it is always present",
+          "type": [
+            "User"
+          ],
+          "name": "user"
+        }
+      ],
+      "description": "Describes a topic of a direct messages chat.",
+      "name": "DirectMessagesTopic"
     },
     {
       "params": [
@@ -4893,7 +5283,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted. Not supported for messages sent on behalf of a Telegram Business account.",
+          "description": "Optional. If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted. Not supported for messages sent in channel direct messages chats and on behalf of a Telegram Business account.",
           "type": [
             "str"
           ],
@@ -4901,7 +5291,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.\n\nThis offers a quick way for the user to open your bot in inline mode in the same chat - good for selecting something from multiple options. Not supported in channels and for messages sent on behalf of a Telegram Business account.",
+          "description": "Optional. If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.\n\nThis offers a quick way for the user to open your bot in inline mode in the same chat - good for selecting something from multiple options. Not supported in channels and for messages sent in channel direct messages chats and on behalf of a Telegram Business account.",
           "type": [
             "str"
           ],
@@ -4909,7 +5299,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field. Not supported for messages sent on behalf of a Telegram Business account.",
+          "description": "Optional. If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field. Not supported for messages sent in channel direct messages chats and on behalf of a Telegram Business account.",
           "type": [
             "SwitchInlineQueryChosenChat"
           ],
@@ -5386,6 +5776,14 @@
             "bool"
           ],
           "name": "can_manage_topics"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the administrator can manage direct messages of the channel and decline suggested posts; for channels only",
+          "type": [
+            "bool"
+          ],
+          "name": "can_manage_direct_messages"
         }
       ],
       "description": "Represents the rights of an administrator in a chat.",
@@ -5644,6 +6042,14 @@
             "bool"
           ],
           "name": "can_manage_topics"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the administrator can manage direct messages of the channel and decline suggested posts; for channels only",
+          "type": [
+            "bool"
+          ],
+          "name": "can_manage_direct_messages"
         },
         {
           "optional": true,
@@ -6191,6 +6597,44 @@
       ],
       "description": "Describes the opening hours of a business.",
       "name": "BusinessOpeningHours"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Current level of the user, indicating their reliability when purchasing digital goods and services. A higher level suggests a more trustworthy customer; a negative level is likely reason for concern.",
+          "type": [
+            "int"
+          ],
+          "name": "level"
+        },
+        {
+          "optional": false,
+          "description": "Numerical value of the user's rating; the higher the rating, the better",
+          "type": [
+            "int"
+          ],
+          "name": "rating"
+        },
+        {
+          "optional": false,
+          "description": "The rating value required to get the current level",
+          "type": [
+            "int"
+          ],
+          "name": "current_level_rating"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The rating value required to get to the next level; omitted if the maximum level was reached",
+          "type": [
+            "int"
+          ],
+          "name": "next_level_rating"
+        }
+      ],
+      "description": "This object describes the rating of a user based on their Telegram Star spendings.",
+      "name": "UserRating"
     },
     {
       "params": [
@@ -6752,10 +7196,48 @@
             "str"
           ],
           "name": "icon_custom_emoji_id"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the name of the topic wasn't specified explicitly by its creator and likely needs to be changed by the bot",
+          "type": [
+            "bool"
+          ],
+          "name": "is_name_implicit"
         }
       ],
       "description": "This object represents a forum topic.",
       "name": "ForumTopic"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Center color of the background in RGB format",
+          "type": [
+            "int"
+          ],
+          "name": "center_color"
+        },
+        {
+          "optional": false,
+          "description": "Edge color of the background in RGB format",
+          "type": [
+            "int"
+          ],
+          "name": "edge_color"
+        },
+        {
+          "optional": false,
+          "description": "Text color of the background in RGB format",
+          "type": [
+            "int"
+          ],
+          "name": "text_color"
+        }
+      ],
+      "description": "This object describes the background of a gift.",
+      "name": "GiftBackground"
     },
     {
       "params": [
@@ -6793,7 +7275,23 @@
         },
         {
           "optional": true,
-          "description": "Optional. The total number of the gifts of this type that can be sent; for limited gifts only",
+          "description": "Optional. True, if the gift can only be purchased by Telegram Premium subscribers",
+          "type": [
+            "bool"
+          ],
+          "name": "is_premium"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the gift can be used (after being upgraded) to customize a user's appearance",
+          "type": [
+            "bool"
+          ],
+          "name": "has_colors"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The total number of gifts of this type that can be sent by all users; for limited gifts only",
           "type": [
             "int"
           ],
@@ -6801,11 +7299,51 @@
         },
         {
           "optional": true,
-          "description": "Optional. The number of remaining gifts of this type that can be sent; for limited gifts only",
+          "description": "Optional. The number of remaining gifts of this type that can be sent by all users; for limited gifts only",
           "type": [
             "int"
           ],
           "name": "remaining_count"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The total number of gifts of this type that can be sent by the bot; for limited gifts only",
+          "type": [
+            "int"
+          ],
+          "name": "personal_total_count"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The number of remaining gifts of this type that can be sent by the bot; for limited gifts only",
+          "type": [
+            "int"
+          ],
+          "name": "personal_remaining_count"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Background of the gift",
+          "type": [
+            "GiftBackground"
+          ],
+          "name": "background"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The total number of different unique gifts that can be obtained by upgrading the gift",
+          "type": [
+            "int"
+          ],
+          "name": "unique_gift_variant_count"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Information about the chat that published the gift",
+          "type": [
+            "Chat"
+          ],
+          "name": "publisher_chat"
         }
       ],
       "description": "This object represents a gift that can be sent by the bot.",
@@ -6962,6 +7500,78 @@
       "params": [
         {
           "optional": false,
+          "description": "Custom emoji identifier of the unique gift's model",
+          "type": [
+            "str"
+          ],
+          "name": "model_custom_emoji_id"
+        },
+        {
+          "optional": false,
+          "description": "Custom emoji identifier of the unique gift's symbol",
+          "type": [
+            "str"
+          ],
+          "name": "symbol_custom_emoji_id"
+        },
+        {
+          "optional": false,
+          "description": "Main color used in light themes; RGB format",
+          "type": [
+            "int"
+          ],
+          "name": "light_theme_main_color"
+        },
+        {
+          "optional": false,
+          "description": "List of 1-3 additional colors used in light themes; RGB format",
+          "type": [
+            [
+              "array",
+              [
+                "int"
+              ]
+            ]
+          ],
+          "name": "light_theme_other_colors"
+        },
+        {
+          "optional": false,
+          "description": "Main color used in dark themes; RGB format",
+          "type": [
+            "int"
+          ],
+          "name": "dark_theme_main_color"
+        },
+        {
+          "optional": false,
+          "description": "List of 1-3 additional colors used in dark themes; RGB format",
+          "type": [
+            [
+              "array",
+              [
+                "int"
+              ]
+            ]
+          ],
+          "name": "dark_theme_other_colors"
+        }
+      ],
+      "description": "This object contains information about the color scheme for a user's name, message replies and link previews based on a unique gift.",
+      "name": "UniqueGiftColors"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Identifier of the regular gift from which the gift was upgraded",
+          "type": [
+            "str"
+          ],
+          "name": "gift_id"
+        },
+        {
+          "optional": false,
           "description": "Human-readable name of the regular gift from which this unique gift was upgraded",
           "type": [
             "str"
@@ -7007,6 +7617,38 @@
             "UniqueGiftBackdrop"
           ],
           "name": "backdrop"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the original regular gift was exclusively purchaseable by Telegram Premium subscribers",
+          "type": [
+            "bool"
+          ],
+          "name": "is_premium"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the gift is assigned from the TON blockchain and can't be resold or transferred in Telegram",
+          "type": [
+            "bool"
+          ],
+          "name": "is_from_blockchain"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The color scheme that can be used by the gift's owner for the chat's name, replies to messages and link previews; for business account gifts and gifts that are currently on sale only",
+          "type": [
+            "UniqueGiftColors"
+          ],
+          "name": "colors"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Information about the chat that published the gift",
+          "type": [
+            "Chat"
+          ],
+          "name": "publisher_chat"
         }
       ],
       "description": "This object describes a unique gift that was upgraded from a regular gift.",
@@ -7040,11 +7682,19 @@
         },
         {
           "optional": true,
-          "description": "Optional. Number of Telegram Stars that were prepaid by the sender for the ability to upgrade the gift",
+          "description": "Optional. Number of Telegram Stars that were prepaid for the ability to upgrade the gift",
           "type": [
             "int"
           ],
           "name": "prepaid_upgrade_star_count"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the gift's upgrade was purchased after the gift was sent",
+          "type": [
+            "bool"
+          ],
+          "name": "is_upgrade_separate"
         },
         {
           "optional": true,
@@ -7082,6 +7732,14 @@
             "bool"
           ],
           "name": "is_private"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Unique number reserved for this gift when upgraded. See the number field in UniqueGift",
+          "type": [
+            "int"
+          ],
+          "name": "unique_gift_number"
         }
       ],
       "description": "Describes a service message about a regular gift that was sent or received.",
@@ -7099,7 +7757,7 @@
         },
         {
           "optional": false,
-          "description": "Origin of the gift. Currently, either “upgrade” for gifts upgraded from regular gifts, “transfer” for gifts transferred from other users or channels, or “resale” for gifts bought from other users",
+          "description": "Origin of the gift. Currently, either “upgrade” for gifts upgraded from regular gifts, “transfer” for gifts transferred from other users or channels, “resale” for gifts bought from other users, “gifted_upgrade” for upgrades purchased after the gift was sent, or “offer” for gifts bought or sold through gift purchase offers",
           "type": [
             "str"
           ],
@@ -7107,11 +7765,19 @@
         },
         {
           "optional": true,
-          "description": "Optional. For gifts bought from other users, the price paid for the gift",
+          "description": "Optional. For gifts bought from other users, the currency in which the payment for the gift was done. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins.",
+          "type": [
+            "str"
+          ],
+          "name": "last_resale_currency"
+        },
+        {
+          "optional": true,
+          "description": "Optional. For gifts bought from other users, the price paid for the gift in either Telegram Stars or nanotoncoins",
           "type": [
             "int"
           ],
-          "name": "last_resale_star_count"
+          "name": "last_resale_amount"
         },
         {
           "optional": true,
@@ -7238,7 +7904,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Number of Telegram Stars that can be claimed by the receiver instead of the gift; omitted if the gift cannot be converted to Telegram Stars",
+          "description": "Optional. Number of Telegram Stars that can be claimed by the receiver instead of the gift; omitted if the gift cannot be converted to Telegram Stars; for gifts received on behalf of business accounts only",
           "type": [
             "int"
           ],
@@ -7246,11 +7912,27 @@
         },
         {
           "optional": true,
-          "description": "Optional. Number of Telegram Stars that were paid by the sender for the ability to upgrade the gift",
+          "description": "Optional. Number of Telegram Stars that were paid for the ability to upgrade the gift",
           "type": [
             "int"
           ],
           "name": "prepaid_upgrade_star_count"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the gift's upgrade was purchased after the gift was sent; for gifts received on behalf of business accounts only",
+          "type": [
+            "bool"
+          ],
+          "name": "is_upgrade_separate"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Unique number reserved for this gift when upgraded. See the number field in UniqueGift",
+          "type": [
+            "int"
+          ],
+          "name": "unique_gift_number"
         }
       ],
       "description": "This object describes a gift received and owned by a user or a chat. Currently, it can be one of",
@@ -7353,7 +8035,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Number of Telegram Stars that can be claimed by the receiver instead of the gift; omitted if the gift cannot be converted to Telegram Stars",
+          "description": "Optional. Number of Telegram Stars that can be claimed by the receiver instead of the gift; omitted if the gift cannot be converted to Telegram Stars; for gifts received on behalf of business accounts only",
           "type": [
             "int"
           ],
@@ -7361,11 +8043,27 @@
         },
         {
           "optional": true,
-          "description": "Optional. Number of Telegram Stars that were paid by the sender for the ability to upgrade the gift",
+          "description": "Optional. Number of Telegram Stars that were paid for the ability to upgrade the gift",
           "type": [
             "int"
           ],
           "name": "prepaid_upgrade_star_count"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the gift's upgrade was purchased after the gift was sent; for gifts received on behalf of business accounts only",
+          "type": [
+            "bool"
+          ],
+          "name": "is_upgrade_separate"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Unique number reserved for this gift when upgraded. See the number field in UniqueGift",
+          "type": [
+            "int"
+          ],
+          "name": "unique_gift_number"
         }
       ],
       "description": "Describes a regular gift owned by a user or a chat.",
@@ -7517,6 +8215,14 @@
             "bool"
           ],
           "name": "premium_subscription"
+        },
+        {
+          "optional": false,
+          "description": "True, if transfers of unique gifts from channels are accepted",
+          "type": [
+            "bool"
+          ],
+          "name": "gifts_from_channels"
         }
       ],
       "description": "This object describes the types of gifts that can be gifted to a user or a chat.",
@@ -7634,7 +8340,7 @@
         },
         {
           "optional": false,
-          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)",
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername). Channel direct messages chats and channel chats aren't supported.",
           "type": [
             "int",
             "str"
@@ -7657,7 +8363,7 @@
         },
         {
           "optional": false,
-          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)",
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername). Channel direct messages chats and channel chats aren't supported.",
           "type": [
             "int",
             "str"
@@ -7680,7 +8386,7 @@
         },
         {
           "optional": false,
-          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)",
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername). Channel direct messages chats and channel chats aren't supported.",
           "type": [
             "int",
             "str"
@@ -13632,11 +14338,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -13709,6 +14423,14 @@
         },
         {
           "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
+        },
+        {
+          "optional": true,
           "description": "Description of the message to reply to",
           "type": [
             "ReplyParameters"
@@ -13747,11 +14469,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be forwarded; required if the message is forwarded to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -13787,6 +14517,22 @@
           "name": "protect_content"
         },
         {
+          "optional": true,
+          "description": "Unique identifier of the message effect to be added to the message; only available when forwarding to private chats",
+          "type": [
+            "str"
+          ],
+          "name": "message_effect_id"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
+        },
+        {
           "optional": false,
           "description": "Message identifier in the chat specified in from_chat_id",
           "type": [
@@ -13815,11 +14561,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the messages will be forwarded; required if the messages are forwarded to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -13885,11 +14639,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -13979,6 +14741,22 @@
         },
         {
           "optional": true,
+          "description": "Unique identifier of the message effect to be added to the message; only available when copying to private chats",
+          "type": [
+            "str"
+          ],
+          "name": "message_effect_id"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
+        },
+        {
+          "optional": true,
           "description": "Description of the message to reply to",
           "type": [
             "ReplyParameters"
@@ -14017,11 +14795,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the messages will be sent; required if the messages are sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -14103,11 +14889,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -14197,6 +14991,14 @@
         },
         {
           "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
+        },
+        {
+          "optional": true,
           "description": "Description of the message to reply to",
           "type": [
             "ReplyParameters"
@@ -14243,11 +15045,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -14354,6 +15164,14 @@
         },
         {
           "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
+        },
+        {
+          "optional": true,
           "description": "Description of the message to reply to",
           "type": [
             "ReplyParameters"
@@ -14400,11 +15218,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -14495,6 +15321,14 @@
         },
         {
           "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
+        },
+        {
+          "optional": true,
           "description": "Description of the message to reply to",
           "type": [
             "ReplyParameters"
@@ -14541,11 +15375,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -14693,6 +15535,14 @@
         },
         {
           "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
+        },
+        {
+          "optional": true,
           "description": "Description of the message to reply to",
           "type": [
             "ReplyParameters"
@@ -14739,11 +15589,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -14866,6 +15724,14 @@
         },
         {
           "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
+        },
+        {
+          "optional": true,
           "description": "Description of the message to reply to",
           "type": [
             "ReplyParameters"
@@ -14912,11 +15778,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -14998,6 +15872,14 @@
         },
         {
           "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
+        },
+        {
+          "optional": true,
           "description": "Description of the message to reply to",
           "type": [
             "ReplyParameters"
@@ -15044,11 +15926,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -15118,6 +16008,14 @@
         },
         {
           "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
+        },
+        {
+          "optional": true,
           "description": "Description of the message to reply to",
           "type": [
             "ReplyParameters"
@@ -15163,8 +16061,24 @@
           "name": "chat_id"
         },
         {
+          "optional": true,
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
+          "type": [
+            "int"
+          ],
+          "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
+        },
+        {
           "optional": false,
-          "description": "The number of Telegram Stars that must be paid to buy access to the media; 1-10000",
+          "description": "The number of Telegram Stars that must be paid to buy access to the media; 1-25000",
           "type": [
             "int"
           ],
@@ -15254,6 +16168,14 @@
         },
         {
           "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
+        },
+        {
+          "optional": true,
           "description": "Description of the message to reply to",
           "type": [
             "ReplyParameters"
@@ -15300,11 +16222,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the messages will be sent; required if the messages are sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -15361,16 +16291,11 @@
           "name": "reply_parameters"
         }
       ],
-      "description": "Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Messages that were sent is returned.",
+      "description": "Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.",
       "type": "post",
       "name": "sendMediaGroup",
       "return": [
-        [
-          "array",
-          [
-            "Message"
-          ]
-        ]
+        "sent"
       ]
     },
     {
@@ -15394,11 +16319,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -15482,6 +16415,14 @@
         },
         {
           "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
+        },
+        {
+          "optional": true,
           "description": "Description of the message to reply to",
           "type": [
             "ReplyParameters"
@@ -15528,11 +16469,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -15632,6 +16581,14 @@
         },
         {
           "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
+        },
+        {
+          "optional": true,
           "description": "Description of the message to reply to",
           "type": [
             "ReplyParameters"
@@ -15678,11 +16635,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -15750,6 +16715,14 @@
         },
         {
           "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
+        },
+        {
+          "optional": true,
           "description": "Description of the message to reply to",
           "type": [
             "ReplyParameters"
@@ -15787,7 +16760,7 @@
         },
         {
           "optional": false,
-          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername). Polls can't be sent to channel direct messages chats.",
           "type": [
             "int",
             "str"
@@ -15796,7 +16769,7 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
@@ -16083,11 +17056,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": true,
@@ -16131,6 +17112,14 @@
         },
         {
           "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
+        },
+        {
+          "optional": true,
           "description": "Description of the message to reply to",
           "type": [
             "ReplyParameters"
@@ -16159,6 +17148,69 @@
     {
       "params": [
         {
+          "optional": false,
+          "description": "Unique identifier for the target private chat",
+          "type": [
+            "int"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": true,
+          "description": "Unique identifier for the target message thread",
+          "type": [
+            "int"
+          ],
+          "name": "message_thread_id"
+        },
+        {
+          "optional": false,
+          "description": "Unique identifier of the message draft; must be non-zero. Changes of drafts with the same identifier are animated",
+          "type": [
+            "int"
+          ],
+          "name": "draft_id"
+        },
+        {
+          "optional": false,
+          "description": "Text of the message to be sent, 1-4096 characters after entities parsing",
+          "type": [
+            "str"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": true,
+          "description": "Mode for parsing entities in the message text. See formatting options for more details.",
+          "type": [
+            "str"
+          ],
+          "name": "parse_mode"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode",
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "name": "entities"
+        }
+      ],
+      "description": "Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled. Returns True on success.",
+      "type": "post",
+      "name": "sendMessageDraft",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
           "optional": true,
           "description": "Unique identifier of the business connection on behalf of which the action will be sent",
           "type": [
@@ -16168,7 +17220,7 @@
         },
         {
           "optional": false,
-          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername). Channel chats and channel direct messages chats aren't supported.",
           "type": [
             "int",
             "str"
@@ -16177,7 +17229,7 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread; for supergroups only",
+          "description": "Unique identifier for the target message thread or topic of a forum; for supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
@@ -16515,7 +17567,7 @@
         },
         {
           "optional": true,
-          "description": "Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics",
+          "description": "Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics. For backward compatibility, defaults to True for promotions of channel administrators",
           "type": [
             "bool"
           ],
@@ -16600,6 +17652,14 @@
             "bool"
           ],
           "name": "can_manage_topics"
+        },
+        {
+          "optional": true,
+          "description": "Pass True if the administrator can manage direct messages within the channel and decline suggested posts; for channels only",
+          "type": [
+            "bool"
+          ],
+          "name": "can_manage_direct_messages"
         }
       ],
       "description": "Use this method to promote or demote a user in a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Pass False for all boolean parameters to demote a user. Returns True on success.",
@@ -17157,7 +18217,7 @@
           "name": "disable_notification"
         }
       ],
-      "description": "Use this method to add a message to the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.",
+      "description": "Use this method to add a message to the list of pinned messages in a chat. In private chats and channel direct messages chats, all non-service messages can be pinned. Conversely, the bot must be an administrator with the 'can_pin_messages' right or the 'can_edit_messages' right to pin messages in groups and channels respectively. Returns True on success.",
       "type": "post",
       "name": "pinChatMessage",
       "return": [
@@ -17192,7 +18252,7 @@
           "name": "message_id"
         }
       ],
-      "description": "Use this method to remove a message from the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.",
+      "description": "Use this method to remove a message from the list of pinned messages in a chat. In private chats and channel direct messages chats, all messages can be unpinned. Conversely, the bot must be an administrator with the 'can_pin_messages' right or the 'can_edit_messages' right to unpin messages in groups and channels respectively. Returns True on success.",
       "type": "post",
       "name": "unpinChatMessage",
       "return": [
@@ -17211,7 +18271,7 @@
           "name": "chat_id"
         }
       ],
-      "description": "Use this method to clear the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.",
+      "description": "Use this method to clear the list of pinned messages in a chat. In private chats and channel direct messages chats, no additional rights are required to unpin all pinned messages. Conversely, the bot must be an administrator with the 'can_pin_messages' right or the 'can_edit_messages' right to unpin all pinned messages in groups and channels respectively. Returns True on success.",
       "type": "post",
       "name": "unpinAllChatMessages",
       "return": [
@@ -17222,7 +18282,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)",
+          "description": "Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername). Channel direct messages chats aren't supported; leave the corresponding channel instead.",
           "type": [
             "int",
             "str"
@@ -17499,7 +18559,7 @@
           "name": "icon_custom_emoji_id"
         }
       ],
-      "description": "Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.",
+      "description": "Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.",
       "type": "post",
       "name": "editForumTopic",
       "return": [
@@ -17580,7 +18640,7 @@
           "name": "message_thread_id"
         }
       ],
-      "description": "Use this method to delete a forum topic along with all its messages in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_delete_messages administrator rights. Returns True on success.",
+      "description": "Use this method to delete a forum topic along with all its messages in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can_delete_messages administrator rights. Returns True on success.",
       "type": "post",
       "name": "deleteForumTopic",
       "return": [
@@ -17607,7 +18667,7 @@
           "name": "message_thread_id"
         }
       ],
-      "description": "Use this method to clear the list of pinned messages in a forum topic. The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup. Returns True on success.",
+      "description": "Use this method to clear the list of pinned messages in a forum topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup. Returns True on success.",
       "type": "post",
       "name": "unpinAllForumTopicMessages",
       "return": [
@@ -18148,6 +19208,1170 @@
       ]
     },
     {
+      "params": [],
+      "description": "Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a Gifts object.",
+      "type": "get",
+      "name": "getAvailableGifts",
+      "return": [
+        "Gifts"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": true,
+          "description": "Required if chat_id is not specified. Unique identifier of the target user who will receive the gift.",
+          "type": [
+            "int"
+          ],
+          "name": "user_id"
+        },
+        {
+          "optional": true,
+          "description": "Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift.",
+          "type": [
+            "int",
+            "str"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": false,
+          "description": "Identifier of the gift; limited gifts can't be sent to channel chats",
+          "type": [
+            "str"
+          ],
+          "name": "gift_id"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver",
+          "type": [
+            "bool"
+          ],
+          "name": "pay_for_upgrade"
+        },
+        {
+          "optional": true,
+          "description": "Text that will be shown along with the gift; 0-128 characters",
+          "type": [
+            "str"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": true,
+          "description": "Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.",
+          "type": [
+            "str"
+          ],
+          "name": "text_parse_mode"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.",
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "name": "text_entities"
+        }
+      ],
+      "description": "Sends a gift to the given user or channel chat. The gift can't be converted to Telegram Stars by the receiver. Returns True on success.",
+      "type": "post",
+      "name": "sendGift",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the target user who will receive a Telegram Premium subscription",
+          "type": [
+            "int"
+          ],
+          "name": "user_id"
+        },
+        {
+          "optional": false,
+          "description": "Number of months the Telegram Premium subscription will be active for the user; must be one of 3, 6, or 12",
+          "type": [
+            "int"
+          ],
+          "name": "month_count"
+        },
+        {
+          "optional": false,
+          "description": "Number of Telegram Stars to pay for the Telegram Premium subscription; must be 1000 for 3 months, 1500 for 6 months, and 2500 for 12 months",
+          "type": [
+            "int"
+          ],
+          "name": "star_count"
+        },
+        {
+          "optional": true,
+          "description": "Text that will be shown along with the service message about the subscription; 0-128 characters",
+          "type": [
+            "str"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": true,
+          "description": "Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.",
+          "type": [
+            "str"
+          ],
+          "name": "text_parse_mode"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.",
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "name": "text_entities"
+        }
+      ],
+      "description": "Gifts a Telegram Premium subscription to the given user. Returns True on success.",
+      "type": "post",
+      "name": "giftPremiumSubscription",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the target user",
+          "type": [
+            "int"
+          ],
+          "name": "user_id"
+        },
+        {
+          "optional": true,
+          "description": "Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.",
+          "type": [
+            "str"
+          ],
+          "name": "custom_description"
+        }
+      ],
+      "description": "Verifies a user on behalf of the organization which is represented by the bot. Returns True on success.",
+      "type": "post",
+      "name": "verifyUser",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername). Channel direct messages chats can't be verified.",
+          "type": [
+            "int",
+            "str"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": true,
+          "description": "Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.",
+          "type": [
+            "str"
+          ],
+          "name": "custom_description"
+        }
+      ],
+      "description": "Verifies a chat on behalf of the organization which is represented by the bot. Returns True on success.",
+      "type": "post",
+      "name": "verifyChat",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the target user",
+          "type": [
+            "int"
+          ],
+          "name": "user_id"
+        }
+      ],
+      "description": "Removes verification from a user who is currently verified on behalf of the organization represented by the bot. Returns True on success.",
+      "type": "post",
+      "name": "removeUserVerification",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
+          "type": [
+            "int",
+            "str"
+          ],
+          "name": "chat_id"
+        }
+      ],
+      "description": "Removes verification from a chat that is currently verified on behalf of the organization represented by the bot. Returns True on success.",
+      "type": "post",
+      "name": "removeChatVerification",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection on behalf of which to read the message",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": false,
+          "description": "Unique identifier of the chat in which the message was received. The chat must have been active in the last 24 hours.",
+          "type": [
+            "int"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": false,
+          "description": "Unique identifier of the message to mark as read",
+          "type": [
+            "int"
+          ],
+          "name": "message_id"
+        }
+      ],
+      "description": "Marks incoming message as read on behalf of a business account. Requires the can_read_messages business bot right. Returns True on success.",
+      "type": "post",
+      "name": "readBusinessMessage",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection on behalf of which to delete the messages",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": false,
+          "description": "A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat. See deleteMessage for limitations on which messages can be deleted",
+          "type": [
+            [
+              "array",
+              [
+                "int"
+              ]
+            ]
+          ],
+          "name": "message_ids"
+        }
+      ],
+      "description": "Delete messages on behalf of a business account. Requires the can_delete_sent_messages business bot right to delete messages sent by the bot itself, or the can_delete_all_messages business bot right to delete any message. Returns True on success.",
+      "type": "post",
+      "name": "deleteBusinessMessages",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": false,
+          "description": "The new value of the first name for the business account; 1-64 characters",
+          "type": [
+            "str"
+          ],
+          "name": "first_name"
+        },
+        {
+          "optional": true,
+          "description": "The new value of the last name for the business account; 0-64 characters",
+          "type": [
+            "str"
+          ],
+          "name": "last_name"
+        }
+      ],
+      "description": "Changes the first and last name of a managed business account. Requires the can_change_name business bot right. Returns True on success.",
+      "type": "post",
+      "name": "setBusinessAccountName",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": true,
+          "description": "The new value of the username for the business account; 0-32 characters",
+          "type": [
+            "str"
+          ],
+          "name": "username"
+        }
+      ],
+      "description": "Changes the username of a managed business account. Requires the can_change_username business bot right. Returns True on success.",
+      "type": "post",
+      "name": "setBusinessAccountUsername",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": true,
+          "description": "The new value of the bio for the business account; 0-140 characters",
+          "type": [
+            "str"
+          ],
+          "name": "bio"
+        }
+      ],
+      "description": "Changes the bio of a managed business account. Requires the can_change_bio business bot right. Returns True on success.",
+      "type": "post",
+      "name": "setBusinessAccountBio",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": false,
+          "description": "The new profile photo to set",
+          "type": [
+            "InputProfilePhoto"
+          ],
+          "name": "photo"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to set the public photo, which will be visible even if the main photo is hidden by the business account's privacy settings. An account can have only one public photo.",
+          "type": [
+            "bool"
+          ],
+          "name": "is_public"
+        }
+      ],
+      "description": "Changes the profile photo of a managed business account. Requires the can_edit_profile_photo business bot right. Returns True on success.",
+      "type": "post",
+      "name": "setBusinessAccountProfilePhoto",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to remove the public photo, which is visible even if the main photo is hidden by the business account's privacy settings. After the main photo is removed, the previous profile photo (if present) becomes the main photo.",
+          "type": [
+            "bool"
+          ],
+          "name": "is_public"
+        }
+      ],
+      "description": "Removes the current profile photo of a managed business account. Requires the can_edit_profile_photo business bot right. Returns True on success.",
+      "type": "post",
+      "name": "removeBusinessAccountProfilePhoto",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": false,
+          "description": "Pass True, if a button for sending a gift to the user or by the business account must always be shown in the input field",
+          "type": [
+            "bool"
+          ],
+          "name": "show_gift_button"
+        },
+        {
+          "optional": false,
+          "description": "Types of gifts accepted by the business account",
+          "type": [
+            "AcceptedGiftTypes"
+          ],
+          "name": "accepted_gift_types"
+        }
+      ],
+      "description": "Changes the privacy settings pertaining to incoming gifts in a managed business account. Requires the can_change_gift_settings business bot right. Returns True on success.",
+      "type": "post",
+      "name": "setBusinessAccountGiftSettings",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        }
+      ],
+      "description": "Returns the amount of Telegram Stars owned by a managed business account. Requires the can_view_gifts_and_stars business bot right. Returns StarAmount on success.",
+      "type": "get",
+      "name": "getBusinessAccountStarBalance",
+      "return": [
+        "StarAmount"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": false,
+          "description": "Number of Telegram Stars to transfer; 1-10000",
+          "type": [
+            "int"
+          ],
+          "name": "star_count"
+        }
+      ],
+      "description": "Transfers Telegram Stars from the business account balance to the bot's balance. Requires the can_transfer_stars business bot right. Returns True on success.",
+      "type": "post",
+      "name": "transferBusinessAccountStars",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude gifts that aren't saved to the account's profile page",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_unsaved"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude gifts that are saved to the account's profile page",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_saved"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude gifts that can be purchased an unlimited number of times",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_unlimited"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude gifts that can be purchased a limited number of times and can be upgraded to unique",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_limited_upgradable"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude gifts that can be purchased a limited number of times and can't be upgraded to unique",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_limited_non_upgradable"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude unique gifts",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_unique"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_from_blockchain"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to sort results by gift price instead of send date. Sorting is applied before pagination.",
+          "type": [
+            "bool"
+          ],
+          "name": "sort_by_price"
+        },
+        {
+          "optional": true,
+          "description": "Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results",
+          "type": [
+            "str"
+          ],
+          "name": "offset"
+        },
+        {
+          "optional": true,
+          "description": "The maximum number of gifts to be returned; 1-100. Defaults to 100",
+          "type": [
+            "int"
+          ],
+          "name": "limit"
+        }
+      ],
+      "description": "Returns the gifts received and owned by a managed business account. Requires the can_view_gifts_and_stars business bot right. Returns OwnedGifts on success.",
+      "type": "get",
+      "name": "getBusinessAccountGifts",
+      "return": [
+        "OwnedGifts"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the user",
+          "type": [
+            "int"
+          ],
+          "name": "user_id"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude gifts that can be purchased an unlimited number of times",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_unlimited"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude gifts that can be purchased a limited number of times and can be upgraded to unique",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_limited_upgradable"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude gifts that can be purchased a limited number of times and can't be upgraded to unique",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_limited_non_upgradable"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_from_blockchain"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude unique gifts",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_unique"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to sort results by gift price instead of send date. Sorting is applied before pagination.",
+          "type": [
+            "bool"
+          ],
+          "name": "sort_by_price"
+        },
+        {
+          "optional": true,
+          "description": "Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results",
+          "type": [
+            "str"
+          ],
+          "name": "offset"
+        },
+        {
+          "optional": true,
+          "description": "The maximum number of gifts to be returned; 1-100. Defaults to 100",
+          "type": [
+            "int"
+          ],
+          "name": "limit"
+        }
+      ],
+      "description": "Returns the gifts owned and hosted by a user. Returns OwnedGifts on success.",
+      "type": "get",
+      "name": "getUserGifts",
+      "return": [
+        "OwnedGifts"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
+          "type": [
+            "int",
+            "str"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude gifts that aren't saved to the chat's profile page. Always True, unless the bot has the can_post_messages administrator right in the channel.",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_unsaved"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude gifts that are saved to the chat's profile page. Always False, unless the bot has the can_post_messages administrator right in the channel.",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_saved"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude gifts that can be purchased an unlimited number of times",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_unlimited"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude gifts that can be purchased a limited number of times and can be upgraded to unique",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_limited_upgradable"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude gifts that can be purchased a limited number of times and can't be upgraded to unique",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_limited_non_upgradable"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_from_blockchain"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to exclude unique gifts",
+          "type": [
+            "bool"
+          ],
+          "name": "exclude_unique"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to sort results by gift price instead of send date. Sorting is applied before pagination.",
+          "type": [
+            "bool"
+          ],
+          "name": "sort_by_price"
+        },
+        {
+          "optional": true,
+          "description": "Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results",
+          "type": [
+            "str"
+          ],
+          "name": "offset"
+        },
+        {
+          "optional": true,
+          "description": "The maximum number of gifts to be returned; 1-100. Defaults to 100",
+          "type": [
+            "int"
+          ],
+          "name": "limit"
+        }
+      ],
+      "description": "Returns the gifts owned by a chat. Returns OwnedGifts on success.",
+      "type": "get",
+      "name": "getChatGifts",
+      "return": [
+        "OwnedGifts"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": false,
+          "description": "Unique identifier of the regular gift that should be converted to Telegram Stars",
+          "type": [
+            "str"
+          ],
+          "name": "owned_gift_id"
+        }
+      ],
+      "description": "Converts a given regular gift to Telegram Stars. Requires the can_convert_gifts_to_stars business bot right. Returns True on success.",
+      "type": "post",
+      "name": "convertGiftToStars",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": false,
+          "description": "Unique identifier of the regular gift that should be upgraded to a unique one",
+          "type": [
+            "str"
+          ],
+          "name": "owned_gift_id"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to keep the original gift text, sender and receiver in the upgraded gift",
+          "type": [
+            "bool"
+          ],
+          "name": "keep_original_details"
+        },
+        {
+          "optional": true,
+          "description": "The amount of Telegram Stars that will be paid for the upgrade from the business account balance. If gift.prepaid_upgrade_star_count > 0, then pass 0, otherwise, the can_transfer_stars business bot right is required and gift.upgrade_star_count must be passed.",
+          "type": [
+            "int"
+          ],
+          "name": "star_count"
+        }
+      ],
+      "description": "Upgrades a given regular gift to a unique gift. Requires the can_transfer_and_upgrade_gifts business bot right. Additionally requires the can_transfer_stars business bot right if the upgrade is paid. Returns True on success.",
+      "type": "post",
+      "name": "upgradeGift",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": false,
+          "description": "Unique identifier of the regular gift that should be transferred",
+          "type": [
+            "str"
+          ],
+          "name": "owned_gift_id"
+        },
+        {
+          "optional": false,
+          "description": "Unique identifier of the chat which will own the gift. The chat must be active in the last 24 hours.",
+          "type": [
+            "int"
+          ],
+          "name": "new_owner_chat_id"
+        },
+        {
+          "optional": true,
+          "description": "The amount of Telegram Stars that will be paid for the transfer from the business account balance. If positive, then the can_transfer_stars business bot right is required.",
+          "type": [
+            "int"
+          ],
+          "name": "star_count"
+        }
+      ],
+      "description": "Transfers an owned unique gift to another user. Requires the can_transfer_and_upgrade_gifts business bot right. Requires can_transfer_stars business bot right if the transfer is paid. Returns True on success.",
+      "type": "post",
+      "name": "transferGift",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": false,
+          "description": "Content of the story",
+          "type": [
+            "InputStoryContent"
+          ],
+          "name": "content"
+        },
+        {
+          "optional": false,
+          "description": "Period after which the story is moved to the archive, in seconds; must be one of 6 * 3600, 12 * 3600, 86400, or 2 * 86400",
+          "type": [
+            "int"
+          ],
+          "name": "active_period"
+        },
+        {
+          "optional": true,
+          "description": "Caption of the story, 0-2048 characters after entities parsing",
+          "type": [
+            "str"
+          ],
+          "name": "caption"
+        },
+        {
+          "optional": true,
+          "description": "Mode for parsing entities in the story caption. See formatting options for more details.",
+          "type": [
+            "str"
+          ],
+          "name": "parse_mode"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode",
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "name": "caption_entities"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized list of clickable areas to be shown on the story",
+          "type": [
+            [
+              "array",
+              [
+                "StoryArea"
+              ]
+            ]
+          ],
+          "name": "areas"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to keep the story accessible after it expires",
+          "type": [
+            "bool"
+          ],
+          "name": "post_to_chat_page"
+        },
+        {
+          "optional": true,
+          "description": "Pass True if the content of the story must be protected from forwarding and screenshotting",
+          "type": [
+            "bool"
+          ],
+          "name": "protect_content"
+        }
+      ],
+      "description": "Posts a story on behalf of a managed business account. Requires the can_manage_stories business bot right. Returns Story on success.",
+      "type": "post",
+      "name": "postStory",
+      "return": [
+        "Story"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": false,
+          "description": "Unique identifier of the chat which posted the story that should be reposted",
+          "type": [
+            "int"
+          ],
+          "name": "from_chat_id"
+        },
+        {
+          "optional": false,
+          "description": "Unique identifier of the story that should be reposted",
+          "type": [
+            "int"
+          ],
+          "name": "from_story_id"
+        },
+        {
+          "optional": false,
+          "description": "Period after which the story is moved to the archive, in seconds; must be one of 6 * 3600, 12 * 3600, 86400, or 2 * 86400",
+          "type": [
+            "int"
+          ],
+          "name": "active_period"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to keep the story accessible after it expires",
+          "type": [
+            "bool"
+          ],
+          "name": "post_to_chat_page"
+        },
+        {
+          "optional": true,
+          "description": "Pass True if the content of the story must be protected from forwarding and screenshotting",
+          "type": [
+            "bool"
+          ],
+          "name": "protect_content"
+        }
+      ],
+      "description": "Reposts a story on behalf of a business account from another business account. Both business accounts must be managed by the same bot, and the story on the source account must have been posted (or reposted) by the bot. Requires the can_manage_stories business bot right for both business accounts. Returns Story on success.",
+      "type": "post",
+      "name": "repostStory",
+      "return": [
+        "Story"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": false,
+          "description": "Unique identifier of the story to edit",
+          "type": [
+            "int"
+          ],
+          "name": "story_id"
+        },
+        {
+          "optional": false,
+          "description": "Content of the story",
+          "type": [
+            "InputStoryContent"
+          ],
+          "name": "content"
+        },
+        {
+          "optional": true,
+          "description": "Caption of the story, 0-2048 characters after entities parsing",
+          "type": [
+            "str"
+          ],
+          "name": "caption"
+        },
+        {
+          "optional": true,
+          "description": "Mode for parsing entities in the story caption. See formatting options for more details.",
+          "type": [
+            "str"
+          ],
+          "name": "parse_mode"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode",
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "name": "caption_entities"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized list of clickable areas to be shown on the story",
+          "type": [
+            [
+              "array",
+              [
+                "StoryArea"
+              ]
+            ]
+          ],
+          "name": "areas"
+        }
+      ],
+      "description": "Edits a story previously posted by the bot on behalf of a managed business account. Requires the can_manage_stories business bot right. Returns Story on success.",
+      "type": "post",
+      "name": "editStory",
+      "return": [
+        "Story"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the business connection",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": false,
+          "description": "Unique identifier of the story to delete",
+          "type": [
+            "int"
+          ],
+          "name": "story_id"
+        }
+      ],
+      "description": "Deletes a story previously posted by the bot on behalf of a managed business account. Requires the can_manage_stories business bot right. Returns True on success.",
+      "type": "post",
+      "name": "deleteStory",
+      "return": [
+        "true"
+      ]
+    },
+    {
       "params": [
         {
           "optional": true,
@@ -18681,6 +20905,74 @@
       "params": [
         {
           "optional": false,
+          "description": "Unique identifier for the target direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": false,
+          "description": "Identifier of a suggested post message to approve",
+          "type": [
+            "int"
+          ],
+          "name": "message_id"
+        },
+        {
+          "optional": true,
+          "description": "Point in time (Unix timestamp) when the post is expected to be published; omit if the date has already been specified when the suggested post was created. If specified, then the date must be not more than 2678400 seconds (30 days) in the future",
+          "type": [
+            "int"
+          ],
+          "name": "send_date"
+        }
+      ],
+      "description": "Use this method to approve a suggested post in a direct messages chat. The bot must have the 'can_post_messages' administrator right in the corresponding channel chat. Returns True on success.",
+      "type": "post",
+      "name": "approveSuggestedPost",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier for the target direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": false,
+          "description": "Identifier of a suggested post message to decline",
+          "type": [
+            "int"
+          ],
+          "name": "message_id"
+        },
+        {
+          "optional": true,
+          "description": "Comment for the creator of the suggested post; 0-128 characters",
+          "type": [
+            "str"
+          ],
+          "name": "comment"
+        }
+      ],
+      "description": "Use this method to decline a suggested post in a direct messages chat. The bot must have the 'can_manage_direct_messages' administrator right in the corresponding channel chat. Returns True on success.",
+      "type": "post",
+      "name": "declineSuggestedPost",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
           "type": [
             "int",
@@ -18697,7 +20989,7 @@
           "name": "message_id"
         }
       ],
-      "description": "Use this method to delete a message, including service messages, with the following limitations:\n- A message can only be deleted if it was sent less than 48 hours ago.\n- Service messages about a supergroup, channel, or forum topic creation can't be deleted.\n- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.\n- Bots can delete outgoing messages in private chats, groups, and supergroups.\n- Bots can delete incoming messages in private chats.\n- Bots granted can_post_messages permissions can delete outgoing messages in channels.\n- If the bot is an administrator of a group, it can delete any message there.\n- If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.\nReturns True on success.",
+      "description": "Use this method to delete a message, including service messages, with the following limitations:\n- A message can only be deleted if it was sent less than 48 hours ago.\n- Service messages about a supergroup, channel, or forum topic creation can't be deleted.\n- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.\n- Bots can delete outgoing messages in private chats, groups, and supergroups.\n- Bots can delete incoming messages in private chats.\n- Bots granted can_post_messages permissions can delete outgoing messages in channels.\n- If the bot is an administrator of a group, it can delete any message there.\n- If the bot has can_delete_messages administrator right in a supergroup or a channel, it can delete any message there.\n- If the bot has can_manage_direct_messages administrator right in a channel, it can delete any message in the corresponding direct messages chat.\nReturns True on success.",
       "type": "post",
       "name": "deleteMessage",
       "return": [
@@ -18737,915 +21029,6 @@
       ]
     },
     {
-      "params": [],
-      "description": "Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a Gifts object.",
-      "type": "get",
-      "name": "getAvailableGifts",
-      "return": [
-        "Gifts"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": true,
-          "description": "Required if chat_id is not specified. Unique identifier of the target user who will receive the gift.",
-          "type": [
-            "int"
-          ],
-          "name": "user_id"
-        },
-        {
-          "optional": true,
-          "description": "Required if user_id is not specified. Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift.",
-          "type": [
-            "int",
-            "str"
-          ],
-          "name": "chat_id"
-        },
-        {
-          "optional": false,
-          "description": "Identifier of the gift",
-          "type": [
-            "str"
-          ],
-          "name": "gift_id"
-        },
-        {
-          "optional": true,
-          "description": "Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver",
-          "type": [
-            "bool"
-          ],
-          "name": "pay_for_upgrade"
-        },
-        {
-          "optional": true,
-          "description": "Text that will be shown along with the gift; 0-128 characters",
-          "type": [
-            "str"
-          ],
-          "name": "text"
-        },
-        {
-          "optional": true,
-          "description": "Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.",
-          "type": [
-            "str"
-          ],
-          "name": "text_parse_mode"
-        },
-        {
-          "optional": true,
-          "description": "A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.",
-          "type": [
-            [
-              "array",
-              [
-                "MessageEntity"
-              ]
-            ]
-          ],
-          "name": "text_entities"
-        }
-      ],
-      "description": "Sends a gift to the given user or channel chat. The gift can't be converted to Telegram Stars by the receiver. Returns True on success.",
-      "type": "post",
-      "name": "sendGift",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the target user who will receive a Telegram Premium subscription",
-          "type": [
-            "int"
-          ],
-          "name": "user_id"
-        },
-        {
-          "optional": false,
-          "description": "Number of months the Telegram Premium subscription will be active for the user; must be one of 3, 6, or 12",
-          "type": [
-            "int"
-          ],
-          "name": "month_count"
-        },
-        {
-          "optional": false,
-          "description": "Number of Telegram Stars to pay for the Telegram Premium subscription; must be 1000 for 3 months, 1500 for 6 months, and 2500 for 12 months",
-          "type": [
-            "int"
-          ],
-          "name": "star_count"
-        },
-        {
-          "optional": true,
-          "description": "Text that will be shown along with the service message about the subscription; 0-128 characters",
-          "type": [
-            "str"
-          ],
-          "name": "text"
-        },
-        {
-          "optional": true,
-          "description": "Mode for parsing entities in the text. See formatting options for more details. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.",
-          "type": [
-            "str"
-          ],
-          "name": "text_parse_mode"
-        },
-        {
-          "optional": true,
-          "description": "A JSON-serialized list of special entities that appear in the gift text. It can be specified instead of text_parse_mode. Entities other than “bold”, “italic”, “underline”, “strikethrough”, “spoiler”, and “custom_emoji” are ignored.",
-          "type": [
-            [
-              "array",
-              [
-                "MessageEntity"
-              ]
-            ]
-          ],
-          "name": "text_entities"
-        }
-      ],
-      "description": "Gifts a Telegram Premium subscription to the given user. Returns True on success.",
-      "type": "post",
-      "name": "giftPremiumSubscription",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the target user",
-          "type": [
-            "int"
-          ],
-          "name": "user_id"
-        },
-        {
-          "optional": true,
-          "description": "Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.",
-          "type": [
-            "str"
-          ],
-          "name": "custom_description"
-        }
-      ],
-      "description": "Verifies a user on behalf of the organization which is represented by the bot. Returns True on success.",
-      "type": "post",
-      "name": "verifyUser",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
-          "type": [
-            "int",
-            "str"
-          ],
-          "name": "chat_id"
-        },
-        {
-          "optional": true,
-          "description": "Custom description for the verification; 0-70 characters. Must be empty if the organization isn't allowed to provide a custom verification description.",
-          "type": [
-            "str"
-          ],
-          "name": "custom_description"
-        }
-      ],
-      "description": "Verifies a chat on behalf of the organization which is represented by the bot. Returns True on success.",
-      "type": "post",
-      "name": "verifyChat",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the target user",
-          "type": [
-            "int"
-          ],
-          "name": "user_id"
-        }
-      ],
-      "description": "Removes verification from a user who is currently verified on behalf of the organization represented by the bot. Returns True on success.",
-      "type": "post",
-      "name": "removeUserVerification",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)",
-          "type": [
-            "int",
-            "str"
-          ],
-          "name": "chat_id"
-        }
-      ],
-      "description": "Removes verification from a chat that is currently verified on behalf of the organization represented by the bot. Returns True on success.",
-      "type": "post",
-      "name": "removeChatVerification",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection on behalf of which to read the message",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        },
-        {
-          "optional": false,
-          "description": "Unique identifier of the chat in which the message was received. The chat must have been active in the last 24 hours.",
-          "type": [
-            "int"
-          ],
-          "name": "chat_id"
-        },
-        {
-          "optional": false,
-          "description": "Unique identifier of the message to mark as read",
-          "type": [
-            "int"
-          ],
-          "name": "message_id"
-        }
-      ],
-      "description": "Marks incoming message as read on behalf of a business account. Requires the can_read_messages business bot right. Returns True on success.",
-      "type": "post",
-      "name": "readBusinessMessage",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection on behalf of which to delete the messages",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        },
-        {
-          "optional": false,
-          "description": "A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat. See deleteMessage for limitations on which messages can be deleted",
-          "type": [
-            [
-              "array",
-              [
-                "int"
-              ]
-            ]
-          ],
-          "name": "message_ids"
-        }
-      ],
-      "description": "Delete messages on behalf of a business account. Requires the can_delete_sent_messages business bot right to delete messages sent by the bot itself, or the can_delete_all_messages business bot right to delete any message. Returns True on success.",
-      "type": "post",
-      "name": "deleteBusinessMessages",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        },
-        {
-          "optional": false,
-          "description": "The new value of the first name for the business account; 1-64 characters",
-          "type": [
-            "str"
-          ],
-          "name": "first_name"
-        },
-        {
-          "optional": true,
-          "description": "The new value of the last name for the business account; 0-64 characters",
-          "type": [
-            "str"
-          ],
-          "name": "last_name"
-        }
-      ],
-      "description": "Changes the first and last name of a managed business account. Requires the can_change_name business bot right. Returns True on success.",
-      "type": "post",
-      "name": "setBusinessAccountName",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        },
-        {
-          "optional": true,
-          "description": "The new value of the username for the business account; 0-32 characters",
-          "type": [
-            "str"
-          ],
-          "name": "username"
-        }
-      ],
-      "description": "Changes the username of a managed business account. Requires the can_change_username business bot right. Returns True on success.",
-      "type": "post",
-      "name": "setBusinessAccountUsername",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        },
-        {
-          "optional": true,
-          "description": "The new value of the bio for the business account; 0-140 characters",
-          "type": [
-            "str"
-          ],
-          "name": "bio"
-        }
-      ],
-      "description": "Changes the bio of a managed business account. Requires the can_change_bio business bot right. Returns True on success.",
-      "type": "post",
-      "name": "setBusinessAccountBio",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        },
-        {
-          "optional": false,
-          "description": "The new profile photo to set",
-          "type": [
-            "InputProfilePhoto"
-          ],
-          "name": "photo"
-        },
-        {
-          "optional": true,
-          "description": "Pass True to set the public photo, which will be visible even if the main photo is hidden by the business account's privacy settings. An account can have only one public photo.",
-          "type": [
-            "bool"
-          ],
-          "name": "is_public"
-        }
-      ],
-      "description": "Changes the profile photo of a managed business account. Requires the can_edit_profile_photo business bot right. Returns True on success.",
-      "type": "post",
-      "name": "setBusinessAccountProfilePhoto",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        },
-        {
-          "optional": true,
-          "description": "Pass True to remove the public photo, which is visible even if the main photo is hidden by the business account's privacy settings. After the main photo is removed, the previous profile photo (if present) becomes the main photo.",
-          "type": [
-            "bool"
-          ],
-          "name": "is_public"
-        }
-      ],
-      "description": "Removes the current profile photo of a managed business account. Requires the can_edit_profile_photo business bot right. Returns True on success.",
-      "type": "post",
-      "name": "removeBusinessAccountProfilePhoto",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        },
-        {
-          "optional": false,
-          "description": "Pass True, if a button for sending a gift to the user or by the business account must always be shown in the input field",
-          "type": [
-            "bool"
-          ],
-          "name": "show_gift_button"
-        },
-        {
-          "optional": false,
-          "description": "Types of gifts accepted by the business account",
-          "type": [
-            "AcceptedGiftTypes"
-          ],
-          "name": "accepted_gift_types"
-        }
-      ],
-      "description": "Changes the privacy settings pertaining to incoming gifts in a managed business account. Requires the can_change_gift_settings business bot right. Returns True on success.",
-      "type": "post",
-      "name": "setBusinessAccountGiftSettings",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        }
-      ],
-      "description": "Returns the amount of Telegram Stars owned by a managed business account. Requires the can_view_gifts_and_stars business bot right. Returns StarAmount on success.",
-      "type": "get",
-      "name": "getBusinessAccountStarBalance",
-      "return": [
-        "StarAmount"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        },
-        {
-          "optional": false,
-          "description": "Number of Telegram Stars to transfer; 1-10000",
-          "type": [
-            "int"
-          ],
-          "name": "star_count"
-        }
-      ],
-      "description": "Transfers Telegram Stars from the business account balance to the bot's balance. Requires the can_transfer_stars business bot right. Returns True on success.",
-      "type": "post",
-      "name": "transferBusinessAccountStars",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        },
-        {
-          "optional": true,
-          "description": "Pass True to exclude gifts that aren't saved to the account's profile page",
-          "type": [
-            "bool"
-          ],
-          "name": "exclude_unsaved"
-        },
-        {
-          "optional": true,
-          "description": "Pass True to exclude gifts that are saved to the account's profile page",
-          "type": [
-            "bool"
-          ],
-          "name": "exclude_saved"
-        },
-        {
-          "optional": true,
-          "description": "Pass True to exclude gifts that can be purchased an unlimited number of times",
-          "type": [
-            "bool"
-          ],
-          "name": "exclude_unlimited"
-        },
-        {
-          "optional": true,
-          "description": "Pass True to exclude gifts that can be purchased a limited number of times",
-          "type": [
-            "bool"
-          ],
-          "name": "exclude_limited"
-        },
-        {
-          "optional": true,
-          "description": "Pass True to exclude unique gifts",
-          "type": [
-            "bool"
-          ],
-          "name": "exclude_unique"
-        },
-        {
-          "optional": true,
-          "description": "Pass True to sort results by gift price instead of send date. Sorting is applied before pagination.",
-          "type": [
-            "bool"
-          ],
-          "name": "sort_by_price"
-        },
-        {
-          "optional": true,
-          "description": "Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results",
-          "type": [
-            "str"
-          ],
-          "name": "offset"
-        },
-        {
-          "optional": true,
-          "description": "The maximum number of gifts to be returned; 1-100. Defaults to 100",
-          "type": [
-            "int"
-          ],
-          "name": "limit"
-        }
-      ],
-      "description": "Returns the gifts received and owned by a managed business account. Requires the can_view_gifts_and_stars business bot right. Returns OwnedGifts on success.",
-      "type": "get",
-      "name": "getBusinessAccountGifts",
-      "return": [
-        "OwnedGifts"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        },
-        {
-          "optional": false,
-          "description": "Unique identifier of the regular gift that should be converted to Telegram Stars",
-          "type": [
-            "str"
-          ],
-          "name": "owned_gift_id"
-        }
-      ],
-      "description": "Converts a given regular gift to Telegram Stars. Requires the can_convert_gifts_to_stars business bot right. Returns True on success.",
-      "type": "post",
-      "name": "convertGiftToStars",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        },
-        {
-          "optional": false,
-          "description": "Unique identifier of the regular gift that should be upgraded to a unique one",
-          "type": [
-            "str"
-          ],
-          "name": "owned_gift_id"
-        },
-        {
-          "optional": true,
-          "description": "Pass True to keep the original gift text, sender and receiver in the upgraded gift",
-          "type": [
-            "bool"
-          ],
-          "name": "keep_original_details"
-        },
-        {
-          "optional": true,
-          "description": "The amount of Telegram Stars that will be paid for the upgrade from the business account balance. If gift.prepaid_upgrade_star_count > 0, then pass 0, otherwise, the can_transfer_stars business bot right is required and gift.upgrade_star_count must be passed.",
-          "type": [
-            "int"
-          ],
-          "name": "star_count"
-        }
-      ],
-      "description": "Upgrades a given regular gift to a unique gift. Requires the can_transfer_and_upgrade_gifts business bot right. Additionally requires the can_transfer_stars business bot right if the upgrade is paid. Returns True on success.",
-      "type": "post",
-      "name": "upgradeGift",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        },
-        {
-          "optional": false,
-          "description": "Unique identifier of the regular gift that should be transferred",
-          "type": [
-            "str"
-          ],
-          "name": "owned_gift_id"
-        },
-        {
-          "optional": false,
-          "description": "Unique identifier of the chat which will own the gift. The chat must be active in the last 24 hours.",
-          "type": [
-            "int"
-          ],
-          "name": "new_owner_chat_id"
-        },
-        {
-          "optional": true,
-          "description": "The amount of Telegram Stars that will be paid for the transfer from the business account balance. If positive, then the can_transfer_stars business bot right is required.",
-          "type": [
-            "int"
-          ],
-          "name": "star_count"
-        }
-      ],
-      "description": "Transfers an owned unique gift to another user. Requires the can_transfer_and_upgrade_gifts business bot right. Requires can_transfer_stars business bot right if the transfer is paid. Returns True on success.",
-      "type": "post",
-      "name": "transferGift",
-      "return": [
-        "true"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        },
-        {
-          "optional": false,
-          "description": "Content of the story",
-          "type": [
-            "InputStoryContent"
-          ],
-          "name": "content"
-        },
-        {
-          "optional": false,
-          "description": "Period after which the story is moved to the archive, in seconds; must be one of 6 * 3600, 12 * 3600, 86400, or 2 * 86400",
-          "type": [
-            "int"
-          ],
-          "name": "active_period"
-        },
-        {
-          "optional": true,
-          "description": "Caption of the story, 0-2048 characters after entities parsing",
-          "type": [
-            "str"
-          ],
-          "name": "caption"
-        },
-        {
-          "optional": true,
-          "description": "Mode for parsing entities in the story caption. See formatting options for more details.",
-          "type": [
-            "str"
-          ],
-          "name": "parse_mode"
-        },
-        {
-          "optional": true,
-          "description": "A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode",
-          "type": [
-            [
-              "array",
-              [
-                "MessageEntity"
-              ]
-            ]
-          ],
-          "name": "caption_entities"
-        },
-        {
-          "optional": true,
-          "description": "A JSON-serialized list of clickable areas to be shown on the story",
-          "type": [
-            [
-              "array",
-              [
-                "StoryArea"
-              ]
-            ]
-          ],
-          "name": "areas"
-        },
-        {
-          "optional": true,
-          "description": "Pass True to keep the story accessible after it expires",
-          "type": [
-            "bool"
-          ],
-          "name": "post_to_chat_page"
-        },
-        {
-          "optional": true,
-          "description": "Pass True if the content of the story must be protected from forwarding and screenshotting",
-          "type": [
-            "bool"
-          ],
-          "name": "protect_content"
-        }
-      ],
-      "description": "Posts a story on behalf of a managed business account. Requires the can_manage_stories business bot right. Returns Story on success.",
-      "type": "post",
-      "name": "postStory",
-      "return": [
-        "Story"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        },
-        {
-          "optional": false,
-          "description": "Unique identifier of the story to edit",
-          "type": [
-            "int"
-          ],
-          "name": "story_id"
-        },
-        {
-          "optional": false,
-          "description": "Content of the story",
-          "type": [
-            "InputStoryContent"
-          ],
-          "name": "content"
-        },
-        {
-          "optional": true,
-          "description": "Caption of the story, 0-2048 characters after entities parsing",
-          "type": [
-            "str"
-          ],
-          "name": "caption"
-        },
-        {
-          "optional": true,
-          "description": "Mode for parsing entities in the story caption. See formatting options for more details.",
-          "type": [
-            "str"
-          ],
-          "name": "parse_mode"
-        },
-        {
-          "optional": true,
-          "description": "A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode",
-          "type": [
-            [
-              "array",
-              [
-                "MessageEntity"
-              ]
-            ]
-          ],
-          "name": "caption_entities"
-        },
-        {
-          "optional": true,
-          "description": "A JSON-serialized list of clickable areas to be shown on the story",
-          "type": [
-            [
-              "array",
-              [
-                "StoryArea"
-              ]
-            ]
-          ],
-          "name": "areas"
-        }
-      ],
-      "description": "Edits a story previously posted by the bot on behalf of a managed business account. Requires the can_manage_stories business bot right. Returns Story on success.",
-      "type": "post",
-      "name": "editStory",
-      "return": [
-        "Story"
-      ]
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier of the business connection",
-          "type": [
-            "str"
-          ],
-          "name": "business_connection_id"
-        },
-        {
-          "optional": false,
-          "description": "Unique identifier of the story to delete",
-          "type": [
-            "int"
-          ],
-          "name": "story_id"
-        }
-      ],
-      "description": "Deletes a story previously posted by the bot on behalf of a managed business account. Requires the can_manage_stories business bot right. Returns True on success.",
-      "type": "post",
-      "name": "deleteStory",
-      "return": [
-        "true"
-      ]
-    },
-    {
       "params": [
         {
           "optional": true,
@@ -19666,11 +21049,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -19720,6 +21111,14 @@
             "str"
           ],
           "name": "message_effect_id"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
         },
         {
           "optional": true,
@@ -20372,11 +21771,19 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
           "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
         },
         {
           "optional": false,
@@ -20587,6 +21994,14 @@
             "str"
           ],
           "name": "message_effect_id"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
         },
         {
           "optional": true,
@@ -21027,7 +22442,7 @@
         },
         {
           "optional": false,
-          "description": "Unique identifier for the target chat",
+          "description": "Unique identifier for the target chat. Games can't be sent to channel direct messages chats and channel chats.",
           "type": [
             "int"
           ],
@@ -21035,7 +22450,7 @@
         },
         {
           "optional": true,
-          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only",
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
           "type": [
             "int"
           ],
