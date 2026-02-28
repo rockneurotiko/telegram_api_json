@@ -177,7 +177,7 @@ defmodule TelegramApiJson do
   end
 
   defp maybe_add_file_type(types, description) do
-    if String.contains?(description, "attach://") do
+    if "file" not in types and String.contains?(description, "attach://") do
       types ++ ["file"]
     else
       types
