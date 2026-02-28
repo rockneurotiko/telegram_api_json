@@ -41,7 +41,9 @@ defmodule TelegramApiJson do
     "BackgroundFill",
     "BackgroundType",
     "InputProfilePhoto",
-    "InputStoryContent"
+    "InputStoryContent",
+    "OwnedGift",
+    "StoryAreaType"
   ]
 
   @zero_parameters [
@@ -239,9 +241,15 @@ defmodule TelegramApiJson do
   @simple_return_r ~r{(?:r|R)eturns (?:the |a )?([^\s]+)}
   @on_success_return ~r{(?:r|R)eturns (?:the |a )?([^\s]+) on success}
   @as_object_r ~r{(?:r|R)eturns the (?:.+ )?(?:as |a |as a )([^\s]+)}
+  @array_objects ~r{an (?:a|A)rray of ([^\s]+)}
   @is_returned_r ~r{([^\s]+) (?:object )?is returned}
 
-  @all_type_regexes_r [@on_success_return, @is_returned_r, @as_object_r, @simple_return_r]
+  @all_type_regexes_r [
+    @on_success_return,
+    @is_returned_r,
+    @as_object_r,
+    @simple_return_r
+  ]
 
   defp extract_return_type(type) do
     post_ts = [
@@ -251,35 +259,32 @@ defmodule TelegramApiJson do
     ]
 
     cond do
-      String.contains?(type, "Returns an Array of Update") ->
-        [["array", ["Update"]]]
+      # String.contains?(type, "Returns an Array of Update") ->
+      #   [["array", ["Update"]]]
 
-      String.contains?(type, "On success, an array of MessageId") ->
-        [["array", ["MessageId"]]]
+      # String.contains?(type, "On success, an array of MessageId") ->
+      #   [["array", ["MessageId"]]]
 
-      String.contains?(type, "On success, an array of Messages") ->
-        [["array", ["Message"]]]
+      # String.contains?(type, "On success, an array of Messages") ->
+      #   [["array", ["Message"]]]
 
       String.contains?(type, "File object is returned") ->
         ["File"]
 
-      String.contains?(type, "Returns an Array of GameHighScore") ->
-        [["array", ["GameHighScore"]]]
+      # String.contains?(type, "Returns an Array of GameHighScore") ->
+      #   [["array", ["GameHighScore"]]]
 
-      String.contains?(type, "Returns an Array of ChatMember") ->
-        [["array", ["ChatMember"]]]
+      # String.contains?(type, "Returns an Array of ChatMember") ->
+      #   [["array", ["ChatMember"]]]
 
-      String.contains?(type, "Returns an Array of BotCommand") ->
-        [["array", ["BotCommand"]]]
+      # String.contains?(type, "Returns an Array of BotCommand") ->
+      #   [["array", ["BotCommand"]]]
 
-      String.contains?(type, "Returns an Array of Sticker") ->
-        [["array", ["Sticker"]]]
+      # String.contains?(type, "Returns an Array of Sticker") ->
+      #   [["array", ["Sticker"]]]
 
-      String.contains?(
-        type,
-        "On success, if the message is not an inline message"
-      ) ->
-        # Special case for setGameScore and stopMessageLiveLocation https://core.telegram.org/bots/api#setgamescore
+      String.match?(type, ~r/if the (?:edited )?message is not an inline message/) ->
+        # Methods that return Message or True depending on inline, eg: editMessageText, setGameScore, ...
         ["Message", "true"]
 
       Enum.any?(post_ts, &String.contains?(type, &1)) ->
@@ -288,6 +293,10 @@ defmodule TelegramApiJson do
         typ = type |> String.split(t) |> Enum.at(1) |> String.split() |> Enum.at(0) |> good_type()
 
         [typ]
+
+      match = Regex.run(@array_objects, type) ->
+        type = Enum.at(match, -1)
+        [["array", [good_type(type)]]]
 
       true ->
         Enum.reduce_while(@all_type_regexes_r, ["any"], fn r, acc ->

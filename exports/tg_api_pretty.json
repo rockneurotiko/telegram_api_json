@@ -394,6 +394,14 @@
             "bool"
           ],
           "name": "has_topics_enabled"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the bot allows users to create and delete topics in private chats. Returned only in getMe.",
+          "type": [
+            "bool"
+          ],
+          "name": "allows_users_to_create_topics"
         }
       ],
       "description": "This object represents a Telegram user or bot.",
@@ -864,6 +872,14 @@
             "UserRating"
           ],
           "name": "rating"
+        },
+        {
+          "optional": true,
+          "description": "Optional. For private chats, the first audio added to the profile of the user",
+          "type": [
+            "Audio"
+          ],
+          "name": "first_profile_audio"
         },
         {
           "optional": true,
@@ -1338,6 +1354,22 @@
             "User"
           ],
           "name": "left_chat_member"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Service message: chat owner has left",
+          "type": [
+            "ChatOwnerLeft"
+          ],
+          "name": "chat_owner_left"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Service message: chat owner has changed",
+          "type": [
+            "ChatOwnerChanged"
+          ],
+          "name": "chat_owner_changed"
         },
         {
           "optional": true,
@@ -2618,6 +2650,60 @@
         },
         {
           "optional": false,
+          "description": "Video width",
+          "type": [
+            "int"
+          ],
+          "name": "width"
+        },
+        {
+          "optional": false,
+          "description": "Video height",
+          "type": [
+            "int"
+          ],
+          "name": "height"
+        },
+        {
+          "optional": false,
+          "description": "Codec that was used to encode the video, for example, “h264”, “h265”, or “av01”",
+          "type": [
+            "str"
+          ],
+          "name": "codec"
+        },
+        {
+          "optional": true,
+          "description": "Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.",
+          "type": [
+            "int"
+          ],
+          "name": "file_size"
+        }
+      ],
+      "description": "This object represents a video file of a specific quality.",
+      "name": "VideoQuality"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Identifier for this file, which can be used to download or reuse the file",
+          "type": [
+            "str"
+          ],
+          "name": "file_id"
+        },
+        {
+          "optional": false,
+          "description": "Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.",
+          "type": [
+            "str"
+          ],
+          "name": "file_unique_id"
+        },
+        {
+          "optional": false,
           "description": "Video width as defined by the sender",
           "type": [
             "int"
@@ -2668,6 +2754,19 @@
             "int"
           ],
           "name": "start_timestamp"
+        },
+        {
+          "optional": true,
+          "description": "Optional. List of available qualities of the video",
+          "type": [
+            [
+              "array",
+              [
+                "VideoQuality"
+              ]
+            ]
+          ],
+          "name": "qualities"
         },
         {
           "optional": true,
@@ -4849,6 +4948,33 @@
       "params": [
         {
           "optional": false,
+          "description": "Total number of profile audios for the target user",
+          "type": [
+            "int"
+          ],
+          "name": "total_count"
+        },
+        {
+          "optional": false,
+          "description": "Requested profile audios",
+          "type": [
+            [
+              "array",
+              [
+                "Audio"
+              ]
+            ]
+          ],
+          "name": "audios"
+        }
+      ],
+      "description": "This object represents the audios displayed on a user's profile.",
+      "name": "UserProfileAudios"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
           "description": "Identifier for this file, which can be used to download or reuse the file",
           "type": [
             "str"
@@ -4965,11 +5091,27 @@
       "params": [
         {
           "optional": false,
-          "description": "Text of the button. If none of the optional fields are used, it will be sent as a message when the button is pressed",
+          "description": "Text of the button. If none of the fields other than text, icon_custom_emoji_id, and style are used, it will be sent as a message when the button is pressed",
           "type": [
             "str"
           ],
           "name": "text"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Unique identifier of the custom emoji shown before the text of the button. Can only be used by bots that purchased additional usernames on Fragment or in the messages directly sent by the bot to private, group and supergroup chats if the owner of the bot has a Telegram Premium subscription.",
+          "type": [
+            "str"
+          ],
+          "name": "icon_custom_emoji_id"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Style of the button. Must be one of “danger” (red), “success” (green) or “primary” (blue). If omitted, then an app-specific style is used.",
+          "type": [
+            "str"
+          ],
+          "name": "style"
         },
         {
           "optional": true,
@@ -5020,7 +5162,7 @@
           "name": "web_app"
         }
       ],
-      "description": "This object represents one button of the reply keyboard. At most one of the optional fields must be used to specify type of the button. For simple text buttons, String can be used instead of this object to specify the button text.",
+      "description": "This object represents one button of the reply keyboard. At most one of the fields other than text, icon_custom_emoji_id, and style must be used to specify the type of the button. For simple text buttons, String can be used instead of this object to specify the button text.",
       "name": "KeyboardButton"
     },
     {
@@ -5251,6 +5393,22 @@
         },
         {
           "optional": true,
+          "description": "Optional. Unique identifier of the custom emoji shown before the text of the button. Can only be used by bots that purchased additional usernames on Fragment or in the messages directly sent by the bot to private, group and supergroup chats if the owner of the bot has a Telegram Premium subscription.",
+          "type": [
+            "str"
+          ],
+          "name": "icon_custom_emoji_id"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Style of the button. Must be one of “danger” (red), “success” (green) or “primary” (blue). If omitted, then an app-specific style is used.",
+          "type": [
+            "str"
+          ],
+          "name": "style"
+        },
+        {
+          "optional": true,
           "description": "Optional. HTTP or tg:// URL to be opened when the button is pressed. Links tg://user?id=<user_id> can be used to mention a user by their identifier without using a username, if this is allowed by their privacy settings.",
           "type": [
             "str"
@@ -5330,7 +5488,7 @@
           "name": "pay"
         }
       ],
-      "description": "This object represents one button of an inline keyboard. Exactly one of the optional fields must be used to specify type of the button.",
+      "description": "This object represents one button of an inline keyboard. Exactly one of the fields other than text, icon_custom_emoji_id, and style must be used to specify the type of the button.",
       "name": "InlineKeyboardButton"
     },
     {
@@ -6763,44 +6921,6 @@
           "name": "address"
         }
       ],
-      "description": "Describes the type of a clickable area on a story. Currently, it can be one of",
-      "name": "StoryAreaType"
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Type of the area, always “location”",
-          "type": [
-            "str"
-          ],
-          "name": "type"
-        },
-        {
-          "optional": false,
-          "description": "Location latitude in degrees",
-          "type": [
-            "float"
-          ],
-          "name": "latitude"
-        },
-        {
-          "optional": false,
-          "description": "Location longitude in degrees",
-          "type": [
-            "float"
-          ],
-          "name": "longitude"
-        },
-        {
-          "optional": true,
-          "description": "Optional. Address of the location",
-          "type": [
-            "LocationAddress"
-          ],
-          "name": "address"
-        }
-      ],
       "description": "Describes a story area pointing to a location. Currently, a story can have up to 10 location areas.",
       "name": "StoryAreaTypeLocation"
     },
@@ -7388,11 +7508,19 @@
         },
         {
           "optional": false,
-          "description": "The number of unique gifts that receive this model for every 1000 gifts upgraded",
+          "description": "The number of unique gifts that receive this model for every 1000 gift upgrades. Always 0 for crafted gifts.",
           "type": [
             "int"
           ],
           "name": "rarity_per_mille"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Rarity of the model if it is a crafted model. Currently, can be “uncommon”, “rare”, “epic”, or “legendary”.",
+          "type": [
+            "str"
+          ],
+          "name": "rarity"
         }
       ],
       "description": "This object describes the model of a unique gift.",
@@ -7628,6 +7756,14 @@
         },
         {
           "optional": true,
+          "description": "Optional. True, if the gift was used to craft another gift and isn't available anymore",
+          "type": [
+            "bool"
+          ],
+          "name": "is_burned"
+        },
+        {
+          "optional": true,
           "description": "Optional. True, if the gift is assigned from the TON blockchain and can't be resold or transferred in Telegram",
           "type": [
             "bool"
@@ -7806,137 +7942,6 @@
       ],
       "description": "Describes a service message about a unique gift that was sent or received.",
       "name": "UniqueGiftInfo"
-    },
-    {
-      "params": [
-        {
-          "optional": false,
-          "description": "Type of the gift, always “regular”",
-          "type": [
-            "str"
-          ],
-          "name": "type"
-        },
-        {
-          "optional": false,
-          "description": "Information about the regular gift",
-          "type": [
-            "Gift"
-          ],
-          "name": "gift"
-        },
-        {
-          "optional": true,
-          "description": "Optional. Unique identifier of the gift for the bot; for gifts received on behalf of business accounts only",
-          "type": [
-            "str"
-          ],
-          "name": "owned_gift_id"
-        },
-        {
-          "optional": true,
-          "description": "Optional. Sender of the gift if it is a known user",
-          "type": [
-            "User"
-          ],
-          "name": "sender_user"
-        },
-        {
-          "optional": false,
-          "description": "Date the gift was sent in Unix time",
-          "type": [
-            "int"
-          ],
-          "name": "send_date"
-        },
-        {
-          "optional": true,
-          "description": "Optional. Text of the message that was added to the gift",
-          "type": [
-            "str"
-          ],
-          "name": "text"
-        },
-        {
-          "optional": true,
-          "description": "Optional. Special entities that appear in the text",
-          "type": [
-            [
-              "array",
-              [
-                "MessageEntity"
-              ]
-            ]
-          ],
-          "name": "entities"
-        },
-        {
-          "optional": true,
-          "description": "Optional. True, if the sender and gift text are shown only to the gift receiver; otherwise, everyone will be able to see them",
-          "type": [
-            "bool"
-          ],
-          "name": "is_private"
-        },
-        {
-          "optional": true,
-          "description": "Optional. True, if the gift is displayed on the account's profile page; for gifts received on behalf of business accounts only",
-          "type": [
-            "bool"
-          ],
-          "name": "is_saved"
-        },
-        {
-          "optional": true,
-          "description": "Optional. True, if the gift can be upgraded to a unique gift; for gifts received on behalf of business accounts only",
-          "type": [
-            "bool"
-          ],
-          "name": "can_be_upgraded"
-        },
-        {
-          "optional": true,
-          "description": "Optional. True, if the gift was refunded and isn't available anymore",
-          "type": [
-            "bool"
-          ],
-          "name": "was_refunded"
-        },
-        {
-          "optional": true,
-          "description": "Optional. Number of Telegram Stars that can be claimed by the receiver instead of the gift; omitted if the gift cannot be converted to Telegram Stars; for gifts received on behalf of business accounts only",
-          "type": [
-            "int"
-          ],
-          "name": "convert_star_count"
-        },
-        {
-          "optional": true,
-          "description": "Optional. Number of Telegram Stars that were paid for the ability to upgrade the gift",
-          "type": [
-            "int"
-          ],
-          "name": "prepaid_upgrade_star_count"
-        },
-        {
-          "optional": true,
-          "description": "Optional. True, if the gift's upgrade was purchased after the gift was sent; for gifts received on behalf of business accounts only",
-          "type": [
-            "bool"
-          ],
-          "name": "is_upgrade_separate"
-        },
-        {
-          "optional": true,
-          "description": "Optional. Unique number reserved for this gift when upgraded. See the number field in UniqueGift",
-          "type": [
-            "int"
-          ],
-          "name": "unique_gift_number"
-        }
-      ],
-      "description": "This object describes a gift received and owned by a user or a chat. Currently, it can be one of",
-      "name": "OwnedGift"
     },
     {
       "params": [
@@ -8692,6 +8697,34 @@
       ],
       "description": "This object represents a boost removed from a chat.",
       "name": "ChatBoostRemoved"
+    },
+    {
+      "params": [
+        {
+          "optional": true,
+          "description": "Optional. The user which will be the new owner of the chat if the previous owner does not return to the chat",
+          "type": [
+            "User"
+          ],
+          "name": "new_owner"
+        }
+      ],
+      "description": "Describes a service message about the chat owner leaving the chat.",
+      "name": "ChatOwnerLeft"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "The new owner of the chat",
+          "type": [
+            "User"
+          ],
+          "name": "new_owner"
+        }
+      ],
+      "description": "Describes a service message about an ownership change in the chat.",
+      "name": "ChatOwnerChanged"
     },
     {
       "params": [
@@ -14004,11 +14037,28 @@
     },
     {
       "subtypes": [
+        "StoryAreaTypeLocation",
+        "StoryAreaTypeSuggestedReaction",
+        "StoryAreaTypeLink",
+        "StoryAreaTypeWeather",
+        "StoryAreaTypeUniqueGift"
+      ],
+      "name": "StoryAreaType"
+    },
+    {
+      "subtypes": [
         "ReactionTypeEmoji",
         "ReactionTypeCustomEmoji",
         "ReactionTypePaid"
       ],
       "name": "ReactionType"
+    },
+    {
+      "subtypes": [
+        "OwnedGiftRegular",
+        "OwnedGiftUnique"
+      ],
+      "name": "OwnedGift"
     },
     {
       "subtypes": [
@@ -16295,7 +16345,12 @@
       "type": "post",
       "name": "sendMediaGroup",
       "return": [
-        "sent"
+        [
+          "array",
+          [
+            "Message"
+          ]
+        ]
       ]
     },
     {
@@ -17331,6 +17386,40 @@
       "name": "getUserProfilePhotos",
       "return": [
         "UserProfilePhotos"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the target user",
+          "type": [
+            "int"
+          ],
+          "name": "user_id"
+        },
+        {
+          "optional": true,
+          "description": "Sequential number of the first audio to be returned. By default, all audios are returned.",
+          "type": [
+            "int"
+          ],
+          "name": "offset"
+        },
+        {
+          "optional": true,
+          "description": "Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.",
+          "type": [
+            "int"
+          ],
+          "name": "limit"
+        }
+      ],
+      "description": "Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.",
+      "type": "get",
+      "name": "getUserProfileAudios",
+      "return": [
+        "UserProfileAudios"
       ]
     },
     {
@@ -18516,7 +18605,7 @@
           "name": "icon_custom_emoji_id"
         }
       ],
-      "description": "Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns information about the created topic as a ForumTopic object.",
+      "description": "Use this method to create a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator right. Returns information about the created topic as a ForumTopic object.",
       "type": "post",
       "name": "createForumTopic",
       "return": [
@@ -19117,6 +19206,50 @@
       "name": "getMyShortDescription",
       "return": [
         "BotShortDescription"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "The new profile photo to set",
+          "type": [
+            "InputProfilePhoto"
+          ],
+          "name": "photo"
+        }
+      ],
+      "description": "Changes the profile photo of the bot. Returns True on success.",
+      "type": "post",
+      "name": "setMyProfilePhoto",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": true,
+          "description": "Unique identifier for the target private chat. If not specified, default bot's menu button will be changed",
+          "type": [
+            "int"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault",
+          "type": [
+            "MenuButton"
+          ],
+          "name": "menu_button"
+        }
+      ],
+      "description": "Removes the profile photo of the bot. Requires no parameters. Returns True on success.",
+      "type": "post",
+      "name": "removeMyProfilePhoto",
+      "return": [
+        "true"
       ]
     },
     {
@@ -20456,7 +20589,8 @@
       "type": "post",
       "name": "editMessageText",
       "return": [
-        "Message"
+        "Message",
+        "true"
       ]
     },
     {
@@ -20544,7 +20678,8 @@
       "type": "post",
       "name": "editMessageCaption",
       "return": [
-        "Message"
+        "Message",
+        "true"
       ]
     },
     {
@@ -20603,7 +20738,8 @@
       "type": "post",
       "name": "editMessageMedia",
       "return": [
-        "Message"
+        "Message",
+        "true"
       ]
     },
     {
@@ -20702,7 +20838,8 @@
       "type": "post",
       "name": "editMessageLiveLocation",
       "return": [
-        "Message"
+        "Message",
+        "true"
       ]
     },
     {
@@ -20855,7 +20992,8 @@
       "type": "post",
       "name": "editMessageReplyMarkup",
       "return": [
-        "Message"
+        "Message",
+        "true"
       ]
     },
     {
