@@ -46,15 +46,6 @@ defmodule TelegramApiJson do
     "StoryAreaType"
   ]
 
-  @zero_parameters [
-    "getMe",
-    "getWebhookInfo",
-    "logOut",
-    "close",
-    "getAvailableGifts",
-    "getMyStarBalance"
-  ]
-
   def scrape() do
     tree() |> analyze_html(%__MODULE__{})
   end
@@ -154,9 +145,10 @@ defmodule TelegramApiJson do
     returned = description |> extract_return_type()
 
     params =
-      case name in @zero_parameters do
-        true -> []
-        false -> tree |> find_next("table") |> extract_table_params()
+      if zero_parameter?(description) do
+        []
+      else
+        tree |> find_next("table") |> extract_table_params()
       end
 
     %TelegramApiJson.Method{
@@ -236,6 +228,11 @@ defmodule TelegramApiJson do
       true ->
         []
     end
+  end
+
+  @zero_param_r ~r{(?:r|R)equires no parameters}
+  defp zero_parameter?(description) do
+    Regex.match?(@zero_param_r, description)
   end
 
   @simple_return_r ~r{(?:r|R)eturns (?:the |a )?([^\s]+)}

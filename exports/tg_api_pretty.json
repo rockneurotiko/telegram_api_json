@@ -18522,41 +18522,7 @@
       ]
     },
     {
-      "params": [
-        {
-          "optional": false,
-          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)",
-          "type": [
-            "int",
-            "str"
-          ],
-          "name": "chat_id"
-        },
-        {
-          "optional": false,
-          "description": "Topic name, 1-128 characters",
-          "type": [
-            "str"
-          ],
-          "name": "name"
-        },
-        {
-          "optional": true,
-          "description": "Color of the topic icon in RGB format. Currently, must be one of 7322096 (0x6FB9F0), 16766590 (0xFFD67E), 13338331 (0xCB86DB), 9367192 (0x8EEE98), 16749490 (0xFF93B2), or 16478047 (0xFB6F5F)",
-          "type": [
-            "int"
-          ],
-          "name": "icon_color"
-        },
-        {
-          "optional": true,
-          "description": "Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers.",
-          "type": [
-            "str"
-          ],
-          "name": "icon_custom_emoji_id"
-        }
-      ],
+      "params": [],
       "description": "Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.",
       "type": "get",
       "name": "getForumTopicIconStickers",
@@ -19227,24 +19193,7 @@
       ]
     },
     {
-      "params": [
-        {
-          "optional": true,
-          "description": "Unique identifier for the target private chat. If not specified, default bot's menu button will be changed",
-          "type": [
-            "int"
-          ],
-          "name": "chat_id"
-        },
-        {
-          "optional": true,
-          "description": "A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault",
-          "type": [
-            "MenuButton"
-          ],
-          "name": "menu_button"
-        }
-      ],
+      "params": [],
       "description": "Removes the profile photo of the bot. Requires no parameters. Returns True on success.",
       "type": "post",
       "name": "removeMyProfilePhoto",
