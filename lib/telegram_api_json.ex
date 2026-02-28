@@ -171,7 +171,17 @@ defmodule TelegramApiJson do
     opt = Enum.count(opt_row) == 1
     description = extra_row |> Floki.text()
 
+    types = maybe_add_file_type(types, description)
+
     %TelegramApiJson.Param{name: name, type: types, optional: opt, description: description}
+  end
+
+  defp maybe_add_file_type(types, description) do
+    if String.contains?(description, "attach://") do
+      types ++ ["file"]
+    else
+      types
+    end
   end
 
   defp extract_table_row(row) do
