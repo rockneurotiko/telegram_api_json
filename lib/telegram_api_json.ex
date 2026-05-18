@@ -43,7 +43,9 @@ defmodule TelegramApiJson do
     "InputProfilePhoto",
     "InputStoryContent",
     "OwnedGift",
-    "StoryAreaType"
+    "StoryAreaType",
+    "InputPollMedia",
+    "InputPollOptionMedia"
   ]
 
   def scrape() do
@@ -109,7 +111,7 @@ defmodule TelegramApiJson do
   defp empty_object?([{"p", _, _} = elem | _rest]) do
     text = Floki.text(elem)
 
-    String.contains?(text, "Currently holds no information")
+    text |> String.downcase() |> String.contains?("currently holds no information")
   end
 
   defp empty_object?([{"table", _, _} | _rest]), do: false
