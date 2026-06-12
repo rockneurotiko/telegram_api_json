@@ -215,9 +215,10 @@ This are some types that, when specified as type, it can be any of the subtype o
 Parameters of this objects:
 
 - name: String - Name of the parent type, this usually are not a model, but is used as type in some parameter or return field.
-- subtype: [String] - List of names of models which are subtype of this one.
+- subtypes: [String] - List of names of models which are subtype of this one.
+- primitive_types: [T] - *(Optional)* List of additional primitive or compound [types](#types) that are also valid values for this generic, beyond the struct subtypes. Only present when the generic accepts non-struct values (e.g. a plain string or an array). Uses the same type encoding as [Type modifiers](#type-modifiers).
 
-Example:
+Example of a simple generic:
 
 ``` json
 {
@@ -228,6 +229,23 @@ Example:
         "InputContactMessageContent"
     ],
     "name": "InputMessageContent"
+}
+```
+
+Example of a generic with primitive types (`RichText` can be a plain String, an Array of RichText, or any of the struct subtypes):
+
+``` json
+{
+    "subtypes": [
+        "RichTextBold",
+        "RichTextItalic",
+        "..."
+    ],
+    "primitive_types": [
+        "str",
+        ["array", ["RichText"]]
+    ],
+    "name": "RichText"
 }
 ```
 
