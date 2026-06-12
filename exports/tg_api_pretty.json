@@ -16759,6 +16759,15 @@
         "RichTextReference",
         "RichTextReferenceLink"
       ],
+      "primitive_types": [
+        "str",
+        [
+          "array",
+          [
+            "RichText"
+          ]
+        ]
+      ],
       "name": "RichText"
     },
     {

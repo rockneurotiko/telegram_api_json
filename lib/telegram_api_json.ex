@@ -4,7 +4,7 @@ defmodule TelegramApiJson do
   defstruct models: [], methods: [], generics: []
 
   defmodule Generic do
-    defstruct [:name, :subtypes]
+    defstruct [:name, :subtypes, :primitive_types]
   end
 
   defmodule Model do
@@ -55,8 +55,18 @@ defmodule TelegramApiJson do
   end
 
   def scrape_and_print(pretty \\ false) do
-    scrape() |> Poison.encode!(pretty: pretty) |> IO.puts()
+    scrape() |> sanitize_for_json() |> Poison.encode!(pretty: pretty) |> IO.puts()
   end
+
+  defp sanitize_for_json(%__MODULE__{} = result) do
+    %{result | generics: Enum.map(result.generics, &sanitize_generic/1)}
+  end
+
+  defp sanitize_generic(%Generic{primitive_types: nil} = g) do
+    Map.from_struct(g) |> Map.delete(:primitive_types)
+  end
+
+  defp sanitize_generic(%Generic{} = g), do: Map.from_struct(g)
 
   defp tree do
     [{_, _, tree} | _] =
@@ -128,8 +138,36 @@ defmodule TelegramApiJson do
     Logger.debug("Extracting generic: #{name}")
 
     subtypes = tree |> find_next("ul") |> Floki.find("li") |> Enum.map(&Floki.text/1)
+    primitive_types = extract_primitive_types(name, tree)
 
-    %TelegramApiJson.Generic{name: name, subtypes: subtypes}
+    %TelegramApiJson.Generic{name: name, subtypes: subtypes, primitive_types: primitive_types}
+  end
+
+  defp extract_primitive_types(_name, tree) do
+    description = tree |> find_next("p") |> Floki.text()
+    primitives = []
+
+    primitives =
+      if String.contains?(description, "a String") do
+        primitives ++ ["str"]
+      else
+        primitives
+      end
+
+    primitives =
+      case Regex.run(~r/an Array of (\w+)/, description) do
+        [_, array_type] ->
+          parsed = parse_types(array_type)
+          primitives ++ [["array", parsed]]
+
+        nil ->
+          primitives
+      end
+
+    case primitives do
+      [] -> nil
+      _ -> primitives
+    end
   end
 
   defp extract_model(name, tree) do
