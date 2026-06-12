@@ -45,7 +45,9 @@ defmodule TelegramApiJson do
     "OwnedGift",
     "StoryAreaType",
     "InputPollMedia",
-    "InputPollOptionMedia"
+    "InputPollOptionMedia",
+    "RichBlock",
+    "RichText"
   ]
 
   def scrape() do

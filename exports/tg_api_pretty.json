@@ -434,6 +434,14 @@
             "bool"
           ],
           "name": "can_manage_bots"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the bot supports join request queries and can be assigned to process them. Returned only in getMe.",
+          "type": [
+            "bool"
+          ],
+          "name": "supports_join_request_queries"
         }
       ],
       "description": "This object represents a Telegram user or bot.",
@@ -928,6 +936,14 @@
             "int"
           ],
           "name": "paid_message_star_count"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The bot that processes join request queries in the chat. The field is only available to chat administrators.",
+          "type": [
+            "User"
+          ],
+          "name": "guard_bot"
         }
       ],
       "description": "This object contains full information about a chat.",
@@ -1227,6 +1243,14 @@
             "str"
           ],
           "name": "effect_id"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Message is a rich formatted message",
+          "type": [
+            "RichMessage"
+          ],
+          "name": "rich_message"
         },
         {
           "optional": true,
@@ -3314,6 +3338,20 @@
     {
       "params": [
         {
+          "optional": false,
+          "description": "URL of the link",
+          "type": [
+            "str"
+          ],
+          "name": "url"
+        }
+      ],
+      "description": "Represents an HTTP link.",
+      "name": "Link"
+    },
+    {
+      "params": [
+        {
           "optional": true,
           "description": "Optional. Media is an animation, information about the animation",
           "type": [
@@ -3336,6 +3374,14 @@
             "Document"
           ],
           "name": "document"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The HTTP link attached to the poll option",
+          "type": [
+            "Link"
+          ],
+          "name": "link"
         },
         {
           "optional": true,
@@ -6919,7 +6965,7 @@
         },
         {
           "optional": false,
-          "description": "True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues",
+          "description": "True, if the user is allowed to send text messages, rich messages, contacts, giveaways, giveaway winners, invoices, locations and venues",
           "type": [
             "bool"
           ],
@@ -7158,6 +7204,14 @@
             "ChatInviteLink"
           ],
           "name": "invite_link"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Identifier of the join request query. If present, then the bot must call sendChatJoinRequestWebApp or directly call answerChatJoinRequestQuery within 10 seconds.",
+          "type": [
+            "str"
+          ],
+          "name": "query_id"
         }
       ],
       "description": "Represents a join request sent to a chat.",
@@ -7167,7 +7221,7 @@
       "params": [
         {
           "optional": true,
-          "description": "Optional. True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues",
+          "description": "Optional. True, if the user is allowed to send text messages, rich messages, contacts, giveaways, giveaway winners, invoices, locations and venues",
           "type": [
             "bool"
           ],
@@ -9996,6 +10050,28 @@
       "params": [
         {
           "optional": false,
+          "description": "Type of the result, must be link",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "HTTP URL of the link",
+          "type": [
+            "str"
+          ],
+          "name": "url"
+        }
+      ],
+      "description": "Represents an HTTP link to be sent.",
+      "name": "InputMediaLink"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
           "description": "Type of the result, must be live_photo",
           "type": [
             "str"
@@ -10941,6 +11017,1554 @@
       ],
       "description": "This object describes a sticker to be added to a sticker set.",
       "name": "InputSticker"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Content of the message",
+          "type": [
+            [
+              "array",
+              [
+                "RichBlock"
+              ]
+            ]
+          ],
+          "name": "blocks"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the rich message must be shown right-to-left",
+          "type": [
+            "bool"
+          ],
+          "name": "is_rtl"
+        }
+      ],
+      "description": "Rich formatted message.",
+      "name": "RichMessage"
+    },
+    {
+      "params": [
+        {
+          "optional": true,
+          "description": "Optional. Content of the rich message to send described using HTML formatting. See rich message formatting options for more details.",
+          "type": [
+            "str"
+          ],
+          "name": "html"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Content of the rich message to send described using Markdown formatting. See rich message formatting options for more details.",
+          "type": [
+            "str"
+          ],
+          "name": "markdown"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Pass True if the rich message must be shown right-to-left",
+          "type": [
+            "bool"
+          ],
+          "name": "is_rtl"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Pass True to skip automatic detection of entities (e.g., URLs, email addresses, username mentions, hashtags, cashtags, bot commands, or phone numbers) in the text",
+          "type": [
+            "bool"
+          ],
+          "name": "skip_entity_detection"
+        }
+      ],
+      "description": "Describes a rich message to be sent. Exactly one of the fields html or markdown must be used.",
+      "name": "InputRichMessage"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “bold”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        }
+      ],
+      "description": "A bold text.",
+      "name": "RichTextBold"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “italic”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        }
+      ],
+      "description": "An italicized text.",
+      "name": "RichTextItalic"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “underline”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        }
+      ],
+      "description": "An underlined text.",
+      "name": "RichTextUnderline"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “strikethrough”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        }
+      ],
+      "description": "A strikethrough text.",
+      "name": "RichTextStrikethrough"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “spoiler”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        }
+      ],
+      "description": "A text covered by a spoiler.",
+      "name": "RichTextSpoiler"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “date_time”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": false,
+          "description": "The Unix time associated with the entity",
+          "type": [
+            "int"
+          ],
+          "name": "unix_time"
+        },
+        {
+          "optional": false,
+          "description": "The string that defines the formatting of the date and time. See date-time entity formatting for more details.",
+          "type": [
+            "str"
+          ],
+          "name": "date_time_format"
+        }
+      ],
+      "description": "Formatted date and time.",
+      "name": "RichTextDateTime"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “text_mention”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": false,
+          "description": "The mentioned user",
+          "type": [
+            "User"
+          ],
+          "name": "user"
+        }
+      ],
+      "description": "A mention of a Telegram user by their identifier.",
+      "name": "RichTextTextMention"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “subscript”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        }
+      ],
+      "description": "A subscript text.",
+      "name": "RichTextSubscript"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “superscript”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        }
+      ],
+      "description": "A superscript text.",
+      "name": "RichTextSuperscript"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “marked”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        }
+      ],
+      "description": "A marked text.",
+      "name": "RichTextMarked"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “code”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        }
+      ],
+      "description": "A monowidth text.",
+      "name": "RichTextCode"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “custom_emoji”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Unique identifier of the custom emoji. Use getCustomEmojiStickers to get full information about the sticker.",
+          "type": [
+            "str"
+          ],
+          "name": "custom_emoji_id"
+        },
+        {
+          "optional": false,
+          "description": "Alternative emoji for the custom emoji",
+          "type": [
+            "str"
+          ],
+          "name": "alternative_text"
+        }
+      ],
+      "description": "A custom emoji.",
+      "name": "RichTextCustomEmoji"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “mathematical_expression”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The expression in LaTeX format",
+          "type": [
+            "str"
+          ],
+          "name": "expression"
+        }
+      ],
+      "description": "A mathematical expression.",
+      "name": "RichTextMathematicalExpression"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “url”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": false,
+          "description": "URL of the link",
+          "type": [
+            "str"
+          ],
+          "name": "url"
+        }
+      ],
+      "description": "A text with a link.",
+      "name": "RichTextUrl"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “email_address”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": false,
+          "description": "The email address",
+          "type": [
+            "str"
+          ],
+          "name": "email_address"
+        }
+      ],
+      "description": "A text with an email address.",
+      "name": "RichTextEmailAddress"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “phone_number”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": false,
+          "description": "The phone number",
+          "type": [
+            "str"
+          ],
+          "name": "phone_number"
+        }
+      ],
+      "description": "A text with a phone number.",
+      "name": "RichTextPhoneNumber"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “bank_card_number”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": false,
+          "description": "The bank card number",
+          "type": [
+            "str"
+          ],
+          "name": "bank_card_number"
+        }
+      ],
+      "description": "A text with a bank card number.",
+      "name": "RichTextBankCardNumber"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “mention”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": false,
+          "description": "The username",
+          "type": [
+            "str"
+          ],
+          "name": "username"
+        }
+      ],
+      "description": "A mention by a username.",
+      "name": "RichTextMention"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “hashtag”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": false,
+          "description": "The hashtag",
+          "type": [
+            "str"
+          ],
+          "name": "hashtag"
+        }
+      ],
+      "description": "A hashtag.",
+      "name": "RichTextHashtag"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “cashtag”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": false,
+          "description": "The cashtag",
+          "type": [
+            "str"
+          ],
+          "name": "cashtag"
+        }
+      ],
+      "description": "A cashtag.",
+      "name": "RichTextCashtag"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “bot_command”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": false,
+          "description": "The bot command",
+          "type": [
+            "str"
+          ],
+          "name": "bot_command"
+        }
+      ],
+      "description": "A bot command.",
+      "name": "RichTextBotCommand"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “anchor”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The name of the anchor",
+          "type": [
+            "str"
+          ],
+          "name": "name"
+        }
+      ],
+      "description": "An anchor.",
+      "name": "RichTextAnchor"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “anchor_link”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The link text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": false,
+          "description": "The name of the anchor. If the name is empty, then the link brings back to the top of the message.",
+          "type": [
+            "str"
+          ],
+          "name": "anchor_name"
+        }
+      ],
+      "description": "A link to an anchor.",
+      "name": "RichTextAnchorLink"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “reference”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Text of the reference",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": false,
+          "description": "The name of the reference",
+          "type": [
+            "str"
+          ],
+          "name": "name"
+        }
+      ],
+      "description": "A reference.",
+      "name": "RichTextReference"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the rich text, always “reference_link”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The link text",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": false,
+          "description": "The name of the reference",
+          "type": [
+            "str"
+          ],
+          "name": "reference_name"
+        }
+      ],
+      "description": "A link to a reference.",
+      "name": "RichTextReferenceLink"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Block caption",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Block credit which corresponds to the HTML tag <cite>",
+          "type": [
+            "RichText"
+          ],
+          "name": "credit"
+        }
+      ],
+      "description": "Caption of a rich formatted block.",
+      "name": "RichBlockCaption"
+    },
+    {
+      "params": [
+        {
+          "optional": true,
+          "description": "Optional. Text in the cell. If omitted, then the cell is invisible.",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the cell is a header cell",
+          "type": [
+            "bool"
+          ],
+          "name": "is_header"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The number of columns the cell spans if it is bigger than 1",
+          "type": [
+            "int"
+          ],
+          "name": "colspan"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The number of rows the cell spans if it is bigger than 1",
+          "type": [
+            "int"
+          ],
+          "name": "rowspan"
+        },
+        {
+          "optional": false,
+          "description": "Horizontal cell content alignment. Currently, must be one of “left”, “center”, or “right”.",
+          "type": [
+            "str"
+          ],
+          "name": "align"
+        },
+        {
+          "optional": false,
+          "description": "Vertical cell content alignment. Currently, must be one of “top”, “middle”, or “bottom”.",
+          "type": [
+            "str"
+          ],
+          "name": "valign"
+        }
+      ],
+      "description": "Cell in a table.",
+      "name": "RichBlockTableCell"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Label of the item",
+          "type": [
+            "str"
+          ],
+          "name": "label"
+        },
+        {
+          "optional": false,
+          "description": "The content of the item",
+          "type": [
+            [
+              "array",
+              [
+                "RichBlock"
+              ]
+            ]
+          ],
+          "name": "blocks"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the item has a checkbox",
+          "type": [
+            "bool"
+          ],
+          "name": "has_checkbox"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the item has a checked checkbox",
+          "type": [
+            "bool"
+          ],
+          "name": "is_checked"
+        },
+        {
+          "optional": true,
+          "description": "Optional. For ordered lists, the numeric value of the item label",
+          "type": [
+            "int"
+          ],
+          "name": "value"
+        },
+        {
+          "optional": true,
+          "description": "Optional. For ordered lists, the type of the item label; must be one of “a” for lowercase letters, “A” for uppercase letters, “i” for lowercase Roman numerals, “I” for uppercase Roman numerals, or “1” for decimal numbers",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        }
+      ],
+      "description": "An item of a list.",
+      "name": "RichBlockListItem"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “paragraph”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Text of the block",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        }
+      ],
+      "description": "A text paragraph, corresponding to the HTML tag <p>.",
+      "name": "RichBlockParagraph"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “heading”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Text of the block",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": false,
+          "description": "Relative size of the text font; 1-6, 1 is the largest, 6 is the smallest",
+          "type": [
+            "int"
+          ],
+          "name": "size"
+        }
+      ],
+      "description": "A section heading, corresponding to the HTML tags <h1>, <h2>, <h3>, <h4>, <h5>, or <h6>.",
+      "name": "RichBlockSectionHeading"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “pre”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Text of the block",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The programming language of the text",
+          "type": [
+            "str"
+          ],
+          "name": "language"
+        }
+      ],
+      "description": "A preformatted text block, corresponding to the nested HTML tags <pre> and <code>.",
+      "name": "RichBlockPreformatted"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “footer”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Text of the block",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        }
+      ],
+      "description": "A footer, corresponding to the HTML tag <footer>.",
+      "name": "RichBlockFooter"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “divider”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        }
+      ],
+      "description": "A divider, corresponding to the HTML tag <hr/>.",
+      "name": "RichBlockDivider"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “mathematical_expression”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The mathematical expression in LaTeX format",
+          "type": [
+            "str"
+          ],
+          "name": "expression"
+        }
+      ],
+      "description": "A block with a mathematical expression in LaTeX format, corresponding to the custom HTML tag <tg-math-block>.",
+      "name": "RichBlockMathematicalExpression"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “anchor”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The name of the anchor",
+          "type": [
+            "str"
+          ],
+          "name": "name"
+        }
+      ],
+      "description": "A block with an anchor, corresponding to the HTML tag <a> with the attribute name.",
+      "name": "RichBlockAnchor"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “list”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Items of the list",
+          "type": [
+            [
+              "array",
+              [
+                "RichBlockListItem"
+              ]
+            ]
+          ],
+          "name": "items"
+        }
+      ],
+      "description": "A list of blocks, corresponding to the HTML tag <ul> or <ol> with multiple nested tags <li>.",
+      "name": "RichBlockList"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “blockquote”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Content of the block",
+          "type": [
+            [
+              "array",
+              [
+                "RichBlock"
+              ]
+            ]
+          ],
+          "name": "blocks"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Credit of the block",
+          "type": [
+            "RichText"
+          ],
+          "name": "credit"
+        }
+      ],
+      "description": "A block quotation, corresponding to the HTML tag <blockquote>.",
+      "name": "RichBlockBlockQuotation"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “pullquote”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Text of the block",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Credit of the block",
+          "type": [
+            "RichText"
+          ],
+          "name": "credit"
+        }
+      ],
+      "description": "A quotation with centered text, loosely corresponding to the HTML tag <aside>.",
+      "name": "RichBlockPullQuotation"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “collage”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Elements of the collage",
+          "type": [
+            [
+              "array",
+              [
+                "RichBlock"
+              ]
+            ]
+          ],
+          "name": "blocks"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the block",
+          "type": [
+            "RichBlockCaption"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A collage, corresponding to the custom HTML tag <tg-collage>.",
+      "name": "RichBlockCollage"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “slideshow”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Elements of the slideshow",
+          "type": [
+            [
+              "array",
+              [
+                "RichBlock"
+              ]
+            ]
+          ],
+          "name": "blocks"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the block",
+          "type": [
+            "RichBlockCaption"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A slideshow, corresponding to the custom HTML tag <tg-slideshow>.",
+      "name": "RichBlockSlideshow"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “table”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Cells of the table",
+          "type": [
+            [
+              "array",
+              [
+                [
+                  "array",
+                  [
+                    "RichBlockTableCell"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          "name": "cells"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the table has borders",
+          "type": [
+            "bool"
+          ],
+          "name": "is_bordered"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the table is striped",
+          "type": [
+            "bool"
+          ],
+          "name": "is_striped"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the table",
+          "type": [
+            "RichText"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A table, corresponding to the HTML tag <table>.",
+      "name": "RichBlockTable"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “details”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Always shown summary of the block",
+          "type": [
+            "RichText"
+          ],
+          "name": "summary"
+        },
+        {
+          "optional": false,
+          "description": "Content of the block",
+          "type": [
+            [
+              "array",
+              [
+                "RichBlock"
+              ]
+            ]
+          ],
+          "name": "blocks"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the content of the block is visible by default",
+          "type": [
+            "bool"
+          ],
+          "name": "is_open"
+        }
+      ],
+      "description": "An expandable block for details disclosure, corresponding to the HTML tag <details>.",
+      "name": "RichBlockDetails"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “map”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Location of the center of the map",
+          "type": [
+            "Location"
+          ],
+          "name": "location"
+        },
+        {
+          "optional": false,
+          "description": "Map zoom level; 13-20",
+          "type": [
+            "int"
+          ],
+          "name": "zoom"
+        },
+        {
+          "optional": false,
+          "description": "Expected width of the map",
+          "type": [
+            "int"
+          ],
+          "name": "width"
+        },
+        {
+          "optional": false,
+          "description": "Expected height of the map",
+          "type": [
+            "int"
+          ],
+          "name": "height"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the block",
+          "type": [
+            "RichBlockCaption"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A block with a map, corresponding to the custom HTML tag <tg-map>.",
+      "name": "RichBlockMap"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “animation”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The animation",
+          "type": [
+            "Animation"
+          ],
+          "name": "animation"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the media preview is covered by a spoiler animation",
+          "type": [
+            "bool"
+          ],
+          "name": "has_spoiler"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the block",
+          "type": [
+            "RichBlockCaption"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A block with an animation, corresponding to the HTML tag <video>.",
+      "name": "RichBlockAnimation"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “audio”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The audio",
+          "type": [
+            "Audio"
+          ],
+          "name": "audio"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the block",
+          "type": [
+            "RichBlockCaption"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A block with a music file, corresponding to the HTML tag <audio>.",
+      "name": "RichBlockAudio"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “photo”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Available sizes of the photo",
+          "type": [
+            [
+              "array",
+              [
+                "PhotoSize"
+              ]
+            ]
+          ],
+          "name": "photo"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the media preview is covered by a spoiler animation",
+          "type": [
+            "bool"
+          ],
+          "name": "has_spoiler"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the block",
+          "type": [
+            "RichBlockCaption"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A block with a photo, corresponding to the HTML tag <photo>.",
+      "name": "RichBlockPhoto"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “video”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The video",
+          "type": [
+            "Video"
+          ],
+          "name": "video"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the media preview is covered by a spoiler animation",
+          "type": [
+            "bool"
+          ],
+          "name": "has_spoiler"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the block",
+          "type": [
+            "RichBlockCaption"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A block with a video, corresponding to the HTML tag <video>.",
+      "name": "RichBlockVideo"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “voice_note”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The voice note",
+          "type": [
+            "Voice"
+          ],
+          "name": "voice_note"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the block",
+          "type": [
+            "RichBlockCaption"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A block with a voice note, corresponding to the HTML tag <audio>.",
+      "name": "RichBlockVoiceNote"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “thinking”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Text of the block. See https://t.me/addemoji/AIActions for examples of custom emoji, which are recommended for usage in the block.",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        }
+      ],
+      "description": "A block with a “Thinking…” placeholder, corresponding to the custom HTML tag <tg-thinking>. The block may be used only in sendRichMessageDraft, therefore it can't be received in messages. See https://t.me/addemoji/AIActions for examples of custom emoji, which are recommended for usage in the block.",
+      "name": "RichBlockThinking"
     },
     {
       "params": [
@@ -13047,6 +14671,20 @@
       "params": [
         {
           "optional": false,
+          "description": "The message to be sent",
+          "type": [
+            "InputRichMessage"
+          ],
+          "name": "rich_message"
+        }
+      ],
+      "description": "Represents the content of a rich message to be sent as the result of an inline query.",
+      "name": "InputRichMessageContent"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
           "description": "Latitude of the location in degrees",
           "type": [
             "float"
@@ -14969,6 +16607,7 @@
     {
       "subtypes": [
         "InputMediaAnimation",
+        "InputMediaLink",
         "InputMediaLivePhoto",
         "InputMediaLocation",
         "InputMediaPhoto",
@@ -15094,6 +16733,62 @@
     },
     {
       "subtypes": [
+        "RichTextBold",
+        "RichTextItalic",
+        "RichTextUnderline",
+        "RichTextStrikethrough",
+        "RichTextSpoiler",
+        "RichTextDateTime",
+        "RichTextTextMention",
+        "RichTextSubscript",
+        "RichTextSuperscript",
+        "RichTextMarked",
+        "RichTextCode",
+        "RichTextCustomEmoji",
+        "RichTextMathematicalExpression",
+        "RichTextUrl",
+        "RichTextEmailAddress",
+        "RichTextPhoneNumber",
+        "RichTextBankCardNumber",
+        "RichTextMention",
+        "RichTextHashtag",
+        "RichTextCashtag",
+        "RichTextBotCommand",
+        "RichTextAnchor",
+        "RichTextAnchorLink",
+        "RichTextReference",
+        "RichTextReferenceLink"
+      ],
+      "name": "RichText"
+    },
+    {
+      "subtypes": [
+        "RichBlockParagraph",
+        "RichBlockSectionHeading",
+        "RichBlockPreformatted",
+        "RichBlockFooter",
+        "RichBlockDivider",
+        "RichBlockMathematicalExpression",
+        "RichBlockAnchor",
+        "RichBlockList",
+        "RichBlockBlockQuotation",
+        "RichBlockPullQuotation",
+        "RichBlockCollage",
+        "RichBlockSlideshow",
+        "RichBlockTable",
+        "RichBlockDetails",
+        "RichBlockMap",
+        "RichBlockAnimation",
+        "RichBlockAudio",
+        "RichBlockPhoto",
+        "RichBlockVideo",
+        "RichBlockVoiceNote",
+        "RichBlockThinking"
+      ],
+      "name": "RichBlock"
+    },
+    {
+      "subtypes": [
         "InlineQueryResultCachedAudio",
         "InlineQueryResultCachedDocument",
         "InlineQueryResultCachedGif",
@@ -15120,6 +16815,7 @@
     {
       "subtypes": [
         "InputTextMessageContent",
+        "InputRichMessageContent",
         "InputLocationMessageContent",
         "InputVenueMessageContent",
         "InputContactMessageContent",
@@ -19459,6 +21155,58 @@
       "params": [
         {
           "optional": false,
+          "description": "Unique identifier of the join request query",
+          "type": [
+            "str"
+          ],
+          "name": "chat_join_request_query_id"
+        },
+        {
+          "optional": false,
+          "description": "Result of the query. Must be either “approve” to allow the user to join the chat, “decline” to disallow the user to join the chat, or “queue” to leave the decision to other administrators.",
+          "type": [
+            "str"
+          ],
+          "name": "result"
+        }
+      ],
+      "description": "Use this method to process a received chat join request query. Returns True on success.",
+      "type": "post",
+      "name": "answerChatJoinRequestQuery",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the join request query",
+          "type": [
+            "str"
+          ],
+          "name": "chat_join_request_query_id"
+        },
+        {
+          "optional": false,
+          "description": "The URL of the Mini App to be opened",
+          "type": [
+            "str"
+          ],
+          "name": "web_app_url"
+        }
+      ],
+      "description": "Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.",
+      "type": "post",
+      "name": "sendChatJoinRequestWebApp",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
           "description": "Unique identifier for the target chat or username of the target channel in the format @username",
           "type": [
             "int",
@@ -22042,8 +23790,8 @@
           "name": "inline_message_id"
         },
         {
-          "optional": false,
-          "description": "New text of the message, 1-4096 characters after entities parsing",
+          "optional": true,
+          "description": "New text of the message, 1-4096 characters after entity parsing; required if rich_message isn't specified",
           "type": [
             "str"
           ],
@@ -22080,6 +23828,14 @@
         },
         {
           "optional": true,
+          "description": "New rich content of the message; required if text isn't specified",
+          "type": [
+            "InputRichMessage"
+          ],
+          "name": "rich_message"
+        },
+        {
+          "optional": true,
           "description": "A JSON-serialized object for an inline keyboard",
           "type": [
             "InlineKeyboardMarkup"
@@ -22087,7 +23843,7 @@
           "name": "reply_markup"
         }
       ],
-      "description": "Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.",
+      "description": "Use this method to edit text, rich and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.",
       "type": "post",
       "name": "editMessageText",
       "return": [
@@ -22236,7 +23992,7 @@
           "name": "reply_markup"
         }
       ],
-      "description": "Use this method to edit animation, audio, document, live photo, photo, or video messages, or to add media to text messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.",
+      "description": "Use this method to edit animation, audio, document, live photo, photo, or video messages, or to replace a text or a rich message with a media. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.",
       "type": "post",
       "name": "editMessageMedia",
       "return": [
@@ -23326,6 +25082,158 @@
       "description": "Use this method to delete a sticker set that was created by the bot. Returns True on success.",
       "type": "post",
       "name": "deleteStickerSet",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": true,
+          "description": "Unique identifier of the business connection on behalf of which the message will be sent",
+          "type": [
+            "str"
+          ],
+          "name": "business_connection_id"
+        },
+        {
+          "optional": false,
+          "description": "Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username",
+          "type": [
+            "int",
+            "str"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": true,
+          "description": "Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only",
+          "type": [
+            "int"
+          ],
+          "name": "message_thread_id"
+        },
+        {
+          "optional": true,
+          "description": "Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat",
+          "type": [
+            "int"
+          ],
+          "name": "direct_messages_topic_id"
+        },
+        {
+          "optional": false,
+          "description": "The message to be sent",
+          "type": [
+            "InputRichMessage"
+          ],
+          "name": "rich_message"
+        },
+        {
+          "optional": true,
+          "description": "Sends the message silently. Users will receive a notification with no sound.",
+          "type": [
+            "bool"
+          ],
+          "name": "disable_notification"
+        },
+        {
+          "optional": true,
+          "description": "Protects the contents of the sent message from forwarding and saving",
+          "type": [
+            "bool"
+          ],
+          "name": "protect_content"
+        },
+        {
+          "optional": true,
+          "description": "Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.",
+          "type": [
+            "bool"
+          ],
+          "name": "allow_paid_broadcast"
+        },
+        {
+          "optional": true,
+          "description": "Unique identifier of the message effect to be added to the message; for private chats only",
+          "type": [
+            "str"
+          ],
+          "name": "message_effect_id"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.",
+          "type": [
+            "SuggestedPostParameters"
+          ],
+          "name": "suggested_post_parameters"
+        },
+        {
+          "optional": true,
+          "description": "Description of the message to reply to",
+          "type": [
+            "ReplyParameters"
+          ],
+          "name": "reply_parameters"
+        },
+        {
+          "optional": true,
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user.",
+          "type": [
+            "InlineKeyboardMarkup",
+            "ReplyKeyboardMarkup",
+            "ReplyKeyboardRemove",
+            "ForceReply"
+          ],
+          "name": "reply_markup"
+        }
+      ],
+      "description": "Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.",
+      "type": "post",
+      "name": "sendRichMessage",
+      "return": [
+        "Message"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier for the target private chat",
+          "type": [
+            "int"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": true,
+          "description": "Unique identifier for the target message thread",
+          "type": [
+            "int"
+          ],
+          "name": "message_thread_id"
+        },
+        {
+          "optional": false,
+          "description": "Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated.",
+          "type": [
+            "int"
+          ],
+          "name": "draft_id"
+        },
+        {
+          "optional": false,
+          "description": "The partial message to be streamed",
+          "type": [
+            "InputRichMessage"
+          ],
+          "name": "rich_message"
+        }
+      ],
+      "description": "Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user's chat. Returns True on success.",
+      "type": "post",
+      "name": "sendRichMessageDraft",
       "return": [
         "true"
       ]
