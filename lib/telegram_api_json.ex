@@ -366,6 +366,7 @@ defmodule TelegramApiJson do
 
     case type do
       "Int" -> "int"
+      "Integer" -> "int"
       "String" -> "str"
       "True" -> "true"
       other -> other
