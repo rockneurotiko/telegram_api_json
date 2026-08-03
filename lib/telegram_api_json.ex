@@ -47,7 +47,8 @@ defmodule TelegramApiJson do
     "InputPollMedia",
     "InputPollOptionMedia",
     "RichBlock",
-    "RichText"
+    "RichText",
+    "InputRichBlock"
   ]
 
   def scrape() do

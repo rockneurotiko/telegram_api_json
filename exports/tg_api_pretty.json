@@ -209,6 +209,14 @@
             "ManagedBotUpdated"
           ],
           "name": "managed_bot"
+        },
+        {
+          "optional": true,
+          "description": "Optional. User payment subscription has changed",
+          "type": [
+            "BotSubscriptionUpdated"
+          ],
+          "name": "subscription"
         }
       ],
       "description": "This object represents an incoming update.\nAt most one of the optional fields can be present in any given update.",
@@ -944,6 +952,14 @@
             "User"
           ],
           "name": "guard_bot"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The Community to which the chat belongs",
+          "type": [
+            "Community"
+          ],
+          "name": "community"
         }
       ],
       "description": "This object contains full information about a chat.",
@@ -953,7 +969,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Unique message identifier inside this chat. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent.",
+          "description": "Unique message identifier inside this chat; 0 for ephemeral messages. In specific instances (e.g., a message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent.",
           "type": [
             "int"
           ],
@@ -1016,6 +1032,22 @@
           "name": "sender_tag"
         },
         {
+          "optional": true,
+          "description": "Optional. For ephemeral messages, the user who received the message",
+          "type": [
+            "User"
+          ],
+          "name": "receiver_user"
+        },
+        {
+          "optional": true,
+          "description": "Optional. For ephemeral messages, identifier of the ephemeral message inside this chat. The identifier may be reused for another ephemeral message after the message is deleted or expires.",
+          "type": [
+            "int"
+          ],
+          "name": "ephemeral_message_id"
+        },
+        {
           "optional": false,
           "description": "Date the message was sent in Unix time. It is always a positive number, representing a valid date.",
           "type": [
@@ -1073,7 +1105,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. For replies in the same chat and message thread, the original message. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply.",
+          "description": "Optional. For replies in the same chat and message thread, the original message. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply. If the message is a reply to an ephemeral message, then this field may be omitted.",
           "type": [
             "Message"
           ],
@@ -1650,7 +1682,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location.",
+          "description": "Optional. Service message: a user in the chat triggered another user's proximity alert while sharing Live Location",
           "type": [
             "ProximityAlertTriggered"
           ],
@@ -1687,6 +1719,22 @@
             "ChecklistTasksAdded"
           ],
           "name": "checklist_tasks_added"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Service message: chat added to a Community",
+          "type": [
+            "CommunityChatAdded"
+          ],
+          "name": "community_chat_added"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Service message: chat removed from a Community",
+          "type": [
+            "CommunityChatRemoved"
+          ],
+          "name": "community_chat_removed"
         },
         {
           "optional": true,
@@ -2287,8 +2335,8 @@
     {
       "params": [
         {
-          "optional": false,
-          "description": "Identifier of the message that will be replied to in the current chat, or in the chat chat_id if it is specified",
+          "optional": true,
+          "description": "Optional. Identifier of the message that will be replied to in the current chat, or in the chat chat_id if it is specified. Required if ephemeral_message_id isn't specified.",
           "type": [
             "int"
           ],
@@ -2296,7 +2344,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. If the message to be replied to is from a different chat, unique identifier for the chat or username of the bot, supergroup or channel in the format @username. Not supported for messages sent on behalf of a business account and messages from channel direct messages chats.",
+          "description": "Optional. If the message to be replied to is from a different chat, unique identifier for the chat or username of the bot, supergroup or channel in the format @username. Not supported for messages sent on behalf of a business account, messages from channel direct messages chats and ephemeral messages.",
           "type": [
             "int",
             "str"
@@ -2305,7 +2353,15 @@
         },
         {
           "optional": true,
-          "description": "Optional. Pass True if the message should be sent even if the specified message to be replied to is not found. Always False for replies in another chat or forum topic. Always True for messages sent on behalf of a business account.",
+          "description": "Optional. Identifier of the incoming ephemeral message that will be replied to in the current chat. A reply to an ephemeral message must itself be an ephemeral message. An ephemeral message may only be replied to within 15 seconds of being sent. Required if message_id isn't specified.",
+          "type": [
+            "int"
+          ],
+          "name": "ephemeral_message_id"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Pass True if the message should be sent even if the specified message to be replied to is not found. Always False for replies in another chat or forum topic, and sent ephemeral messages. Always True for messages sent on behalf of a business account.",
           "type": [
             "bool"
           ],
@@ -2313,7 +2369,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Quoted part of the message to be replied to; 0-1024 characters after entities parsing. The quote must be an exact substring of the message to be replied to, including bold, italic, underline, strikethrough, spoiler, custom_emoji, and date_time entities. The message will fail to send if the quote isn't found in the original message.",
+          "description": "Optional. Quoted part of the message to be replied to; 0-1024 characters after entities parsing. The quote must be an exact substring of the message to be replied to, including bold, italic, underline, strikethrough, spoiler, custom_emoji, and date_time entities. The message will fail to send if the quote isn't found in the original message. Ignored for ephemeral messages.",
           "type": [
             "str"
           ],
@@ -4043,73 +4099,6 @@
     {
       "params": [
         {
-          "optional": true,
-          "description": "Optional. Message containing the checklist whose tasks were marked as done or not done. Note that the Message object in this field will not contain the reply_to_message field even if it itself is a reply.",
-          "type": [
-            "Message"
-          ],
-          "name": "checklist_message"
-        },
-        {
-          "optional": true,
-          "description": "Optional. Identifiers of the tasks that were marked as done",
-          "type": [
-            [
-              "array",
-              [
-                "int"
-              ]
-            ]
-          ],
-          "name": "marked_as_done_task_ids"
-        },
-        {
-          "optional": true,
-          "description": "Optional. Identifiers of the tasks that were marked as not done",
-          "type": [
-            [
-              "array",
-              [
-                "int"
-              ]
-            ]
-          ],
-          "name": "marked_as_not_done_task_ids"
-        }
-      ],
-      "description": "Describes a service message about checklist tasks marked as done or not done.",
-      "name": "ChecklistTasksDone"
-    },
-    {
-      "params": [
-        {
-          "optional": true,
-          "description": "Optional. Message containing the checklist to which the tasks were added. Note that the Message object in this field will not contain the reply_to_message field even if it itself is a reply.",
-          "type": [
-            "Message"
-          ],
-          "name": "checklist_message"
-        },
-        {
-          "optional": false,
-          "description": "List of tasks added to the checklist",
-          "type": [
-            [
-              "array",
-              [
-                "ChecklistTask"
-              ]
-            ]
-          ],
-          "name": "tasks"
-        }
-      ],
-      "description": "Describes a service message about tasks added to a checklist.",
-      "name": "ChecklistTasksAdded"
-    },
-    {
-      "params": [
-        {
           "optional": false,
           "description": "Latitude as defined by the sender",
           "type": [
@@ -4324,6 +4313,36 @@
       ],
       "description": "This object contains information about the creation, token update, or owner update of a bot that is managed by the current bot.",
       "name": "ManagedBotUpdated"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "User who subscribed for payments toward the bot",
+          "type": [
+            "User"
+          ],
+          "name": "user"
+        },
+        {
+          "optional": false,
+          "description": "Bot-specified invoice payload",
+          "type": [
+            "str"
+          ],
+          "name": "invoice_payload"
+        },
+        {
+          "optional": false,
+          "description": "The new state of the subscription. Currently, it can be one of “canceled” if the user canceled the subscription, “active” if the user re-enabled a previously canceled subscription, or “failed” if payment for the subscription failed.",
+          "type": [
+            "str"
+          ],
+          "name": "state"
+        }
+      ],
+      "description": "This object contains information about changes to a user payment subscription toward the current bot.",
+      "name": "BotSubscriptionUpdated"
     },
     {
       "params": [
@@ -4681,6 +4700,92 @@
     {
       "params": [
         {
+          "optional": true,
+          "description": "Optional. Message containing the checklist whose tasks were marked as done or not done. Note that the Message object in this field will not contain the reply_to_message field even if it itself is a reply.",
+          "type": [
+            "Message"
+          ],
+          "name": "checklist_message"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Identifiers of the tasks that were marked as done",
+          "type": [
+            [
+              "array",
+              [
+                "int"
+              ]
+            ]
+          ],
+          "name": "marked_as_done_task_ids"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Identifiers of the tasks that were marked as not done",
+          "type": [
+            [
+              "array",
+              [
+                "int"
+              ]
+            ]
+          ],
+          "name": "marked_as_not_done_task_ids"
+        }
+      ],
+      "description": "Describes a service message about checklist tasks marked as done or not done.",
+      "name": "ChecklistTasksDone"
+    },
+    {
+      "params": [
+        {
+          "optional": true,
+          "description": "Optional. Message containing the checklist to which the tasks were added. Note that the Message object in this field will not contain the reply_to_message field even if it itself is a reply.",
+          "type": [
+            "Message"
+          ],
+          "name": "checklist_message"
+        },
+        {
+          "optional": false,
+          "description": "List of tasks added to the checklist",
+          "type": [
+            [
+              "array",
+              [
+                "ChecklistTask"
+              ]
+            ]
+          ],
+          "name": "tasks"
+        }
+      ],
+      "description": "Describes a service message about tasks added to a checklist.",
+      "name": "ChecklistTasksAdded"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "The new community to which the chat belongs",
+          "type": [
+            "Community"
+          ],
+          "name": "community"
+        }
+      ],
+      "description": "Describes a service message about a chat being added to a community.",
+      "name": "CommunityChatAdded"
+    },
+    {
+      "params": [],
+      "description": "Describes a service message about a chat being removed from a community. Currently holds no information.",
+      "name": "CommunityChatRemoved"
+    },
+    {
+      "params": [
+        {
           "optional": false,
           "description": "Name of the topic",
           "type": [
@@ -4987,7 +5092,7 @@
       "params": [
         {
           "optional": false,
-          "description": "True, if direct messages are enabled for the channel chat; false otherwise",
+          "description": "True, if direct messages are enabled for the channel chat; False otherwise",
           "type": [
             "bool"
           ],
@@ -5091,7 +5196,7 @@
         },
         {
           "optional": false,
-          "description": "Currency in which the payment was made. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins.",
+          "description": "Currency in which the payment was made. Currently, one of “XTR” for Telegram Stars or “TON” for TON grams.",
           "type": [
             "str"
           ],
@@ -5099,7 +5204,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. The amount of the currency that was received by the channel in nanotoncoins; for payments in toncoins only",
+          "description": "Optional. The amount of the currency that was received by the channel in nanograms; for payments in TON grams only",
           "type": [
             "int"
           ],
@@ -5436,7 +5541,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Currency in which the post will be paid. Currently, must be one of “XTR” for Telegram Stars or “TON” for toncoins.",
+          "description": "Currency in which the post will be paid. Currently, must be one of “XTR” for Telegram Stars or “TON” for TON grams.",
           "type": [
             "str"
           ],
@@ -5444,7 +5549,7 @@
         },
         {
           "optional": false,
-          "description": "The amount of the currency that will be paid for the post in the smallest units of the currency, i.e. Telegram Stars or nanotoncoins. Currently, price in Telegram Stars must be between 5 and 100000, and price in nanotoncoins must be between 10000000 and 10000000000000.",
+          "description": "The amount of the currency that will be paid for the post in the smallest units of the currency, i.e. Telegram Stars or nanograms. Currently, price in Telegram Stars must be between 5 and 100000, and price in nanograms must be between 10000000 and 10000000000000.",
           "type": [
             "int"
           ],
@@ -5661,7 +5766,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Requests clients to always show the keyboard when the regular keyboard is hidden. Defaults to false, in which case the custom keyboard can be hidden and opened with a keyboard icon.",
+          "description": "Optional. Requests clients to always show the keyboard when the regular keyboard is hidden. Defaults to False, in which case the custom keyboard can be hidden and opened with a keyboard icon.",
           "type": [
             "bool"
           ],
@@ -5669,7 +5774,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Requests clients to resize the keyboard vertically for optimal fit (e.g., make the keyboard smaller if there are just two rows of buttons). Defaults to false, in which case the custom keyboard is always of the same height as the app's standard keyboard.",
+          "description": "Optional. Requests clients to resize the keyboard vertically for optimal fit (e.g., make the keyboard smaller if there are just two rows of buttons). Defaults to False, in which case the custom keyboard is always of the same height as the app's standard keyboard.",
           "type": [
             "bool"
           ],
@@ -5677,7 +5782,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Requests clients to hide the keyboard as soon as it's been used. The keyboard will still be available, but clients will automatically display the usual letter-keyboard in the chat - the user can press a special button in the input field to see the custom keyboard again. Defaults to false.",
+          "description": "Optional. Requests clients to hide the keyboard as soon as it's been used. The keyboard will still be available, but clients will automatically display the usual letter-keyboard in the chat - the user can press a special button in the input field to see the custom keyboard again. Defaults to False.",
           "type": [
             "bool"
           ],
@@ -6339,6 +6444,28 @@
       "params": [
         {
           "optional": false,
+          "description": "Unique identifier for this community. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.",
+          "type": [
+            "int"
+          ],
+          "name": "id"
+        },
+        {
+          "optional": false,
+          "description": "Name of the community",
+          "type": [
+            "str"
+          ],
+          "name": "name"
+        }
+      ],
+      "description": "Represents a community (a group of chats).",
+      "name": "Community"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
           "description": "File identifier of small (160x160) chat photo. This file_id can be used only for photo download and only for as long as the photo is not changed.",
           "type": [
             "str"
@@ -6599,7 +6726,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. True, if the administrator can edit the tags of regular members; for groups and supergroups only. If omitted defaults to the value of can_pin_messages.",
+          "description": "Optional. True, if the administrator can edit the tags of regular members; for groups and supergroups only. If omitted, defaults to the value of can_pin_messages.",
           "type": [
             "bool"
           ],
@@ -6873,7 +7000,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. True, if the administrator can edit the tags of regular members; for groups and supergroups only. If omitted defaults to the value of can_pin_messages.",
+          "description": "Optional. True, if the administrator can edit the tags of regular members; for groups and supergroups only. If omitted, defaults to the value of can_pin_messages.",
           "type": [
             "bool"
           ],
@@ -7207,7 +7334,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Identifier of the join request query. If present, then the bot must call sendChatJoinRequestWebApp or directly call answerChatJoinRequestQuery within 10 seconds.",
+          "description": "Optional. Identifier of the join request query; for bots assigned to process join requests only. If present, then the bot must call sendChatJoinRequestWebApp or directly call answerChatJoinRequestQuery within 10 seconds.",
           "type": [
             "str"
           ],
@@ -7341,7 +7468,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages.",
+          "description": "Optional. True, if the user is allowed to create forum topics. If omitted, defaults to the value of can_pin_messages.",
           "type": [
             "bool"
           ],
@@ -8627,7 +8754,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. For gifts bought from other users, the currency in which the payment for the gift was done. Currently, one of “XTR” for Telegram Stars or “TON” for toncoins.",
+          "description": "Optional. For gifts bought from other users, the currency in which the payment for the gift was done. Currently, one of “XTR” for Telegram Stars or “TON” for TON grams.",
           "type": [
             "str"
           ],
@@ -8635,7 +8762,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. For gifts bought from other users, the price paid for the gift in either Telegram Stars or nanotoncoins",
+          "description": "Optional. For gifts bought from other users, the price paid for the gift in either Telegram Stars or nanograms",
           "type": [
             "int"
           ],
@@ -9025,6 +9152,14 @@
             "str"
           ],
           "name": "description"
+        },
+        {
+          "optional": true,
+          "description": "Optional. True, if the command sends an ephemeral message, which can be seen only by the sender of the message and the bot",
+          "type": [
+            "bool"
+          ],
+          "name": "is_ephemeral"
         }
       ],
       "description": "This object represents a bot command.",
@@ -9795,7 +9930,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Type of the result, must be animation",
+          "description": "Type of the media, must be animation",
           "type": [
             "str"
           ],
@@ -9850,7 +9985,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Pass True, if the caption must be shown above the message media",
+          "description": "Optional. Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -9896,7 +10031,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Type of the result, must be audio",
+          "description": "Type of the media, must be audio",
           "type": [
             "str"
           ],
@@ -9981,7 +10116,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Type of the result, must be document",
+          "description": "Type of the media, must be document",
           "type": [
             "str"
           ],
@@ -10050,7 +10185,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Type of the result, must be link",
+          "description": "Type of the media, must be link",
           "type": [
             "str"
           ],
@@ -10072,7 +10207,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Type of the result, must be live_photo",
+          "description": "Type of the media, must be live_photo",
           "type": [
             "str"
           ],
@@ -10127,7 +10262,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Pass True, if the caption must be shown above the message media",
+          "description": "Optional. Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -10149,7 +10284,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Type of the result, must be location",
+          "description": "Type of the media, must be location",
           "type": [
             "str"
           ],
@@ -10187,7 +10322,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Type of the result, must be photo",
+          "description": "Type of the media, must be photo",
           "type": [
             "str"
           ],
@@ -10233,7 +10368,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Pass True, if the caption must be shown above the message media",
+          "description": "Optional. Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -10255,7 +10390,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Type of the result, must be sticker",
+          "description": "Type of the media, must be sticker",
           "type": [
             "str"
           ],
@@ -10286,7 +10421,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Type of the result, must be venue",
+          "description": "Type of the media, must be venue",
           "type": [
             "str"
           ],
@@ -10364,7 +10499,7 @@
       "params": [
         {
           "optional": false,
-          "description": "Type of the result, must be video",
+          "description": "Type of the media, must be video",
           "type": [
             "str"
           ],
@@ -10436,7 +10571,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Pass True, if the caption must be shown above the message media",
+          "description": "Optional. Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -10485,6 +10620,66 @@
       ],
       "description": "Represents a video to be sent.",
       "name": "InputMediaVideo"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the media, must be voice_note",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files »",
+          "type": [
+            "str",
+            "file"
+          ],
+          "name": "media"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the voice message to be sent, 0-1024 characters after entities parsing",
+          "type": [
+            "str"
+          ],
+          "name": "caption"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Mode for parsing entities in the voice message caption. See formatting options for more details.",
+          "type": [
+            "str"
+          ],
+          "name": "parse_mode"
+        },
+        {
+          "optional": true,
+          "description": "Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode",
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "name": "caption_entities"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Duration of the voice message in seconds",
+          "type": [
+            "int"
+          ],
+          "name": "duration"
+        }
+      ],
+      "description": "Represents a voice message file to be sent.",
+      "name": "InputMediaVoiceNote"
     },
     {
       "params": [
@@ -11049,7 +11244,20 @@
       "params": [
         {
           "optional": true,
-          "description": "Optional. Content of the rich message to send described using HTML formatting. See rich message formatting options for more details.",
+          "description": "Optional. Content of the rich message to send described as a list of blocks",
+          "type": [
+            [
+              "array",
+              [
+                "InputRichBlock"
+              ]
+            ]
+          ],
+          "name": "blocks"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Content of the rich message to send described using HTML formatting. See rich message formatting options for more details. Use media field to specify the media used in the message.",
           "type": [
             "str"
           ],
@@ -11057,11 +11265,24 @@
         },
         {
           "optional": true,
-          "description": "Optional. Content of the rich message to send described using Markdown formatting. See rich message formatting options for more details.",
+          "description": "Optional. Content of the rich message to send described using Markdown formatting. See rich message formatting options for more details. Use media field to specify the media used in the message.",
           "type": [
             "str"
           ],
           "name": "markdown"
+        },
+        {
+          "optional": true,
+          "description": "Optional. List of media that are specified in the markdown or html fields using tg://photo?id=, tg://video?id=, and tg://audio?id= links",
+          "type": [
+            [
+              "array",
+              [
+                "InputRichMessageMedia"
+              ]
+            ]
+          ],
+          "name": "media"
         },
         {
           "optional": true,
@@ -11080,8 +11301,34 @@
           "name": "skip_entity_detection"
         }
       ],
-      "description": "Describes a rich message to be sent. Exactly one of the fields html or markdown must be used.",
+      "description": "Describes a rich message to be sent. Exactly one of the fields html, markdown, or blocks must be used.",
       "name": "InputRichMessage"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier of the media used in a tg://photo?id=, tg://video?id=, or tg://audio?id= link. 1-64 characters, only A-Z, a-z, 0-9, _ and - are allowed.",
+          "type": [
+            "str"
+          ],
+          "name": "id"
+        },
+        {
+          "optional": false,
+          "description": "The media to be sent. Everything except the media itself and its properties is ignored.",
+          "type": [
+            "InputMediaAnimation",
+            "InputMediaAudio",
+            "InputMediaPhoto",
+            "InputMediaVideo",
+            "InputMediaVoiceNote"
+          ],
+          "name": "media"
+        }
+      ],
+      "description": "Describes a media element embedded in an outgoing rich message.",
+      "name": "InputRichMessageMedia"
     },
     {
       "params": [
@@ -12473,7 +12720,7 @@
           "name": "caption"
         }
       ],
-      "description": "A block with a photo, corresponding to the HTML tag <photo>.",
+      "description": "A block with a photo, corresponding to the HTML tag <img>.",
       "name": "RichBlockPhoto"
     },
     {
@@ -12556,15 +12803,715 @@
         },
         {
           "optional": false,
-          "description": "Text of the block. See https://t.me/addemoji/AIActions for examples of custom emoji, which are recommended for usage in the block.",
+          "description": "Text of the block. See https://t.me/addemoji/AIActions for examples of custom emoji that are recommended for usage in the block.",
           "type": [
             "RichText"
           ],
           "name": "text"
         }
       ],
-      "description": "A block with a “Thinking…” placeholder, corresponding to the custom HTML tag <tg-thinking>. The block may be used only in sendRichMessageDraft, therefore it can't be received in messages. See https://t.me/addemoji/AIActions for examples of custom emoji, which are recommended for usage in the block.",
+      "description": "A block with a “Thinking…” placeholder, corresponding to the custom HTML tag <tg-thinking>. The block may be used only in sendRichMessageDraft, therefore it can't be received in messages. See https://t.me/addemoji/AIActions for examples of custom emoji that are recommended for usage in the block.",
       "name": "RichBlockThinking"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "The content of the item",
+          "type": [
+            [
+              "array",
+              [
+                "InputRichBlock"
+              ]
+            ]
+          ],
+          "name": "blocks"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Pass True if the item has a checkbox",
+          "type": [
+            "bool"
+          ],
+          "name": "has_checkbox"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Pass True if the item has a checked checkbox",
+          "type": [
+            "bool"
+          ],
+          "name": "is_checked"
+        },
+        {
+          "optional": true,
+          "description": "Optional. For ordered lists, the numeric value of the item label",
+          "type": [
+            "int"
+          ],
+          "name": "value"
+        },
+        {
+          "optional": true,
+          "description": "Optional. For ordered lists, the type of the item label; must be one of “a” for lowercase letters, “A” for uppercase letters, “i” for lowercase Roman numerals, “I” for uppercase Roman numerals, or “1” for decimal numbers",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        }
+      ],
+      "description": "An item of a list to be sent.",
+      "name": "InputRichBlockListItem"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “paragraph”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Text of the block",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        }
+      ],
+      "description": "A text paragraph, corresponding to the HTML tag <p>.",
+      "name": "InputRichBlockParagraph"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “heading”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Text of the block",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": false,
+          "description": "Relative size of the text font; 1-6, 1 is the largest, 6 is the smallest",
+          "type": [
+            "int"
+          ],
+          "name": "size"
+        }
+      ],
+      "description": "A section heading, corresponding to the HTML tags <h1>, <h2>, <h3>, <h4>, <h5>, or <h6>.",
+      "name": "InputRichBlockSectionHeading"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “pre”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Text of the block",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": true,
+          "description": "Optional. The programming language of the text",
+          "type": [
+            "str"
+          ],
+          "name": "language"
+        }
+      ],
+      "description": "A preformatted text block, corresponding to the nested HTML tags <pre> and <code>.",
+      "name": "InputRichBlockPreformatted"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “footer”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Text of the block",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        }
+      ],
+      "description": "A footer, corresponding to the HTML tag <footer>.",
+      "name": "InputRichBlockFooter"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “divider”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        }
+      ],
+      "description": "A divider, corresponding to the HTML tag <hr/>.",
+      "name": "InputRichBlockDivider"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “mathematical_expression”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The mathematical expression in LaTeX format",
+          "type": [
+            "str"
+          ],
+          "name": "expression"
+        }
+      ],
+      "description": "A block with a mathematical expression in LaTeX format, corresponding to the custom HTML tag <tg-math-block>.",
+      "name": "InputRichBlockMathematicalExpression"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “anchor”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The name of the anchor",
+          "type": [
+            "str"
+          ],
+          "name": "name"
+        }
+      ],
+      "description": "A block with an anchor, corresponding to the HTML tag <a> with the attribute name.",
+      "name": "InputRichBlockAnchor"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “list”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Items of the list",
+          "type": [
+            [
+              "array",
+              [
+                "InputRichBlockListItem"
+              ]
+            ]
+          ],
+          "name": "items"
+        }
+      ],
+      "description": "A list of blocks, corresponding to the HTML tag <ul> or <ol> with multiple nested tags <li>.",
+      "name": "InputRichBlockList"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “blockquote”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Content of the block",
+          "type": [
+            [
+              "array",
+              [
+                "InputRichBlock"
+              ]
+            ]
+          ],
+          "name": "blocks"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Credit of the block",
+          "type": [
+            "RichText"
+          ],
+          "name": "credit"
+        }
+      ],
+      "description": "A block quotation, corresponding to the HTML tag <blockquote>.",
+      "name": "InputRichBlockBlockQuotation"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “pullquote”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Text of the block",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Credit of the block",
+          "type": [
+            "RichText"
+          ],
+          "name": "credit"
+        }
+      ],
+      "description": "A quotation with centered text, loosely corresponding to the HTML tag <aside>.",
+      "name": "InputRichBlockPullQuotation"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “collage”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Elements of the collage",
+          "type": [
+            [
+              "array",
+              [
+                "InputRichBlock"
+              ]
+            ]
+          ],
+          "name": "blocks"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the block",
+          "type": [
+            "RichBlockCaption"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A collage, corresponding to the custom HTML tag <tg-collage>.",
+      "name": "InputRichBlockCollage"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “slideshow”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Elements of the slideshow",
+          "type": [
+            [
+              "array",
+              [
+                "InputRichBlock"
+              ]
+            ]
+          ],
+          "name": "blocks"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the block",
+          "type": [
+            "RichBlockCaption"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A slideshow, corresponding to the custom HTML tag <tg-slideshow>.",
+      "name": "InputRichBlockSlideshow"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “table”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Cells of the table",
+          "type": [
+            [
+              "array",
+              [
+                [
+                  "array",
+                  [
+                    "RichBlockTableCell"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          "name": "cells"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Pass True if the table has borders",
+          "type": [
+            "bool"
+          ],
+          "name": "is_bordered"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Pass True if the table is striped",
+          "type": [
+            "bool"
+          ],
+          "name": "is_striped"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the table",
+          "type": [
+            "RichText"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A table, corresponding to the HTML tag <table>.",
+      "name": "InputRichBlockTable"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “details”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Always shown summary of the block",
+          "type": [
+            "RichText"
+          ],
+          "name": "summary"
+        },
+        {
+          "optional": false,
+          "description": "Content of the block",
+          "type": [
+            [
+              "array",
+              [
+                "InputRichBlock"
+              ]
+            ]
+          ],
+          "name": "blocks"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Pass True if the content of the block is visible by default",
+          "type": [
+            "bool"
+          ],
+          "name": "is_open"
+        }
+      ],
+      "description": "An expandable block for details disclosure, corresponding to the HTML tag <details>.",
+      "name": "InputRichBlockDetails"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “map”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Location of the center of the map",
+          "type": [
+            "Location"
+          ],
+          "name": "location"
+        },
+        {
+          "optional": false,
+          "description": "Map zoom level; 0-24",
+          "type": [
+            "int"
+          ],
+          "name": "zoom"
+        },
+        {
+          "optional": false,
+          "description": "Map width; 0-10000",
+          "type": [
+            "int"
+          ],
+          "name": "width"
+        },
+        {
+          "optional": false,
+          "description": "Map height; 0-10000",
+          "type": [
+            "int"
+          ],
+          "name": "height"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the block",
+          "type": [
+            "RichBlockCaption"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A block with a map, corresponding to the custom HTML tag <tg-map>. The map's width and height must not exceed 10000 in total. The width and height ratio must be at most 20.",
+      "name": "InputRichBlockMap"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “animation”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The animation. Caption is ignored.",
+          "type": [
+            "InputMediaAnimation"
+          ],
+          "name": "animation"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the block",
+          "type": [
+            "RichBlockCaption"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A block with an animation, corresponding to the HTML tag <video>.",
+      "name": "InputRichBlockAnimation"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “audio”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The audio. Caption is ignored.",
+          "type": [
+            "InputMediaAudio"
+          ],
+          "name": "audio"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the block",
+          "type": [
+            "RichBlockCaption"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A block with a music file, corresponding to the HTML tag <audio>.",
+      "name": "InputRichBlockAudio"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “photo”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The photo. Caption is ignored.",
+          "type": [
+            "InputMediaPhoto"
+          ],
+          "name": "photo"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the block",
+          "type": [
+            "RichBlockCaption"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A block with a photo, corresponding to the HTML tag <img>.",
+      "name": "InputRichBlockPhoto"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “video”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The video. Caption is ignored.",
+          "type": [
+            "InputMediaVideo"
+          ],
+          "name": "video"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the block",
+          "type": [
+            "RichBlockCaption"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A block with a video, corresponding to the HTML tag <video>.",
+      "name": "InputRichBlockVideo"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “voice_note”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "The voice note. Caption is ignored.",
+          "type": [
+            "InputMediaVoiceNote"
+          ],
+          "name": "voice_note"
+        },
+        {
+          "optional": true,
+          "description": "Optional. Caption of the block",
+          "type": [
+            "RichBlockCaption"
+          ],
+          "name": "caption"
+        }
+      ],
+      "description": "A block with a voice note, corresponding to the HTML tag <audio>.",
+      "name": "InputRichBlockVoiceNote"
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Type of the block, always “thinking”",
+          "type": [
+            "str"
+          ],
+          "name": "type"
+        },
+        {
+          "optional": false,
+          "description": "Text of the block. See https://t.me/addemoji/AIActions for examples of custom emoji that are recommended for usage in the block.",
+          "type": [
+            "RichText"
+          ],
+          "name": "text"
+        }
+      ],
+      "description": "A block with a “Thinking…” placeholder, corresponding to the custom HTML tag <tg-thinking>. The block may be used only in sendRichMessageDraft, therefore it can't be received in messages. See https://t.me/addemoji/AIActions for examples of custom emoji that are recommended for usage in the block.",
+      "name": "InputRichBlockThinking"
     },
     {
       "params": [
@@ -12833,7 +13780,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Pass True, if the caption must be shown above the message media",
+          "description": "Optional. Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -12964,7 +13911,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Pass True, if the caption must be shown above the message media",
+          "description": "Optional. Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -13095,7 +14042,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Pass True, if the caption must be shown above the message media",
+          "description": "Optional. Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -13202,7 +14149,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Pass True, if the caption must be shown above the message media",
+          "description": "Optional. Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -14022,7 +14969,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Pass True, if the caption must be shown above the message media",
+          "description": "Optional. Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -14113,7 +15060,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Pass True, if the caption must be shown above the message media",
+          "description": "Optional. Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -14204,7 +15151,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Pass True, if the caption must be shown above the message media",
+          "description": "Optional. Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -14440,7 +15387,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. Pass True, if the caption must be shown above the message media",
+          "description": "Optional. Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -14908,7 +15855,7 @@
         },
         {
           "optional": true,
-          "description": "Optional. A JSON-serialized array of suggested amounts of tip in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.",
+          "description": "Optional. A JSON-serialized Array of suggested amounts of tip in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.",
           "type": [
             [
               "array",
@@ -16798,6 +17745,32 @@
     },
     {
       "subtypes": [
+        "InputRichBlockParagraph",
+        "InputRichBlockSectionHeading",
+        "InputRichBlockPreformatted",
+        "InputRichBlockFooter",
+        "InputRichBlockDivider",
+        "InputRichBlockMathematicalExpression",
+        "InputRichBlockAnchor",
+        "InputRichBlockList",
+        "InputRichBlockBlockQuotation",
+        "InputRichBlockPullQuotation",
+        "InputRichBlockCollage",
+        "InputRichBlockSlideshow",
+        "InputRichBlockTable",
+        "InputRichBlockDetails",
+        "InputRichBlockMap",
+        "InputRichBlockAnimation",
+        "InputRichBlockAudio",
+        "InputRichBlockPhoto",
+        "InputRichBlockVideo",
+        "InputRichBlockVoiceNote",
+        "InputRichBlockThinking"
+      ],
+      "name": "InputRichBlock"
+    },
+    {
+      "subtypes": [
         "InlineQueryResultCachedAudio",
         "InlineQueryResultCachedDocument",
         "InlineQueryResultCachedGif",
@@ -17081,6 +18054,22 @@
           "name": "direct_messages_topic_id"
         },
         {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any",
+          "type": [
+            "str"
+          ],
+          "name": "callback_query_id"
+        },
+        {
           "optional": false,
           "description": "Text of the message to be sent, 1-4096 characters after entities parsing",
           "type": [
@@ -17342,7 +18331,7 @@
           "name": "protect_content"
         }
       ],
-      "description": "Use this method to forward multiple messages of any kind. If some of the specified messages can't be found or forwarded, they are skipped. Service messages and messages with protected content can't be forwarded. Album grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.",
+      "description": "Use this method to forward multiple messages of any kind. If some of the specified messages can't be found or forwarded, they are skipped. Service messages and messages with protected content can't be forwarded. Album grouping is kept for forwarded messages. On success, an Array of MessageId of the sent messages is returned.",
       "type": "post",
       "name": "forwardMessages",
       "return": [
@@ -17437,7 +18426,7 @@
         },
         {
           "optional": true,
-          "description": "Pass True, if the caption must be shown above the message media. Ignored if a new caption isn't specified.",
+          "description": "Pass True if the caption must be shown above the message media. Ignored if a new caption isn't specified.",
           "type": [
             "bool"
           ],
@@ -17503,7 +18492,7 @@
           "name": "reply_markup"
         }
       ],
-      "description": "Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.",
+      "description": "Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.",
       "type": "post",
       "name": "copyMessage",
       "return": [
@@ -17584,7 +18573,7 @@
           "name": "remove_caption"
         }
       ],
-      "description": "Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an array of MessageId of the sent messages is returned.",
+      "description": "Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_ids is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an Array of MessageId of the sent messages is returned.",
       "type": "post",
       "name": "copyMessages",
       "return": [
@@ -17632,6 +18621,22 @@
           "name": "direct_messages_topic_id"
         },
         {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any",
+          "type": [
+            "str"
+          ],
+          "name": "callback_query_id"
+        },
+        {
           "optional": false,
           "description": "Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More information on Sending Files »",
           "type": [
@@ -17671,7 +18676,7 @@
         },
         {
           "optional": true,
-          "description": "Pass True, if the caption must be shown above the message media",
+          "description": "Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -17788,6 +18793,22 @@
           "name": "direct_messages_topic_id"
         },
         {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any",
+          "type": [
+            "str"
+          ],
+          "name": "callback_query_id"
+        },
+        {
           "optional": false,
           "description": "Live photo video to send. The video must be no longer than 10 seconds and must not exceed 10 MB in size. Pass a file_id as String to send a video that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. More information on Sending Files ». Sending live photos by a URL is currently unsupported.",
           "type": [
@@ -17836,7 +18857,7 @@
         },
         {
           "optional": true,
-          "description": "Pass True, if the caption must be shown above the message media",
+          "description": "Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -17951,6 +18972,22 @@
             "int"
           ],
           "name": "direct_messages_topic_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any",
+          "type": [
+            "str"
+          ],
+          "name": "callback_query_id"
         },
         {
           "optional": false,
@@ -18126,6 +19163,22 @@
           "name": "direct_messages_topic_id"
         },
         {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any",
+          "type": [
+            "str"
+          ],
+          "name": "callback_query_id"
+        },
+        {
           "optional": false,
           "description": "File to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files »",
           "type": [
@@ -18283,6 +19336,22 @@
           "name": "direct_messages_topic_id"
         },
         {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any",
+          "type": [
+            "str"
+          ],
+          "name": "callback_query_id"
+        },
+        {
           "optional": false,
           "description": "Video to send. Pass a file_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. More information on Sending Files »",
           "type": [
@@ -18372,7 +19441,7 @@
         },
         {
           "optional": true,
-          "description": "Pass True, if the caption must be shown above the message media",
+          "description": "Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -18497,6 +19566,22 @@
           "name": "direct_messages_topic_id"
         },
         {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any",
+          "type": [
+            "str"
+          ],
+          "name": "callback_query_id"
+        },
+        {
           "optional": false,
           "description": "Animation to send. Pass a file_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. More information on Sending Files »",
           "type": [
@@ -18569,7 +19654,7 @@
         },
         {
           "optional": true,
-          "description": "Pass True, if the caption must be shown above the message media",
+          "description": "Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -18684,6 +19769,22 @@
             "int"
           ],
           "name": "direct_messages_topic_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any",
+          "type": [
+            "str"
+          ],
+          "name": "callback_query_id"
         },
         {
           "optional": false,
@@ -18834,6 +19935,22 @@
           "name": "direct_messages_topic_id"
         },
         {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any",
+          "type": [
+            "str"
+          ],
+          "name": "callback_query_id"
+        },
+        {
           "optional": false,
           "description": "Video note to send. Pass a file_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. More information on Sending Files ». Sending video notes by a URL is currently unsupported.",
           "type": [
@@ -18979,7 +20096,7 @@
         },
         {
           "optional": false,
-          "description": "A JSON-serialized array describing the media to be sent; up to 10 items",
+          "description": "A JSON-serialized Array describing the media to be sent; up to 10 items",
           "type": [
             [
               "array",
@@ -19029,7 +20146,7 @@
         },
         {
           "optional": true,
-          "description": "Pass True, if the caption must be shown above the message media",
+          "description": "Pass True if the caption must be shown above the message media",
           "type": [
             "bool"
           ],
@@ -19131,7 +20248,7 @@
         },
         {
           "optional": false,
-          "description": "A JSON-serialized array describing messages to be sent, must include 2-10 items",
+          "description": "A JSON-serialized Array describing messages to be sent, must include 2-10 items",
           "type": [
             [
               "array",
@@ -19184,7 +20301,7 @@
           "name": "reply_parameters"
         }
       ],
-      "description": "Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Message objects that were sent is returned.",
+      "description": "Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an Array of Message objects that were sent is returned.",
       "type": "post",
       "name": "sendMediaGroup",
       "return": [
@@ -19232,6 +20349,22 @@
           "name": "direct_messages_topic_id"
         },
         {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any",
+          "type": [
+            "str"
+          ],
+          "name": "callback_query_id"
+        },
+        {
           "optional": false,
           "description": "Latitude of the location",
           "type": [
@@ -19257,7 +20390,7 @@
         },
         {
           "optional": true,
-          "description": "Period in seconds during which the location will be updated (see Live Locations, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely",
+          "description": "Period in seconds during which the location will be updated (see Live Locations), must be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely. Must be 0 for ephemeral messages.",
           "type": [
             "int"
           ],
@@ -19380,6 +20513,22 @@
             "int"
           ],
           "name": "direct_messages_topic_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any",
+          "type": [
+            "str"
+          ],
+          "name": "callback_query_id"
         },
         {
           "optional": false,
@@ -19546,6 +20695,22 @@
             "int"
           ],
           "name": "direct_messages_topic_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any",
+          "type": [
+            "str"
+          ],
+          "name": "callback_query_id"
         },
         {
           "optional": false,
@@ -19733,7 +20898,7 @@
         },
         {
           "optional": true,
-          "description": "Pass True, if the poll allows multiple answers, defaults to False",
+          "description": "Pass True if the poll allows multiple answers, defaults to False",
           "type": [
             "bool"
           ],
@@ -19741,7 +20906,7 @@
         },
         {
           "optional": true,
-          "description": "Pass True, if the poll allows to change chosen answer options, defaults to False for quizzes and to True for regular polls",
+          "description": "Pass True if the poll allows to change chosen answer options, defaults to False for quizzes and to True for regular polls",
           "type": [
             "bool"
           ],
@@ -19749,7 +20914,7 @@
         },
         {
           "optional": true,
-          "description": "Pass True, if the poll options must be shown in random order",
+          "description": "Pass True if the poll options must be shown in random order",
           "type": [
             "bool"
           ],
@@ -19757,7 +20922,7 @@
         },
         {
           "optional": true,
-          "description": "Pass True, if answer options can be added to the poll after creation; not supported for anonymous polls and quizzes",
+          "description": "Pass True if answer options can be added to the poll after creation; not supported for anonymous polls and quizzes",
           "type": [
             "bool"
           ],
@@ -19765,7 +20930,7 @@
         },
         {
           "optional": true,
-          "description": "Pass True, if poll results must be shown only after the poll closes",
+          "description": "Pass True if poll results must be shown only after the poll closes",
           "type": [
             "bool"
           ],
@@ -19773,7 +20938,7 @@
         },
         {
           "optional": true,
-          "description": "Pass True, if voting is limited to users who have been members of the chat where the poll is being sent for more than 24 hours; for channel chats only",
+          "description": "Pass True if voting is limited to users who have been members of the chat where the poll is being sent for more than 24 hours; for channel chats only",
           "type": [
             "bool"
           ],
@@ -20167,7 +21332,7 @@
         },
         {
           "optional": false,
-          "description": "Unique identifier of the message draft; must be non-zero. Changes of drafts with the same identifier are animated.",
+          "description": "Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated.",
           "type": [
             "int"
           ],
@@ -21198,14 +22363,14 @@
         },
         {
           "optional": false,
-          "description": "The URL of the Mini App to be opened",
+          "description": "An HTTPS URL of a Web App to be opened with additional data as specified in Initializing Web Apps",
           "type": [
             "str"
           ],
           "name": "web_app_url"
         }
       ],
-      "description": "Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.",
+      "description": "Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Call answerChatJoinRequestQuery to resolve the join request query based on the user interaction with the Mini App. Returns True on success.",
       "type": "post",
       "name": "sendChatJoinRequestWebApp",
       "return": [
@@ -21491,11 +22656,11 @@
           "name": "chat_id"
         }
       ],
-      "description": "Use this method to get the number of members in a chat. Returns Int on success.",
+      "description": "Use this method to get the number of members in a chat. Returns Integer on success.",
       "type": "get",
       "name": "getChatMemberCount",
       "return": [
-        "int"
+        "Integer"
       ]
     },
     {
@@ -21544,7 +22709,7 @@
           "name": "limit"
         }
       ],
-      "description": "Use this method to get the last messages from the personal chat (i.e., the chat currently added to their profile) of a given user. On success, an array of Message objects is returned.",
+      "description": "Use this method to get the last messages from the personal chat (i.e., the chat currently added to their profile) of a given user. On success, an Array of Message objects is returned.",
       "type": "get",
       "name": "getUserPersonalChatMessages",
       "return": [
@@ -21952,7 +23117,7 @@
         },
         {
           "optional": true,
-          "description": "If True, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to false.",
+          "description": "If True, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to False.",
           "type": [
             "bool"
           ],
@@ -22119,7 +23284,7 @@
         },
         {
           "optional": false,
-          "description": "Pass True, if only selected users can access the bot. The bot's owner can always access it.",
+          "description": "Pass True if only selected users can access the bot. The bot's owner can always access it.",
           "type": [
             "bool"
           ],
@@ -22127,7 +23292,7 @@
         },
         {
           "optional": true,
-          "description": "A JSON-serialized list of up to 10 identifiers of users who will have access to the bot in addition to its owner. Ignored if is_access_restricted is false.",
+          "description": "A JSON-serialized list of up to 10 identifiers of users who will have access to the bot in addition to its owner. Ignored if is_access_restricted is False.",
           "type": [
             [
               "array",
@@ -22946,7 +24111,7 @@
         },
         {
           "optional": false,
-          "description": "Pass True, if a button for sending a gift to the user or by the business account must always be shown in the input field",
+          "description": "Pass True if a button for sending a gift to the user or by the business account must always be shown in the input field",
           "type": [
             "bool"
           ],
@@ -23837,7 +25002,7 @@
         },
         {
           "optional": true,
-          "description": "New rich content of the message; required if text isn't specified",
+          "description": "New rich content of the message; required if text isn't specified. Direct upload of new files isn't supported when an inline message is edited.",
           "type": [
             "InputRichMessage"
           ],
@@ -23926,7 +25091,7 @@
         },
         {
           "optional": true,
-          "description": "Pass True, if the caption must be shown above the message media. Supported only for animation, photo and video messages.",
+          "description": "Pass True if the caption must be shown above the message media. Supported only for animation, photo and video messages.",
           "type": [
             "bool"
           ],
@@ -23986,7 +25151,7 @@
         },
         {
           "optional": false,
-          "description": "A JSON-serialized object for a new media content of the message",
+          "description": "A JSON-serialized object for the new media content of the message",
           "type": [
             "InputMedia"
           ],
@@ -24311,6 +25476,252 @@
       "params": [
         {
           "optional": false,
+          "description": "Unique identifier for the target chat or username of the target supergroup in the format @username",
+          "type": [
+            "int",
+            "str"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": false,
+          "description": "Identifier of the user who received the message",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": false,
+          "description": "Identifier of the ephemeral message to edit",
+          "type": [
+            "int"
+          ],
+          "name": "ephemeral_message_id"
+        },
+        {
+          "optional": false,
+          "description": "New text of the message, 1-4096 characters after entity parsing",
+          "type": [
+            "str"
+          ],
+          "name": "text"
+        },
+        {
+          "optional": true,
+          "description": "Mode for parsing entities in the message text. See formatting options for more details.",
+          "type": [
+            "str"
+          ],
+          "name": "parse_mode"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode",
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "name": "entities"
+        },
+        {
+          "optional": true,
+          "description": "Link preview generation options for the message",
+          "type": [
+            "LinkPreviewOptions"
+          ],
+          "name": "link_preview_options"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized object for an inline keyboard",
+          "type": [
+            "InlineKeyboardMarkup"
+          ],
+          "name": "reply_markup"
+        }
+      ],
+      "description": "Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.",
+      "type": "post",
+      "name": "editEphemeralMessageText",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier for the target chat or username of the target supergroup in the format @username",
+          "type": [
+            "int",
+            "str"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": false,
+          "description": "Identifier of the user who received the message",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": false,
+          "description": "Identifier of the ephemeral message to edit",
+          "type": [
+            "int"
+          ],
+          "name": "ephemeral_message_id"
+        },
+        {
+          "optional": false,
+          "description": "A JSON-serialized object for the new media content of the message. A new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL.",
+          "type": [
+            "InputMedia"
+          ],
+          "name": "media"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized object for an inline keyboard",
+          "type": [
+            "InlineKeyboardMarkup"
+          ],
+          "name": "reply_markup"
+        }
+      ],
+      "description": "Use this method to edit the media of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.",
+      "type": "post",
+      "name": "editEphemeralMessageMedia",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier for the target chat or username of the target supergroup in the format @username",
+          "type": [
+            "int",
+            "str"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": false,
+          "description": "Identifier of the user who received the message",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": false,
+          "description": "Identifier of the ephemeral message to edit",
+          "type": [
+            "int"
+          ],
+          "name": "ephemeral_message_id"
+        },
+        {
+          "optional": true,
+          "description": "New caption of the message, 0-1024 characters after entities parsing",
+          "type": [
+            "str"
+          ],
+          "name": "caption"
+        },
+        {
+          "optional": true,
+          "description": "Mode for parsing entities in the message caption. See formatting options for more details.",
+          "type": [
+            "str"
+          ],
+          "name": "parse_mode"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode",
+          "type": [
+            [
+              "array",
+              [
+                "MessageEntity"
+              ]
+            ]
+          ],
+          "name": "caption_entities"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized object for an inline keyboard",
+          "type": [
+            "InlineKeyboardMarkup"
+          ],
+          "name": "reply_markup"
+        }
+      ],
+      "description": "Use this method to edit the caption of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.",
+      "type": "post",
+      "name": "editEphemeralMessageCaption",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier for the target chat or username of the target supergroup in the format @username",
+          "type": [
+            "int",
+            "str"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": false,
+          "description": "Identifier of the user who received the message",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": false,
+          "description": "Identifier of the ephemeral message to edit",
+          "type": [
+            "int"
+          ],
+          "name": "ephemeral_message_id"
+        },
+        {
+          "optional": true,
+          "description": "A JSON-serialized object for an inline keyboard",
+          "type": [
+            "InlineKeyboardMarkup"
+          ],
+          "name": "reply_markup"
+        }
+      ],
+      "description": "Use this method to edit only the reply markup of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.",
+      "type": "post",
+      "name": "editEphemeralMessageReplyMarkup",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
           "description": "Unique identifier for the target direct messages chat",
           "type": [
             "int"
@@ -24447,6 +25858,41 @@
         },
         {
           "optional": false,
+          "description": "Identifier of the user who received the message",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": false,
+          "description": "Identifier of the ephemeral message to delete",
+          "type": [
+            "int"
+          ],
+          "name": "ephemeral_message_id"
+        }
+      ],
+      "description": "Use this method to delete an ephemeral message. Note that it is not guaranteed that the user will receive the message deletion event, especially if they are offline. Returns True on success.",
+      "type": "post",
+      "name": "deleteEphemeralMessage",
+      "return": [
+        "true"
+      ]
+    },
+    {
+      "params": [
+        {
+          "optional": false,
+          "description": "Unique identifier for the target chat or username of the target supergroup in the format @username",
+          "type": [
+            "int",
+            "str"
+          ],
+          "name": "chat_id"
+        },
+        {
+          "optional": false,
           "description": "Identifier of the target message",
           "type": [
             "int"
@@ -24546,6 +25992,22 @@
             "int"
           ],
           "name": "direct_messages_topic_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only. It is not guaranteed that the user will receive the message, especially if they are offline. See ephemeral message sending for more details.",
+          "type": [
+            "int"
+          ],
+          "name": "receiver_user_id"
+        },
+        {
+          "optional": true,
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any",
+          "type": [
+            "str"
+          ],
+          "name": "callback_query_id"
         },
         {
           "optional": false,
@@ -25099,7 +26561,7 @@
       "params": [
         {
           "optional": true,
-          "description": "Unique identifier of the business connection on behalf of which the message will be sent",
+          "description": "Unique identifier of the business connection on behalf of which the message will be sent. Bot can send rich messages on behalf of a business account only if the corresponding user can send rich messages.",
           "type": [
             "str"
           ],
@@ -25233,7 +26695,7 @@
         },
         {
           "optional": false,
-          "description": "The partial message to be streamed",
+          "description": "The partial message to be streamed. Direct upload of new files isn't supported.",
           "type": [
             "InputRichMessage"
           ],
@@ -25259,7 +26721,7 @@
         },
         {
           "optional": false,
-          "description": "A JSON-serialized array of results for the inline query",
+          "description": "A JSON-serialized Array of results for the inline query",
           "type": [
             [
               "array",
@@ -25400,7 +26862,7 @@
         },
         {
           "optional": true,
-          "description": "A JSON-serialized array of suggested amounts of tips in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.",
+          "description": "A JSON-serialized Array of suggested amounts of tips in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.",
           "type": [
             [
               "array",
@@ -25660,7 +27122,7 @@
         },
         {
           "optional": true,
-          "description": "A JSON-serialized array of suggested amounts of tips in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.",
+          "description": "A JSON-serialized Array of suggested amounts of tips in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.",
           "type": [
             [
               "array",
@@ -25795,7 +27257,7 @@
         },
         {
           "optional": true,
-          "description": "Required if ok is True. A JSON-serialized array of available shipping options.",
+          "description": "Required if ok is True. A JSON-serialized Array of available shipping options.",
           "type": [
             [
               "array",
@@ -25963,7 +27425,7 @@
         },
         {
           "optional": false,
-          "description": "A JSON-serialized array describing the errors",
+          "description": "A JSON-serialized Array describing the errors",
           "type": [
             [
               "array",
