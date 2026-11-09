@@ -48,7 +48,10 @@ defmodule TelegramApiJson do
     "InputPollOptionMedia",
     "RichBlock",
     "RichText",
-    "InputRichBlock"
+    "InputRichBlock",
+    "WidgetQueryType",
+    "EmojiType",
+    "ChatShareTheme"
   ]
 
   def scrape() do
